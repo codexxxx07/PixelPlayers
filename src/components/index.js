@@ -5,7 +5,7 @@ export { default as MemoryCard } from './MemoryCard';
 export { default as RoutineCard } from './RoutineCard';
 export { default as ProgressCard } from './ProgressCard';
 export { default as VoiceButton } from './VoiceButton';
-export { default as PixelBuddy } from './PixelBuddy';
+export { default as ClaraAvatar } from './ClaraAvatar';
 export { default as Waveform } from './Waveform';
 export { default as BuddyLauncher } from './BuddyLauncher';
 export { default as SosButton, SosModal } from './SosButton';

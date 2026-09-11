@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useApp } from "../context/AppContext";
-import { PixelBuddy, VoiceButton, Waveform } from "../components";
+import { VoiceButton, Waveform } from "../components";
+import ClaraAvatar from "./ClaraAvatar";
 import { AiBubble, BuddyBadge, ThinkingBubble, UserBubble } from "./BuddyChat";
 import useConversation from "../services/useConversation";
 import { SUGGESTIONS } from "../services/chat";
@@ -50,7 +51,7 @@ export default function BuddyLauncher() {
           <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
             <BuddyBadge state={buddyState} className="w-11 h-11 flex-shrink-0" animate={false} />
             <div className="min-w-0 flex-1">
-              <p className="font-pixel text-[8px] text-teal-800 tracking-wider">MEMORY BUDDY</p>
+              <p className="font-pixel text-[8px] text-teal-800 tracking-wider">CLARA</p>
               <p className="text-teal-700 font-bold text-sm truncate">{statusText}</p>
             </div>
             <button
@@ -78,7 +79,7 @@ export default function BuddyLauncher() {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 buddy-chat-bg min-h-[300px] max-h-[46vh]" aria-live="polite" aria-label="Memory Buddy chat">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 buddy-chat-bg min-h-[300px] max-h-[46vh]" aria-live="polite" aria-label="Clara chat">
             {messages.map((message) =>
               message.role === "user" ? (
                 <UserBubble key={message.id} message={message} />
@@ -195,13 +196,11 @@ export default function BuddyLauncher() {
       <button
         type="button"
         onClick={toggleOpen}
-        aria-label={open ? "Close Memory Buddy chat" : "Open Memory Buddy chat"}
+        aria-label={open ? "Close Clara chat" : "Open Clara chat"}
         aria-expanded={open}
-        className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-b from-teal-400 to-teal-600 border-2 border-teal-700/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_6px_16px_rgba(19,78,74,0.35)] hover:brightness-105 active:scale-95 transition-all"
+        className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-b from-teal-400 to-teal-600 border-2 border-teal-700/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_6px_16px_rgba(19,78,74,0.35)] hover:brightness-105 active:scale-95 transition-all overflow-hidden"
       >
-        <div className="w-11 h-11" aria-hidden="true">
-          <PixelBuddy state={buddyState} className="w-full h-full" animate={false} />
-        </div>
+        <ClaraAvatar size="lg" className="w-12 h-12" />
       </button>
     </div>
   );

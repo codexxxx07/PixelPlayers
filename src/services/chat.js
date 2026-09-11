@@ -61,7 +61,7 @@ export function buildGreeting(user, currentTime) {
     {
       id: genId("a"),
       role: "ai",
-      text: `${greeting}, ${user.name}! I'm your Memory Buddy. I'm always here for you — you're never alone.`,
+      text: `${greeting}, ${user.name}! I'm Clara, your friendly memory companion. I'm always here for you — you're never alone.`,
       time: nowTime(),
       actions: [],
       chips: [],
@@ -107,7 +107,7 @@ export function getResponse(text, data) {
   if (lower.includes("who are you") || lower.includes("what are you")) {
     return {
       context: "help",
-      text: `I'm your Memory Buddy, ${name} — a friendly companion who helps you remember things, keep your day on track, and feel at ease. I'm not a doctor; I'm just a warm helper who is always by your side.`,
+      text: `I'm Clara, ${name} — your friendly memory companion who helps you remember things, keep your day on track, and feel at ease. I'm not a doctor; I'm just a warm helper who is always by your side.`,
     };
   }
 

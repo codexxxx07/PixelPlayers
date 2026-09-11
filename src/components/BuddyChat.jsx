@@ -1,7 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import PixelBuddy from "./PixelBuddy";
+import ClaraAvatar from "./ClaraAvatar";
 import { speakText } from "../services/chat";
 
 export function useTypewriter(text, active) {
@@ -33,12 +33,8 @@ function SpeakerIcon({ className = "" }) {
   );
 }
 
-export function BuddyBadge({ state = "idle", className = "", animate = true }) {
-  return (
-    <div className={`flex items-center justify-center rounded-2xl bg-gradient-to-b from-teal-50 to-amber-50 border-2 border-teal-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.6)] p-0.5 ${className}`}>
-      <PixelBuddy state={state} className="w-full h-full" animate={animate} />
-    </div>
-  );
+export function BuddyBadge({ className = "" }) {
+  return <ClaraAvatar className={className} />;
 }
 
 function ChipButton({ icon, label, onClick }) {
@@ -96,7 +92,7 @@ export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
       <div className="max-w-[85%] sm:max-w-[78%] min-w-0">
         <div className="buddy-bubble px-4 py-3.5 sm:px-5 sm:py-4">
           <div className="flex items-center justify-between gap-3 mb-1.5">
-            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">MEMORY BUDDY</p>
+            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">CLARA</p>
             <div className="flex items-center gap-2">
               {message.time && <span className="text-[11px] text-gray-400">{message.time}</span>}
               <button

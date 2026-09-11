@@ -156,8 +156,8 @@ export default function Assistant() {
           <div className="skeuo-card flex items-center gap-4 p-5">
             <BuddyBadge state={buddyState} className="w-16 h-16 flex-shrink-0" />
             <div className="min-w-0">
-              <p className="font-pixel text-[10px] text-teal-800 mb-1">MEMORY BUDDY</p>
-              <p className="text-gray-500 text-sm">{formatDate(currentTime)}</p>
+              <p className="font-pixel text-[10px] text-teal-800 mb-1">CLARA</p>
+              <p className="text-sm text-gray-500 truncate">Your friendly memory companion</p>
               <p className="text-teal-700 font-extrabold text-base mt-1">{statusText}</p>
             </div>
           </div>
@@ -169,8 +169,8 @@ export default function Assistant() {
               <div className="flex items-center gap-3 mb-4">
                 <BuddyBadge state={buddyState} className="w-16 h-16 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="font-pixel text-[9px] text-teal-800 leading-relaxed">MEMORY BUDDY</p>
-                  <p className="text-gray-600 text-sm mt-1">{formatDate(currentTime)}</p>
+                  <p className="font-pixel text-[9px] text-teal-800 leading-relaxed">CLARA</p>
+                  <p className="text-sm text-gray-500 mt-1">Your friendly memory companion</p>
                 </div>
               </div>
               <p className="text-gray-700 text-lg leading-snug">{statusText}</p>
@@ -227,7 +227,7 @@ export default function Assistant() {
             <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
               <BuddyBadge state={buddyState} className="w-14 h-14 flex-shrink-0" animate={false} />
               <div className="min-w-0 flex-1">
-                <p className="font-pixel text-[9px] text-teal-800 tracking-wider">MEMORY BUDDY</p>
+                <p className="font-pixel text-[9px] text-teal-800 tracking-wider">CLARA</p>
                 <p className="text-teal-700 font-bold text-sm sm:text-base mt-0.5 truncate">{statusText}</p>
               </div>
               <button
@@ -243,7 +243,7 @@ export default function Assistant() {
             <div
               className="flex-1 h-[52vh] min-h-[420px] overflow-y-auto p-5 space-y-5 buddy-chat-bg"
               aria-live="polite"
-              aria-label="Conversation with Memory Buddy"
+              aria-label="Conversation with Clara"
             >
               <p className="text-center text-xs font-bold uppercase tracking-wider text-gray-400">Today</p>
 
