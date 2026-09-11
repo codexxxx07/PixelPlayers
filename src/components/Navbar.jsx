@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import SosButton, { SosModal } from "./SosButton";
 
 const navLinks = [
   { to: "/", label: "Home" },
@@ -21,6 +22,13 @@ const mobileExtras = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [sosOpen, setSosOpen] = useState(false);
+  const [sosSession, setSosSession] = useState(0);
+
+  const openSos = () => {
+    setSosSession((count) => count + 1);
+    setSosOpen(true);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -97,6 +105,7 @@ export default function Navbar() {
               >
                 Sign Up
               </Link>
+              <SosButton variant="navbar" onClick={openSos} />
             </div>
 
             {/* Mobile Hamburger */}
@@ -127,6 +136,8 @@ export default function Navbar() {
           </div>
         </nav>
       </header>
+
+      <SosButton variant="floating" onClick={openSos} />
 
       {/* Mobile Menu Overlay */}
       <div
@@ -160,6 +171,15 @@ export default function Navbar() {
 
           {/* Mobile Nav Links */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+            <div className="mb-3">
+                <SosButton
+                  variant="menu"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    openSos();
+                  }}
+                />
+              </div>
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
@@ -208,6 +228,8 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      <SosModal key={sosSession} open={sosOpen} onClose={() => setSosOpen(false)} />
     </>
   );
 }

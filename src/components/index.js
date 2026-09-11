@@ -8,3 +8,4 @@ export { default as VoiceButton } from './VoiceButton';
 export { default as PixelBuddy } from './PixelBuddy';
 export { default as Waveform } from './Waveform';
 export { default as BuddyLauncher } from './BuddyLauncher';
+export { default as SosButton, SosModal } from './SosButton';
