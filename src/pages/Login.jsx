@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import AuthShell from "../components/AuthShell";
 import AuthField from "../components/AuthField";
 
 export default function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(true);
@@ -12,12 +14,12 @@ export default function Login() {
   const validate = () => {
     const next = {};
     if (!email.trim()) {
-      next.email = "Please enter your email address.";
+      next.email = t("auth.emailRequired");
     } else if (!/^\S+@\S+\.\S+$/.test(email.trim())) {
-      next.email = "That email address does not look right.";
+      next.email = t("auth.emailInvalid");
     }
     if (!password) {
-      next.password = "Please enter your password.";
+      next.password = t("auth.passwordRequired");
     }
     return next;
   };
@@ -34,33 +36,33 @@ export default function Login() {
 
   return (
     <AuthShell
-      eyebrow="Welcome back"
-      title="Log In"
-      subtitle="Jump back in and keep your mind sharp"
+      eyebrow={t("auth.welcomeBack")}
+      title={t("auth.loginTitle")}
+      subtitle={t("auth.loginSubtitle")}
     >
       <form onSubmit={handleSubmit} noValidate className="space-y-6">
         <AuthField
           id="email"
-          label="Email"
+          label={t("auth.email")}
           type="email"
           icon="✉️"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           autoComplete="email"
-          placeholder="you@example.com"
+          placeholder={t("auth.emailPlaceholder")}
           required
           error={errors.email}
         />
 
         <AuthField
           id="password"
-          label="Password"
+          label={t("auth.password")}
           type="password"
           icon="🔒"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           autoComplete="current-password"
-          placeholder="Your password"
+          placeholder={t("auth.passwordPlaceholder")}
           required
           error={errors.password}
         />
@@ -73,13 +75,13 @@ export default function Login() {
               onChange={(event) => setRememberMe(event.target.checked)}
               className="w-6 h-6 rounded accent-teal-600 shadow-sm"
             />
-            Remember me
+            {t("auth.rememberMe")}
           </label>
           <Link
             to="/login"
             className="text-lg font-bold text-teal-700 underline decoration-teal-300 underline-offset-4 hover:text-teal-600 transition-colors"
           >
-            Forgot password?
+            {t("auth.forgotPassword")}
           </Link>
         </div>
 
@@ -87,17 +89,17 @@ export default function Login() {
           type="submit"
           className="skeuo-btn skeuo-btn-primary skeuo-btn-block font-body text-xl font-extrabold py-4"
         >
-          Log In
+          {t("auth.loginButton")}
         </button>
       </form>
 
       <p className="mt-6 text-center text-lg font-medium text-gray-500">
-        Don&apos;t have an account?{" "}
+        {t("auth.noAccount")}{" "}
         <Link
           to="/signup"
           className="font-extrabold text-teal-700 underline decoration-teal-300 underline-offset-4 hover:text-teal-600 transition-colors"
         >
-          Sign Up
+          {t("auth.signUpLink")}
         </Link>
       </p>
     </AuthShell>

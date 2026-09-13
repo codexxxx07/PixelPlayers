@@ -1,13 +1,14 @@
 import { useApp } from '../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
 import RoutineCard from '../components/RoutineCard';
 
-function getGreeting() {
+function getGreetingKey() {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Good Morning';
-  if (hour < 17) return 'Good Afternoon';
-  return 'Good Evening';
+  if (hour < 12) return 'common.goodMorning';
+  if (hour < 17) return 'common.goodAfternoon';
+  return 'common.goodEvening';
 }
 
 function getTodayDate() {
@@ -32,14 +33,15 @@ function getCurrentActivityIndex(routine) {
 }
 
 const tomorrowActivities = [
-  { time: '08:30', title: 'Breakfast', icon: '🥣' },
-  { time: '09:30', title: 'Cognitive game', icon: '🧠' },
-  { time: '12:30', title: 'Lunch', icon: '🍲' },
-  { time: '17:00', title: 'Evening walk', icon: '🚶‍♀️' },
+  { time: '08:30', titleKey: 'routine.tomorrowBreakfast', icon: '🥣' },
+  { time: '09:30', titleKey: 'routine.tomorrowCognitive', icon: '🧠' },
+  { time: '12:30', titleKey: 'routine.tomorrowLunch', icon: '🍲' },
+  { time: '17:00', titleKey: 'routine.tomorrowWalk', icon: '🚶‍♀️' },
 ];
 
 export default function Routine() {
   const { routine, user } = useApp();
+  const { t } = useTranslation();
 
   const completedCount = routine.filter((a) => a.completed).length;
   const totalCount = routine.length;
@@ -53,13 +55,13 @@ export default function Routine() {
         {/* Page Header */}
         <div className="text-center mb-10">
           <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-2 tracking-wide">
-            {getGreeting()}, {user.name}
+            {t(getGreetingKey())}, {user.name}
           </h1>
           <p className="text-gray-500 text-lg font-[family-name:var(--font-pixel)] text-[11px] tracking-wider mb-1">
             {getTodayDate()}
           </p>
           <p className="text-gray-400 text-sm italic">
-            Here is your plan for today
+            {t('routine.todaysPlan')}
           </p>
         </div>
 
@@ -78,11 +80,11 @@ export default function Routine() {
                   <div className="flex items-center justify-center gap-2">
                     <span className="inline-flex h-3 w-3 rounded-full bg-teal-500 animate-pulse" />
                     <span className="font-[family-name:var(--font-pixel)] text-teal-600 text-[10px] tracking-wide">
-                      Happening Now
+                      {t('routine.happeningNow')}
                     </span>
                   </div>
                   <p className="text-emerald-600 text-sm mt-4 font-medium italic">
-                    You are doing great!
+                    {t('routine.doingGreat')}
                   </p>
                 </div>
               </PixelCard>
@@ -91,7 +93,7 @@ export default function Routine() {
             {/* Today's Timeline */}
             <div>
               <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-6 tracking-wide">
-                Today&apos;s Timeline
+                {t('routine.todaysTimeline')}
               </h2>
               <div className="relative">
                 {/* Vertical line */}
@@ -137,7 +139,7 @@ export default function Routine() {
             {/* Progress Summary */}
             <PixelCard className="p-6">
               <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
-                Today&apos;s Progress
+                {t('routine.todaysProgress')}
               </h3>
 
               {/* Progress bar */}
@@ -150,7 +152,7 @@ export default function Routine() {
 
               <div className="flex items-center justify-between mb-2">
                 <span className="text-gray-600 text-sm font-medium">
-                  {completedCount} of {totalCount} activities completed
+                  {t('routine.activitiesCompleted', { done: completedCount, total: totalCount })}
                 </span>
                 <span className="font-[family-name:var(--font-pixel)] text-teal-600 text-sm">
                   {progressPercent}%
@@ -159,11 +161,11 @@ export default function Routine() {
 
               {progressPercent === 100 ? (
                 <p className="text-emerald-600 text-sm text-center font-medium italic mt-2">
-                  All done for today! Great job, Maya!
+                  {t('routine.allDone', { name: user.name })}
                 </p>
               ) : (
                 <p className="text-gray-400 text-xs text-center italic mt-2">
-                  Keep going, you are doing wonderfully!
+                  {t('routine.keepGoing')}
                 </p>
               )}
             </PixelCard>
@@ -171,17 +173,17 @@ export default function Routine() {
             {/* Quick Actions */}
             <PixelCard className="p-6">
               <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
-                Need to adjust your routine?
+                {t('routine.adjustRoutine')}
               </h3>
               <div className="space-y-3">
                 <PixelButton variant="primary" size="lg" block icon="➕">
-                  Add Activity
+                  {t('routine.addActivity')}
                 </PixelButton>
                 <PixelButton variant="secondary" size="lg" block icon="⏭️">
-                  Skip Activity
+                  {t('routine.skipActivity')}
                 </PixelButton>
                 <PixelButton variant="secondary" size="lg" block icon="📅">
-                  View Weekly Schedule
+                  {t('routine.viewWeeklySchedule')}
                 </PixelButton>
               </div>
             </PixelCard>
@@ -189,7 +191,7 @@ export default function Routine() {
             {/* Tomorrow Preview */}
             <PixelCard className="p-6">
               <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
-                Tomorrow&apos;s Highlights
+                {t('routine.tomorrowsHighlights')}
               </h3>
               <div className="space-y-3">
                 {tomorrowActivities.map((activity, index) => (
@@ -199,14 +201,14 @@ export default function Routine() {
                   >
                     <span className="text-2xl">{activity.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-gray-700 text-sm font-medium truncate">{activity.title}</p>
+                      <p className="text-gray-700 text-sm font-medium truncate">{t(activity.titleKey)}</p>
                       <p className="text-gray-400 text-xs">{activity.time}</p>
                     </div>
                   </div>
                 ))}
               </div>
               <PixelButton variant="secondary" size="sm" block className="mt-4" icon="📋">
-                View Full Schedule
+                {t('routine.viewFullSchedule')}
               </PixelButton>
             </PixelCard>
           </div>

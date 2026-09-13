@@ -227,12 +227,12 @@ export default function useConversation({ user, memories, routine, reminders, ga
   const buddyState = voiceState === "listening" ? "listening" : thinking ? "thinking" : "idle";
   const statusText =
     voiceState === "listening"
-      ? "Listening — speak freely"
+      ? "chat.statusListening"
       : voiceState === "processing"
-        ? "Working on it…"
+        ? "chat.statusWorking"
         : thinking
-          ? "Thinking…"
-          : "Ready to help";
+          ? "chat.statusThinking"
+          : "chat.statusReady";
 
   return {
     messages,

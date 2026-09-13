@@ -1,9 +1,11 @@
 import { useLocation } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import { PixelButton, PixelCard } from '../components/';
 
 export default function ComingSoon() {
   const { games } = useApp();
+  const { t } = useTranslation();
   const location = useLocation();
   const slug = location.pathname.split('/').filter(Boolean).pop() || '';
   const game = games.find((item) => item.id === slug);
@@ -16,10 +18,10 @@ export default function ComingSoon() {
             <span aria-hidden="true">{game ? game.icon : '🎮'}</span>
           </div>
           <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
-            {game ? game.name : 'This Game'}
+            {game ? game.name : t('comingSoon.titleFallback')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mt-3">
-            {game ? game.description : 'Something fun is on the way.'}
+            {game ? game.description : t('comingSoon.descFallback')}
           </p>
         </header>
 
@@ -29,17 +31,12 @@ export default function ComingSoon() {
               🛠️
             </div>
             <h2 className="font-[family-name:var(--font-pixel)] text-amber-600 text-sm mb-3 tracking-wide">
-              COMING SOON
+              {t('comingSoon.comingSoon')}
             </h2>
             <p className="text-gray-600 text-base leading-relaxed max-w-md mx-auto">
-              {game ? (
-                <>
-                  We're busy preparing <strong>{game.name}</strong> for you. It will be
-                  available here soon — check back in a little while!
-                </>
-              ) : (
-                'This activity is still being prepared. It will be available here soon!'
-              )}
+              {game
+                ? t('comingSoon.preparing', { name: game.name })
+                : t('comingSoon.notGame')}
             </p>
             {game && (
               <div className="flex flex-wrap justify-center gap-2 mt-6">
@@ -60,7 +57,7 @@ export default function ComingSoon() {
 
         <div className="text-center mt-8 animate-slide-up stagger-2">
           <PixelButton to="/games" size="lg">
-            ← Back to Games
+            {t('comingSoon.backToGames')}
           </PixelButton>
         </div>
       </div>

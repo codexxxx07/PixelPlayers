@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 function AuthShell({ eyebrow, title, subtitle, children }) {
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden">
       <div className="absolute inset-0 pixel-grid" aria-hidden="true" />
@@ -37,7 +40,7 @@ function AuthShell({ eyebrow, title, subtitle, children }) {
         </div>
 
         <p className="mt-8 text-center text-sm text-gray-400 font-medium">
-          Pixel Players · Your memory, your story
+          Pixel Players · {t('auth.tagline')}
         </p>
       </div>
     </div>

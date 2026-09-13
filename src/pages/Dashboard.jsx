@@ -1,14 +1,15 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
+import { useTranslation } from "react-i18next";
 import { PixelButton, PixelCard, ProgressCard, RoutineCard } from "../components/";
 
 function getGreeting(hour) {
-  if (hour < 5) return "Good Night";
-  if (hour < 12) return "Good Morning";
-  if (hour < 17) return "Good Afternoon";
-  if (hour < 21) return "Good Evening";
-  return "Good Night";
+  if (hour < 5) return "common.goodNight";
+  if (hour < 12) return "common.goodMorning";
+  if (hour < 17) return "common.goodAfternoon";
+  if (hour < 21) return "common.goodEvening";
+  return "common.goodNight";
 }
 
 function formatTime12h(time) {
@@ -74,6 +75,7 @@ function SectionTitle({ icon, children }) {
 
 export default function Dashboard() {
   const { user, currentTime, routine, memories, games, activityLog, toggleRoutine, progressData } = useApp();
+  const { t } = useTranslation();
 
   const hour = currentTime.getHours();
   const greeting = getGreeting(hour);
@@ -104,8 +106,8 @@ export default function Dashboard() {
 
   const recommendedIds = ["picture-recall", "word-association"];
   const recommendedReasons = {
-    "picture-recall": "Because you enjoy visual memories",
-    "word-association": "Keep your language skills sharp",
+    "picture-recall": "dashboard.reasonPicture",
+    "word-association": "dashboard.reasonWord",
   };
   const recommendedGames = recommendedIds
     .map((id) => games.find((game) => game.id === id))
@@ -123,10 +125,10 @@ export default function Dashboard() {
     routine.length > 0 ? Math.round((doneCount / routine.length) * 100) : 0;
 
   const quickActions = [
-    { to: "/games", icon: "🎮", label: "Play a Game", hint: "Fun brain activities" },
-    { to: "/assistant", icon: "🤖", label: "Talk to Assistant", hint: "Chat anytime" },
-    { to: "/memory", icon: "💾", label: "Add Memory", hint: "Save a special moment" },
-    { to: "/routine", icon: "📋", label: "View Routine", hint: "See today's plan" },
+    { to: "/games", icon: "🎮", labelKey: "dashboard.playGame", hintKey: "dashboard.playGameHint" },
+    { to: "/assistant", icon: "🤖", labelKey: "dashboard.talkToAssistant", hintKey: "dashboard.talkToAssistantHint" },
+    { to: "/memory", icon: "💾", labelKey: "dashboard.addMemory", hintKey: "dashboard.addMemoryHint" },
+    { to: "/routine", icon: "📋", labelKey: "dashboard.viewRoutine", hintKey: "dashboard.viewRoutineHint" },
   ];
 
   return (
@@ -151,10 +153,10 @@ export default function Dashboard() {
           <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
             <div className="flex-1">
               <p className="font-[family-name:var(--font-pixel)] text-[9px] md:text-[10px] text-teal-500 tracking-widest mb-3">
-                {isDay ? "A FRESH NEW DAY" : "A QUIET EVENING"}
+                {isDay ? t('dashboard.dayTag') : t('dashboard.eveningTag')}
               </p>
               <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl leading-relaxed mb-4">
-                {greeting}, {user.name}
+                {t(greeting)}, {user.name}
               </h1>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-gray-600 text-base md:text-lg">
                 <span className="inline-flex items-center gap-2">
@@ -184,7 +186,7 @@ export default function Dashboard() {
 
         {/* ========== CURRENT STATUS ========== */}
         <section className="animate-slide-up stagger-1">
-          <SectionTitle icon="🗓️">Current Status</SectionTitle>
+          <SectionTitle icon="🗓️">{t('dashboard.currentStatus')}</SectionTitle>
           <PixelCard variant="elevated" className="p-6 md:p-7">
             <div className="grid sm:grid-cols-2 gap-5">
               <div className="flex items-center gap-4 rounded-2xl bg-emerald-50 border border-emerald-200 p-5">
@@ -194,13 +196,13 @@ export default function Dashboard() {
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs font-bold uppercase tracking-wide text-emerald-600 mb-1">
-                    Current Activity
+                    {t('dashboard.currentActivity')}
                   </p>
                   <p className="text-gray-800 text-lg font-bold leading-snug truncate">
-                    {currentActivity ? currentActivity.title : "Resting time"}
+                    {currentActivity ? currentActivity.title : t('dashboard.restingTime')}
                   </p>
                   <p className="text-sm text-emerald-600">
-                    {currentActivity ? formatTime12h(currentActivity.time) : "Enjoy the calm 🪴"}
+                    {currentActivity ? formatTime12h(currentActivity.time) : t('dashboard.enjoyCalm')}
                   </p>
                 </div>
               </div>
@@ -209,13 +211,13 @@ export default function Dashboard() {
                 <span className="flex flex-shrink-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-gray-400" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold uppercase tracking-wide text-gray-500 mb-1">
-                    Next Up
+                    {t('dashboard.nextUp')}
                   </p>
                   <p className="text-gray-800 text-lg font-bold leading-snug truncate">
-                    {nextActivity ? nextActivity.title : "Nothing planned"}
+                    {nextActivity ? nextActivity.title : t('dashboard.nothingPlanned')}
                   </p>
                   <p className="text-sm text-gray-500">
-                    {nextActivity ? formatTime12h(nextActivity.time) : "A free afternoon"}
+                    {nextActivity ? formatTime12h(nextActivity.time) : t('dashboard.freeAfternoon')}
                   </p>
                 </div>
               </div>
@@ -225,7 +227,7 @@ export default function Dashboard() {
 
         {/* ========== RECOMMENDED FOR YOU ========== */}
         <section className="animate-slide-up stagger-2">
-          <SectionTitle icon="✨">Recommended For You</SectionTitle>
+          <SectionTitle icon="✨">{t('dashboard.recommended')}</SectionTitle>
           <div className="grid sm:grid-cols-2 gap-5 items-stretch">
             {recommendedGames.map((game) => (
               <PixelCard key={game.id} hover pixel className="p-6 flex flex-col">
@@ -243,10 +245,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
-                  {recommendedReasons[game.id]}
+                  {t(recommendedReasons[game.id])}
                 </p>
                 <PixelButton to="/games" size="md" className="self-start mt-auto">
-                  Start Activity
+                  {t('dashboard.startActivity')}
                 </PixelButton>
               </PixelCard>
             ))}
@@ -255,19 +257,19 @@ export default function Dashboard() {
 
         {/* ========== TODAY'S PROGRESS ========== */}
         <section className="animate-slide-up stagger-3">
-          <SectionTitle icon="📊">Today's Progress</SectionTitle>
+          <SectionTitle icon="📊">{t('dashboard.todaysProgress')}</SectionTitle>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-5">
-            <ProgressCard label="Games Completed" value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
-            <ProgressCard label="Accuracy" value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
-            <ProgressCard label="Avg. Response" value={12.4} unit="s" icon="⏱️" color="blue" />
-            <ProgressCard label="Current Streak" value={progressData.streak} unit="days" icon="🔥" trend="stable" color="amber" />
+            <ProgressCard label={t('dashboard.gamesCompleted')} value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
+            <ProgressCard label={t('dashboard.accuracy')} value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
+            <ProgressCard label={t('dashboard.avgResponse')} value={12.4} unit="s" icon="⏱️" color="blue" />
+            <ProgressCard label={t('dashboard.currentStreak')} value={progressData.streak} unit={t('common.days')} icon="🔥" trend="stable" color="amber" />
           </div>
 
           <PixelCard variant="default" className="p-5">
             <div className="flex items-center justify-between mb-3">
               <p className="text-sm font-bold text-gray-700">
-                {doneCount} of {routine.length} planned activities done today
+                {t('dashboard.plannedActivities', { done: doneCount, total: routine.length })}
               </p>
               <p className="text-xs font-bold text-teal-600">{routineProgress}%</p>
             </div>
@@ -279,16 +281,16 @@ export default function Dashboard() {
 
         {/* ========== MEMORY HIGHLIGHTS ========== */}
         <section className="animate-slide-up stagger-4">
-          <SectionTitle icon="💛">Your Memories</SectionTitle>
+          <SectionTitle icon="💛">{t('dashboard.yourMemories')}</SectionTitle>
 
           <PixelCard variant="default" className="p-5 mb-5 bg-amber-50/40 border-amber-200/60">
             <div className="flex items-center gap-3">
               <span className="text-2xl" aria-hidden="true">🆕</span>
               <p className="text-gray-700 text-base md:text-lg font-semibold">
                 <span className="font-[family-name:var(--font-pixel)] text-[10px] text-amber-600 mr-2">
-                  3 NEW
+                  {t('dashboard.newMemoriesLabel')}
                 </span>
-                3 new memories this week — keep them coming!
+                {t('dashboard.newMemoriesBanner')}
               </p>
             </div>
           </PixelCard>
@@ -314,7 +316,7 @@ export default function Dashboard() {
 
           <div className="mt-6">
             <PixelButton to="/memory" variant="secondary" size="md">
-              View Memory Profile
+              {t('dashboard.viewMemoryProfile')}
             </PixelButton>
           </div>
         </section>
@@ -325,11 +327,11 @@ export default function Dashboard() {
             <div className="flex items-center gap-2.5">
               <span className="text-xl leading-none" aria-hidden="true">⏰</span>
               <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm tracking-wider">
-                Today's Routine
+                {t('dashboard.todaysRoutine')}
               </h2>
             </div>
             <PixelButton to="/routine" variant="secondary" size="sm" className="hidden sm:inline-flex">
-              View Full Routine
+              {t('dashboard.viewFullRoutine')}
             </PixelButton>
           </div>
 
@@ -343,14 +345,14 @@ export default function Dashboard() {
 
           <div className="mt-4 sm:hidden">
             <PixelButton to="/routine" variant="secondary" size="md" block>
-              View Full Routine
+              {t('dashboard.viewFullRoutine')}
             </PixelButton>
           </div>
         </section>
 
         {/* ========== QUICK ACTIONS ========== */}
         <section className="animate-slide-up stagger-6">
-          <SectionTitle icon="⚡">Quick Actions</SectionTitle>
+          <SectionTitle icon="⚡">{t('dashboard.quickActions')}</SectionTitle>
           <div className="grid grid-cols-2 gap-4 md:gap-5 items-stretch">
             {quickActions.map((action) => (
               <Link
@@ -370,9 +372,9 @@ export default function Dashboard() {
                   {action.icon}
                 </span>
                 <span className="font-[family-name:var(--font-pixel)] text-teal-800 text-[10px] md:text-[11px] leading-relaxed block">
-                  {action.label}
+                  {t(action.labelKey)}
                 </span>
-                <span className="text-xs md:text-sm text-gray-500 mt-2 block">{action.hint}</span>
+                <span className="text-xs md:text-sm text-gray-500 mt-2 block">{t(action.hintKey)}</span>
               </Link>
             ))}
           </div>
@@ -380,7 +382,7 @@ export default function Dashboard() {
 
         {/* ========== RECENT ACTIVITY ========== */}
         <section className="animate-slide-up">
-          <SectionTitle icon="🕰️">Recent Activity</SectionTitle>
+          <SectionTitle icon="🕰️">{t('dashboard.recentActivity')}</SectionTitle>
           <div className="space-y-3">
             {activityLog.slice(0, 5).map((activity) => (
               <PixelCard key={activity.id} variant="default" className="p-4 md:p-5">

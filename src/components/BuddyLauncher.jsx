@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useApp } from "../context/AppContext";
 import { PixelBuddy, VoiceButton, Waveform } from "../components";
 import { AiBubble, BuddyBadge, ThinkingBubble, UserBubble } from "./BuddyChat";
@@ -8,6 +9,7 @@ import { SUGGESTIONS } from "../services/chat";
 
 export default function BuddyLauncher() {
   const { user, memories, routine, reminders, games, supportNetwork, currentTime } = useApp();
+  const { t } = useTranslation();
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const {
@@ -50,13 +52,13 @@ export default function BuddyLauncher() {
           <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
             <BuddyBadge state={buddyState} className="w-11 h-11 flex-shrink-0" animate={false} />
             <div className="min-w-0 flex-1">
-              <p className="font-pixel text-[8px] text-teal-800 tracking-wider">MEMORY BUDDY</p>
-              <p className="text-teal-700 font-bold text-sm truncate">{statusText}</p>
+              <p className="font-pixel text-[8px] text-teal-800 tracking-wider">{t('assistant.memoryBuddy')}</p>
+              <p className="text-teal-700 font-bold text-sm truncate">{t(statusText)}</p>
             </div>
             <button
               type="button"
               onClick={resetChat}
-              aria-label="Start a new chat"
+              aria-label={t('chat.startNewChat')}
               className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-white border-2 border-teal-200 hover:bg-teal-50 text-teal-800 text-sm transition-colors"
             >
               <span aria-hidden="true">↻</span>
@@ -65,20 +67,20 @@ export default function BuddyLauncher() {
               to="/assistant"
               className="flex-shrink-0 inline-flex items-center gap-1 rounded-xl bg-white border-2 border-teal-200 hover:bg-teal-50 text-teal-800 px-3 py-1.5 text-xs font-bold transition-colors"
             >
-              Full chat
+              {t('chat.fullChat')}
               <span aria-hidden="true">→</span>
             </Link>
             <button
               type="button"
               onClick={toggleOpen}
-              aria-label="Close chat"
+              aria-label={t('chat.closeChat')}
               className="flex-shrink-0 flex items-center justify-center w-9 h-9 rounded-xl bg-white border-2 border-teal-200 hover:bg-teal-50 text-teal-800 text-sm transition-colors"
             >
               <span aria-hidden="true">✕</span>
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 buddy-chat-bg min-h-[300px] max-h-[46vh]" aria-live="polite" aria-label="Memory Buddy chat">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 buddy-chat-bg min-h-[300px] max-h-[46vh]" aria-live="polite" aria-label={t('chat.chatAriaLabel')}>
             {messages.map((message) =>
               message.role === "user" ? (
                 <UserBubble key={message.id} message={message} />
@@ -103,7 +105,7 @@ export default function BuddyLauncher() {
                 <div className="flex items-center gap-3">
                   <BuddyBadge state="listening" className="w-10 h-10 flex-shrink-0" />
                   <div className="flex-1 min-w-0">
-                    <p className="font-pixel text-[8px] text-red-500 tracking-wider">LISTENING…</p>
+                    <p className="font-pixel text-[8px] text-red-500 tracking-wider">{t('assistant.listening')}</p>
                     {voiceTranscript ? (
                       <p className="text-teal-800 text-sm mt-0.5 font-semibold truncate">{voiceTranscript}</p>
                     ) : (
@@ -116,15 +118,15 @@ export default function BuddyLauncher() {
                     className="flex-shrink-0 inline-flex items-center gap-1.5 rounded-xl bg-white border-2 border-red-200 hover:bg-red-50 text-red-600 px-3 py-2 text-xs font-bold transition-colors"
                   >
                     <span aria-hidden="true">⏹</span>
-                    Stop
+                    {t('assistant.stop')}
                   </button>
                 </div>
               ) : (
                 <div className="flex items-center gap-3">
                   <BuddyBadge state="thinking" className="w-10 h-10 flex-shrink-0" />
                   <div className="flex-1">
-                    <p className="font-pixel text-[8px] text-teal-700 tracking-wider">THINKING…</p>
-                    <p className="text-gray-500 text-sm mt-0.5">Just a moment, dear.</p>
+                    <p className="font-pixel text-[8px] text-teal-700 tracking-wider">{t('assistant.thinking')}</p>
+                    <p className="text-gray-500 text-sm mt-0.5">{t('assistant.justAMoment')}</p>
                   </div>
                   <span className="inline-block w-6 h-6 rounded-full border-4 border-teal-200 border-t-teal-600 animate-spin flex-shrink-0" aria-hidden="true" />
                 </div>
@@ -141,7 +143,7 @@ export default function BuddyLauncher() {
                 className="flex-shrink-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 border-teal-200 bg-white hover:bg-teal-50 text-teal-800 px-3 py-2 text-xs font-bold transition-colors"
               >
                 <span aria-hidden="true">{suggestion.icon}</span>
-                {suggestion.label}
+                {t(suggestion.labelKey)}
               </button>
             ))}
           </div>
@@ -150,7 +152,7 @@ export default function BuddyLauncher() {
             <div className="flex items-end gap-2">
               <div className="flex-1">
                 <label htmlFor="buddy-floater-input" className="sr-only">
-                  Type your message
+                  {t('assistant.typeMessage')}
                 </label>
                 <textarea
                   id="buddy-floater-input"
@@ -163,7 +165,7 @@ export default function BuddyLauncher() {
                       submit();
                     }
                   }}
-                  placeholder="Ask me anything…"
+                  placeholder={t('assistant.askAnything')}
                   className="w-full resize-none rounded-xl border-2 border-teal-200 bg-white px-4 py-3 text-base text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-200"
                 />
               </div>
@@ -176,7 +178,7 @@ export default function BuddyLauncher() {
               <button
                 type="submit"
                 disabled={!input.trim() || thinking || voiceState !== "idle"}
-                aria-label="Send message"
+                aria-label={t('assistant.sendMessage')}
                 className="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-b from-teal-500 to-teal-600 text-white text-xl shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-[2px] active:shadow-[0_1px_0_#134e4a] disabled:opacity-40 disabled:pointer-events-none transition-all"
               >
                 <span aria-hidden="true">➤</span>
@@ -188,14 +190,14 @@ export default function BuddyLauncher() {
 
       {!open && (
         <span className="absolute right-[calc(100%+14px)] bottom-4 hidden sm:inline-flex items-center whitespace-nowrap rounded-2xl bg-white border-2 border-teal-100 shadow-lg px-4 py-3 text-teal-800 font-bold text-sm">
-          Ask me anything
+          {t('assistant.askAnything')}
         </span>
       )}
 
       <button
         type="button"
         onClick={toggleOpen}
-        aria-label={open ? "Close Memory Buddy chat" : "Open Memory Buddy chat"}
+        aria-label={open ? t('chat.closeChatDetails') : t('chat.openChat')}
         aria-expanded={open}
         className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-b from-teal-400 to-teal-600 border-2 border-teal-700/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_6px_16px_rgba(19,78,74,0.35)] hover:brightness-105 active:scale-95 transition-all"
       >

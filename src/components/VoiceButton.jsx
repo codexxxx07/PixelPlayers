@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const SIZES = {
   sm: "w-12 h-12",
   md: "w-14 h-14",
@@ -32,6 +34,7 @@ function MicIcon({ className = "" }) {
 }
 
 export default function VoiceButton({ isListening = false, onToggle, size = "md", className = "" }) {
+  const { t } = useTranslation();
   const base =
     "relative z-10 flex items-center justify-center rounded-full transition-all duration-300 select-none touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-500";
 
@@ -54,7 +57,7 @@ export default function VoiceButton({ isListening = false, onToggle, size = "md"
       <button
         type="button"
         onClick={onToggle}
-        aria-label={isListening ? "Stop voice input" : "Start voice input"}
+        aria-label={isListening ? t('chat.stopVoice') : t('chat.startVoice')}
         aria-pressed={isListening}
         className={`${base} ${isListening ? active : idle} ${SIZES[size]}`}
       >

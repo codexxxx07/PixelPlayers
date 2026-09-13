@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const PALETTE = {
   B: "#134e4a",
   F: "#ffe9d6",
@@ -41,13 +43,14 @@ const PATTERNS = {
 };
 
 export default function PixelBuddy({ state = "idle", className = "", animate = true }) {
+  const { t } = useTranslation();
   const rows = PATTERNS[state] || PATTERNS.idle;
 
   return (
     <div
       className={`grid grid-cols-10 ${animate ? "animate-buddy-float" : ""} ${className}`}
       role="img"
-      aria-label="Memory Buddy pixel friend"
+      aria-label={t('chat.pixelBuddyAria')}
     >
       {rows.map((row, y) =>
         row.split("").map((cell, x) =>

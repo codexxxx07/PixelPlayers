@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const colorTints = {
   teal: "bg-teal-50 border-teal-200 text-teal-700",
   blue: "bg-blue-50 border-blue-200 text-blue-700",
@@ -9,9 +11,9 @@ const colorTints = {
 };
 
 const trendConfig = {
-  up: { icon: "↑", color: "text-emerald-600", label: "trending up" },
-  down: { icon: "↓", color: "text-red-500", label: "trending down" },
-  stable: { icon: "→", color: "text-gray-400", label: "stable" },
+  up: { icon: "↑", color: "text-emerald-600", labelKey: "common.trendingUp" },
+  down: { icon: "↓", color: "text-red-500", labelKey: "common.trendingDown" },
+  stable: { icon: "→", color: "text-gray-400", labelKey: "common.stable" },
 };
 
 export default function ProgressCard({
@@ -22,6 +24,7 @@ export default function ProgressCard({
   trend,
   color = "teal",
 }) {
+  const { t } = useTranslation();
   const tint = colorTints[color] || colorTints.teal;
   const trendInfo = trend ? trendConfig[trend] : null;
 
@@ -37,7 +40,7 @@ export default function ProgressCard({
         {trendInfo && (
           <span
             className={`inline-flex items-center gap-1 text-sm font-medium ${trendInfo.color}`}
-            aria-label={trendInfo.label}
+            aria-label={t(trendInfo.labelKey)}
           >
             <span className="text-lg leading-none">{trendInfo.icon}</span>
           </span>
