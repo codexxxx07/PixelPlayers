@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Show, UserButton } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
 
 const navLinks = [
@@ -93,18 +94,23 @@ export default function Navbar() {
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center gap-3 shrink-0">
-              <Link
-                to="/login"
-                className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
-              >
-                Log In
-              </Link>
-              <Link
-                to="/signup"
-                className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
-              >
-                Sign Up
-              </Link>
+              <Show when="signed-out">
+                <Link
+                  to="/login"
+                  className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
+                >
+                  Sign Up
+                </Link>
+              </Show>
+              <Show when="signed-in">
+                <UserButton />
+              </Show>
               <SosButton variant="navbar" onClick={openSos} />
             </div>
 
@@ -211,20 +217,27 @@ export default function Navbar() {
 
           {/* Mobile Auth */}
           <div className="px-6 py-5 border-t border-teal-100 space-y-3">
-            <Link
-              to="/login"
-              onClick={() => setMobileOpen(false)}
-              className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
-            >
-              Log In
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setMobileOpen(false)}
-              className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
-            >
-              Sign Up
-            </Link>
+            <Show when="signed-out">
+              <Link
+                to="/login"
+                onClick={() => setMobileOpen(false)}
+                className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
+              >
+                Log In
+              </Link>
+              <Link
+                to="/signup"
+                onClick={() => setMobileOpen(false)}
+                className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
+              >
+                Sign Up
+              </Link>
+            </Show>
+            <Show when="signed-in">
+              <div className="flex justify-center">
+                <UserButton />
+              </div>
+            </Show>
           </div>
         </div>
       </div>
