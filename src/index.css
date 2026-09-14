@@ -207,6 +207,21 @@
 }
 
 @layer components {
+  .auth-shell .cl-rootBox,
+  .auth-shell .cl-cardBox,
+  .auth-shell .cl-signIn-root,
+  .auth-shell .cl-signUp-root {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .auth-shell .cl-cardBox {
+    display: flex !important;
+    justify-content: center !important;
+    max-width: 28rem !important;
+    margin-inline: auto !important;
+  }
+
   .skeuo-btn {
     position: relative;
     display: inline-flex;

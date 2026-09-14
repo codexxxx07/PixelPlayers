@@ -22,7 +22,7 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
   );
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell">
       <div className="absolute inset-0 pixel-grid" aria-hidden="true" />
       <div
         className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-teal-200/40 blur-3xl"

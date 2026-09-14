@@ -9,7 +9,16 @@ export default function Login() {
       title="Log In"
       subtitle="Jump back in and keep your mind sharp"
     >
-      <SignIn signUpUrl="/signup" fallbackRedirectUrl="/dashboard" />
+      <SignIn
+        signUpUrl="/signup"
+        fallbackRedirectUrl="/dashboard"
+        appearance={{
+          elements: {
+            rootBox: "w-full",
+            cardBox: "mx-auto w-full max-w-md",
+          },
+        }}
+      />
     </AuthShell>
   );
 }

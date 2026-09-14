@@ -9,7 +9,16 @@ export default function Signup() {
       title="Create Account"
       subtitle="Start your cognitive journey today"
     >
-      <SignUp signInUrl="/login" fallbackRedirectUrl="/dashboard" />
+      <SignUp
+        signInUrl="/login"
+        fallbackRedirectUrl="/dashboard"
+        appearance={{
+          elements: {
+            rootBox: "w-full",
+            cardBox: "mx-auto w-full max-w-md",
+          },
+        }}
+      />
     </AuthShell>
   );
 }
