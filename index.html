@@ -12,9 +12,212 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Pixel Players — Helping Memories Stay Meaningful</title>
+    <style>
+      .boot-shell {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #fffaf3;
+        color: #5f3d28;
+        font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+      }
+
+      .boot-bar {
+        width: 100%;
+        border-bottom: 3px dashed #99f6e4;
+        background-color: #fff8f0;
+      }
+
+      .boot-bar-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+      }
+
+      .boot-logo-block {
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 0.75rem;
+      }
+
+      .boot-logo-text {
+        height: 1rem;
+        width: 9rem;
+        border-radius: 0.25rem;
+      }
+
+      .boot-cta {
+        height: 2.75rem;
+        width: 7.5rem;
+        border-radius: 0.75rem;
+      }
+
+      .boot-hero {
+        flex: 1;
+        max-width: 80rem;
+        width: 100%;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+        text-align: center;
+      }
+
+      .boot-hero-badge {
+        height: 2rem;
+        width: 10rem;
+        margin: 0 auto;
+        border-radius: 9999px;
+      }
+
+      .boot-hero-title {
+        height: 1.5rem;
+        width: 75%;
+        max-width: 34rem;
+        margin: 2rem auto 0;
+        border-radius: 0.375rem;
+      }
+
+      .boot-hero-sub {
+        height: 1rem;
+        width: 60%;
+        max-width: 26rem;
+        margin: 1rem auto 0;
+        border-radius: 0.375rem;
+      }
+
+      .boot-hero-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .boot-hero-btn {
+        height: 3.25rem;
+        width: 13rem;
+        border-radius: 0.9rem;
+      }
+
+      .boot-card-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        max-width: 80rem;
+        margin: 2rem auto 0;
+        padding: 0 1.5rem;
+      }
+
+      .boot-card {
+        height: 13rem;
+        border-radius: 1.25rem;
+      }
+
+      .boot-footer {
+        background-color: #134e4a;
+        padding: 2.5rem 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .boot-footer-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+      }
+
+      .boot-footer-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+      }
+
+      .boot-footer-block {
+        height: 6.5rem;
+        border-radius: 0.75rem;
+      }
+
+      .sk-boot {
+        background-color: #faead3;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .sk-boot::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
+        animation: boot-sweep 1.9s ease-in-out infinite;
+      }
+
+      @keyframes boot-sweep {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .sk-boot::after {
+          animation: none;
+        }
+      }
+
+      @media (max-width: 40rem) {
+        .boot-logo-text,
+        .boot-hero, .boot-cta {
+          display: none;
+        }
+        .boot-card-row {
+          grid-template-columns: 1fr;
+        }
+        .boot-footer-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-shell" aria-busy="true" aria-hidden="true">
+        <div class="boot-bar">
+          <div class="boot-bar-inner">
+            <div class="boot-logo-block sk-boot"></div>
+            <div class="boot-logo-text sk-boot"></div>
+            <div class="boot-cta sk-boot"></div>
+          </div>
+        </div>
+        <div style="flex: 1">
+          <div class="boot-hero">
+            <div class="boot-hero-badge sk-boot"></div>
+            <div class="boot-hero-title sk-boot"></div>
+            <div class="boot-hero-sub sk-boot"></div>
+            <div class="boot-hero-buttons">
+              <div class="boot-hero-btn sk-boot"></div>
+              <div class="boot-hero-btn sk-boot"></div>
+            </div>
+          </div>
+          <div class="boot-card-row">
+            <div class="boot-card sk-boot"></div>
+            <div class="boot-card sk-boot"></div>
+            <div class="boot-card sk-boot"></div>
+          </div>
+        </div>
+        <div class="boot-footer">
+          <div class="boot-footer-inner">
+            <div class="boot-footer-row">
+              <div class="boot-footer-block sk-boot"></div>
+              <div class="boot-footer-block sk-boot"></div>
+              <div class="boot-footer-block sk-boot"></div>
+              <div class="boot-footer-block sk-boot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

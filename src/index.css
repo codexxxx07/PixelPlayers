@@ -626,6 +626,54 @@
   }
 }
 
+.sk-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sk-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 80%
+    );
+    animation: sk-shimmer-sweep 1.9s ease-in-out infinite;
+  }
+
+  .sk {
+    background: var(--color-warm-150);
+    border-radius: 12px;
+  }
+
+  .sk-sm {
+    border-radius: 8px;
+  }
+
+  .sk-round {
+    border-radius: 9999px;
+  }
+
+  .sk-avatar {
+    border-radius: 9999px;
+  }
+
+@keyframes sk-shimmer-sweep {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-shimmer::after {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
