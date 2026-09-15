@@ -16,9 +16,7 @@ export default function PageLoader({
 
   return (
     <div className="min-h-screen bg-warm-50" role="status" aria-live="polite">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SkeletonView />
-      </div>
+      <SkeletonView />
     </div>
   );
 }

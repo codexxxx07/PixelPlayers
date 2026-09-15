@@ -39,7 +39,7 @@ function StepCardSkeleton() {
 export default function SkeletonHome() {
   return (
     <div className="min-h-screen" aria-busy="true">
-      <SkeletonHero />
+      <SkeletonHero variant="home" />
 
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -127,7 +127,7 @@ export default function SkeletonHome() {
             <SkeletonText lines={2} size="md" />
           </div>
           <div className="mt-10 flex justify-center">
-            <SkeletonButton size="lg" width="12rem" />
+            <SkeletonButton size="lg" width="12rem" variant="primary" />
           </div>
         </div>
       </section>

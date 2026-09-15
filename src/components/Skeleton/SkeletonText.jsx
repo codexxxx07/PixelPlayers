@@ -45,13 +45,14 @@ export default function SkeletonText({
   lines = 2,
   size = "md",
   className = "",
+  skipShimmer = false,
 }) {
   const results = [];
   const heightClass = SIZES[size] || SIZES.md;
-  results.push(<Skeleton key="first" height={heightClass} width={widthAt(0)} />);
+  results.push(<Skeleton key="first" height={heightClass} width={widthAt(0)} skipShimmer={skipShimmer} />);
   for (let i = 1; i < lines; i += 1) {
     results.push(
-      <Skeleton key={i} height={heightClass} width={widthAt(i)} className="mt-2.5" />
+      <Skeleton key={i} height={heightClass} width={widthAt(i)} className="mt-2.5" skipShimmer={skipShimmer} />
     );
   }
   return <div className={className} aria-hidden="true">{results}</div>;

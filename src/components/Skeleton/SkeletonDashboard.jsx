@@ -90,21 +90,23 @@ export default function SkeletonDashboard() {
     <div className="min-h-screen pb-16" aria-busy="true">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10 space-y-12">
         <section className="relative overflow-hidden rounded-3xl p-7 md:p-10 bg-gradient-to-br from-amber-100 via-orange-50 to-teal-50">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+          <div className="absolute top-0 left-0 right-0 h-3 flex opacity-70">
+            <div className="flex-1 bg-teal-400" />
+            <div className="flex-1 bg-amber-400" />
+            <div className="flex-1 bg-teal-300" />
+            <div className="flex-1 bg-amber-300" />
+          </div>
+
+          <div className="relative flex flex-col sm:flex-row sm:items-center gap-6 pt-3">
             <div className="flex-1">
-              <Skeleton width="8rem" height="0.8rem" rounding="sm" />
+              <Skeleton width="9rem" height="0.65rem" rounding="sm" />
               <Skeleton width="70%" height="1.6rem" rounding="sm" className="mt-4" />
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4">
                 <Skeleton width="12rem" height="1rem" rounding="sm" />
                 <Skeleton width="8rem" height="1rem" rounding="sm" />
               </div>
             </div>
-            <Skeleton
-              width="5rem"
-              height="5rem"
-              rounding="lg"
-              className="sk-shimmer flex-shrink-0 self-center sm:self-end"
-            />
+            <div className="flex-shrink-0 self-center sm:self-end w-20 h-20 rounded-2xl border-2 border-amber-200/70 bg-white/70 shadow-inner flex items-center justify-center sk sk-shimmer" />
           </div>
         </section>
 

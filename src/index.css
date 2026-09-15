@@ -626,7 +626,8 @@
   }
 }
 
-.sk-shimmer {
+@layer components {
+  .sk-shimmer {
     position: relative;
     overflow: hidden;
   }
@@ -646,8 +647,10 @@
   }
 
   .sk {
-    background: var(--color-warm-150);
+    background: linear-gradient(180deg, var(--color-warm-100), var(--color-warm-200));
+    border: 1px solid var(--color-warm-300);
     border-radius: 12px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   .sk-sm {
@@ -661,6 +664,23 @@
   .sk-avatar {
     border-radius: 9999px;
   }
+
+  .sk-on-dark {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .sk-pixel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    background: var(--color-warm-300);
+    box-shadow:
+      16px 0 0 var(--color-warm-200),
+      32px 0 0 var(--color-warm-300);
+  }
+}
 
 @keyframes sk-shimmer-sweep {
   100% {
