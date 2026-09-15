@@ -59,21 +59,21 @@ export default function Navbar() {
     : baseNavLinks;
 
   const linkClass = ({ isActive }) =>
-    `relative px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
+    `relative inline-flex items-center justify-center px-4 py-2.5 text-base leading-6 font-medium rounded-lg transition-colors duration-200 ${
       isActive
-        ? "bg-teal-100 text-teal-700"
-        : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
+        ? "bg-teal-100 text-teal-700 font-semibold after:content-[''] after:absolute after:inset-x-4 after:bottom-1.5 after:h-[3px] after:rounded-sm after:bg-teal-600"
+        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
-    `block w-full px-6 py-4 text-xl font-medium rounded-xl transition-colors duration-200 ${
+    `flex w-full items-center min-h-14 px-6 py-4 text-lg font-medium rounded-xl transition-colors duration-200 ${
       isActive
-        ? "bg-teal-100 text-teal-700 border-l-4 border-teal-600"
-        : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
+        ? "bg-teal-100 text-teal-700 font-semibold border-l-4 border-teal-600"
+        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600"
     }`;
 
   const userNamePillClass =
-    "inline-flex items-center gap-2 rounded-xl border-2 border-teal-200 bg-white px-4 py-2.5 shadow-[0_2px_0_rgba(19,78,74,0.15)]";
+    "inline-flex items-center gap-2 rounded-xl border-2 border-teal-200 bg-white px-4 py-2 shadow-[0_2px_0_rgba(19,78,74,0.15)]";
 
   return (
     <>
@@ -93,13 +93,13 @@ export default function Navbar() {
                 <span className="text-white text-lg leading-none mt-0.5">♥</span>
                 <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-amber-400 rounded-sm" />
               </div>
-              <span className="font-[family-name:var(--font-pixel)] text-lg sm:text-xl text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
+              <span className="font-[family-name:var(--font-pixel)] text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
                 Pixel&nbsp;Players
               </span>
             </Link>
 
             {/* Desktop Nav */}
-            <div className="hidden xl:flex items-center gap-1">
+            <div className="hidden xl:flex items-center gap-2">
               {navLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} className={linkClass} end={link.to === "/"}>
                   {t(link.key)}
@@ -118,14 +118,14 @@ export default function Navbar() {
                     >
                       {displayName.charAt(0)}
                     </span>
-                    <span className="max-w-[10rem] truncate text-teal-800 font-bold">
+                    <span className="max-w-[10rem] truncate text-teal-800 font-semibold">
                       {displayName}
                     </span>
                   </span>
                   <button
                     type="button"
                     onClick={handleSignOut}
-                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3.5"
                   >
                     {t("settings.signOut")}
                   </button>
@@ -134,13 +134,13 @@ export default function Navbar() {
                 <>
                   <Link
                     to="/login"
-                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3.5"
                   >
                     {t("nav.login")}
                   </Link>
                   <Link
                     to="/signup"
-                    className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
+                    className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3.5"
                   >
                     {t("nav.signup")}
                   </Link>
@@ -151,7 +151,7 @@ export default function Navbar() {
 
             {/* Mobile Hamburger */}
             <button
-              className="lg:hidden flex flex-col items-center justify-center w-14 h-14 rounded-xl hover:bg-teal-50 transition-colors shrink-0"
+              className="xl:hidden flex flex-col items-center justify-center w-12 h-12 rounded-xl hover:bg-teal-50 transition-colors shrink-0"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={mobileOpen}
@@ -182,7 +182,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${
+        className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-opacity duration-300 xl:hidden ${
           mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setMobileOpen(false)}
@@ -190,7 +190,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-white shadow-2xl transition-transform duration-300 ease-out lg:hidden ${
+        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-white shadow-2xl transition-transform duration-300 ease-out xl:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
         style={{ backgroundColor: "#FFF8F0" }}
@@ -211,16 +211,16 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Nav Links */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1.5">
             <div className="mb-3">
-                <SosButton
-                  variant="menu"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    openSos();
-                  }}
-                />
-              </div>
+              <SosButton
+                variant="menu"
+                onClick={() => {
+                  setMobileOpen(false);
+                  openSos();
+                }}
+              />
+            </div>
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}

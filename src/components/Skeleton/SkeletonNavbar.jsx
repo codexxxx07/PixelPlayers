@@ -19,9 +19,9 @@ export default function SkeletonNavbar() {
             </div>
           </div>
 
-          <div className="hidden xl:flex items-center gap-1">
+          <div className="hidden xl:flex items-center gap-2">
             {[68, 80, 72, 82, 100].map((w, i) => (
-              <Skeleton key={i} width={`${w / 16}rem`} height="1.5rem" rounding="lg" />
+              <Skeleton key={i} width={`${w / 16}rem`} height="2.75rem" rounding="lg" />
             ))}
           </div>
 
@@ -32,7 +32,7 @@ export default function SkeletonNavbar() {
           </div>
 
           <button
-            className="lg:hidden flex flex-col items-center justify-center w-14 h-14 rounded-xl shrink-0"
+            className="xl:hidden flex flex-col items-center justify-center w-12 h-12 rounded-xl shrink-0"
             aria-label="Open menu"
           >
             <div className="flex flex-col gap-1.5 w-6">
