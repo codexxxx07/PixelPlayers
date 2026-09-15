@@ -1,49 +1,74 @@
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
 
 const approaches = [
   {
     icon: '🤖',
-    title: 'AI-Powered Personalization',
-    description:
-      'Every activity is tailored to the individual. Our AI learns from your interactions, adapts difficulty in real time, and recommends activities aligned with your interests and cognitive patterns.',
+    titleKey: 'about.approachAi.title',
+    descKey: 'about.approachAi.desc',
   },
   {
     icon: '🇮🇳',
-    title: 'Culturally Relevant',
-    description:
-      'Content designed specifically for Indian elderly users — familiar names, regional references, culturally appropriate themes, and support for Indian languages.',
+    titleKey: 'about.approachCulture.title',
+    descKey: 'about.approachCulture.desc',
   },
   {
     icon: '🔒',
-    title: 'Privacy-First',
-    description:
-      'Your data belongs to you. We use end-to-end encryption, on-device processing where possible, and give you full control over what is shared and what stays private.',
+    titleKey: 'about.approachPrivacy.title',
+    descKey: 'about.approachPrivacy.desc',
   },
 ];
 
 const techStack = [
-  { name: 'React', desc: 'Modern responsive UI' },
-  { name: 'AI / ML', desc: 'Personalization engine' },
-  { name: 'Voice API', desc: 'Natural voice interaction' },
-  { name: 'Tailwind CSS', desc: 'Accessible design system' },
+  { name: 'React', descKey: 'about.tech.react' },
+  { name: 'AI / ML', descKey: 'about.tech.ai' },
+  { name: 'Voice API', descKey: 'about.tech.voice' },
+  { name: 'Tailwind CSS', descKey: 'about.tech.tailwind' },
 ];
 
 const languageLabels = {
-  en: 'English',
-  hi: 'हिन्दी',
-  bn: 'বাংলা',
+  en: 'about.langEnglish',
+  hi: 'about.langHindi',
+  bn: 'about.langBengali',
+  hinglish: 'about.langHinglish',
+  or: 'about.langOdia',
+  as: 'about.langAssamese',
+  pa: 'about.langPunjabi',
+  ta: 'about.langTamil',
+  te: 'about.langTelugu',
+  ur: 'about.langUrdu',
+  mr: 'about.langMarathi',
+  gu: 'about.langGujarati',
+  kn: 'about.langKannada',
+  ml: 'about.langMalayalam',
 };
 
 const stats = [
-  { value: '50M+', label: 'Elderly affected by cognitive decline in India' },
-  { value: '70%', label: 'Have limited access to mental wellness tools' },
-  { value: '3+', label: 'Indian languages supported' },
+  { value: '50M+', labelKey: 'about.statCognitive' },
+  { value: '70%', labelKey: 'about.statAccess' },
+  { value: '3+', labelKey: 'about.statLanguages' },
+];
+
+const architectureFlow = [
+  { labelKey: 'about.arch.ui', color: 'bg-teal-500' },
+  { labelKey: 'about.arch.input', color: 'bg-teal-400' },
+  { labelKey: 'about.arch.ai', color: 'bg-amber-400' },
+  { labelKey: 'about.arch.recommendation', color: 'bg-teal-300' },
+  { labelKey: 'about.arch.analytics', color: 'bg-teal-600' },
+  { labelKey: 'about.arch.data', color: 'bg-teal-700' },
+];
+
+const supportedLanguages = [
+  { langKey: 'about.langNameEnglish', native: 'EN' },
+  { langKey: 'about.langNameHindi', native: 'HI' },
+  { langKey: 'about.langNameBengali', native: 'BN' },
 ];
 
 function PixelPatternBlock() {
+  const { t } = useTranslation();
   return (
     <div className="w-full h-48 md:h-64 rounded-2xl border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-warm-50 flex items-center justify-center overflow-hidden relative">
       <div className="absolute inset-0 pixel-grid opacity-50" />
@@ -62,7 +87,7 @@ function PixelPatternBlock() {
         ))}
       </div>
       <div className="absolute bottom-4 left-1/2 -translate-x-1/2 font-[family-name:var(--font-pixel)] text-[9px] text-teal-400 tracking-wider">
-        PIXEL PATTERN
+        {t('about.pixelPattern')}
       </div>
     </div>
   );
@@ -70,6 +95,7 @@ function PixelPatternBlock() {
 
 export default function About() {
   const { language } = useApp();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen">
@@ -78,16 +104,16 @@ export default function About() {
         <div className="absolute inset-0 pixel-grid pointer-events-none opacity-30" />
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-white border-2 border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-[family-name:var(--font-pixel)] mb-6">
-            🌐 {languageLabels[language] || 'English'}
+            🌐 {t(languageLabels[language] || 'about.langEnglish')}
           </span>
           <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-4 block">
-            About
+            {t('about.eyebrow')}
           </span>
           <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-3xl text-teal-700 leading-relaxed mb-6 tracking-wide">
-            About Pixel Players
+            {t('about.title')}
           </h1>
           <p className="text-warm-700 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Designed with care for elderly users in the North Eastern Region
+            {t('about.headerDesc')}
           </p>
         </div>
       </section>
@@ -97,26 +123,22 @@ export default function About() {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
-              Mission
+              {t('about.missionBadge')}
             </span>
             <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide mb-6">
-              Our Mission
+              {t('about.missionTitle')}
             </h2>
             <p className="text-warm-800 text-lg leading-relaxed mb-6">
-              We believe every elderly individual deserves access to engaging, personalized
-              tools that support cognitive wellness and daily independence. Our mission is to
-              bridge the gap between AI technology and compassionate elderly care.
+              {t('about.missionP1')}
             </p>
             <p className="text-warm-600 text-base leading-relaxed">
-              Through AI-powered personalized activities, gentle reminders, and meaningful
-              social connections, we aim to help older adults maintain their cognitive abilities,
-              stay engaged with life, and continue doing the things they love.
+              {t('about.missionP2')}
             </p>
             <Link
               to="/features"
               className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-500 hover:text-teal-700 transition-colors inline-flex items-center gap-1 mt-6"
             >
-              See All Features <span className="text-[8px]">→</span>
+              {t('about.seeAllFeatures')} <span className="text-[8px]">→</span>
             </Link>
           </div>
           <PixelPatternBlock />
@@ -132,22 +154,21 @@ export default function About() {
               SIH26003
             </span>
             <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide mb-4">
-              The Problem We're Solving
+              {t('about.problemTitle')}
             </h2>
             <p className="text-warm-600 text-base max-w-2xl mx-auto">
-              Cognitive decline affects millions of older adults in India, with limited access
-              to engaging, culturally relevant mental wellness tools.
+              {t('about.problemDesc')}
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 items-stretch">
             {stats.map((stat) => (
-              <PixelCard key={stat.label} hover className="p-8 text-center flex flex-col items-center justify-center">
+              <PixelCard key={stat.labelKey} hover className="p-8 text-center flex flex-col items-center justify-center">
                 <div className="font-[family-name:var(--font-pixel)] text-3xl md:text-4xl text-teal-500 mb-4">
                   {stat.value}
                 </div>
                 <p className="text-warm-700 text-base leading-relaxed">
-                  {stat.label}
+                  {t(stat.labelKey)}
                 </p>
               </PixelCard>
             ))}
@@ -160,24 +181,24 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
-              Approach
+              {t('about.approachBadge')}
             </span>
             <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide">
-              Our Approach
+              {t('about.approachTitle')}
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {approaches.map((item) => (
-              <PixelCard key={item.title} hover pixel className="p-8 group">
+              <PixelCard key={item.titleKey} hover pixel className="p-8 group">
                 <div className="text-5xl mb-5 group-hover:scale-110 transition-transform duration-200">
                   {item.icon}
                 </div>
                 <h3 className="font-[family-name:var(--font-pixel)] text-[11px] text-teal-800 mb-3 leading-relaxed">
-                  {item.title}
+                  {t(item.titleKey)}
                 </h3>
                 <p className="text-warm-700 text-base leading-relaxed">
-                  {item.description}
+                  {t(item.descKey)}
                 </p>
               </PixelCard>
             ))}
@@ -190,10 +211,10 @@ export default function About() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
             <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
-              Technology
+              {t('about.techBadge')}
             </span>
             <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide">
-              Built with Modern Technology
+              {t('about.techTitle')}
             </h2>
           </div>
 
@@ -205,7 +226,7 @@ export default function About() {
                   <div className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-700 mb-1">
                     {tech.name}
                   </div>
-                  <p className="text-warm-500 text-sm">{tech.desc}</p>
+                  <p className="text-warm-500 text-sm">{t(tech.descKey)}</p>
                 </PixelCard>
               ))}
             </div>
@@ -213,21 +234,14 @@ export default function About() {
             {/* Architecture flow */}
             <PixelCard className="p-6 md:p-8">
               <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-700 mb-6 tracking-wider">
-                ARCHITECTURE FLOW
+                {t('about.architectureFlow')}
               </h3>
               <div className="space-y-3">
-                {[
-                  { label: 'User Interface (React)', color: 'bg-teal-500' },
-                  { label: 'Voice / Touch Input', color: 'bg-teal-400' },
-                  { label: 'AI Personalization Engine', color: 'bg-amber-400' },
-                  { label: 'Activity Recommendation', color: 'bg-teal-300' },
-                  { label: 'Progress Analytics', color: 'bg-teal-600' },
-                  { label: 'Secure Data Layer', color: 'bg-teal-700' },
-                ].map((item, i) => (
-                  <div key={item.label}>
+                {architectureFlow.map((item, i) => (
+                  <div key={item.labelKey}>
                     <div className="flex items-center gap-3">
                       <div className={`w-3 h-3 rounded-sm ${item.color} flex-shrink-0`} />
-                      <span className="text-warm-800 text-sm font-medium">{item.label}</span>
+                      <span className="text-warm-800 text-sm font-medium">{t(item.labelKey)}</span>
                     </div>
                     {i < 5 && (
                       <div className="ml-1.5 mt-1 mb-1 w-0.5 h-3 bg-warm-200" />
@@ -245,14 +259,13 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-14">
             <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
-              Focus Region
+              {t('about.focusBadge')}
             </span>
             <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide mb-4">
-              Built for the North Eastern Region
+              {t('about.focusTitle')}
             </h2>
             <p className="text-warm-600 text-base max-w-2xl mx-auto leading-relaxed">
-              Designed with deep understanding of the diverse cultures, languages, and needs
-              of elderly communities across India's North Eastern states.
+              {t('about.focusDesc')}
             </p>
           </div>
 
@@ -260,34 +273,29 @@ export default function About() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h3 className="font-[family-name:var(--font-pixel)] text-[11px] text-teal-800 mb-4 leading-relaxed">
-                  Indian Language Support
+                  {t('about.languageSupportTitle')}
                 </h3>
                 <div className="space-y-3 mb-6">
-                  {[
-                    { lang: 'English', native: 'EN' },
-                    { lang: 'हिन्दी', native: 'HI' },
-                    { lang: 'বাংলা', native: 'BN' },
-                  ].map((l) => (
+                  {supportedLanguages.map((l) => (
                     <div key={l.native} className="flex items-center gap-3">
                       <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-teal-100 border border-teal-200 font-[family-name:var(--font-pixel)] text-[9px] text-teal-700">
                         {l.native}
                       </span>
-                      <span className="text-warm-800 text-base">{l.lang}</span>
+                      <span className="text-warm-800 text-base">{t(l.langKey)}</span>
                     </div>
                   ))}
                 </div>
                 <p className="text-warm-600 text-sm leading-relaxed">
-                  More languages will be added based on community needs. Our voice-first
-                  approach ensures accessibility even for users with limited literacy.
+                  {t('about.languageSupportDesc')}
                 </p>
               </div>
               <div className="bg-gradient-to-br from-teal-50 to-warm-50 rounded-2xl p-8 border border-teal-100 text-center">
                 <div className="text-5xl mb-4">🇮🇳</div>
                 <p className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-700 leading-relaxed mb-2">
-                  DESIGNED FOR INDIA
+                  {t('about.designedForIndia')}
                 </p>
                 <p className="text-warm-600 text-sm">
-                  Culturally aware, linguistically diverse, and built with empathy for elderly Indian users.
+                  {t('about.designedForIndiaDesc')}
                 </p>
               </div>
             </div>
@@ -295,7 +303,7 @@ export default function About() {
 
           <div className="text-center mt-12">
             <PixelButton to="/features" variant="primary" size="lg">
-              Explore All Features
+              {t('about.exploreAllFeatures')}
             </PixelButton>
           </div>
         </div>

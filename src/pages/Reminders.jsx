@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
 
 const categoryConfig = {
-  medication: { icon: '💊', label: 'Medication', color: 'bg-red-100 text-red-700 border-red-200' },
-  appointment: { icon: '📋', label: 'Appointment', color: 'bg-blue-100 text-blue-700 border-blue-200' },
-  meal: { icon: '🍽️', label: 'Meal', color: 'bg-orange-100 text-orange-700 border-orange-200' },
-  hydration: { icon: '💧', label: 'Water', color: 'bg-cyan-100 text-cyan-700 border-cyan-200' },
-  activity: { icon: '🏃', label: 'Activity', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
-  other: { icon: '📌', label: 'Other', color: 'bg-purple-100 text-purple-700 border-purple-200' },
+  medication: { icon: '💊', label: 'Medication', labelKey: 'reminders.catMedication', color: 'bg-red-100 text-red-700 border-red-200' },
+  appointment: { icon: '📋', label: 'Appointment', labelKey: 'reminders.catAppointment', color: 'bg-blue-100 text-blue-700 border-blue-200' },
+  meal: { icon: '🍽️', label: 'Meal', labelKey: 'reminders.catMeal', color: 'bg-orange-100 text-orange-700 border-orange-200' },
+  hydration: { icon: '💧', label: 'Water', labelKey: 'reminders.catWater', color: 'bg-cyan-100 text-cyan-700 border-cyan-200' },
+  activity: { icon: '🏃', label: 'Activity', labelKey: 'reminders.catActivity', color: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
+  other: { icon: '📌', label: 'Other', labelKey: 'reminders.catOther', color: 'bg-purple-100 text-purple-700 border-purple-200' },
 };
 
 const hours = [
@@ -21,13 +22,14 @@ const periods = ['AM', 'PM'];
 const repeats = ['Once', 'Daily', 'Weekly'];
 
 function Toggle({ enabled, onToggle }) {
+  const { t } = useTranslation();
   return (
     <button
       onClick={onToggle}
       className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${
         enabled ? 'bg-teal-500' : 'bg-gray-300'
       }`}
-      aria-label={enabled ? 'Disable reminder' : 'Enable reminder'}
+      aria-label={enabled ? t('reminders.disable') : t('reminders.enable')}
     >
       <span
         className={`pointer-events-none inline-block h-7 w-7 transform rounded-full bg-white shadow-lg ring-0 transition duration-300 ease-in-out ${
@@ -59,6 +61,7 @@ function formatTimeDisplay(time) {
 
 export default function Reminders() {
   const { reminders, toggleReminder, addReminder, deleteReminder } = useApp();
+  const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [formTitle, setFormTitle] = useState('');
   const [formCategory, setFormCategory] = useState('medication');
@@ -145,7 +148,7 @@ export default function Reminders() {
                     <button
                       onClick={() => deleteReminder(reminder.id)}
                       className="flex items-center justify-center w-10 h-10 rounded-lg text-gray-300 hover:text-red-500 hover:bg-red-50 transition-colors"
-                      aria-label="Delete reminder"
+                      aria-label={t('reminders.delete')}
                     >
                       🗑️
                     </button>
@@ -165,10 +168,10 @@ export default function Reminders() {
         {/* Page Header */}
         <div className="text-center mb-10">
           <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
-            Smart Reminders
+            {t('reminders.pageTitle')}
           </h1>
           <p className="text-gray-500 text-lg italic">
-            Never miss what is important
+            {t('reminders.pageSubtitle')}
           </p>
         </div>
 
@@ -182,30 +185,30 @@ export default function Reminders() {
               block
               icon="🔔"
             >
-              Add New Reminder
+              {t('reminders.addNew')}
             </PixelButton>
           </div>
         ) : (
           <PixelCard className="p-6 md:p-8 mb-8 border-2 border-teal-300 shadow-lg shadow-teal-500/10">
             <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-6 tracking-wide">
-              Add New Reminder
+              {t('reminders.addNew')}
             </h3>
 
             {/* Title */}
             <div className="mb-5">
-              <label className="block text-gray-600 text-sm font-medium mb-2">Reminder Title</label>
+              <label className="block text-gray-600 text-sm font-medium mb-2">{t('reminders.titleLabel')}</label>
               <input
                 type="text"
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
-                placeholder="e.g., Take morning medication"
+                placeholder={t('reminders.titlePlaceholder')}
                 className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base text-gray-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[52px]"
               />
             </div>
 
             {/* Category Selector */}
             <div className="mb-5">
-              <label className="block text-gray-600 text-sm font-medium mb-2">Category</label>
+              <label className="block text-gray-600 text-sm font-medium mb-2">{t('reminders.categoryLabel')}</label>
               <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                 {Object.entries(categoryConfig).map(([key, cat]) => (
                   <button
@@ -218,7 +221,7 @@ export default function Reminders() {
                     }`}
                   >
                     <span className="text-2xl">{cat.icon}</span>
-                    <span className="text-[10px] text-gray-600 font-medium">{cat.label}</span>
+                    <span className="text-[10px] text-gray-600 font-medium">{t(cat.labelKey)}</span>
                   </button>
                 ))}
               </div>
@@ -226,7 +229,7 @@ export default function Reminders() {
 
             {/* Time Picker */}
             <div className="mb-5">
-              <label className="block text-gray-600 text-sm font-medium mb-2">Time</label>
+              <label className="block text-gray-600 text-sm font-medium mb-2">{t('reminders.timeLabel')}</label>
               <div className="flex gap-3">
                 <select
                   value={formHour}
@@ -257,7 +260,7 @@ export default function Reminders() {
 
             {/* Repeat Selector */}
             <div className="mb-6">
-              <label className="block text-gray-600 text-sm font-medium mb-2">Repeat</label>
+              <label className="block text-gray-600 text-sm font-medium mb-2">{t('reminders.repeatLabel')}</label>
               <div className="flex gap-2">
                 {repeats.map((r) => (
                   <button
@@ -278,7 +281,7 @@ export default function Reminders() {
             {/* Action Buttons */}
             <div className="flex gap-3">
               <PixelButton onClick={handleSave} variant="primary" size="lg" className="flex-1" icon="💾">
-                Save Reminder
+                {t('reminders.save')}
               </PixelButton>
               <PixelButton
                 onClick={() => { setShowForm(false); resetForm(); }}
@@ -286,7 +289,7 @@ export default function Reminders() {
                 size="lg"
                 icon="✕"
               >
-                Cancel
+                {t('reminders.cancel')}
               </PixelButton>
             </div>
           </PixelCard>
@@ -297,13 +300,13 @@ export default function Reminders() {
           {reminders.length === 0 && !showForm ? (
             <PixelCard className="p-10 text-center">
               <span className="text-5xl block mb-4">🔔</span>
-              <p className="text-gray-500 text-lg">No reminders yet. Tap &apos;Add New Reminder&apos; to get started!</p>
+              <p className="text-gray-500 text-lg">{t('reminders.empty')}</p>
             </PixelCard>
           ) : (
             <>
-              {renderReminderGroup('Morning', '🌅', morningReminders)}
-              {renderReminderGroup('Afternoon', '☀️', afternoonReminders)}
-              {renderReminderGroup('Evening', '🌙', eveningReminders)}
+              {renderReminderGroup(t('reminders.groupMorning'), '🌅', morningReminders)}
+              {renderReminderGroup(t('reminders.groupAfternoon'), '☀️', afternoonReminders)}
+              {renderReminderGroup(t('reminders.groupEvening'), '🌙', eveningReminders)}
             </>
           )}
         </div>
@@ -311,7 +314,7 @@ export default function Reminders() {
         {/* Reminder Categories Overview */}
         <div className="mt-8">
           <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-4 tracking-wide">
-            Reminder Categories
+            {t('reminders.reminderCategories')}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-stretch">
             {Object.entries(categoryConfig).map(([key, cat]) => (
@@ -321,9 +324,9 @@ export default function Reminders() {
                     {cat.icon}
                   </span>
                   <div className="min-w-0">
-                    <p className="text-gray-700 text-sm font-medium leading-snug truncate">{cat.label}</p>
+                    <p className="text-gray-700 text-sm font-medium leading-snug truncate">{t(cat.labelKey)}</p>
                     <p className="text-gray-400 text-xs mt-0.5">
-                      {categoryCounts[key]} {categoryCounts[key] === 1 ? 'reminder' : 'reminders'}
+                      {t('reminders.count', { count: categoryCounts[key] })}
                     </p>
                   </div>
                 </div>
@@ -338,14 +341,14 @@ export default function Reminders() {
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>
               <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs tracking-wide">
-                Privacy Note
+                {t('reminders.privacyNote')}
               </h3>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed">
-              Reminders are local to your device.
+              {t('reminders.privacyLine1')}
             </p>
             <p className="text-gray-400 text-xs mt-2 italic">
-              Your trusted contacts can view your reminders if you allow.
+              {t('reminders.privacyLine2')}
             </p>
           </PixelCard>
         </div>

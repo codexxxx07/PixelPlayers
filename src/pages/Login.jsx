@@ -1,13 +1,15 @@
 import { SignIn } from "@clerk/react";
+import { useTranslation } from "react-i18next";
 import AuthShell from "../components/AuthShell";
 
 export default function Login() {
+  const { t } = useTranslation();
   return (
     <AuthShell
       chromeless
-      eyebrow="Welcome back"
-      title="Log In"
-      subtitle="Jump back in and keep your mind sharp"
+      eyebrow={t("auth.welcomeBack")}
+      title={t("auth.loginTitle")}
+      subtitle={t("auth.loginSubtitle")}
     >
       <SignIn
         signUpUrl="/signup"

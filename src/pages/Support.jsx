@@ -1,29 +1,38 @@
 import { useState, useRef, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { PixelCard, PixelButton } from '../components/';
 
 const relationshipOptions = [
-  { id: 'family', label: 'Family', icon: '👨‍👩‍👧', color: 'bg-amber-400', active: 'border-amber-500 bg-amber-50 text-amber-800' },
-  { id: 'friend', label: 'Friend', icon: '🤝', color: 'bg-sky-400', active: 'border-sky-500 bg-sky-50 text-sky-800' },
-  { id: 'caregiver', label: 'Caregiver', icon: '🏥', color: 'bg-rose-400', active: 'border-rose-500 bg-rose-50 text-rose-800' },
-  { id: 'neighbour', label: 'Neighbour', icon: '🏘️', color: 'bg-emerald-400', active: 'border-emerald-500 bg-emerald-50 text-emerald-800' },
-  { id: 'community', label: 'Community Worker', icon: '👥', color: 'bg-violet-400', active: 'border-violet-500 bg-violet-50 text-violet-800' },
+  { id: 'family', label: 'Family', labelKey: 'support.relFamily', icon: '👨‍👩‍👧', color: 'bg-amber-400', active: 'border-amber-500 bg-amber-50 text-amber-800' },
+  { id: 'friend', label: 'Friend', labelKey: 'support.relFriend', icon: '🤝', color: 'bg-sky-400', active: 'border-sky-500 bg-sky-50 text-sky-800' },
+  { id: 'caregiver', label: 'Caregiver', labelKey: 'support.relCaregiver', icon: '🏥', color: 'bg-rose-400', active: 'border-rose-500 bg-rose-50 text-rose-800' },
+  { id: 'neighbour', label: 'Neighbour', labelKey: 'support.relNeighbour', icon: '🏘️', color: 'bg-emerald-400', active: 'border-emerald-500 bg-emerald-50 text-emerald-800' },
+  { id: 'community', label: 'Community Worker', labelKey: 'support.relCommunity', icon: '👥', color: 'bg-violet-400', active: 'border-violet-500 bg-violet-50 text-violet-800' },
 ];
 
 const permissionOptions = [
-  { id: 'progress', label: 'View Progress Only', description: 'They can see your game progress' },
-  { id: 'routine', label: 'View Routine', description: 'They can see your daily routine' },
-  { id: 'full', label: 'Full Access', description: 'They can see progress, routine, and memories' },
+  { id: 'progress', label: 'View Progress Only', labelKey: 'support.permProgress', description: 'They can see your game progress', descriptionKey: 'support.permProgressDesc' },
+  { id: 'routine', label: 'View Routine', labelKey: 'support.permRoutine', description: 'They can see your daily routine', descriptionKey: 'support.permRoutineDesc' },
+  { id: 'full', label: 'Full Access', labelKey: 'support.permFull', description: 'They can see progress, routine, and memories', descriptionKey: 'support.permFullDesc' },
 ];
 
 const permissionLabels = {
-  progress: 'Can view progress',
-  routine: 'Can view routine',
-  full: 'Full access',
+  progress: 'support.permProgressBadge',
+  routine: 'support.permRoutineBadge',
+  full: 'support.permFullBadge',
 };
 
-const checkInFallbacks = ['Today, 8:45 AM', 'Yesterday', '3 days ago'];
+const checkInFallbacks = ['support.checkToday', 'support.checkYesterday', 'support.checkDaysAgo'];
+
+const REL_LABEL_KEYS = {
+  'Family': 'support.relFamily',
+  'Friend': 'support.relFriend',
+  'Caregiver': 'support.relCaregiver',
+  'Neighbour': 'support.relNeighbour',
+  'Community Worker': 'support.relCommunity',
+};
 
 function getRelationshipLabel(relationship) {
   const r = (relationship || '').toLowerCase();
@@ -118,6 +127,7 @@ export default function Support() {
   const [sosProgress, setSosProgress] = useState(0);
   const [sosAlert, setSosAlert] = useState(false);
   const holdRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     return () => clearInterval(holdRef.current);
@@ -155,9 +165,9 @@ export default function Support() {
     addSupportPerson({
       name: name.trim(),
       relationship: selectedRelationship.label,
-      phone: phone.trim() || 'No phone number',
+      phone: phone.trim() || t('support.noPhone'),
       permission,
-      role: `${selectedRelationship.icon} Trusted person`,
+      role: `${selectedRelationship.icon} ${t('support.role')}`,
       sos: true,
     });
     setName('');
@@ -172,27 +182,27 @@ export default function Support() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         <div className="text-center mb-10">
           <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
-            Trusted Support Network
+            {t('support.pageTitle')}
           </h1>
           <p className="text-gray-600 text-lg max-w-xl mx-auto">
-            Stay connected with people who care about you
+            {t('support.pageSubtitle')}
           </p>
           <p className="text-gray-400 text-sm mt-2 max-w-lg mx-auto italic">
-            Add trusted people who can check in on your progress and help when needed.
+            {t('support.pageHint')}
           </p>
         </div>
 
         <section className="mb-12">
           <div className="flex items-center justify-between gap-4 mb-5">
             <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm tracking-wide">
-              Current Network
+              {t('support.currentNetwork')}
             </h2>
             <PixelButton
               onClick={() => setShowForm((visible) => !visible)}
               variant="primary"
               size="lg"
             >
-              {showForm ? 'Close Form' : 'Add a Trusted Person'}
+              {showForm ? t('support.closeForm') : t('support.addTrustedPerson')}
             </PixelButton>
           </div>
 
@@ -200,7 +210,7 @@ export default function Support() {
             <PixelCard className="p-10 text-center">
               <span className="text-4xl block mb-4">👥</span>
               <p className="text-gray-500 text-lg">
-                Your support network is empty. Add a trusted person to get started.
+                {t('support.emptyNetwork')}
               </p>
             </PixelCard>
           ) : (
@@ -222,7 +232,7 @@ export default function Support() {
                           {person.name}
                         </h3>
                         <p className="text-warm-600 text-sm mt-1.5">
-                          {relationshipLabel}
+                          {t(REL_LABEL_KEYS[relationshipLabel] || 'support.relFamily')}
                         </p>
                         {person.role && (
                           <p className="text-gray-400 text-xs mt-0.5">{person.role}</p>
@@ -240,30 +250,30 @@ export default function Support() {
                       <div className="flex items-center gap-3 rounded-xl bg-warm-100 px-4 py-3">
                         <span className="text-xl">💚</span>
                         <span className="text-warm-800 text-base">
-                          Last check-in: {getLastCheckIn(person, index)}
+                          {t('support.lastCheckIn', { value: t(getLastCheckIn(person, index)) })}
                         </span>
                       </div>
                       <div className="flex items-center gap-3 rounded-xl bg-teal-50 border border-teal-100 px-4 py-3">
                         <span className="text-xl">🔐</span>
                         <span className="text-teal-800 text-base font-semibold">
-                          {permissionLabel}
+                          {t(permissionLabel)}
                         </span>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-3 gap-3 mt-auto">
                       <PixelButton variant="secondary" size="md">
-                        Message
+                        {t('support.message')}
                       </PixelButton>
                       <PixelButton variant="primary" size="md">
-                        Call
+                        {t('support.call')}
                       </PixelButton>
                       <button
                         type="button"
                         onClick={() => deleteSupportPerson(person.id)}
                         className="font-[family-name:var(--font-pixel)] uppercase rounded-xl bg-red-500 text-white text-[0.72rem] tracking-wide px-3 py-3 border-2 border-red-700 shadow-[0_4px_0_#991b1b] transition-transform duration-100 hover:bg-red-600 active:translate-y-1 active:shadow-none"
                       >
-                        Remove
+                        {t('support.remove')}
                       </button>
                     </div>
                   </PixelCard>
@@ -276,26 +286,26 @@ export default function Support() {
         {showForm && (
           <PixelCard className="p-6 md:p-8 mb-12 animate-slide-up">
             <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
-              Add a Trusted Person
+              {t('support.addTrustedPerson')}
             </h2>
             <p className="text-gray-500 text-sm mb-6">
-              They will receive an invitation and can only see what you allow.
+              {t('support.formInvitation')}
             </p>
 
             <label className="block text-warm-800 text-base font-bold mb-2" htmlFor="support-name">
-              Name
+              {t('support.nameLabel')}
             </label>
             <input
               id="support-name"
               type="text"
               value={name}
               onChange={(event) => setName(event.target.value)}
-              placeholder="Enter their full name"
+              placeholder={t('support.namePlaceholder')}
               className="w-full border-2 border-warm-200 rounded-xl bg-white px-5 py-4 text-lg text-gray-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all placeholder:text-gray-300 mb-6"
             />
 
             <label className="block text-warm-800 text-base font-bold mb-3">
-              Relationship
+              {t('support.relationshipLabel')}
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
               {relationshipOptions.map((option) => (
@@ -312,26 +322,26 @@ export default function Support() {
                 >
                   <span className="text-3xl">{option.icon}</span>
                   <span className="text-sm font-semibold leading-tight text-center">
-                    {option.label}
+                    {t(option.labelKey)}
                   </span>
                 </button>
               ))}
             </div>
 
             <label className="block text-warm-800 text-base font-bold mb-2" htmlFor="support-phone">
-              Phone Number
+              {t('support.phoneLabel')}
             </label>
             <input
               id="support-phone"
               type="tel"
               value={phone}
               onChange={(event) => setPhone(event.target.value)}
-              placeholder="Enter phone number"
+              placeholder={t('support.phonePlaceholder')}
               className="w-full border-2 border-warm-200 rounded-xl bg-white px-5 py-4 text-lg text-gray-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all placeholder:text-gray-300 mb-6"
             />
 
             <label className="block text-warm-800 text-base font-bold mb-3">
-              What can they see?
+              {t('support.whatCanTheySee')}
             </label>
             <div className="grid md:grid-cols-3 gap-3 mb-8">
               {permissionOptions.map((option) => (
@@ -363,14 +373,14 @@ export default function Support() {
                         permission === option.id ? 'text-teal-800' : 'text-warm-800'
                       }`}
                     >
-                      {option.label}
+                      {t(option.labelKey)}
                     </span>
                     <span
                       className={`block text-sm mt-1 leading-relaxed ${
                         permission === option.id ? 'text-teal-600' : 'text-gray-500'
                       }`}
                     >
-                      {option.description}
+                      {t(option.descriptionKey)}
                     </span>
                   </span>
                 </button>
@@ -379,10 +389,10 @@ export default function Support() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <PixelButton onClick={handleAddPerson} variant="primary" size="lg" block>
-                Send Invitation
+                {t('support.sendInvitation')}
               </PixelButton>
               <PixelButton onClick={() => setShowForm(false)} variant="secondary" size="lg" block>
-                Cancel
+                {t('support.cancel')}
               </PixelButton>
             </div>
           </PixelCard>
@@ -390,37 +400,37 @@ export default function Support() {
 
         <section className="mb-12">
           <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
-            Privacy Settings
+            {t('support.privacySettings')}
           </h2>
           <p className="text-gray-500 text-sm mb-5">
-            You decide exactly what your trusted people can see.
+            {t('support.privacySettingsHint')}
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             <Toggle
               checked={settings.shareProgress ?? true}
               onChange={(value) => updateSettings({ shareProgress: value })}
-              label="Share my progress with trusted people"
+              label={t('support.shareProgress')}
             />
             <Toggle
               checked={settings.shareRoutine ?? true}
               onChange={(value) => updateSettings({ shareRoutine: value })}
-              label="Share my routine"
+              label={t('support.shareRoutine')}
             />
             <Toggle
               checked={settings.shareMemories ?? false}
               onChange={(value) => updateSettings({ shareMemories: value })}
-              label="Share my memories"
+              label={t('support.shareMemories')}
             />
             <Toggle
               checked={settings.allowEmergencySOS ?? true}
               onChange={(value) => updateSettings({ allowEmergencySOS: value })}
-              label="Allow emergency SOS contacts"
+              label={t('support.allowSOS')}
             />
           </div>
           <p className="text-gray-400 text-sm mt-4 italic">
-            Your information stays private and is never shared without your permission. View our{' '}
+            {t('support.privacyNote')}
             <Link to="/settings" className="text-teal-600 underline hover:text-teal-700">
-              Privacy Policy
+              {t('support.privacyPolicy')}
             </Link>
             .
           </p>
@@ -428,32 +438,32 @@ export default function Support() {
 
         <section className="mb-12">
           <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
-            Emergency SOS
+            {t('support.emergencySOS')}
           </h2>
           <p className="text-gray-500 text-sm mb-5">
-            Quick access to emergency contacts
+            {t('support.emergencySOSHint')}
           </p>
 
           <PixelCard className="p-8 text-center">
             <p className="text-gray-500 text-base mb-6">
-              Press and hold the button for 3 seconds to alert your trusted contacts
+              {t('support.holdToAlert')}
             </p>
             <div className="flex justify-center mb-6">
               {sosAlert ? (
                 <div className="rounded-2xl border-2 border-red-300 bg-red-50 px-8 py-8 w-56">
                   <span className="text-5xl block mb-3">🚨</span>
                   <p className="text-red-700 text-base font-bold">
-                    This would alert your trusted contacts now.
+                    {t('support.alertNow')}
                   </p>
                   <p className="text-red-500 text-sm mt-2">
-                    This is a demonstration only — no message was sent.
+                    {t('support.demoOnly')}
                   </p>
                   <button
                     type="button"
                     onClick={() => setSosAlert(false)}
                     className="mt-4 font-[family-name:var(--font-pixel)] uppercase text-[0.62rem] rounded-lg border-2 border-red-300 bg-white text-red-600 px-4 py-2 hover:bg-red-100"
                   >
-                    Done
+                    {t('support.done')}
                   </button>
                 </div>
               ) : (
@@ -471,10 +481,10 @@ export default function Support() {
                     background: 'linear-gradient(180deg, #f87171, #dc2626)',
                   }}
                 >
-                  <span className="sr-only">Emergency SOS button</span>
+                  <span className="sr-only">{t('support.sosAriaLabel')}</span>
                   <span className="text-6xl block mb-2">🆘</span>
                   <span className="absolute bottom-8 text-xl tracking-widest">
-                    SOS
+                    {t('sos.label')}
                   </span>
                   <span className="absolute bottom-0 left-0 h-2 bg-red-900/60 transition-all duration-100 rounded-b-full"
                     style={{ width: `${sosProgress}%` }}
@@ -484,11 +494,11 @@ export default function Support() {
             </div>
 
             <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 tracking-wide">
-              Your emergency contacts
+              {t('support.yourEmergencyContacts')}
             </h3>
             {!settings.allowEmergencySOS && (
               <p className="text-gray-500 text-base mb-4">
-                SOS is turned off in your privacy settings.
+                {t('support.sosOff')}
               </p>
             )}
             {settings.allowEmergencySOS && emergencyContacts.length > 0 ? (
@@ -519,7 +529,7 @@ export default function Support() {
             ) : (
               settings.allowEmergencySOS && (
                 <p className="text-gray-400 text-base">
-                  No emergency contacts yet. Add trusted people to enable SOS.
+                  {t('support.noEmergencyContacts')}
                 </p>
               )
             )}
@@ -528,30 +538,30 @@ export default function Support() {
 
         <section className="mb-12">
           <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-5 tracking-wide">
-            How It Works
+            {t('support.howItWorks')}
           </h2>
           <div className="grid md:grid-cols-3 gap-5 items-stretch">
             <PixelCard className="p-8 text-center flex flex-col items-center justify-center">
               <span className="text-4xl block mb-3">🔔</span>
               <p className="text-warm-800 text-base leading-relaxed">
-                Your trusted people are notified when you need help
+                {t('support.howNotify')}
               </p>
             </PixelCard>
             <PixelCard className="p-8 text-center flex flex-col items-center justify-center">
               <span className="text-4xl block mb-3">🛡️</span>
               <p className="text-warm-800 text-base leading-relaxed">
-                You control what they can see
+                {t('support.howControl')}
               </p>
             </PixelCard>
             <PixelCard className="p-8 text-center flex flex-col items-center justify-center">
               <span className="text-4xl block mb-3">🤫</span>
               <p className="text-warm-800 text-base leading-relaxed">
-                Nothing is shared without your permission
+                {t('support.howPrivate')}
               </p>
             </PixelCard>
           </div>
           <p className="text-gray-400 text-sm mt-6 text-center italic">
-            Welcome, {user.name}. Your network of {supportNetwork.length} trusted people is here for you.
+            {t('support.welcomeNetwork', { name: user.name, count: supportNetwork.length })}
           </p>
         </section>
       </div>

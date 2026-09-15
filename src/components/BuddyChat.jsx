@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClaraAvatar from "./ClaraAvatar";
+import { useTranslation } from "react-i18next";
 import { speakText } from "../services/chat";
 
 export function useTypewriter(text, active) {
@@ -51,6 +52,7 @@ function ChipButton({ icon, label, onClick }) {
 }
 
 function ActionButton({ action, onClick }) {
+  const { t } = useTranslation();
   const primary =
     "inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-teal-500 to-teal-600 text-white px-5 py-3 text-base font-extrabold shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-[2px] active:shadow-[0_1px_0_#134e4a]";
   const ghost =
@@ -59,7 +61,7 @@ function ActionButton({ action, onClick }) {
   const content = (
     <>
       {action.icon && <span aria-hidden="true">{action.icon}</span>}
-      <span>{action.label}</span>
+      <span>{action.labelKey ? t(action.labelKey, action.labelValues) : action.label}</span>
     </>
   );
 
@@ -79,6 +81,7 @@ function ActionButton({ action, onClick }) {
 }
 
 export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
+  const { t } = useTranslation();
   const { shown, done } = useTypewriter(message.text, isStreaming);
 
   useEffect(() => {
@@ -92,18 +95,18 @@ export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
       <div className="max-w-[85%] sm:max-w-[78%] min-w-0">
         <div className="buddy-bubble px-4 py-3.5 sm:px-5 sm:py-4">
           <div className="flex items-center justify-between gap-3 mb-1.5">
-            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">CLARA</p>
+            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">{t('assistant.memoryBuddy')}</p>
             <div className="flex items-center gap-2">
               {message.time && <span className="text-[11px] text-gray-400">{message.time}</span>}
               <button
                 type="button"
                 onClick={() => speakText(message.text)}
-                aria-label="Read this reply aloud"
-                title="Read aloud"
+                aria-label={t('chat.readAloud')}
+                title={t('chat.readAloud')}
                 className="inline-flex items-center gap-1 rounded-full border border-teal-200 bg-white px-2.5 py-1 text-teal-700 text-xs font-bold hover:bg-teal-50 transition-colors"
               >
                 <SpeakerIcon className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Listen</span>
+                <span className="hidden sm:inline">{t('chat.listen')}</span>
               </button>
             </div>
           </div>
@@ -127,7 +130,7 @@ export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
         {done && message.chips.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-3">
             {message.chips.map((chip, index) => (
-              <ChipButton key={`${chip.label}-${index}`} icon={chip.icon} label={chip.label} onClick={() => onChip(chip)} />
+              <ChipButton key={`${chip.label}-${index}`} icon={chip.icon} label={chip.labelKey ? t(chip.labelKey) : chip.label} onClick={() => onChip(chip)} />
             ))}
           </div>
         )}
@@ -150,12 +153,13 @@ export function UserBubble({ message }) {
 }
 
 export function ThinkingBubble() {
+  const { t } = useTranslation();
   return (
     <div className="flex items-start gap-3">
       <BuddyBadge state="thinking" className="w-12 h-12 flex-shrink-0 mt-1" />
       <div className="buddy-bubble px-5 py-4">
         <div className="flex items-center gap-3">
-          <span className="font-pixel text-[9px] text-teal-700 tracking-wider">THINKING…</span>
+          <span className="font-pixel text-[9px] text-teal-700 tracking-wider">{t('assistant.thinking')}</span>
           <span className="flex items-center gap-1" aria-hidden="true">
             {[0, 1, 2].map((i) => (
               <span

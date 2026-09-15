@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
+  const { t } = useTranslation();
   const heading = (
     <div className="text-center mb-8">
       <div
@@ -44,7 +47,7 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
         )}
 
         <p className="mt-8 text-center text-sm text-gray-400 font-medium">
-          Pixel Players · Your memory, your story
+          Pixel Players · {t('auth.tagline')}
         </p>
       </div>
     </div>

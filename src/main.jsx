@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import { BootShell } from './components/Skeleton'
+import './i18n'
 import './index.css'
 
 // eslint-disable-next-line react-refresh/only-export-components

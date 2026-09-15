@@ -1,13 +1,14 @@
 import { useMemo } from "react";
 import { useApp } from "../context/AppContext";
+import { useTranslation } from "react-i18next";
 import { PixelButton, PixelCard, ProgressCard } from "../components/";
 
 const CATEGORY_MIX = [
-  { label: "Memory", pct: 35, color: "bg-blue-400", dot: "bg-blue-400" },
-  { label: "Attention", pct: 25, color: "bg-amber-400", dot: "bg-amber-400" },
-  { label: "Reasoning", pct: 20, color: "bg-purple-400", dot: "bg-purple-400" },
-  { label: "Language", pct: 15, color: "bg-emerald-400", dot: "bg-emerald-400" },
-  { label: "Other", pct: 5, color: "bg-gray-300", dot: "bg-gray-300" },
+  { labelKey: "progress.catMemory", pct: 35, color: "bg-blue-400", dot: "bg-blue-400" },
+  { labelKey: "progress.catAttention", pct: 25, color: "bg-amber-400", dot: "bg-amber-400" },
+  { labelKey: "progress.catReasoning", pct: 20, color: "bg-purple-400", dot: "bg-purple-400" },
+  { labelKey: "progress.catLanguage", pct: 15, color: "bg-emerald-400", dot: "bg-emerald-400" },
+  { labelKey: "progress.catOther", pct: 5, color: "bg-gray-300", dot: "bg-gray-300" },
 ];
 
 const FAVORITE_PLAYS = [
@@ -17,11 +18,11 @@ const FAVORITE_PLAYS = [
 ];
 
 const ACHIEVEMENTS = [
-  { icon: "🏆", title: "First Game", desc: "Played your very first activity", completed: true },
-  { icon: "🔥", title: "5-Day Streak", desc: "Active for 5 days in a row", completed: true },
-  { icon: "🧠", title: "Memory Master", desc: "Score 90%+ in 10 Memory games", completed: false },
-  { icon: "📅", title: "Week Warrior", desc: "Play every day for a full week", completed: false },
-  { icon: "🎯", title: "Perfect Score", desc: "Finish a game with 100%", completed: false },
+  { icon: "🏆", titleKey: "progress.achFirst", descKey: "progress.achFirstDesc", completed: true },
+  { icon: "🔥", titleKey: "progress.achStreak", descKey: "progress.achStreakDesc", completed: true },
+  { icon: "🧠", titleKey: "progress.achMemory", descKey: "progress.achMemoryDesc", completed: false },
+  { icon: "📅", titleKey: "progress.achWeek", descKey: "progress.achWeekDesc", completed: false },
+  { icon: "🎯", titleKey: "progress.achPerfect", descKey: "progress.achPerfectDesc", completed: false },
 ];
 
 function SectionTitle({ icon, children }) {
@@ -37,6 +38,7 @@ function SectionTitle({ icon, children }) {
 
 export default function Progress() {
   const { progressData, games } = useApp();
+  const { t } = useTranslation();
 
   const weeklyData = progressData.weeklyData ?? [];
   const maxGames = Math.max(1, ...weeklyData.map((day) => day.games));
@@ -47,13 +49,13 @@ export default function Progress() {
         const game = games.find((item) => item.id === favorite.id);
         return {
           id: favorite.id,
-          name: game?.name ?? "Unknown Activity",
-          category: game?.category ?? "General",
+          name: game?.name ?? t("progress.unknownActivity"),
+          category: game?.category ?? t("progress.general"),
           icon: game?.icon ?? "🎮",
           ...favorite,
         };
       }),
-    [games]
+    [games, t]
   );
 
   return (
@@ -66,33 +68,33 @@ export default function Progress() {
             <span className="text-3xl" aria-hidden="true">📈</span>
           </div>
           <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl mb-3">
-            Your Progress
+            {t('progress.pageTitle')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mb-4">
-            Activity patterns and achievements
+            {t('progress.pageSubtitle')}
           </p>
           <p className="inline-block text-xs md:text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-4 py-2">
-            This information shows activity patterns and does not provide a medical diagnosis.
+            {t('progress.disclaimer')}
           </p>
         </header>
 
         {/* ========== OVERALL STATS ========== */}
         <section className="animate-slide-up stagger-1">
-          <SectionTitle icon="🧮">Overall Stats</SectionTitle>
+          <SectionTitle icon="🧮">{t('progress.overallStats')}</SectionTitle>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-            <ProgressCard label="Total Games Played" value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
-            <ProgressCard label="Average Accuracy" value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
-            <ProgressCard label="Avg. Response" value={progressData.avgResponseTime} icon="⏱️" color="blue" />
-            <ProgressCard label="Current Streak" value={progressData.streak} unit="days" icon="🔥" trend="stable" color="amber" />
+            <ProgressCard label={t('progress.totalGames')} value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
+            <ProgressCard label={t('progress.avgAccuracy')} value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
+            <ProgressCard label={t('progress.avgResponse')} value={progressData.avgResponseTime} icon="⏱️" color="blue" />
+            <ProgressCard label={t('progress.currentStreak')} value={progressData.streak} unit={t('common.days')} icon="🔥" trend="stable" color="amber" />
           </div>
         </section>
 
         {/* ========== WEEKLY ACTIVITY CHART ========== */}
         <section className="animate-slide-up stagger-2">
-          <SectionTitle icon="📊">Weekly Activity</SectionTitle>
+          <SectionTitle icon="📊">{t('progress.weeklyActivity')}</SectionTitle>
           <PixelCard variant="elevated" className="p-6">
             <p className="text-sm font-bold text-gray-700 mb-6">
-              Games completed per day — last 7 days
+              {t('progress.weeklySubtitle')}
             </p>
             <div className="h-44 flex items-end gap-3 md:gap-4">
               {weeklyData.map((day) => (
@@ -104,7 +106,7 @@ export default function Progress() {
                   <div
                     className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-gradient-to-t from-teal-600 via-teal-400 to-teal-300 shadow-inner transition-all duration-500"
                     style={{ height: `${(day.games / maxGames) * 100}%` }}
-                    title={`${day.day}: ${day.games} games`}
+                    title={t('progress.chartGamesTitle', { day: day.day, games: day.games })}
                   />
                   <span className="text-[11px] font-semibold text-gray-500">{day.day}</span>
                 </div>
@@ -115,10 +117,10 @@ export default function Progress() {
 
         {/* ========== ACCURACY TREND ========== */}
         <section className="animate-slide-up stagger-3">
-          <SectionTitle icon="🎯">Accuracy Trend</SectionTitle>
+          <SectionTitle icon="🎯">{t('progress.accuracyTrend')}</SectionTitle>
           <PixelCard variant="elevated" className="p-6">
             <p className="text-sm font-bold text-gray-700 mb-6">
-              Average accuracy per day — last 7 days
+              {t('progress.accuracySubtitle')}
             </p>
             <div className="h-40 flex items-end gap-3 md:gap-4">
               {weeklyData.map((day) => (
@@ -130,7 +132,7 @@ export default function Progress() {
                   <div
                     className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-gradient-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-inner transition-all duration-500"
                     style={{ height: `${day.accuracy}%` }}
-                    title={`${day.day}: ${day.accuracy}% accuracy`}
+                    title={t('progress.chartAccuracyTitle', { day: day.day, accuracy: day.accuracy })}
                   />
                   <span className="text-[11px] font-semibold text-gray-500">{day.day}</span>
                 </div>
@@ -141,28 +143,28 @@ export default function Progress() {
 
         {/* ========== CATEGORY BREAKDOWN ========== */}
         <section className="animate-slide-up stagger-4">
-          <SectionTitle icon="🧩">Your Activity Mix</SectionTitle>
+          <SectionTitle icon="🧩">{t('progress.activityMix')}</SectionTitle>
           <PixelCard variant="elevated" className="p-6">
             <p className="text-sm font-bold text-gray-700 mb-5">
-              Time spent across cognitive categories
+              {t('progress.activityMixSubtitle')}
             </p>
 
             <div className="h-7 rounded-full overflow-hidden flex bg-gray-100 border border-gray-200 mb-6">
               {CATEGORY_MIX.map((category) => (
                 <div
-                  key={category.label}
+                  key={category.labelKey}
                   className={category.color}
                   style={{ width: `${category.pct}%` }}
-                  title={`${category.label} — ${category.pct}%`}
+                  title={t('progress.mixLabel', { label: t(category.labelKey), pct: category.pct })}
                 />
               ))}
             </div>
 
             <div className="flex flex-wrap gap-x-5 gap-y-3">
               {CATEGORY_MIX.map((category) => (
-                <div key={category.label} className="flex items-center gap-2">
+                <div key={category.labelKey} className="flex items-center gap-2">
                   <span className={`w-3 h-3 rounded-sm ${category.dot}`} aria-hidden="true" />
-                  <span className="text-sm font-semibold text-gray-700">{category.label}</span>
+                  <span className="text-sm font-semibold text-gray-700">{t(category.labelKey)}</span>
                   <span className="text-sm text-gray-500">{category.pct}%</span>
                 </div>
               ))}
@@ -172,7 +174,7 @@ export default function Progress() {
 
         {/* ========== FAVORITE ACTIVITIES ========== */}
         <section className="animate-slide-up stagger-5">
-          <SectionTitle icon="⭐">Your Favorites</SectionTitle>
+          <SectionTitle icon="⭐">{t('progress.favorites')}</SectionTitle>
           <div className="space-y-3">
             {favoriteGames.map((favorite, index) => (
               <PixelCard key={favorite.id} hover className="p-5">
@@ -193,14 +195,14 @@ export default function Progress() {
                       </span>
                     </div>
                     <p className="text-sm text-gray-500 mt-1">
-                      Played {favorite.plays} times
+                      {t('progress.playedTimes', { count: favorite.plays })}
                     </p>
                   </div>
                   <div className="flex-shrink-0 text-right">
                     <p className="font-[family-name:var(--font-pixel)] text-emerald-600 text-sm">
                       {favorite.accuracy}%
                     </p>
-                    <p className="text-[11px] text-gray-400">avg accuracy</p>
+                    <p className="text-[11px] text-gray-400">{t('progress.avgAccuracyLabel')}</p>
                   </div>
                 </div>
               </PixelCard>
@@ -210,11 +212,11 @@ export default function Progress() {
 
         {/* ========== ACHIEVEMENTS ========== */}
         <section className="animate-slide-up stagger-6">
-          <SectionTitle icon="🏅">Achievements</SectionTitle>
+          <SectionTitle icon="🏅">{t('progress.achievements')}</SectionTitle>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
             {ACHIEVEMENTS.map((achievement) => (
               <div
-                key={achievement.title}
+                key={achievement.titleKey}
                 className={`relative rounded-2xl p-5 text-center border-2 flex flex-col items-center transition-all duration-200 ${
                   achievement.completed
                     ? "bg-gradient-to-b from-amber-50 to-amber-100 border-amber-300 shadow-md shadow-amber-900/5"
@@ -232,10 +234,10 @@ export default function Progress() {
                     achievement.completed ? "text-amber-700" : "text-gray-400"
                   }`}
                 >
-                  {achievement.title.toUpperCase()}
+                  {t(achievement.titleKey)}
                 </p>
                 <p className={`text-xs leading-relaxed flex-1 ${achievement.completed ? "text-amber-800/80" : "text-gray-400"}`}>
-                  {achievement.desc}
+                  {t(achievement.descKey)}
                 </p>
 
                 <span
@@ -245,7 +247,7 @@ export default function Progress() {
                       : "bg-gray-200 text-gray-500 border-gray-300"
                   }`}
                 >
-                  {achievement.completed ? "✓ Completed" : "🔒 Locked"}
+                  {achievement.completed ? t('progress.completedLabel') : t('progress.lockedLabel')}
                 </span>
               </div>
             ))}
@@ -259,11 +261,10 @@ export default function Progress() {
               <span className="text-2xl flex-shrink-0" aria-hidden="true">⚠️</span>
               <div>
                 <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-amber-700 mb-2">
-                  IMPORTANT
+                  {t('progress.important')}
                 </h3>
                 <p className="text-amber-800 text-base leading-relaxed">
-                  Pixel Players tracks activity engagement only. This is not a medical
-                  diagnostic tool. Please consult healthcare professionals for medical advice.
+                  {t('progress.disclaimerText')}
                 </p>
               </div>
             </div>
@@ -271,7 +272,7 @@ export default function Progress() {
 
           <div className="mt-8 text-center">
             <PixelButton to="/games" size="lg">
-              Continue Practicing
+              {t('progress.continue')}
             </PixelButton>
           </div>
         </section>

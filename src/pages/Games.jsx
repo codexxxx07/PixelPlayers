@@ -1,37 +1,39 @@
 import { useState } from 'react';
 import { useApp } from '../context/AppContext';
+import { useTranslation } from 'react-i18next';
 import GameCard from '../components/GameCard';
 
 const CATEGORIES = [
-  { key: 'All', label: 'All', icon: '🎮' },
-  { key: 'Memory', label: 'Memory', icon: '🧠' },
-  { key: 'Attention', label: 'Attention', icon: '👁️' },
-  { key: 'Reasoning', label: 'Reasoning', icon: '🧩' },
-  { key: 'Language', label: 'Language', icon: '💬' },
-  { key: 'Recognition', label: 'Recognition', icon: '🏷️' },
-  { key: 'Daily-life', label: 'Daily-life', icon: '📅' },
+  { key: 'All', labelKey: 'games.categoryAll', icon: '🎮' },
+  { key: 'Memory', labelKey: 'games.categoryMemory', icon: '🧠' },
+  { key: 'Attention', labelKey: 'games.categoryAttention', icon: '👁️' },
+  { key: 'Reasoning', labelKey: 'games.categoryReasoning', icon: '🧩' },
+  { key: 'Language', labelKey: 'games.categoryLanguage', icon: '💬' },
+  { key: 'Recognition', labelKey: 'games.categoryRecognition', icon: '🏷️' },
+  { key: 'Daily-life', labelKey: 'games.categoryDaily', icon: '📅' },
 ];
 
 const HOW_HELP_BENEFITS = [
   {
     icon: '🧠',
-    title: 'Keep memory active',
-    text: 'Gentle games let you practice remembering names, places, numbers and everyday steps at your own pace.',
+    titleKey: 'games.howHelpMemory.title',
+    textKey: 'games.howHelpMemory.text',
   },
   {
     icon: '🎯',
-    title: 'Build calm focus',
-    text: 'Short, guided activities encourage careful looking and steady attention without any pressure.',
+    titleKey: 'games.howHelpFocus.title',
+    textKey: 'games.howHelpFocus.text',
   },
   {
     icon: '🌱',
-    title: 'Feel accomplished',
-    text: 'Finishing each activity brings a cheerful reward and a bright sense of achievement.',
+    titleKey: 'games.howHelpAccomplished.title',
+    textKey: 'games.howHelpAccomplished.text',
   },
 ];
 
 export default function Games() {
   const { games } = useApp();
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState('All');
 
   const filteredGames =
@@ -48,10 +50,10 @@ export default function Games() {
             <span aria-hidden="true">🎮</span>
           </div>
           <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
-            Cognitive Games Hub
+            {t('games.title')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mt-3 max-w-xl mx-auto">
-            A growing collection of gentle brain activities — coming soon
+            {t('games.subtitle')}
           </p>
         </header>
 
@@ -75,7 +77,7 @@ export default function Games() {
                   <span className="text-base leading-none" aria-hidden="true">
                     {cat.icon}
                   </span>
-                  {cat.label}
+                  {t(cat.labelKey)}
                 </button>
               );
             })}
@@ -96,17 +98,17 @@ export default function Games() {
                 🍃
               </div>
               <p className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-3">
-                No games in this category
+                {t('games.noGamesTitle')}
               </p>
               <p className="text-gray-500 text-base mb-6">
-                There are no activities here right now. Try another category!
+                {t('games.noGamesDesc')}
               </p>
               <button
                 type="button"
                 onClick={() => setActiveCategory('All')}
                 className="inline-flex items-center gap-2 min-h-12 px-6 rounded-full border-2 border-teal-300 bg-teal-50 text-teal-700 font-bold text-sm hover:bg-teal-100 hover:border-teal-400 transition-colors"
               >
-                🎮 Show all games
+                🎮 {t('games.showAll')}
               </button>
             </div>
           )}
@@ -116,32 +118,31 @@ export default function Games() {
         <section className="animate-slide-up stagger-3">
           <div className="skeuo-card bg-gradient-to-br from-teal-50 to-white">
             <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-2 tracking-wide">
-              How Games Help
+              {t('games.howGamesHelp')}
             </h2>
             <p className="text-gray-500 text-base mb-6">
-              A little play each day keeps the mind happy and busy.
+              {t('games.howGamesHelpDesc')}
             </p>
             <div className="grid sm:grid-cols-3 gap-5 items-stretch">
               {HOW_HELP_BENEFITS.map((benefit) => (
                 <div
-                  key={benefit.title}
+                  key={benefit.titleKey}
                   className="rounded-2xl bg-white/70 border border-teal-100 p-6 text-center flex flex-col items-center"
                 >
                   <div className="w-14 h-14 flex items-center justify-center text-3xl rounded-2xl bg-teal-50 border border-teal-100 mb-4" aria-hidden="true">
                     {benefit.icon}
                   </div>
                   <h3 className="font-bold text-gray-800 text-base mb-2 leading-snug">
-                    {benefit.title}
+                    {t(benefit.titleKey)}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    {benefit.text}
+                    {t(benefit.textKey)}
                   </p>
                 </div>
               ))}
             </div>
             <p className="text-xs text-gray-400 mt-6 text-center leading-relaxed">
-              These activities are designed for enjoyment and gentle engagement. They are not a
-              medical treatment — please talk to your doctor about any health concerns.
+              {t('games.medicalNote')}
             </p>
           </div>
         </section>

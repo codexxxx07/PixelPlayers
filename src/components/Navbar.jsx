@@ -2,25 +2,27 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Show, UserButton } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
+import { useTranslation } from "react-i18next";
 
 const navLinks = [
-  { to: "/", label: "Home" },
-  { to: "/features", label: "Features" },
-  { to: "/games", label: "Games" },
-  { to: "/memory", label: "Memory" },
-  { to: "/dashboard", label: "Dashboard" },
+  { to: "/", key: "nav.home" },
+  { to: "/features", key: "nav.features" },
+  { to: "/games", key: "nav.games" },
+  { to: "/memory", key: "nav.memory" },
+  { to: "/dashboard", key: "nav.dashboard" },
 ];
 
 const mobileExtras = [
-  { to: "/routine", label: "Routine", icon: "📅" },
-  { to: "/assistant", label: "Assistant", icon: "🤖" },
-  { to: "/reminders", label: "Reminders", icon: "⏰" },
-  { to: "/progress", label: "Progress", icon: "📈" },
-  { to: "/support", label: "Support", icon: "👨‍👩‍👧" },
-  { to: "/settings", label: "Settings", icon: "⚙️" },
+  { to: "/routine", key: "nav.routine", icon: "📅" },
+  { to: "/assistant", key: "nav.assistant", icon: "🤖" },
+  { to: "/reminders", key: "nav.reminders", icon: "⏰" },
+  { to: "/progress", key: "nav.progress", icon: "📈" },
+  { to: "/support", key: "nav.support", icon: "👨‍👩‍👧" },
+  { to: "/settings", key: "nav.settings", icon: "⚙️" },
 ];
 
 export default function Navbar() {
+  const { t } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
@@ -87,27 +89,25 @@ export default function Navbar() {
             <div className="hidden xl:flex items-center gap-1">
               {navLinks.map((link) => (
                 <NavLink key={link.to} to={link.to} className={linkClass} end={link.to === "/"}>
-                  {link.label}
+                  {t(link.key)}
                 </NavLink>
               ))}
             </div>
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center gap-3 shrink-0">
-              <Show when="signed-out">
-                <Link
-                  to="/login"
-                  className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
-                >
-                  Sign Up
-                </Link>
-              </Show>
+              <Link
+                to="/login"
+                className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+              >
+                {t("nav.login")}
+              </Link>
+              <Link
+                to="/signup"
+                className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
+              >
+                {t("nav.signup")}
+              </Link>
               <Show when="signed-in">
                 <UserButton />
               </Show>
@@ -118,7 +118,7 @@ export default function Navbar() {
             <button
               className="lg:hidden flex flex-col items-center justify-center w-14 h-14 rounded-xl hover:bg-teal-50 transition-colors shrink-0"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={mobileOpen}
             >
               <div className="flex flex-col gap-1.5 w-6">
@@ -164,12 +164,12 @@ export default function Navbar() {
           {/* Mobile Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-teal-100">
             <span className="font-[family-name:var(--font-pixel)] text-lg text-teal-800">
-              Menu
+              {t("nav.menu")}
             </span>
             <button
               onClick={() => setMobileOpen(false)}
               className="flex items-center justify-center w-12 h-12 rounded-xl hover:bg-teal-50 transition-colors"
-              aria-label="Close menu"
+              aria-label={t("nav.closeMenu")}
             >
               <span className="text-2xl text-gray-500">×</span>
             </button>
@@ -194,11 +194,11 @@ export default function Navbar() {
                 end={link.to === "/"}
                 onClick={() => setMobileOpen(false)}
               >
-                {link.label}
+                {t(link.key)}
               </NavLink>
             ))}
             <div className="pt-3 pb-1 px-6 text-xs font-[family-name:var(--font-pixel)] text-teal-400 tracking-wider">
-              YOUR SPACE
+              {t("nav.yourSpace")}
             </div>
             {mobileExtras.map((link) => (
               <NavLink
@@ -209,7 +209,7 @@ export default function Navbar() {
               >
                 <span className="inline-flex items-center gap-3">
                   <span className="text-xl">{link.icon}</span>
-                  {link.label}
+                  {t(link.key)}
                 </span>
               </NavLink>
             ))}
@@ -217,22 +217,20 @@ export default function Navbar() {
 
           {/* Mobile Auth */}
           <div className="px-6 py-5 border-t border-teal-100 space-y-3">
-            <Show when="signed-out">
-              <Link
-                to="/login"
-                onClick={() => setMobileOpen(false)}
-                className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
-              >
-                Log In
-              </Link>
-              <Link
-                to="/signup"
-                onClick={() => setMobileOpen(false)}
-                className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
-              >
-                Sign Up
-              </Link>
-            </Show>
+            <Link
+              to="/login"
+              onClick={() => setMobileOpen(false)}
+              className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
+            >
+              {t("nav.login")}
+            </Link>
+            <Link
+              to="/signup"
+              onClick={() => setMobileOpen(false)}
+              className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
+            >
+              {t("nav.signup")}
+            </Link>
             <Show when="signed-in">
               <div className="flex justify-center">
                 <UserButton />

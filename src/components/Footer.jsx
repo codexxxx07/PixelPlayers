@@ -1,26 +1,28 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const platformLinks = [
-  { to: "/features", label: "Features" },
-  { to: "/games", label: "Games" },
-  { to: "/memory", label: "Memory" },
-  { to: "/routine", label: "Routine" },
+  { to: "/features", key: "nav.features" },
+  { to: "/games", key: "nav.games" },
+  { to: "/memory", key: "nav.memory" },
+  { to: "/routine", key: "nav.routine" },
 ];
 
 const supportLinks = [
-  { to: "/dashboard", label: "Dashboard" },
-  { to: "/progress", label: "Progress" },
-  { to: "/support", label: "Support" },
-  { to: "/settings", label: "Settings" },
+  { to: "/dashboard", key: "nav.dashboard" },
+  { to: "/progress", key: "nav.progress" },
+  { to: "/support", key: "nav.support" },
+  { to: "/settings", key: "nav.settings" },
 ];
 
 const aboutLinks = [
-  { to: "/about", label: "About" },
-  { to: "/assistant", label: "Assistant" },
-  { to: "/reminders", label: "Reminders" },
+  { to: "/about", key: "nav.about" },
+  { to: "/assistant", key: "nav.assistant" },
+  { to: "/reminders", key: "nav.reminders" },
 ];
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="relative bg-teal-900 text-white">
       {/* Pixel art decorative border */}
@@ -57,17 +59,17 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-teal-200 text-lg mb-6 max-w-sm">
-              Every memory matters.
+              {t("footer.tagline")}
             </p>
             <p className="text-teal-300 text-sm leading-relaxed max-w-sm">
-              A cognitive gaming and memory assistance platform designed to support elderly patients with dementia through engaging activities and gentle reminders.
+              {t("footer.description")}
             </p>
           </div>
 
           {/* Platform Column */}
           <div>
             <h3 className="font-[family-name:var(--font-pixel)] text-sm text-teal-300 uppercase tracking-wider mb-4">
-              Platform
+              {t("footer.platform")}
             </h3>
             <ul className="space-y-3">
               {platformLinks.map((link) => (
@@ -76,7 +78,7 @@ export default function Footer() {
                     to={link.to}
                     className="text-teal-100 hover:text-white text-base transition-colors duration-200 hover:translate-x-1 inline-block"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -86,7 +88,7 @@ export default function Footer() {
           {/* Support Column */}
           <div>
             <h3 className="font-[family-name:var(--font-pixel)] text-sm text-teal-300 uppercase tracking-wider mb-4">
-              Support
+              {t("footer.support")}
             </h3>
             <ul className="space-y-3">
               {supportLinks.map((link) => (
@@ -95,7 +97,7 @@ export default function Footer() {
                     to={link.to}
                     className="text-teal-100 hover:text-white text-base transition-colors duration-200 hover:translate-x-1 inline-block"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -105,7 +107,7 @@ export default function Footer() {
           {/* About Column */}
           <div>
             <h3 className="font-[family-name:var(--font-pixel)] text-sm text-teal-300 uppercase tracking-wider mb-4">
-              Explore
+              {t("footer.explore")}
             </h3>
             <ul className="space-y-3">
               {aboutLinks.map((link) => (
@@ -114,7 +116,7 @@ export default function Footer() {
                     to={link.to}
                     className="text-teal-100 hover:text-white text-base transition-colors duration-200 hover:translate-x-1 inline-block"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -125,7 +127,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="mt-12 pt-8 border-t border-teal-700 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-teal-300 text-sm">
-            © 2026 Pixel Players. Built with care for those who matter most.
+            {t("footer.copyright")}
           </p>
           <div className="flex items-center gap-6">
             <a
@@ -133,25 +135,25 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="text-teal-300 hover:text-white text-sm transition-colors"
-              aria-label="Twitter"
+              aria-label={t("footer.twitter")}
             >
-              Twitter
+              {t("footer.twitter")}
             </a>
             <a
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-teal-300 hover:text-white text-sm transition-colors"
-              aria-label="GitHub"
+              aria-label={t("footer.github")}
             >
-              GitHub
+              {t("footer.github")}
             </a>
             <a
               href="mailto:hello@pixelplayers.com"
               className="text-teal-300 hover:text-white text-sm transition-colors"
-              aria-label="Email us"
+              aria-label={t("footer.emailLabel")}
             >
-              Contact
+              {t("footer.contact")}
             </a>
           </div>
         </div>
@@ -160,7 +162,7 @@ export default function Footer() {
         <div className="mt-6 text-center">
           <span className="inline-flex items-center gap-2 rounded-full bg-teal-800 border border-teal-700 px-4 py-1.5 text-xs text-teal-300">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-            Made for Smart India Hackathon 2026
+            {t("footer.sihCredit")}
           </span>
         </div>
       </div>

@@ -1,15 +1,16 @@
+import { useTranslation } from "react-i18next";
 import PixelButton from "./PixelButton";
 
-const categoryLabels = {
-  hobbies: "Hobbies",
-  food: "Favourite Food",
-  places: "Places",
-  occupation: "Occupation",
-  childhood: "Childhood",
-  people: "People",
-  songs: "Songs",
-  memories: "Memories",
-  preferences: "Daily Preferences",
+const categoryLabelKeys = {
+  hobbies: "memory.shortCatHobbies",
+  food: "memory.shortCatFood",
+  places: "memory.shortCatPlaces",
+  occupation: "memory.shortCatOccupation",
+  childhood: "memory.shortCatChildhood",
+  people: "memory.shortCatPeople",
+  songs: "memory.shortCatSongs",
+  memories: "memory.shortCatMemories",
+  preferences: "memory.shortCatPreferences",
 };
 
 function formatDate(date) {
@@ -33,11 +34,12 @@ function formatDate(date) {
 }
 
 export default function MemoryCard({ memory, onEdit, onDelete }) {
-  const { category, title, description, content, date, icon } = memory;
+  const { t } = useTranslation();
+  const { id, category, title, description, content, date, icon } = memory;
   const displayTitle = title || (typeof content === "string" ? content.split("\n")[0] : "");
   const bodyText = description || content || "";
   const catLabel =
-    categoryLabels[category] || categoryFileName(category) || category || "Memory";
+    categoryLabelsFallback(category) || category || "Memory";
   const displayIcon = icon || "📝";
   const displayDate = formatDate(date);
 
@@ -56,7 +58,9 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
           <span className="text-3xl leading-none flex-shrink-0">{displayIcon}</span>
           <div>
             <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200">
-              {catLabel}
+              {categoryLabelKeys[category]
+                ? t(categoryLabelKeys[category])
+                : catLabel}
             </span>
           </div>
         </div>
@@ -68,13 +72,15 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
       {/* Title */}
       {displayTitle && (
         <p className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] leading-relaxed mb-2">
-          {displayTitle}
+          {t(`memory.data.${id}.title`, { defaultValue: displayTitle })}
         </p>
       )}
 
       {/* Content / Description — grows to keep actions aligned */}
       {bodyText && (
-        <p className="text-gray-600 text-base leading-relaxed mb-6 flex-1">{bodyText}</p>
+        <p className="text-gray-600 text-base leading-relaxed mb-6 flex-1">
+          {t(`memory.data.${id}.description`, { defaultValue: bodyText })}
+        </p>
       )}
 
       {/* Action buttons */}
@@ -85,7 +91,7 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
           size="sm"
           icon="✏️"
         >
-          Edit
+          {t("memory.edit")}
         </PixelButton>
         <PixelButton
           onClick={() => onDelete?.(memory)}
@@ -93,14 +99,14 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
           size="sm"
           icon="🗑️"
         >
-          Delete
+          {t("memory.delete")}
         </PixelButton>
       </div>
     </div>
   );
 }
 
-function categoryFileName(category) {
+function categoryLabelsFallback(category) {
   if (typeof category !== "string") return "";
   return category
     .split("-")

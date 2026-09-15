@@ -1,12 +1,13 @@
-import { formatDate, formatTime, getGreeting } from "./api";
+import i18n from "../i18n";
+import { formatDate, formatTime, getTimeOfDay } from "./api";
 
 export const SUGGESTIONS = [
-  { icon: "📅", label: "What's happening today?" },
-  { icon: "⏭️", label: "What comes next?" },
-  { icon: "💭", label: "Tell me about a memory" },
-  { icon: "🧩", label: "Start a gentle game" },
-  { icon: "💊", label: "Do I have reminders?" },
-  { icon: "🗺️", label: "I feel a little lost" },
+  { icon: "☀️", label: "What's happening today?", labelKey: "chat.suggToday" },
+  { icon: "🎯", label: "What comes next?", labelKey: "chat.suggNext" },
+  { icon: "💭", label: "Tell me about a memory", labelKey: "chat.suggMemory" },
+  { icon: "🧩", label: "Start a gentle game", labelKey: "chat.suggGame" },
+  { icon: "💊", label: "Do I have reminders?", labelKey: "chat.suggReminders" },
+  { icon: "🍂", label: "I feel a little lost", labelKey: "chat.suggLost" },
 ];
 
 export const SIM_VOICE_POOL = [
@@ -56,12 +57,21 @@ export function speakText(text) {
 }
 
 export function buildGreeting(user, currentTime) {
-  const greeting = getGreeting(currentTime) || "Good day";
+  const tod = getTimeOfDay(currentTime) || "day";
+  const greetingKey =
+    tod === "morning"
+      ? "common.goodMorning"
+      : tod === "afternoon"
+        ? "common.goodAfternoon"
+        : tod === "evening"
+          ? "common.goodEvening"
+          : "common.goodDay";
+  const greeting = i18n.t(greetingKey);
   return [
     {
       id: genId("a"),
       role: "ai",
-      text: `${greeting}, ${user.name}! I'm Clara, your friendly memory companion. I'm always here for you — you're never alone.`,
+      text: i18n.t("chat.greeting1", { greeting, name: user.name }),
       time: nowTime(),
       actions: [],
       chips: [],
@@ -71,7 +81,7 @@ export function buildGreeting(user, currentTime) {
     {
       id: genId("a"),
       role: "ai",
-      text: "How can I help you today?\n\n• What's happening in my day\n• Tell me about a memory\n• Start a gentle game\n• Or just talk — I always listen.",
+      text: i18n.t("chat.greeting2"),
       time: nowTime(),
       actions: [],
       chips: SUGGESTIONS,
@@ -92,43 +102,43 @@ export function getResponse(text, data) {
 
   const gameActions = game
     ? [
-        { icon: "🎮", label: `Start ${game.name}`, to: game.href },
-        { icon: "🕊️", label: "Maybe Later", sendText: "Maybe later" },
+        { icon: "🎮", label: `Start ${game.name}`, labelKey: "chat.actionStartGame", labelValues: { game: game.name }, to: game.href },
+        { icon: "🕊️", label: "Maybe Later", labelKey: "chat.actionMaybeLater", sendText: "Maybe later" },
       ]
     : [];
 
   if (/\b(hi|hello|hey|namaste|namaskar|good morning|good afternoon|good evening)\b/.test(lower)) {
     return {
       context: "greeting",
-      text: `Hello again, ${name}! It's so good to hear from you. What would brighten your day — a chat about a happy memory, or a gentle game?`,
+      text: i18n.t("chat.respHello", { name }),
     };
   }
 
   if (lower.includes("who are you") || lower.includes("what are you")) {
     return {
       context: "help",
-      text: `I'm Clara, ${name} — your friendly memory companion who helps you remember things, keep your day on track, and feel at ease. I'm not a doctor; I'm just a warm helper who is always by your side.`,
+      text: i18n.t("chat.respWhoAreYou", { name }),
     };
   }
 
   if (lower.includes("how are you")) {
     return {
       context: "greeting",
-      text: `I'm feeling wonderful, ${name}, because I got to talk with you. How are you feeling today?`,
+      text: i18n.t("chat.respHowAreYou", { name }),
     };
   }
 
   if (lower.includes("my name") && lower.includes("what")) {
     return {
       context: "default",
-      text: `Your name is ${name} — a lovely name that I remember well.`,
+      text: i18n.t("chat.respMyName", { name }),
     };
   }
 
   if (lower.includes("maybe later") || lower.includes("not now") || lower.includes("no thank")) {
     return {
       context: "default",
-      text: `Of course, ${name}. There's no rush at all. I'll be right here whenever you're ready.`,
+      text: i18n.t("chat.respMaybeLater", { name }),
     };
   }
 
@@ -140,16 +150,16 @@ export function getResponse(text, data) {
     return {
       context: "game",
       actions: gameActions,
-      text: `Wonderful! Let's give ${game.name} a try. It only takes a few minutes, and we can go at your pace. Tap the button below whenever you're ready.`,
+      text: i18n.t("chat.respYesGame", { game: game.name }),
     };
   }
 
   if (lower.includes("game") || lower.includes("play") || lower.includes("puzzle") || lower.includes("activity")) {
-    const suggestion = game ? `${game.name} — quick, calm, and good for the mind.` : "We have gentle games that are easy on the mind.";
+    const suggestion = game ? i18n.t("chat.suggestionGame", { game: game.name }) : i18n.t("chat.suggestionGameNone");
     return {
       context: "game",
       actions: gameActions,
-      text: `How about a gentle game, ${name}? ${suggestion} Shall we try it together?`,
+      text: i18n.t("chat.respGame", { name, suggestion }),
     };
   }
 
@@ -158,8 +168,8 @@ export function getResponse(text, data) {
     const thing = remindMatch[1].trim().replace(/[.!?]+$/g, "");
     return {
       context: "reminder",
-      actions: [{ icon: "⏰", label: "Show my reminders", to: "/reminders" }],
-      text: `Of course! I'll keep that in mind for you: "${thing}". I'll nudge you at the right time. Is there anything else you'd like me to remember?`,
+      actions: [{ icon: "⏰", label: "Show my reminders", labelKey: "chat.actionShowReminders", to: "/reminders" }],
+      text: i18n.t("chat.respRemindMe", { thing }),
     };
   }
 
@@ -167,14 +177,14 @@ export function getResponse(text, data) {
     if (meds.length) {
       return {
         context: "reminder",
-        actions: [{ icon: "⏰", label: "Show my reminders", to: "/reminders" }],
-        text: `Yes, ${name}. There's one to look after: "${meds[0].title}" at ${timeLabel(meds[0].time)}. You're doing really well taking care of yourself.`,
+        actions: [{ icon: "⏰", label: "Show my reminders", labelKey: "chat.actionShowReminders", to: "/reminders" }],
+        text: i18n.t("chat.respHasReminder", { name, title: meds[0].title, time: timeLabel(meds[0].time) }),
       };
     }
     return {
       context: "routine",
-      actions: [{ icon: "📅", label: "My day ahead", to: "/routine" }],
-      text: `Let me check... good news — no urgent reminders right now. Enjoy this calm moment, ${name}.`,
+      actions: [{ icon: "📅", label: "My day ahead", labelKey: "chat.actionDayAhead", to: "/routine" }],
+      text: i18n.t("chat.respNoReminder", { name }),
     };
   }
 
@@ -182,24 +192,27 @@ export function getResponse(text, data) {
     if (mem) {
       return {
         context: "memory",
-        actions: [{ icon: "💭", label: "Open my Memory Vault", to: "/memory" }],
-        text: `You have ${data.memories.length} treasured memories saved. Would you like me to share one? Here's a favourite: ${mem.title}. ${mem.description} It always makes me smile to think of it.`,
+        actions: [{ icon: "💭", label: "Open my Memory Vault", labelKey: "chat.actionOpenVault", to: "/memory" }],
+        text: i18n.t("chat.respMemory", { count: data.memories.length, title: mem.title, description: mem.description }),
       };
     }
     return {
       context: "memory",
-      actions: [{ icon: "💭", label: "Add a memory", to: "/memory" }],
-      text: `Your Memory Vault is waiting to grow. Whenever you'd like, tell me a moment you cherish, and I'll help you keep it safe.`,
+      actions: [{ icon: "💭", label: "Add a memory", labelKey: "chat.actionAddMemory", to: "/memory" }],
+      text: i18n.t("chat.respNoMemory"),
     };
   }
 
   if (/(what am i doing|doing now|right now|my day|today|happening|going on)/.test(lower)) {
     const upcoming = data.routine.filter((r) => !r.completed).slice(0, 3);
-    const list = upcoming.map((r) => `• ${r.title} at ${timeLabel(r.time)}`).join("\n") || "— a peaceful rest of the day";
+    const list =
+      upcoming.length > 0
+        ? upcoming.map((r) => `• ${r.title} at ${timeLabel(r.time)}`).join("\n")
+        : i18n.t("chat.dayRest");
     return {
       context: "routine",
-      actions: [{ icon: "🗺️", label: "See today at a glance", to: "/dashboard" }],
-      text: `Here is how your day looks, ${name}:\n\n${list}\n\nAnd remember — the day is yours. We'll go at your pace.`,
+      actions: [{ icon: "🗺️", label: "See today at a glance", labelKey: "chat.actionSeeGlance", to: "/dashboard" }],
+      text: i18n.t("chat.respDay", { name, list }),
     };
   }
 
@@ -207,62 +220,67 @@ export function getResponse(text, data) {
     if (nextR) {
       return {
         context: "routine",
-        actions: [{ icon: "📅", label: "View my routine", to: "/routine" }],
-        text: `Coming up next: "${nextR.title}" at ${timeLabel(nextR.time)}. ${nextR.description ? `${nextR.description}.` : ""} You're doing beautifully, ${name}.`,
+        actions: [{ icon: "📅", label: "View my routine", labelKey: "chat.actionViewRoutine", to: "/routine" }],
+        text: i18n.t("chat.respNextUp", {
+          name,
+          title: nextR.title,
+          time: timeLabel(nextR.time),
+          description: nextR.description ? `${nextR.description}.` : "",
+        }),
       };
     }
     return {
       context: "routine",
-      actions: [{ icon: "📅", label: "View my routine", to: "/routine" }],
-      text: `There's nothing urgent next on the list, ${name} — a good time to rest or do something you enjoy.`,
+      actions: [{ icon: "📅", label: "View my routine", labelKey: "chat.actionViewRoutine", to: "/routine" }],
+      text: i18n.t("chat.respNothingNext", { name }),
     };
   }
 
   if (/(where am i|lost|confused|scared|afraid|worried|anxious|lonely|alone|help me|i need help)/.test(lower)) {
     return {
       context: "where",
-      actions: [{ icon: "🫂", label: "Reach my family", to: "/support" }],
-      text: `You're safe, ${name}. Right now you're at home, and today is ${formatDate(data.currentTime)}. You're never alone — your family is close by and always happy to hear your voice.`,
+      actions: [{ icon: "🫂", label: "Reach my family", labelKey: "chat.actionReachFamily", to: "/support" }],
+      text: i18n.t("chat.respLost", { name, date: formatDate(data.currentTime) }),
     };
   }
 
   if (/(tired|sad|upset|not well|unwell|weak|bored|pain)/.test(lower)) {
     return {
       context: "default",
-      text: `I'm so sorry you're feeling that way, ${name}. Take a slow breath — it's okay to rest. Would you like to talk about it a little, or should I ask a family member to sit with you?`,
+      text: i18n.t("chat.respFeelingDown", { name }),
     };
   }
 
   if (lower.includes("what time") || lower.includes("time is it")) {
     return {
       context: "default",
-      text: `Right now it's ${formatTime(data.currentTime)}. Time is on our side, ${name}.`,
+      text: i18n.t("chat.respTime", { name, time: formatTime(data.currentTime) }),
     };
   }
 
   if (lower.includes("thank") || lower.includes("thanks") || lower.includes("dhanyavad")) {
     return {
       context: "default",
-      text: `You're most welcome, ${name}. Helping you is my favourite thing to do.`,
+      text: i18n.t("chat.respThanks", { name }),
     };
   }
 
   if (/(bye|goodbye|see you|good night)/.test(lower)) {
     return {
       context: "default",
-      text: `Goodbye for now, ${name}. I'll be right here when you need me. Wishing you a peaceful rest.`,
+      text: i18n.t("chat.respBye", { name }),
     };
   }
 
   if (lower.includes("help") || lower.includes("what can you do") || lower.includes("what do you do")) {
     return {
       context: "help",
-      text: `I can help you with lots of little things, ${name}:\n\n• Keep reminders for you\n• Share your day and what comes next\n• Bring back a happy memory\n• Suggest a gentle game\n\nJust tell me what you'd like.`,
+      text: i18n.t("chat.respHelp", { name }),
     };
   }
 
   return {
     context: "default",
-    text: `Mm-hmm, I'm listening, ${name}. Take your time and tell me a little more — I'm in no hurry, and you're doing wonderfully.`,
+    text: i18n.t("chat.respDefault", { name }),
   };
 }
