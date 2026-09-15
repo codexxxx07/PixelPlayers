@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClaraLauncher from "./components/ClaraLauncher";
+import ClickSpark from "./components/ClickSpark";
 import { lazyWithDelay, RouteSkeleton, SkeletonErrorBoundary } from "./components/Skeleton";
 
 const Home = lazyWithDelay(() => import("./pages/Home"));
@@ -71,14 +72,22 @@ function AppRoutes() {
 function App() {
   return (
     <SkeletonErrorBoundary>
-      <div className="min-h-screen bg-warm-50 flex flex-col">
-        <Navbar />
-        <main className="flex-1">
-          <AppRoutes />
-        </main>
-        <Footer />
-        <ClaraLauncher />
-      </div>
+      <ClickSpark
+        sparkColor="#0d9488"
+        sparkSize={12}
+        sparkRadius={22}
+        sparkCount={10}
+        duration={500}
+      >
+        <div className="min-h-screen bg-warm-50 flex flex-col">
+          <Navbar />
+          <main className="flex-1">
+            <AppRoutes />
+          </main>
+          <Footer />
+          <ClaraLauncher />
+        </div>
+      </ClickSpark>
     </SkeletonErrorBoundary>
   );
 }
