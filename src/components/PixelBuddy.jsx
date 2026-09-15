@@ -50,7 +50,7 @@ export default function PixelBuddy({ state = "idle", className = "", animate = t
     <div
       className={`grid grid-cols-10 ${animate ? "animate-buddy-float" : ""} ${className}`}
       role="img"
-      aria-label={t('chat.pixelBuddyAria')}
+      aria-label={t('chat.claraAvatarAria')}
     >
       {rows.map((row, y) =>
         row.split("").map((cell, x) =>

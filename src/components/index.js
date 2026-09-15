@@ -7,5 +7,5 @@ export { default as ProgressCard } from './ProgressCard';
 export { default as VoiceButton } from './VoiceButton';
 export { default as ClaraAvatar } from './ClaraAvatar';
 export { default as Waveform } from './Waveform';
-export { default as BuddyLauncher } from './BuddyLauncher';
+export { default as ClaraLauncher } from './ClaraLauncher';
 export { default as SosButton, SosModal } from './SosButton';

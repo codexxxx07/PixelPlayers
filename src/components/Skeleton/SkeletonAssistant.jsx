@@ -6,7 +6,7 @@ function ClaraCardSkeleton() {
   return (
     <div className="skeuo-card p-5" aria-hidden="true">
       <div className="flex items-center gap-3 mb-4">
-        <SkeletonAvatar size="xl" className="flex-shrink-0" />
+        <SkeletonAvatar size="xl" className="flex-shrink-0 border-2 !border-teal-100/60 !bg-white/90" />
         <div className="min-w-0">
           <Skeleton width="4rem" height="0.8rem" rounding="sm" />
           <Skeleton width="10rem" height="0.9rem" rounding="sm" className="mt-2" />
@@ -70,7 +70,7 @@ export default function SkeletonAssistant() {
 
           <div className="rounded-3xl bg-white border-2 border-teal-100 overflow-hidden flex flex-col">
             <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
-              <SkeletonAvatar size="lg" className="flex-shrink-0" />
+              <SkeletonAvatar size="lg" className="flex-shrink-0 border-2 !border-teal-100/60 !bg-white/90" />
               <div className="min-w-0 flex-1">
                 <Skeleton width="5rem" height="0.8rem" rounding="sm" />
                 <Skeleton width="55%" height="1rem" rounding="sm" className="mt-1" />

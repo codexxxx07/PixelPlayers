@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { useTranslation } from "react-i18next";
 import { VoiceButton, Waveform } from "../components";
-import { AiBubble, BuddyBadge, ThinkingBubble, UserBubble } from "../components/BuddyChat";
+import { AiBubble, ClaraBadge, ThinkingBubble, UserBubble } from "../components/ClaraChat";
 import useConversation from "../services/useConversation";
 import { SUGGESTIONS, timeLabel } from "../services/chat";
 import { formatDate, getTimeOfDay } from "../services/api";
@@ -179,9 +179,10 @@ export default function Assistant() {
       <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-8 md:py-10">
         <div className="lg:hidden mb-6 animate-pixel-fade-in">
           <div className="skeuo-card flex items-center gap-4 p-5">
-            <BuddyBadge state={buddyState} className="w-16 h-16 flex-shrink-0" />
+            <ClaraBadge className="w-16 h-16 flex-shrink-0" />
             <div className="min-w-0">
-              <p className="font-pixel text-[10px] text-teal-800 mb-1">{t('assistant.memoryBuddy')}</p>
+              <p className="font-pixel text-[10px] text-teal-800 mb-1">{t('assistant.clara')}</p>
+              <p className="text-sm text-gray-500 truncate">{t('assistant.claraSubtitle')}</p>
               <p className="text-sm text-gray-500 truncate">{formatDate(currentTime)}</p>
               <p className="text-teal-700 font-extrabold text-base mt-1">{statusText}</p>
             </div>
@@ -192,9 +193,10 @@ export default function Assistant() {
           <aside className="hidden lg:block lg:sticky lg:top-24 space-y-5">
             <div className="skeuo-card p-5 animate-pixel-fade-in">
               <div className="flex items-center gap-3 mb-4">
-                <BuddyBadge state={buddyState} className="w-16 h-16 flex-shrink-0" />
+                <ClaraBadge className="w-16 h-16 flex-shrink-0" />
                 <div className="min-w-0">
-                  <p className="font-pixel text-[9px] text-teal-800 leading-relaxed">{t('assistant.memoryBuddy')}</p>
+                  <p className="font-pixel text-[9px] text-teal-800 leading-relaxed">{t('assistant.clara')}</p>
+                  <p className="text-sm text-gray-500 mt-1">{t('assistant.claraSubtitle')}</p>
                   <p className="text-sm text-gray-500 mt-1">{formatDate(currentTime)}</p>
                 </div>
               </div>
@@ -250,9 +252,10 @@ export default function Assistant() {
 
           <div className="rounded-3xl bg-white border-2 border-teal-100 shadow-[0_8px_30px_rgba(19,78,74,0.08)] overflow-hidden flex flex-col">
             <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
-              <BuddyBadge state={buddyState} className="w-14 h-14 flex-shrink-0" animate={false} />
+              <ClaraBadge className="w-14 h-14 flex-shrink-0" />
               <div className="min-w-0 flex-1">
-                <p className="font-pixel text-[9px] text-teal-800 tracking-wider">{t('assistant.memoryBuddy')}</p>
+                <p className="font-pixel text-[9px] text-teal-800 tracking-wider">{t('assistant.clara')}</p>
+                <p className="text-xs text-gray-500 truncate">{t('assistant.claraSubtitle')}</p>
                 <p className="text-teal-700 font-bold text-sm sm:text-base mt-0.5 truncate">{statusText}</p>
               </div>
               <button
@@ -295,7 +298,7 @@ export default function Assistant() {
               <div className="border-t border-teal-100 bg-gradient-to-r from-teal-50 via-amber-50 to-teal-50 px-5 py-4" aria-live="polite">
                 {voiceState === "listening" ? (
                   <div className="flex items-center gap-4">
-                    <BuddyBadge state="listening" className="w-14 h-14 flex-shrink-0" />
+                    <ClaraBadge className="w-14 h-14 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="font-pixel text-[9px] text-red-500 tracking-wider">{t('assistant.listening')}</p>
                       {voiceTranscript ? (
@@ -315,7 +318,7 @@ export default function Assistant() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-4">
-                    <BuddyBadge state="thinking" className="w-14 h-14 flex-shrink-0" />
+                    <ClaraBadge className="w-14 h-14 flex-shrink-0" />
                     <div className="flex-1">
                       <p className="font-pixel text-[9px] text-teal-700 tracking-wider">{t('assistant.thinking')}</p>
                       <p className="text-gray-500 text-base mt-1">{t('assistant.justAMoment')}</p>

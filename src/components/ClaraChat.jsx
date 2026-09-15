@@ -34,7 +34,7 @@ function SpeakerIcon({ className = "" }) {
   );
 }
 
-export function BuddyBadge({ className = "" }) {
+export function ClaraBadge({ className = "" }) {
   return <ClaraAvatar className={className} />;
 }
 
@@ -90,23 +90,23 @@ export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
 
   return (
     <div className="flex items-start gap-3 animate-slide-up">
-      <BuddyBadge state="idle" className="w-12 h-12 flex-shrink-0 mt-1" />
+      <ClaraBadge className="w-12 h-12 flex-shrink-0 mt-1" />
 
       <div className="max-w-[85%] sm:max-w-[78%] min-w-0">
         <div className="buddy-bubble px-4 py-3.5 sm:px-5 sm:py-4">
           <div className="flex items-center justify-between gap-3 mb-1.5">
-            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">{t('assistant.memoryBuddy')}</p>
+            <p className="font-pixel text-[8px] text-teal-700 tracking-wider">{t("assistant.clara")}</p>
             <div className="flex items-center gap-2">
               {message.time && <span className="text-[11px] text-gray-400">{message.time}</span>}
               <button
                 type="button"
                 onClick={() => speakText(message.text)}
-                aria-label={t('chat.readAloud')}
-                title={t('chat.readAloud')}
+                aria-label={t("chat.readAloud")}
+                title={t("chat.readAloud")}
                 className="inline-flex items-center gap-1 rounded-full border border-teal-200 bg-white px-2.5 py-1 text-teal-700 text-xs font-bold hover:bg-teal-50 transition-colors"
               >
                 <SpeakerIcon className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">{t('chat.listen')}</span>
+                <span className="hidden sm:inline">{t("chat.listen")}</span>
               </button>
             </div>
           </div>
@@ -156,10 +156,10 @@ export function ThinkingBubble() {
   const { t } = useTranslation();
   return (
     <div className="flex items-start gap-3">
-      <BuddyBadge state="thinking" className="w-12 h-12 flex-shrink-0 mt-1" />
+      <ClaraBadge className="w-12 h-12 flex-shrink-0 mt-1" />
       <div className="buddy-bubble px-5 py-4">
         <div className="flex items-center gap-3">
-          <span className="font-pixel text-[9px] text-teal-700 tracking-wider">{t('assistant.thinking')}</span>
+          <span className="font-pixel text-[9px] text-teal-700 tracking-wider">{t("assistant.thinking")}</span>
           <span className="flex items-center gap-1" aria-hidden="true">
             {[0, 1, 2].map((i) => (
               <span

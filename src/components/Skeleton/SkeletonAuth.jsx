@@ -3,7 +3,7 @@ import SkeletonText from "./SkeletonText.jsx";
 
 export default function SkeletonAuth() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden" aria-busy="true">
       <div className="absolute inset-0 pixel-grid" aria-hidden="true" />
       <div className="relative mx-auto max-w-xl px-4 sm:px-6">
         <div className="py-6 sm:py-10">

@@ -19,7 +19,7 @@ export default function SkeletonGameCard() {
       <div className="mt-auto pt-3">
         <Skeleton width="7rem" height="1.5rem" rounding="round" />
         <div className="flex items-center justify-between gap-2 border-t border-warm-200/60 pt-3 mt-3">
-          <Skeleton width="6.5rem" height="1.6rem" rounding="sm" />
+          <Skeleton width="6.5rem" height="1.6rem" rounding="round" />
           <Skeleton width="5.5rem" height="1rem" rounding="sm" />
         </div>
       </div>

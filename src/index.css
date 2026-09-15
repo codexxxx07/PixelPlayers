@@ -638,12 +638,12 @@
     inset: 0;
     transform: translateX(-100%);
     background: linear-gradient(
-      100deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.5) 50%,
-      transparent 80%
+      95deg,
+      transparent 15%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 85%
     );
-    animation: sk-shimmer-sweep 1.9s ease-in-out infinite;
+    animation: sk-shimmer-sweep 2.8s ease infinite;
   }
 
   .sk {

@@ -1,7 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const MIN_DISPLAY_MS = 450;
-const LATENCY_MS = 500;
+const MIN_DISPLAY_MS = 200;
+const LATENCY_MS = 150;
+
+function getEnvDefaults() {
+  if (typeof window === "undefined" || !("matchMedia" in window)) {
+    return { minDisplayMs: MIN_DISPLAY_MS, latencyMs: LATENCY_MS };
+  }
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const saveData = window.matchMedia("(prefers-reduced-data: reduce)").matches;
+  const slowConn =
+    window.navigator && window.navigator.connection && window.navigator.connection.saveData;
+  if (reduceMotion || saveData || slowConn) {
+    return { minDisplayMs: 0, latencyMs: 0 };
+  }
+  return { minDisplayMs: MIN_DISPLAY_MS, latencyMs: LATENCY_MS };
+}
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -9,16 +23,23 @@ function sleep(ms) {
   });
 }
 
-export async function simulateNetwork(loadingPromise = Promise.resolve()) {
-  await Promise.all([loadingPromise, sleep(LATENCY_MS)]);
+export async function simulateNetwork(loadingPromise = Promise.resolve(), latencyMs) {
+  const { latencyMs: defaultLatency } = getEnvDefaults();
+  const effective = latencyMs ?? defaultLatency;
+  if (effective <= 0) return loadingPromise;
+  await Promise.all([loadingPromise, sleep(effective)]);
 }
 
 export default function usePageLoading({
   loading = false,
-  latencyMs = LATENCY_MS,
-  minDisplayMs = MIN_DISPLAY_MS,
+  latencyMs,
+  minDisplayMs,
   onContentReady,
 } = {}) {
+  const envDefaults = getEnvDefaults();
+  const finalLatency = latencyMs ?? envDefaults.latencyMs;
+  const finalMin = minDisplayMs ?? envDefaults.minDisplayMs;
+
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState(null);
   const [attempt, setAttempt] = useState(0);
@@ -30,15 +51,14 @@ export default function usePageLoading({
 
   useEffect(() => {
     let mounted = true;
+    const start = Date.now();
 
     (async () => {
       try {
-        const start = Date.now();
-        await sleep(loading ? latencyMs : latencyMs);
+        if (finalLatency > 0) await sleep(loading ? finalLatency : finalLatency);
         const elapsed = Date.now() - start;
-        if (elapsed < minDisplayMs) {
-          await sleep(minDisplayMs - elapsed);
-        }
+        const remaining = finalMin - elapsed;
+        if (remaining > 0) await sleep(remaining);
         if (mounted) {
           setStatus("success");
           readyRef.current?.();
@@ -54,7 +74,7 @@ export default function usePageLoading({
     return () => {
       mounted = false;
     };
-  }, [loading, latencyMs, minDisplayMs, attempt]);
+  }, [loading, finalLatency, finalMin, attempt]);
 
   const retry = useCallback(() => {
     setError(null);

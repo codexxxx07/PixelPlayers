@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import BuddyLauncher from "./components/BuddyLauncher";
+import ClaraLauncher from "./components/ClaraLauncher";
 import { lazyWithDelay, RouteSkeleton, SkeletonErrorBoundary } from "./components/Skeleton";
 
 const Home = lazyWithDelay(() => import("./pages/Home"));
@@ -69,7 +69,7 @@ function App() {
           <AppRoutes />
         </main>
         <Footer />
-        <BuddyLauncher />
+        <ClaraLauncher />
       </div>
     </SkeletonErrorBoundary>
   );
