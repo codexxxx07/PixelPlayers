@@ -8,4 +8,5 @@ export { default as VoiceButton } from './VoiceButton';
 export { default as ClaraAvatar } from './ClaraAvatar';
 export { default as Waveform } from './Waveform';
 export { default as ClaraLauncher } from './ClaraLauncher';
+export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SosButton, SosModal } from './SosButton';

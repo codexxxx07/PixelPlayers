@@ -1,14 +1,18 @@
 /* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react';
+import { useUser } from '@clerk/react';
+import { getUserDisplayName } from '../utils/displayName';
 
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
-  const [user] = useState({
-    name: "Maya",
+  const { isLoaded: userLoaded, user: clerkUser } = useUser();
+
+  const user = useMemo(() => ({
+    name: userLoaded && clerkUser ? getUserDisplayName(clerkUser) : "",
     greeting: "Good Morning",
     age: 72,
-  });
+  }), [userLoaded, clerkUser]);
 
   const [currentTime, setCurrentTime] = useState(() => new Date());
 

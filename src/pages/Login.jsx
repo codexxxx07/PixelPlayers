@@ -1,9 +1,16 @@
-import { SignIn } from "@clerk/react";
+import { Navigate } from "react-router-dom";
+import { SignIn, useAuth } from "@clerk/react";
 import { useTranslation } from "react-i18next";
 import AuthShell from "../components/AuthShell";
+import { SkeletonAuth } from "../components/Skeleton";
 
 export default function Login() {
+  const { isLoaded, isSignedIn } = useAuth();
   const { t } = useTranslation();
+
+  if (!isLoaded) return <SkeletonAuth />;
+  if (isSignedIn) return <Navigate to="/dashboard" replace />;
+
   return (
     <AuthShell
       chromeless

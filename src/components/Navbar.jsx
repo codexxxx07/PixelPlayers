@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Show, UserButton } from "@clerk/react";
+import { useAuth, useClerk, useUser } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
 import { useTranslation } from "react-i18next";
+import { getUserDisplayName } from "../utils/displayName";
 
-const navLinks = [
+const baseNavLinks = [
   { to: "/", key: "nav.home" },
   { to: "/features", key: "nav.features" },
   { to: "/games", key: "nav.games" },
   { to: "/memory", key: "nav.memory" },
-  { to: "/dashboard", key: "nav.dashboard" },
 ];
 
 const mobileExtras = [
@@ -23,10 +23,16 @@ const mobileExtras = [
 
 export default function Navbar() {
   const { t } = useTranslation();
+  const { isLoaded, isSignedIn } = useAuth();
+  const { user: clerkUser } = useUser();
+  const { signOut } = useClerk();
+  const displayName = getUserDisplayName(clerkUser);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
   const [sosSession, setSosSession] = useState(0);
+
+  const handleSignOut = () => signOut();
 
   const openSos = () => {
     setSosSession((count) => count + 1);
@@ -48,6 +54,10 @@ export default function Navbar() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
+  const navLinks = isSignedIn
+    ? [...baseNavLinks, { to: "/dashboard", key: "nav.dashboard" }]
+    : baseNavLinks;
+
   const linkClass = ({ isActive }) =>
     `relative px-4 py-3 text-lg font-medium rounded-lg transition-colors duration-200 ${
       isActive
@@ -61,6 +71,9 @@ export default function Navbar() {
         ? "bg-teal-100 text-teal-700 border-l-4 border-teal-600"
         : "text-gray-700 hover:bg-teal-50 hover:text-teal-600"
     }`;
+
+  const userNamePillClass =
+    "inline-flex items-center gap-2 rounded-xl border-2 border-teal-200 bg-white px-4 py-2.5 shadow-[0_2px_0_rgba(19,78,74,0.15)]";
 
   return (
     <>
@@ -96,21 +109,43 @@ export default function Navbar() {
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center gap-3 shrink-0">
-              <Link
-                to="/login"
-                className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
-              >
-                {t("nav.login")}
-              </Link>
-              <Link
-                to="/signup"
-                className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
-              >
-                {t("nav.signup")}
-              </Link>
-              <Show when="signed-in">
-                <UserButton />
-              </Show>
+              {isLoaded && isSignedIn ? (
+                <>
+                  <span className={userNamePillClass}>
+                    <span
+                      className="flex items-center justify-center w-7 h-7 rounded-lg bg-teal-600 text-white text-xs font-bold"
+                      aria-hidden="true"
+                    >
+                      {displayName.charAt(0)}
+                    </span>
+                    <span className="max-w-[10rem] truncate text-teal-800 font-bold">
+                      {displayName}
+                    </span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleSignOut}
+                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+                  >
+                    {t("settings.signOut")}
+                  </button>
+                </>
+              ) : isLoaded ? (
+                <>
+                  <Link
+                    to="/login"
+                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3"
+                  >
+                    {t("nav.login")}
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3"
+                  >
+                    {t("nav.signup")}
+                  </Link>
+                </>
+              ) : null}
               <SosButton variant="navbar" onClick={openSos} />
             </div>
 
@@ -217,25 +252,46 @@ export default function Navbar() {
 
           {/* Mobile Auth */}
           <div className="px-6 py-5 border-t border-teal-100 space-y-3">
-            <Link
-              to="/login"
-              onClick={() => setMobileOpen(false)}
-              className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
-            >
-              {t("nav.login")}
-            </Link>
-            <Link
-              to="/signup"
-              onClick={() => setMobileOpen(false)}
-              className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
-            >
-              {t("nav.signup")}
-            </Link>
-            <Show when="signed-in">
-              <div className="flex justify-center">
-                <UserButton />
-              </div>
-            </Show>
+            {isLoaded && isSignedIn ? (
+              <>
+                <div className="flex items-center justify-center gap-3 rounded-2xl border-2 border-teal-200 bg-white px-4 py-3 shadow-[0_2px_0_rgba(19,78,74,0.15)]">
+                  <span
+                    className="flex items-center justify-center w-9 h-9 rounded-lg bg-teal-600 text-white text-sm font-bold"
+                    aria-hidden="true"
+                  >
+                    {displayName.charAt(0)}
+                  </span>
+                  <span className="text-teal-800 font-bold text-lg truncate">{displayName}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    handleSignOut();
+                  }}
+                  className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
+                >
+                  {t("settings.signOut")}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
+                >
+                  {t("nav.login")}
+                </Link>
+                <Link
+                  to="/signup"
+                  onClick={() => setMobileOpen(false)}
+                  className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
+                >
+                  {t("nav.signup")}
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -584,6 +584,7 @@
     "suggReminders": "Do I have reminders?",
     "suggLost": "I feel a little lost",
     "greeting1": "Hi, I'm Clara. How can I help you today?",
+    "greetingNamed": "Hi {{name}}, I'm Clara. How can I help you today?",
     "greeting2": "• What's happening in my day\n• Tell me about a memory\n• Start a gentle game\n• Or just talk — I always listen.",
     "respHello": "Hello again, {{name}}! It's so good to hear from you. What would brighten your day — a chat about a happy memory, or a gentle game?",
     "respWhoAreYou": "I'm Clara, {{name}} — a friendly companion who helps you remember things, keep your day on track, and feel at ease. I'm not a doctor; I'm just a warm helper who is always by your side.",

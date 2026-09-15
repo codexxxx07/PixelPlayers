@@ -13,6 +13,7 @@ const App = lazy(() => import('./App'))
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ClerkProvider
+      publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
       afterSignInUrl="/dashboard"
       afterSignUpUrl="/dashboard"
       afterSignOutUrl="/"

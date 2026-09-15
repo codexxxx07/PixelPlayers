@@ -67,11 +67,15 @@ export function buildGreeting(user, currentTime) {
           ? "common.goodEvening"
           : "common.goodDay";
   const greeting = i18n.t(greetingKey);
+  const name = (user && user.name) || "";
+  const firstText = name
+    ? i18n.t("chat.greetingNamed", { greeting, name })
+    : i18n.t("chat.greeting1");
   return [
     {
       id: genId("a"),
       role: "ai",
-      text: i18n.t("chat.greeting1", { greeting, name: user.name }),
+      text: firstText,
       time: nowTime(),
       actions: [],
       chips: [],

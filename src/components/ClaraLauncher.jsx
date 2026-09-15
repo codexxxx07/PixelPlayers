@@ -21,7 +21,6 @@ export default function ClaraLauncher() {
     streamingId,
     voiceState,
     voiceTranscript,
-    buddyState,
     statusText,
     endRef,
     submit,

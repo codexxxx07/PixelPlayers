@@ -145,7 +145,6 @@ export default function Assistant() {
     voiceState,
     voiceTranscript,
     aiContext,
-    buddyState,
     statusText,
     endRef,
     submit,

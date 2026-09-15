@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProtectedRoute from "./components/ProtectedRoute";
 import ClaraLauncher from "./components/ClaraLauncher";
 import { lazyWithDelay, RouteSkeleton, SkeletonErrorBoundary } from "./components/Skeleton";
 
@@ -49,7 +50,14 @@ function AppRoutes() {
         <Route path="/routine" element={<Routine />} />
         <Route path="/reminders" element={<Reminders />} />
         <Route path="/assistant" element={<Assistant />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/progress" element={<Progress />} />
         <Route path="/support" element={<Support />} />
         <Route path="/settings" element={<Settings />} />

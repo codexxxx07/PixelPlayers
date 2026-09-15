@@ -41,6 +41,26 @@ export default function useConversation({ user, memories, routine, reminders, ga
     dataRef.current = { user, memories, routine, reminders, games, supportNetwork, currentTime };
   }, [user, memories, routine, reminders, games, supportNetwork, currentTime]);
 
+  const initialNameRef = useRef("");
+  const messagesRef = useRef([]);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
+
+  useEffect(() => {
+    const name = user && user.name;
+    if (!name) return;
+    if (initialNameRef.current === name) return;
+    initialNameRef.current = name;
+    const pristine = messagesRef.current.length >= 2 && messagesRef.current.every((message) => message.role === "ai");
+    if (pristine) {
+      setMessages(buildGreeting(user, currentTime));
+      aiContextRef.current = "greeting";
+      setAiContext("greeting");
+    }
+  }, [user, currentTime]);
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [messages, thinking, voiceState, streamingId]);

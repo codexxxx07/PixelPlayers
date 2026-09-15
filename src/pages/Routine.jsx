@@ -55,7 +55,7 @@ export default function Routine() {
         {/* Page Header */}
         <div className="text-center mb-10">
           <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-2 tracking-wide">
-            {t(getGreetingKey())}, {user.name}
+            {t(getGreetingKey())}{user.name ? `, ${user.name}` : ""}
           </h1>
           <p className="text-gray-500 text-lg font-[family-name:var(--font-pixel)] text-[11px] tracking-wider mb-1">
             {getTodayDate()}

@@ -4,14 +4,6 @@ import { useApp } from "../context/AppContext";
 import { useTranslation } from "react-i18next";
 import { PixelButton, PixelCard, ProgressCard, RoutineCard } from "../components/";
 
-function getGreeting(hour) {
-  if (hour < 5) return "common.goodNight";
-  if (hour < 12) return "common.goodMorning";
-  if (hour < 17) return "common.goodAfternoon";
-  if (hour < 21) return "common.goodEvening";
-  return "common.goodNight";
-}
-
 function formatTime12h(time) {
   if (!time) return "";
   const [h, m] = time.split(":").map(Number);
@@ -78,7 +70,6 @@ export default function Dashboard() {
   const { t } = useTranslation();
 
   const hour = currentTime.getHours();
-  const greeting = getGreeting(hour);
   const isDay = hour >= 5 && hour < 18;
 
   const formattedDate = useMemo(
@@ -156,7 +147,7 @@ export default function Dashboard() {
                 {isDay ? t('dashboard.dayTag') : t('dashboard.eveningTag')}
               </p>
               <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl leading-relaxed mb-4">
-                {t(greeting)}, {user.name}
+                {t("auth.welcomeBack")}, {user.name}
               </h1>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-gray-600 text-base md:text-lg">
                 <span className="inline-flex items-center gap-2">
