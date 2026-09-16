@@ -1,29 +1,22 @@
-const ROUNDING = {
-  none: "",
-  sm: "sk-sm",
-  md: "sk",
-  lg: "rounded-2xl",
-  round: "sk-round",
-  pixel: "pixel-border",
-};
+import usePrefersReducedData from './usePrefersReducedData';
+import { ROUNDING } from './rounding';
 
 export default function Skeleton({
-  className = "",
-  width = "100%",
-  height = "1rem",
-  rounding = "md",
-  skipShimmer = false,
-  children,
-  "aria-hidden": ariaHidden,
+  className = 'inline-block',
+  width,
+  height,
+  rounding = 'md',
+  shimmer = true,
+  dark = false,
 }) {
-  const roundingClass = ROUNDING[rounding] || ROUNDING.md;
+  const reducedData = usePrefersReducedData();
+  const radius = ROUNDING[rounding] || ROUNDING.md;
+  const showShimmer = shimmer && !reducedData;
   return (
-    <div
-      className={`sk ${skipShimmer ? "" : "sk-shimmer"} ${roundingClass} ${className}`}
-      style={{ width, height: height ? height : undefined }}
-      aria-hidden={ariaHidden === false ? undefined : "true"}
-    >
-      {children}
-    </div>
+    <span
+      aria-hidden="true"
+      className={`sk ${showShimmer ? 'sk-shimmer' : ''} ${dark ? 'sk-on-dark' : ''} ${radius} ${className}`}
+      style={width != null || height != null ? { width, height } : undefined}
+    />
   );
 }

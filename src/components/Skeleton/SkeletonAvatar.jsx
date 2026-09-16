@@ -1,27 +1,23 @@
-import Skeleton from "./Skeleton.jsx";
+import Skeleton from './Skeleton';
 
 const SIZES = {
-  xs: "w-8 h-8",
-  sm: "w-10 h-10",
-  md: "w-12 h-12",
-  lg: "w-14 h-14",
-  xl: "w-16 h-16",
+  xs: 24,
+  sm: 32,
+  md: 40,
+  lg: 56,
+  xl: 72,
+  xxl: 88,
 };
 
-export default function SkeletonAvatar({
-  size = "md",
-  rounded = false,
-  className = "",
-  skipShimmer = false,
-}) {
-  const sizeClass = SIZES[size] || SIZES.md;
+export default function SkeletonAvatar({ size = 'md', rounding = 'full', dark = false, className = '' }) {
+  const px = SIZES[size] || SIZES.md;
   return (
     <Skeleton
-      width={undefined}
-      height={undefined}
-      rounding={rounded ? "md" : "round"}
-      className={`${sizeClass} ${rounded ? "rounded-xl" : "sk-avatar"} ${className}`}
-      skipShimmer={skipShimmer}
+      width={px}
+      height={px}
+      rounding={rounding}
+      dark={dark}
+      className={`flex-shrink-0 ${className}`}
     />
   );
 }

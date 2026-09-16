@@ -1,136 +1,63 @@
-import SkeletonHero from "./SkeletonHero.jsx";
-import SkeletonCard from "./SkeletonCard.jsx";
-import SkeletonText from "./SkeletonText.jsx";
-import Skeleton from "./Skeleton.jsx";
-import SkeletonButton from "./SkeletonButton.jsx";
-import SkeletonSectionTitle from "./SkeletonSectionTitle.jsx";
+import Skeleton from './Skeleton';
+import SkeletonText from './SkeletonText';
+import SkeletonButton from './SkeletonButton';
+import SkeletonCard from './SkeletonCard';
+import SkeletonHero from './SkeletonHero';
 
-function SectionHeader() {
+function FeatureCardSkeleton() {
   return (
-    <div className="text-center mb-14">
-      <Skeleton
-        width="6rem"
-        height="0.9rem"
-        rounding="sm"
-        className="mx-auto mb-3"
-      />
-      <div className="max-w-md mx-auto">
-        <SkeletonText lines={2} size="xl" />
-      </div>
-      <div className="max-w-lg mx-auto mt-4">
-        <SkeletonText lines={1} size="sm" />
-      </div>
-    </div>
-  );
-}
-
-function StepCardSkeleton() {
-  return (
-    <div className="skeuo-card skeuo-card-pad text-center flex flex-col items-center h-full w-full min-w-0">
-      <Skeleton width="4rem" height="4rem" rounding="lg" />
-      <Skeleton width="5rem" height="0.7rem" rounding="sm" className="mt-4" />
-      <div className="mt-3 max-w-[13rem] w-full">
-        <SkeletonText lines={2} size="sm" />
-      </div>
-    </div>
+    <SkeletonCard className="flex flex-col">
+      <Skeleton width={52} height={52} rounding="xl" className="mb-4" />
+      <SkeletonText size="lg" lines={1} widths={[130]} />
+      <SkeletonText size="md" lines={2} widths={['100%', '84%']} className="mt-2" />
+      <Skeleton width={90} height={14} rounding="md" className="mt-4" />
+    </SkeletonCard>
   );
 }
 
 export default function SkeletonHome() {
   return (
-    <div className="min-h-screen" aria-busy="true">
+    <div className="min-h-screen">
       <SkeletonHero variant="home" />
-
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader />
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-            {[0, 1, 2].map((i) => (
-              <SkeletonCard key={i} className="p-8 text-center">
-                <div className="flex justify-center">
-                  <Skeleton width="3rem" height="3rem" rounding="lg" />
-                </div>
-                <div className="mt-5">
-                  <SkeletonText lines={2} size="sm" className="max-w-[14rem] mx-auto" />
-                </div>
-              </SkeletonCard>
-            ))}
+      <div className="mx-auto max-w-7xl space-y-16 px-6 py-16 md:py-24">
+        <div className="grid gap-6 md:grid-cols-3">
+          <FeatureCardSkeleton />
+          <FeatureCardSkeleton />
+          <FeatureCardSkeleton />
+        </div>
+        <div className="grid items-center gap-10 md:grid-cols-2">
+          <div className="space-y-6">
+            <SkeletonText size="xl" lines={1} widths={[200]} />
+            <SkeletonText size="md" lines={4} widths={['100%', '92%', '88%', '70%']} />
+            <SkeletonButton size="md" width={150} />
+          </div>
+          <div className="relative overflow-hidden rounded-2xl border-2 border-teal-200 bg-gradient-to-br from-teal-50 to-warm-50 p-8">
+            <div className="absolute inset-0 pixel-grid opacity-50" />
+            <div className="relative grid grid-cols-5 gap-1.5">
+              {Array.from({ length: 25 }).map((_, i) => (
+                <Skeleton key={i} height={24} rounding="sm" className="w-full" />
+              ))}
+            </div>
           </div>
         </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader />
-
-          <div className="hidden lg:grid lg:grid-cols-4 gap-4">
-            {[0, 1, 2, 3].map((i) => (
-              <StepCardSkeleton key={i} />
-            ))}
-          </div>
-
-          <div className="hidden md:grid md:grid-cols-2 lg:hidden gap-4">
-            {[0, 1, 2, 3].map((i) => (
-              <StepCardSkeleton key={i} />
-            ))}
-          </div>
-
-          <div className="md:hidden flex flex-col gap-4">
-            {[0, 1, 2, 3].map((i) => (
-              <StepCardSkeleton key={i} />
-            ))}
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <SkeletonCard key={i} className="flex flex-col items-center text-center">
+              <Skeleton width={56} height={56} rounding="xl" className="mb-4" />
+              <SkeletonText size="md" lines={1} widths={[110]} />
+              <SkeletonText size="sm" lines={2} widths={['100%', '80%']} className="mt-2" />
+            </SkeletonCard>
+          ))}
+        </div>
+        <div className="rounded-2xl border-2 border-teal-200 bg-teal-900 p-10 text-center">
+          <SkeletonText size="xl" lines={1} widths={[240]} className="mx-auto" dark={false} />
+          <SkeletonText size="md" lines={2} widths={['55%', '42%']} className="mx-auto mt-4" />
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <SkeletonButton size="lg" width={180} />
+            <SkeletonButton size="lg" width={180} />
           </div>
         </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SectionHeader />
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <div key={i} className="flex items-center gap-3">
-                <Skeleton width="8.75rem" height="2.9rem" rounding="lg" />
-                <Skeleton width="1rem" height="0.5rem" rounding="round" />
-              </div>
-            ))}
-          </div>
-          <div className="w-full flex justify-center mt-6">
-            <Skeleton width="12rem" height="2rem" rounding="round" />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <SkeletonSectionTitle align="center" />
-          <div className="mt-14 grid md:grid-cols-3 gap-6">
-            {[0, 1, 2].map((i) => (
-              <SkeletonCard key={i} className="p-8 flex flex-col">
-                <Skeleton width="2.5rem" height="2.5rem" rounding="sm" />
-                <div className="mt-4">
-                  <SkeletonText lines={4} size="sm" />
-                </div>
-                <div className="mt-6 pt-4 border-t border-warm-200/60">
-                  <Skeleton width="7rem" height="0.8rem" rounding="sm" />
-                  <Skeleton width="5rem" height="0.7rem" rounding="sm" className="mt-2" />
-                </div>
-              </SkeletonCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <SkeletonText lines={2} size="xl" />
-          <div className="max-w-xl mx-auto mt-6">
-            <SkeletonText lines={2} size="md" />
-          </div>
-          <div className="mt-10 flex justify-center">
-            <SkeletonButton size="lg" width="12rem" variant="primary" />
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

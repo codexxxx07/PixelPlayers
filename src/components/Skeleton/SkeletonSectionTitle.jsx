@@ -1,20 +1,11 @@
-import SkeletonText from "./SkeletonText.jsx";
-import Skeleton from "./Skeleton.jsx";
+import Skeleton from './Skeleton';
+import SkeletonText from './SkeletonText';
 
-export default function SkeletonSectionTitle({
-  title = false,
-  className = "",
-  align = "left",
-}) {
-  const alignClass = align === "center" ? "mx-auto text-center" : "";
+export default function SkeletonSectionTitle({ center = false, icon = true, className = '' }) {
   return (
-    <div className={`${alignClass} ${className}`} aria-hidden="true">
-      <Skeleton height="0.65rem" width="7.5rem" className="mb-2.5" />
-      <SkeletonText
-        lines={title ? 2 : 1}
-        size="xl"
-        className="mx-auto"
-      />
+    <div className={`flex items-center gap-3 ${center ? 'justify-center' : ''} ${className}`} aria-hidden="true">
+      {icon && <Skeleton width={28} height={28} rounding="md" />}
+      <SkeletonText size="md" lines={1} widths={[140]} />
     </div>
   );
 }

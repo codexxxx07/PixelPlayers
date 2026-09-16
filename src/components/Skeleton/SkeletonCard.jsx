@@ -1,21 +1,10 @@
-import Skeleton from "./Skeleton.jsx";
-
-export default function SkeletonCard({
-  className = "",
-  children,
-  skipShimmer = false,
-}) {
+export default function SkeletonCard({ children, className = '', pad = true, inset = false }) {
   return (
-    <div className="skeuo-card skeuo-card-pad" aria-hidden="true">
-      {children ? (
-        <div className={`sk sk-shimmer rounded-2xl ${className}`}>{children}</div>
-      ) : (
-        <Skeleton
-          rounding="lg"
-          className={className}
-          skipShimmer={skipShimmer}
-        />
-      )}
+    <div
+      aria-hidden="true"
+      className={`skeuo-card ${pad ? 'skeuo-card-pad' : ''} ${inset ? 'skeuo-card-inset' : ''} ${className}`}
+    >
+      {children}
     </div>
   );
 }

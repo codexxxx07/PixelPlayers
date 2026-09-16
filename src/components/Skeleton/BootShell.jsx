@@ -1,14 +1,25 @@
-import SkeletonNavbar from "./SkeletonNavbar.jsx";
-import SkeletonFooter from "./SkeletonFooter.jsx";
-import PageLoader from "./PageLoader.jsx";
-import DefaultPageSkeleton from "./DefaultPageSkeleton.jsx";
+import SkeletonNavbar from './SkeletonNavbar';
+import SkeletonFooter from './SkeletonFooter';
+import SkeletonCentered from './SkeletonCentered';
+import SkeletonAvatar from './SkeletonAvatar';
+import SkeletonButton from './SkeletonButton';
 
 export default function BootShell() {
   return (
-    <div className="min-h-screen flex flex-col bg-warm-50" aria-busy="true">
+    <div className="flex min-h-screen flex-col bg-warm-50">
       <SkeletonNavbar />
-      <main className="flex-1">
-        <PageLoader skeleton={DefaultPageSkeleton} />
+      <main
+        className="flex flex-1 items-center justify-center px-6 py-16"
+        role="status"
+        aria-busy="true"
+        aria-live="polite"
+      >
+        <span className="sr-only">Pixel Players is loading…</span>
+        <SkeletonCentered>
+          <SkeletonAvatar size="xl" />
+          <SkeletonButton size="lg" width={200} />
+          <SkeletonButton size="md" width={120} />
+        </SkeletonCentered>
       </main>
       <SkeletonFooter />
     </div>

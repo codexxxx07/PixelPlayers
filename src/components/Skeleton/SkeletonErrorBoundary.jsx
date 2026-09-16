@@ -1,34 +1,26 @@
-import { Component } from "react";
-import PageLoader from "./PageLoader.jsx";
+import { Component, Fragment } from 'react';
+import SkeletonError from './SkeletonError';
 
 export default class SkeletonErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { error: null, attempt: 0 };
-  }
+  state = { error: null, resetKey: 0 };
 
   static getDerivedStateFromError(error) {
     return { error };
   }
 
-  componentDidCatch(error, info) {
-    console.error("Pixel Players: page failed to render.", error, info);
-  }
-
   handleRetry = () => {
-    this.setState((prev) => ({ error: null, attempt: prev.attempt + 1 }));
+    this.setState((prev) => ({ error: null, resetKey: prev.resetKey + 1 }));
   };
 
   render() {
     const { error } = this.state;
-    if (!error) {
-      return this.props.children;
+    if (error) {
+      return (
+        <div className="flex min-h-screen items-center justify-center bg-warm-50 px-6">
+          <SkeletonError title="Something went wrong" error={error} onRetry={this.handleRetry} />
+        </div>
+      );
     }
-    return (
-      <PageLoader
-        status="error"
-        onRetry={this.handleRetry}
-      />
-    );
+    return <Fragment key={this.state.resetKey}>{this.props.children}</Fragment>;
   }
 }

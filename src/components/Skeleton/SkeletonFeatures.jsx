@@ -1,86 +1,49 @@
-import SkeletonHero from "./SkeletonHero.jsx";
-import Skeleton from "./Skeleton.jsx";
-import SkeletonText from "./SkeletonText.jsx";
-import SkeletonCard from "./SkeletonCard.jsx";
-import SkeletonButton from "./SkeletonButton.jsx";
+import Skeleton from './Skeleton';
+import SkeletonText from './SkeletonText';
+import SkeletonButton from './SkeletonButton';
+import SkeletonCard from './SkeletonCard';
+import SkeletonHero from './SkeletonHero';
+
+function FeatureCardSkeleton() {
+  return (
+    <SkeletonCard className="flex flex-col">
+      <Skeleton width={52} height={52} rounding="xl" className="mb-4" />
+      <SkeletonText size="lg" lines={1} widths={[130]} />
+      <SkeletonText size="md" lines={2} widths={['100%', '84%']} className="mt-2 flex-1" />
+      <Skeleton width={90} height={14} rounding="md" className="mt-4" />
+    </SkeletonCard>
+  );
+}
 
 export default function SkeletonFeatures() {
   return (
-    <div className="min-h-screen" aria-busy="true">
-      <SkeletonHero />
-
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-              <SkeletonCard
-                key={i}
-                className="p-8 flex flex-col"
-              >
-                <Skeleton width="3rem" height="3rem" rounding="sm" />
-                <Skeleton width="65%" height="0.9rem" rounding="sm" className="mt-5" />
-                <div className="mt-3 flex-1">
-                  <SkeletonText lines={3} size="sm" />
-                </div>
-                <div className="mt-5 pt-4 border-t border-warm-100">
-                  <Skeleton width="5rem" height="0.9rem" rounding="sm" />
-                </div>
-              </SkeletonCard>
-            ))}
-          </div>
+    <div className="min-h-screen">
+      <SkeletonHero variant="page" />
+      <div className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <FeatureCardSkeleton key={i} />
+          ))}
         </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <Skeleton width="4rem" height="0.9rem" rounding="sm" className="mx-auto mb-3" />
-            <div className="max-w-sm mx-auto">
-              <SkeletonText lines={2} size="xl" />
-            </div>
-          </div>
-
-          <div className="hidden md:block">
-            <SkeletonCard className="overflow-hidden">
-              <div className="grid grid-cols-3">
-                {["ASPECT", "TRADITIONAL", "PIXEL"].map((_, col) => (
-                  <div
-                    key={col}
-                    className="p-5"
-                  >
-                    <Skeleton width="70%" height="0.9rem" rounding="sm" />
-                  </div>
-                ))}
+        <div className="mt-16 grid gap-6 md:grid-cols-[minmax(0,1fr)_340px]">
+          <SkeletonCard className="space-y-5">
+            <SkeletonText size="lg" lines={1} widths={[160]} />
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="grid grid-cols-3 items-center gap-4">
+                <Skeleton width="100%" height={16} rounding="md" />
+                <Skeleton width="100%" height={16} rounding="md" />
+                <Skeleton width="100%" height={16} rounding="md" />
               </div>
-              {[0, 1, 2, 3, 4, 5].map((row) => (
-                <div key={row} className="grid grid-cols-3 border-t border-warm-100">
-                  {[40, 70, 60].map((w, col) => (
-                    <div key={col} className="p-5">
-                      <Skeleton width={`${w}%`} height="0.9rem" rounding="sm" />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </SkeletonCard>
-          </div>
-
-          <div className="md:hidden space-y-4">
-            {[0, 1, 2].map((i) => (
-              <SkeletonCard key={i} className="p-5">
-                <Skeleton width="40%" height="0.85rem" rounding="sm" />
-                <div className="space-y-2 mt-3">
-                  <Skeleton width="85%" height="0.9rem" rounding="sm" />
-                  <Skeleton width="75%" height="0.9rem" rounding="sm" />
-                </div>
-              </SkeletonCard>
             ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <SkeletonButton size="lg" width="13rem" />
-          </div>
+          </SkeletonCard>
+          <SkeletonCard className="flex flex-col items-center justify-center text-center">
+            <Skeleton width={72} height={72} rounding="xl" className="mb-4" />
+            <SkeletonText size="lg" lines={1} widths={[140]} />
+            <SkeletonText size="md" lines={2} widths={['100%', '78%']} className="mt-2" />
+            <SkeletonButton size="md" width={150} className="mt-5" />
+          </SkeletonCard>
         </div>
-      </section>
+      </div>
     </div>
   );
 }

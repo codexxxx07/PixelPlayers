@@ -1,145 +1,83 @@
-import Skeleton from "./Skeleton.jsx";
-import SkeletonText from "./SkeletonText.jsx";
-import SkeletonAvatar from "./SkeletonAvatar.jsx";
+import Skeleton from './Skeleton';
+import SkeletonText from './SkeletonText';
+import SkeletonButton from './SkeletonButton';
+import SkeletonAvatar from './SkeletonAvatar';
+import SkeletonCard from './SkeletonCard';
 
-function ClaraCardSkeleton() {
+function ActionItemSkeleton() {
   return (
-    <div className="skeuo-card p-5" aria-hidden="true">
-      <div className="flex items-center gap-3 mb-4">
-        <SkeletonAvatar size="xl" className="flex-shrink-0 border-2 !border-teal-100/60 !bg-white/90" />
-        <div className="min-w-0">
-          <Skeleton width="4rem" height="0.8rem" rounding="sm" />
-          <Skeleton width="10rem" height="0.9rem" rounding="sm" className="mt-2" />
-        </div>
-      </div>
-      <SkeletonText lines={2} size="sm" />
-    </div>
-  );
-}
-
-function SuggestionRowSkeleton() {
-  return (
-    <div className="flex items-center gap-3 rounded-xl border-2 border-warm-200 px-4 py-3.5" aria-hidden="true">
-      <Skeleton width="1.25rem" height="1.25rem" rounding="sm" />
-      <Skeleton width="70%" height="1rem" rounding="sm" />
-    </div>
-  );
-}
-
-function ChatBubbleSkeleton({ align = "start" }) {
-  return (
-    <div className={`flex ${align === "end" ? "justify-end" : "justify-start"}`} aria-hidden="true">
-      <div className="rounded-2xl px-4 py-3">
-        <Skeleton width="13rem" height="0.85rem" rounding="sm" />
-        <Skeleton width="9rem" height="0.85rem" rounding="sm" className="mt-2" />
-      </div>
-    </div>
+    <SkeletonCard className="space-y-3">
+      <Skeleton width={44} height={44} rounding="xl" />
+      <SkeletonText size="md" lines={1} widths={[120]} />
+      <SkeletonText size="sm" lines={2} widths={['100%', '78%']} />
+      <Skeleton width={96} height={14} rounding="md" />
+    </SkeletonCard>
   );
 }
 
 export default function SkeletonAssistant() {
   return (
-    <div className="min-h-screen pb-16" aria-busy="true">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-8 md:py-10">
-        <div className="grid lg:grid-cols-[290px_minmax(0,1fr)_310px] gap-6 items-start">
-          <aside className="hidden lg:block space-y-5">
-            <ClaraCardSkeleton />
-            <div className="skeuo-card p-5">
-              <Skeleton width="7rem" height="0.8rem" rounding="sm" />
-              <div className="mt-4 space-y-2">
-                {[0, 1, 2, 3].map((i) => (
-                  <SuggestionRowSkeleton key={i} />
-                ))}
-              </div>
-            </div>
-            <div className="skeuo-card p-5">
-              <Skeleton width="8rem" height="0.8rem" rounding="sm" />
-              <div className="mt-4 space-y-4">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <Skeleton width="1.5rem" height="1.5rem" rounding="sm" />
-                    <div className="flex-1 min-w-0">
-                      <Skeleton width="30%" height="0.8rem" rounding="sm" />
-                      <Skeleton width="70%" height="1rem" rounding="sm" className="mt-2" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          <div className="rounded-3xl bg-white border-2 border-teal-100 overflow-hidden flex flex-col">
-            <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
-              <SkeletonAvatar size="lg" className="flex-shrink-0 border-2 !border-teal-100/60 !bg-white/90" />
-              <div className="min-w-0 flex-1">
-                <Skeleton width="5rem" height="0.8rem" rounding="sm" />
-                <Skeleton width="55%" height="1rem" rounding="sm" className="mt-1" />
-              </div>
-              <Skeleton width="6.5rem" height="2.6rem" rounding="lg" className="flex-shrink-0" />
-            </div>
-
-            <div className="flex-1 h-[52vh] min-h-[420px] overflow-y-auto p-5 space-y-5 buddy-chat-bg">
-              <div className="text-center">
-                <Skeleton width="3.5rem" height="0.8rem" rounding="sm" className="mx-auto" />
-              </div>
-              <ChatBubbleSkeleton />
-              <ChatBubbleSkeleton align="end" />
-              <ChatBubbleSkeleton />
-              <ChatBubbleSkeleton />
-            </div>
-
-            <div className="px-4 pt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden">
-              {[0, 1, 2, 3].map((i) => (
-                <Skeleton
-                  key={i}
-                  width="7.5rem"
-                  height="2.6rem"
-                  rounding="round"
-                  className="flex-shrink-0"
-                />
-              ))}
-            </div>
-
-            <form className="p-4 border-t border-teal-100 bg-[#FFF8F0]">
-              <div className="flex items-end gap-3">
-                <Skeleton height="5.5rem" rounding="lg" className="flex-1" />
-                <Skeleton width="6rem" height="6rem" rounding="round" className="flex-shrink-0" />
-                <Skeleton width="5rem" height="6rem" rounding="lg" className="flex-shrink-0" />
-              </div>
-            </form>
+    <div className="min-h-screen">
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-8 lg:py-10">
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[290px_minmax(0,1fr)_310px]">
+          <div className="space-y-4">
+            <ActionItemSkeleton />
+            <ActionItemSkeleton />
+            <ActionItemSkeleton />
           </div>
-
-          <aside className="hidden lg:block space-y-5">
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Skeleton width="4rem" height="0.8rem" rounding="sm" />
-                <span className="flex-1 h-0.5 rounded-full bg-teal-100" />
-              </div>
-              <div className="skeuo-card p-5 flex flex-col h-full">
-                <div className="flex items-center gap-3 mb-3">
-                  <Skeleton width="2.75rem" height="2.75rem" rounding="lg" className="flex-shrink-0" />
-                  <Skeleton width="70%" height="0.85rem" rounding="sm" />
-                </div>
-                <SkeletonText lines={2} size="sm" className="flex-1" />
-                <Skeleton width="8rem" height="2.6rem" rounding="lg" className="mt-4" />
+          <SkeletonCard className="flex min-h-[58vh] flex-col">
+            <div className="mb-5 flex items-center gap-3">
+              <SkeletonAvatar size="lg" />
+              <div className="flex-1 space-y-2">
+                <SkeletonText size="md" lines={1} widths={[120]} />
+                <SkeletonText size="sm" lines={1} widths={[160]} />
               </div>
             </div>
-
-            <div className="skeuo-card p-5">
-              <Skeleton width="7rem" height="0.8rem" rounding="sm" />
-              <div className="mt-4 space-y-3">
+            <div className="flex-1 space-y-4">
+              <div className="flex justify-start">
+                <Skeleton width="72%" height={46} rounding="xl" />
+              </div>
+              <div className="flex justify-end">
+                <Skeleton width="46%" height={46} rounding="xl" />
+              </div>
+              <div className="flex justify-start">
+                <Skeleton width="62%" height={46} rounding="xl" />
+              </div>
+              <div className="flex justify-end">
+                <Skeleton width="52%" height={46} rounding="xl" />
+              </div>
+              <div className="flex justify-start">
+                <Skeleton width={120} height={40} rounding="xl" />
+              </div>
+            </div>
+            <div className="mt-5 flex items-center gap-3 border-t border-warm-200 pt-4">
+              <SkeletonButton size="md" width={48} />
+              <Skeleton height={48} className="flex-1" rounding="xl" />
+              <SkeletonButton size="md" width={56} />
+            </div>
+          </SkeletonCard>
+          <div className="hidden space-y-4 lg:block">
+            <SkeletonCard className="flex flex-col items-center text-center">
+              <SkeletonAvatar size="xl" className="mb-4" />
+              <SkeletonText size="md" lines={1} widths={[110]} />
+              <SkeletonText size="sm" lines={2} widths={['100%', '76%']} className="mt-2" />
+              <SkeletonButton size="sm" width={110} className="mt-4" />
+            </SkeletonCard>
+            <SkeletonCard className="space-y-4">
+              <SkeletonText size="md" lines={1} widths={[130]} />
+              <div className="space-y-3">
                 {[0, 1, 2].map((i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <Skeleton width="2.5rem" height="2.5rem" rounding="round" className="flex-shrink-0" />
-                    <div className="min-w-0 flex-1">
-                      <Skeleton width="60%" height="0.9rem" rounding="sm" />
-                      <Skeleton width="45%" height="0.8rem" rounding="sm" className="mt-1" />
+                    <Skeleton width={36} height={36} rounding="lg" />
+                    <div className="flex-1 space-y-2">
+                      <SkeletonText size="sm" lines={1} widths={['100%']} />
+                      <SkeletonText size="xs" lines={1} widths={['70%']} />
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </aside>
+            </SkeletonCard>
+          </div>
         </div>
       </div>
     </div>

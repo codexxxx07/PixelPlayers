@@ -1,22 +1,33 @@
-import SkeletonError from "./SkeletonError.jsx";
-import DefaultPageSkeleton from "./DefaultPageSkeleton.jsx";
+import usePageLoading from './usePageLoading';
+import SkeletonError from './SkeletonError';
+import DefaultPageSkeleton from './DefaultPageSkeleton';
 
 export default function PageLoader({
-  status = "loading",
+  skeleton = <DefaultPageSkeleton />,
+  loading = true,
+  error = null,
   onRetry,
-  skeleton: SkeletonView = DefaultPageSkeleton,
+  minDisplayMs = 200,
+  label = 'Loading…',
+  children = null,
 }) {
-  if (status === "error") {
+  const { status, retry } = usePageLoading({ loading, error, minDisplayMs });
+
+  if (status === 'error') {
+    return <SkeletonError title="Could not load this page" error={error} onRetry={onRetry || retry} />;
+  }
+
+  const showSkeleton = children == null || status === 'loading';
+  if (showSkeleton) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-warm-50">
-        <SkeletonError title="Unable to load this page." onRetry={onRetry} />
+      <div role="status" aria-busy="true" aria-live="polite" className="page-enter">
+        <span className="sr-only">{label}</span>
+        {skeleton}
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-warm-50" role="status" aria-live="polite">
-      <SkeletonView />
-    </div>
-  );
+  if (status === 'idle') return null;
+
+  return children;
 }

@@ -627,9 +627,14 @@
 }
 
 @layer components {
-  .sk-shimmer {
+  .sk {
     position: relative;
+    display: block;
+    width: 100%;
     overflow: hidden;
+    background: linear-gradient(180deg, var(--color-warm-100), var(--color-warm-200));
+    border: 1px solid var(--color-warm-300);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 
   .sk-shimmer::after {
@@ -646,39 +651,10 @@
     animation: sk-shimmer-sweep 2.8s ease infinite;
   }
 
-  .sk {
-    background: linear-gradient(180deg, var(--color-warm-100), var(--color-warm-200));
-    border: 1px solid var(--color-warm-300);
-    border-radius: 12px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  .sk-sm {
-    border-radius: 8px;
-  }
-
-  .sk-round {
-    border-radius: 9999px;
-  }
-
-  .sk-avatar {
-    border-radius: 9999px;
-  }
-
   .sk-on-dark {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
     border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  }
-
-  .sk-pixel-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 2px;
-    background: var(--color-warm-300);
-    box-shadow:
-      16px 0 0 var(--color-warm-200),
-      32px 0 0 var(--color-warm-300);
   }
 }
 
@@ -689,6 +665,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sk-shimmer::after {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-data: reduce) {
   .sk-shimmer::after {
     animation: none;
   }

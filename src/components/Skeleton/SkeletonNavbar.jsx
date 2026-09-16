@@ -1,48 +1,29 @@
-import Skeleton from "./Skeleton.jsx";
-import SkeletonButton from "./SkeletonButton.jsx";
+import Skeleton from './Skeleton';
+
+const NAV_LINKS = [64, 80, 72, 60];
 
 export default function SkeletonNavbar() {
   return (
-    <header
-      className="sticky top-0 z-50 w-full border-b-[3px] border-dashed border-teal-200 shadow-md shadow-teal-900/5"
-      style={{ backgroundColor: "#FFF8F0" }}
+    <div
       aria-hidden="true"
+      className="sticky top-0 z-40 border-b-[3px] border-dashed border-teal-200 bg-[#FFF8F0] shadow-md shadow-teal-900/5"
     >
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-20 items-center justify-between gap-2">
-          <div className="flex items-center gap-2.5 shrink-0">
-            <div className="relative w-10 h-10 rounded-lg border-2 border-teal-300 bg-gradient-to-b from-teal-100 to-teal-200 sk sk-shimmer">
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-sm bg-amber-300" aria-hidden="true" />
-            </div>
-            <div className="hidden sm:block">
-              <Skeleton width="9.5rem" height="1.1rem" rounding="sm" skipShimmer />
-            </div>
-          </div>
-
-          <div className="hidden xl:flex items-center gap-2">
-            {[68, 80, 72, 82, 100].map((w, i) => (
-              <Skeleton key={i} width={`${w / 16}rem`} height="2.75rem" rounding="lg" />
-            ))}
-          </div>
-
-          <div className="hidden lg:flex items-center gap-3 shrink-0">
-            <SkeletonButton size="md" width="6rem" variant="ghost" />
-            <SkeletonButton size="md" width="7.5rem" variant="primary" />
-            <SkeletonButton size="md" width="5rem" variant="danger" />
-          </div>
-
-          <button
-            className="xl:hidden flex flex-col items-center justify-center w-12 h-12 rounded-xl shrink-0"
-            aria-label="Open menu"
-          >
-            <div className="flex flex-col gap-1.5 w-6">
-              <span className="block h-[3px] w-full rounded-full sk sk-shimmer" />
-              <span className="block h-[3px] w-full rounded-full sk sk-shimmer" />
-              <span className="block h-[3px] w-full rounded-full sk sk-shimmer" />
-            </div>
-          </button>
+      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="flex items-center gap-2.5">
+          <Skeleton width={36} height={36} rounding="md" />
+          <Skeleton width={120} height={14} rounding="md" className="hidden sm:block" />
+        </div>
+        <div className="hidden items-center gap-2 lg:flex">
+          {NAV_LINKS.map((w) => (
+            <Skeleton key={w} width={w} height={32} rounding="lg" />
+          ))}
+        </div>
+        <div className="flex items-center gap-3">
+          <Skeleton width={76} height={40} rounding="xl" className="hidden sm:block" />
+          <Skeleton width={40} height={40} rounding="xl" />
+          <Skeleton width={28} height={28} rounding="md" className="lg:hidden" />
         </div>
       </nav>
-    </header>
+    </div>
   );
 }

@@ -1,28 +1,20 @@
-import Skeleton from "./Skeleton.jsx";
-import SkeletonText from "./SkeletonText.jsx";
+import Skeleton from './Skeleton';
+import SkeletonText from './SkeletonText';
+import SkeletonCard from './SkeletonCard';
 
 export default function SkeletonGameCard() {
   return (
-    <div className="skeuo-card skeuo-card-pad h-full flex flex-col" aria-hidden="true">
-      <div className="flex items-start gap-4 mb-4">
-        <Skeleton width="3.5rem" height="3.5rem" rounding="lg" className="sk-shimmer mt-0.5" />
-        <div className="min-w-0 flex-1">
-          <Skeleton width="80%" height="0.9rem" rounding="sm" />
-          <Skeleton width="5.5rem" height="1.5rem" rounding="round" className="mt-2" />
-        </div>
+    <SkeletonCard className="flex min-h-[220px] flex-col">
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <Skeleton width={56} height={56} rounding="xl" />
+        <Skeleton width={80} height={20} rounding="full" />
       </div>
-
-      <SkeletonText lines={2} size="sm" className="flex-1" />
-
-      <Skeleton width="55%" height="0.8rem" rounding="sm" className="mt-4" />
-
-      <div className="mt-auto pt-3">
-        <Skeleton width="7rem" height="1.5rem" rounding="round" />
-        <div className="flex items-center justify-between gap-2 border-t border-warm-200/60 pt-3 mt-3">
-          <Skeleton width="6.5rem" height="1.6rem" rounding="round" />
-          <Skeleton width="5.5rem" height="1rem" rounding="sm" />
-        </div>
+      <SkeletonText size="lg" lines={1} widths={[110]} />
+      <SkeletonText size="md" lines={2} widths={['100%', '82%']} className="mt-2 flex-1" />
+      <div className="mt-4 flex items-center justify-between border-t border-warm-200 pt-3">
+        <Skeleton width={64} height={12} rounding="md" />
+        <Skeleton width={48} height={12} rounding="md" />
       </div>
-    </div>
+    </SkeletonCard>
   );
 }
