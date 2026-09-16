@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth, UserButton } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
@@ -27,11 +27,31 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
   const [sosSession, setSosSession] = useState(0);
+  const [loginRequiredOpen, setLoginRequiredOpen] = useState(false);
+  const sosTriggerRef = useRef(null);
 
-  const openSos = () => {
+  const openSos = useCallback(() => {
+    if (!isLoaded) return;
+    sosTriggerRef.current = document.activeElement;
+    if (!isSignedIn) {
+      setLoginRequiredOpen(true);
+      return;
+    }
     setSosSession((count) => count + 1);
     setSosOpen(true);
-  };
+  }, [isLoaded, isSignedIn]);
+
+  const closeLoginRequired = useCallback(() => {
+    setLoginRequiredOpen(false);
+    if (
+      sosTriggerRef.current &&
+      sosTriggerRef.current.isConnected &&
+      typeof sosTriggerRef.current.focus === "function"
+    ) {
+      sosTriggerRef.current.focus();
+    }
+    sosTriggerRef.current = null;
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -259,6 +279,98 @@ export default function Navbar() {
       </div>
 
       <SosModal key={sosSession} open={sosOpen} onClose={() => setSosOpen(false)} />
+      <LoginRequiredModal
+        open={loginRequiredOpen}
+        onClose={closeLoginRequired}
+      />
     </>
+  );
+}
+
+function LoginRequiredModal({ open, onClose }) {
+  const cancelRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        onClose();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
+
+  useEffect(() => {
+    if (open && cancelRef.current) {
+      cancelRef.current.focus();
+    }
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-[75] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="login-required-title"
+      aria-describedby="login-required-message"
+    >
+      <div
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
+        onClick={onClose}
+      />
+      <div
+        className="relative w-full max-w-md rounded-3xl border-2 border-teal-200 bg-gradient-to-b from-white to-teal-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#b8e0d8,0_28px_48px_rgba(15,60,90,0.3)] animate-slide-up"
+      >
+        <div className="flex flex-col items-center text-center mb-6">
+          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 border-[3px] border-teal-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#0f4c5c] mb-4">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-9 h-9 text-white"
+              aria-hidden="true"
+              shapeRendering="crispEdges"
+            >
+              <rect x="4" y="10" width="16" height="11" rx="2" fill="currentColor" />
+              <path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="2.5" />
+            </svg>
+          </div>
+          <h2
+            id="login-required-title"
+            className="font-[family-name:var(--font-pixel)] text-teal-800 text-sm sm:text-base leading-relaxed"
+          >
+            SIGN IN TO USE SOS
+          </h2>
+          <p id="login-required-message" className="text-gray-600 text-base mt-3 leading-relaxed">
+            Please sign in first to use the SOS feature. Once you're logged in,
+            you'll have full access to SOS and your trusted support options.
+          </p>
+        </div>
+
+        <div className="space-y-3">
+          <Link
+            to="/login"
+            onClick={onClose}
+            className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
+          >
+            Log In
+          </Link>
+          <button
+            type="button"
+            ref={cancelRef}
+            onClick={onClose}
+            className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
