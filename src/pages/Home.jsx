@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PixelCard from '../components/PixelCard';
 import PixelButton from '../components/PixelButton';
+import RotatingText from '../components/RotatingText';
 
 const features = [
   {
@@ -185,7 +186,18 @@ export default function Home() {
 
           <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-4xl lg:text-[2.5rem] text-teal-700 leading-relaxed md:leading-relaxed mb-8 tracking-wide">
             {t('home.tagline')}{' '}
-            <span className="text-teal-500">{t('home.taglineAccent')}</span>
+            <RotatingText
+              texts={['Meaningful', 'Cherished', 'Priceless', 'Forever']}
+              mainClassName="justify-center text-teal-500"
+              staggerFrom="last"
+              initial={{ y: '100%', opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: '-120%', opacity: 0 }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              rotationInterval={2500}
+            />
           </h1>
 
           <p className="text-warm-800 text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed">
