@@ -316,7 +316,7 @@ function LoginRequiredModal({ open, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[75] flex items-center justify-center p-4"
+      className="fixed inset-0 z-75 flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="login-required-title"
@@ -327,10 +327,10 @@ function LoginRequiredModal({ open, onClose }) {
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-md rounded-3xl border-2 border-teal-200 bg-gradient-to-b from-white to-teal-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#b8e0d8,0_28px_48px_rgba(15,60,90,0.3)] animate-slide-up"
+        className="relative w-full max-w-md rounded-3xl border-2 border-teal-200 bg-linear-to-b from-white to-teal-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#b8e0d8,0_28px_48px_rgba(15,60,90,0.3)] animate-slide-up"
       >
         <div className="flex flex-col items-center text-center mb-6">
-          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 border-[3px] border-teal-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#0f4c5c] mb-4">
+          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-b from-teal-500 to-teal-600 border-[3px] border-teal-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#0f4c5c] mb-4">
             <svg
               viewBox="0 0 24 24"
               className="w-9 h-9 text-white"
@@ -343,7 +343,7 @@ function LoginRequiredModal({ open, onClose }) {
           </div>
           <h2
             id="login-required-title"
-            className="font-[family-name:var(--font-pixel)] text-teal-800 text-sm sm:text-base leading-relaxed"
+            className="font-pixel text-teal-800 text-sm sm:text-base leading-relaxed"
           >
             SIGN IN TO USE SOS
           </h2>

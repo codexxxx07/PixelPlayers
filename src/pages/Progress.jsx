@@ -81,7 +81,7 @@ export default function Progress() {
         {/* ========== OVERALL STATS ========== */}
         <section className="animate-slide-up stagger-1">
           <SectionTitle icon="🧮">{t('progress.overallStats')}</SectionTitle>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             <ProgressCard label={t('progress.totalGames')} value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
             <ProgressCard label={t('progress.avgAccuracy')} value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
             <ProgressCard label={t('progress.avgResponse')} value={progressData.avgResponseTime} icon="⏱️" color="blue" />

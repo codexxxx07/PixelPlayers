@@ -189,7 +189,7 @@ export default function Dashboard() {
                   <p className="text-xs font-bold uppercase tracking-wide text-emerald-600 mb-1">
                     {t('dashboard.currentActivity')}
                   </p>
-                  <p className="text-gray-800 text-lg font-bold leading-snug truncate">
+                  <p className="text-gray-800 text-lg font-bold leading-snug">
                     {currentActivity ? currentActivity.title : t('dashboard.restingTime')}
                   </p>
                   <p className="text-sm text-emerald-600">
@@ -204,7 +204,7 @@ export default function Dashboard() {
                   <p className="text-xs font-bold uppercase tracking-wide text-gray-500 mb-1">
                     {t('dashboard.nextUp')}
                   </p>
-                  <p className="text-gray-800 text-lg font-bold leading-snug truncate">
+                  <p className="text-gray-800 text-lg font-bold leading-snug">
                     {nextActivity ? nextActivity.title : t('dashboard.nothingPlanned')}
                   </p>
                   <p className="text-sm text-gray-500">
@@ -250,7 +250,7 @@ export default function Dashboard() {
         <section className="animate-slide-up stagger-3">
           <SectionTitle icon="📊">{t('dashboard.todaysProgress')}</SectionTitle>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-5">
             <ProgressCard label={t('dashboard.gamesCompleted')} value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
             <ProgressCard label={t('dashboard.accuracy')} value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
             <ProgressCard label={t('dashboard.avgResponse')} value={12.4} unit="s" icon="⏱️" color="blue" />
@@ -344,7 +344,7 @@ export default function Dashboard() {
         {/* ========== QUICK ACTIONS ========== */}
         <section className="animate-slide-up stagger-6">
           <SectionTitle icon="⚡">{t('dashboard.quickActions')}</SectionTitle>
-          <div className="grid grid-cols-2 gap-4 md:gap-5 items-stretch">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 items-stretch">
             {quickActions.map((action) => (
               <Link
                 key={action.to}
@@ -362,7 +362,7 @@ export default function Dashboard() {
                 >
                   {action.icon}
                 </span>
-                <span className="font-[family-name:var(--font-pixel)] text-teal-800 text-[10px] md:text-[11px] leading-relaxed block">
+                <span className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] md:text-xs leading-relaxed block">
                   {t(action.labelKey)}
                 </span>
                 <span className="text-xs md:text-sm text-gray-500 mt-2 block">{t(action.hintKey)}</span>

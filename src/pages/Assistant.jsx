@@ -375,9 +375,9 @@ export default function Assistant() {
                   type="submit"
                   disabled={!input.trim() || thinking || voiceState !== "idle"}
                   aria-label={t('assistant.sendMessage')}
-                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 text-white font-pixel text-[10px] px-6 h-24 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] disabled:opacity-40 disabled:pointer-events-none transition-all"
+                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 text-white font-pixel text-[10px] px-4 sm:px-6 h-20 sm:h-24 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] disabled:opacity-40 disabled:pointer-events-none transition-all"
                 >
-                  {t('assistant.send')}<span aria-hidden="true">➤</span>
+                  <span className="hidden sm:inline">{t('assistant.send')}</span><span aria-hidden="true">➤</span>
                 </button>
               </div>
             </form>

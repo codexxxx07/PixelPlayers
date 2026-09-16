@@ -14,9 +14,9 @@ const variants = {
 };
 
 const sizes = {
-  sm: 'px-4 py-2 text-[10px]',
-  md: 'px-6 py-3 text-[11px]',
-  lg: 'px-8 py-4 text-xs',
+  sm: 'px-4 py-2.5 text-[11px]',
+  md: 'px-6 py-3 text-xs',
+  lg: 'px-8 py-4 text-[13px]',
 };
 
 export default function PixelButton({

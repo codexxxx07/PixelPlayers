@@ -68,7 +68,7 @@ export default function Games() {
                   type="button"
                   onClick={() => setActiveCategory(cat.key)}
                   aria-pressed={active}
-                  className={`snap-start flex-shrink-0 inline-flex items-center gap-2 min-h-12 px-4 md:px-5 rounded-full border-2 font-[family-name:var(--font-pixel)] text-[9px] md:text-[10px] uppercase tracking-wider transition-all duration-200 ${
+                  className={`snap-start flex-shrink-0 inline-flex items-center gap-2 min-h-12 px-4 md:px-5 rounded-full border-2 font-[family-name:var(--font-pixel)] text-[10px] md:text-[11px] uppercase tracking-wider transition-all duration-200 ${
                     active
                       ? 'bg-teal-600 border-teal-600 text-white shadow-md shadow-teal-900/20 scale-[1.02]'
                       : 'bg-white border-teal-200 text-teal-700 hover:border-teal-400 hover:bg-teal-50'
@@ -87,7 +87,7 @@ export default function Games() {
         {/* ========== GAMES GRID ========== */}
         <section className="animate-slide-up stagger-2">
           {filteredGames.length > 0 ? (
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {filteredGames.map((game) => (
                 <GameCard key={game.id} game={game} />
               ))}

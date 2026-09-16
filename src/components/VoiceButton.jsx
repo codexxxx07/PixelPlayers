@@ -4,14 +4,14 @@ const SIZES = {
   sm: "w-12 h-12",
   md: "w-14 h-14",
   lg: "w-16 h-16",
-  xl: "w-24 h-24",
+  xl: "w-20 h-20 lg:w-24 lg:h-24",
 };
 
 const MIC_SIZES = {
   sm: "w-5 h-5",
   md: "w-6 h-6",
   lg: "w-7 h-7",
-  xl: "w-10 h-10",
+  xl: "w-8 h-8 lg:w-10 lg:h-10",
 };
 
 function MicIcon({ className = "" }) {

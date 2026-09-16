@@ -201,7 +201,7 @@ export default function Routine() {
                   >
                     <span className="text-2xl">{activity.icon}</span>
                     <div className="flex-1 min-w-0">
-                      <p className="text-gray-700 text-sm font-medium truncate">{t(activity.titleKey)}</p>
+                      <p className="text-gray-700 text-sm font-medium leading-snug">{t(activity.titleKey)}</p>
                       <p className="text-gray-400 text-xs">{activity.time}</p>
                     </div>
                   </div>

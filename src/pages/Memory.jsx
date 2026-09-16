@@ -153,7 +153,7 @@ export default function Memory() {
                 }`}
               >
                 <span className="text-xl">{cat.icon}</span>
-                <span className="font-[family-name:var(--font-pixel)] text-[10px]">{t(cat.labelKey)}</span>
+                <span className="font-[family-name:var(--font-pixel)] text-[11px]">{t(cat.labelKey)}</span>
               </button>
             ))}
           </div>
