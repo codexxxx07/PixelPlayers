@@ -89,9 +89,9 @@ export default function SosButton({ variant = "navbar", onClick }) {
       type="button"
       onClick={onClick}
       aria-label="SOS — emergency help"
-      className="skeuo-btn skeuo-btn-pixel skeuo-btn-sos px-5 py-3.5 gap-2 text-[0.8rem] tracking-widest"
+      className="nav-btn nav-btn-sos nav-btn-pixel"
     >
-      <SosIcon className="w-6 h-6" />
+      <SosIcon className="w-5 h-5" />
       SOS
     </button>
   );

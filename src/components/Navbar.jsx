@@ -99,7 +99,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Auth */}
-            <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <div className="hidden lg:flex items-center shrink-0" style={{ gap: "var(--nav-btn-gap)" }}>
               {isLoaded && isSignedIn ? (
                 <UserButton
                   afterSignOutUrl="/"
@@ -111,16 +111,10 @@ export default function Navbar() {
                 />
               ) : isLoaded ? (
                 <>
-                  <Link
-                    to="/login"
-                    className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel px-5 py-3.5"
-                  >
+                  <Link to="/login" className="nav-btn nav-btn-login nav-btn-pixel">
                     {t("nav.login")}
                   </Link>
-                  <Link
-                    to="/signup"
-                    className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel px-6 py-3.5"
-                  >
+                  <Link to="/signup" className="nav-btn nav-btn-signup nav-btn-pixel">
                     {t("nav.signup")}
                   </Link>
                 </>
@@ -229,38 +223,38 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Mobile Auth */}
-          <div className="px-6 py-5 border-t border-teal-100 space-y-3">
-            {isLoaded && isSignedIn ? (
-              <div className="flex justify-center py-2">
-                <UserButton
-                  afterSignOutUrl="/"
-                  appearance={{
-                    elements: {
-                      avatarBox: "w-12 h-12 rounded-full",
-                    },
-                  }}
-                />
-              </div>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  onClick={() => setMobileOpen(false)}
-                  className="skeuo-btn skeuo-btn-ghost skeuo-btn-pixel skeuo-btn-block py-4"
-                >
-                  {t("nav.login")}
-                </Link>
-                <Link
-                  to="/signup"
-                  onClick={() => setMobileOpen(false)}
-                  className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block py-4"
-                >
-                  {t("nav.signup")}
-                </Link>
-              </>
-            )}
-          </div>
+            {/* Mobile Auth */}
+            <div className="px-6 py-5 border-t border-teal-100 space-y-3">
+              {isLoaded && isSignedIn ? (
+                <div className="flex justify-center py-2">
+                  <UserButton
+                    afterSignOutUrl="/"
+                    appearance={{
+                      elements: {
+                        avatarBox: "w-12 h-12 rounded-full",
+                      },
+                    }}
+                  />
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    onClick={() => setMobileOpen(false)}
+                    className="nav-btn nav-btn-login nav-btn-pixel w-full py-3.5"
+                  >
+                    {t("nav.login")}
+                  </Link>
+                  <Link
+                    to="/signup"
+                    onClick={() => setMobileOpen(false)}
+                    className="nav-btn nav-btn-signup nav-btn-pixel w-full py-3.5"
+                  >
+                    {t("nav.signup")}
+                  </Link>
+                </>
+              )}
+            </div>
         </div>
       </div>
 

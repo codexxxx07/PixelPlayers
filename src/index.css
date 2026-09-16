@@ -48,6 +48,14 @@
   --animate-pulse-ring: pulse-ring 1.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
   --animate-slide-up: slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-progress-fill: progress-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  --nav-btn-height: 2.75rem;
+  --nav-btn-radius: 10px;
+  --nav-btn-gap: 0.5rem;
+  --nav-btn-font-size: 0.875rem;
+  --nav-btn-font-weight: 600;
+  --nav-btn-px: 1rem;
+  --nav-btn-py: 0.5rem;
 }
 
 @keyframes pixel-fade-in {
@@ -571,6 +579,137 @@
 
   .font-body {
     font-family: var(--font-body);
+  }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: var(--nav-btn-height);
+    padding: var(--nav-btn-py) var(--nav-btn-px);
+    font-family: var(--font-body);
+    font-size: var(--nav-btn-font-size);
+    font-weight: var(--nav-btn-font-weight);
+    line-height: 1;
+    border-radius: var(--nav-btn-radius);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    user-select: none;
+    touch-action: manipulation;
+    transition:
+      background 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease,
+      box-shadow 150ms ease,
+      transform 80ms ease;
+  }
+
+  .nav-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .nav-btn:active {
+    transform: translateY(1px);
+  }
+
+  .nav-btn:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .nav-btn-login {
+    background: transparent;
+    border-color: var(--color-primary-dark);
+    color: var(--color-primary-darker);
+  }
+
+  .nav-btn-login:hover {
+    background: rgba(20, 184, 166, 0.08);
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+  }
+
+  .nav-btn-login:active {
+    background: rgba(20, 184, 166, 0.14);
+    transform: translateY(1px);
+  }
+
+  .nav-btn-login:focus-visible {
+    outline-color: var(--color-primary);
+  }
+
+  .nav-btn-signup {
+    color: var(--color-warm-50);
+    background: linear-gradient(180deg, var(--color-primary-light), var(--color-primary));
+    border-color: var(--color-primary-dark);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 2px 0 var(--color-primary-darker),
+      0 4px 10px rgba(13, 148, 136, 0.25);
+  }
+
+  .nav-btn-signup:hover {
+    background: linear-gradient(180deg, var(--color-primary-lighter), var(--color-primary-light));
+    border-color: var(--color-primary);
+    color: var(--color-warm-50);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 3px 0 var(--color-primary-darker),
+      0 6px 14px rgba(13, 148, 136, 0.3);
+  }
+
+  .nav-btn-signup:active {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.2),
+      0 1px 0 var(--color-primary-darker),
+      0 2px 6px rgba(13, 148, 136, 0.3);
+  }
+
+  .nav-btn-signup:focus-visible {
+    outline-color: var(--color-primary-light);
+  }
+
+  .nav-btn-sos {
+    color: #fff;
+    background: linear-gradient(180deg, #f87171, #dc2626);
+    border-color: #991b1b;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 2px 0 #7f1d1d,
+      0 4px 10px rgba(153, 27, 27, 0.25);
+  }
+
+  .nav-btn-sos:hover {
+    background: linear-gradient(180deg, #fca5a5, #ef4444);
+    border-color: #dc2626;
+    color: #fff;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 3px 0 #7f1d1d,
+      0 6px 14px rgba(153, 27, 27, 0.3);
+  }
+
+  .nav-btn-sos:active {
+    transform: translateY(2px);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.2),
+      0 1px 0 #7f1d1d,
+      0 2px 6px rgba(153, 27, 27, 0.3);
+  }
+
+  .nav-btn-sos:focus-visible {
+    outline-color: #f87171;
+  }
+
+  .nav-btn-pixel {
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .scrollbar-hide {
