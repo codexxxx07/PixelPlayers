@@ -84,7 +84,7 @@ export default function Navbar() {
                 <span className="text-white text-lg leading-none mt-0.5">♥</span>
                 <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-amber-400 rounded-sm" />
               </div>
-              <span className="font-[family-name:var(--font-pixel)] text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
+              <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
                 Pixel&nbsp;Players
               </span>
             </Link>
@@ -177,7 +177,7 @@ export default function Navbar() {
         <div className="flex flex-col h-full">
           {/* Mobile Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-teal-100">
-            <span className="font-[family-name:var(--font-pixel)] text-lg text-teal-800">
+            <span className="font-pixel text-lg text-teal-800">
               {t("nav.menu")}
             </span>
             <button
@@ -211,7 +211,7 @@ export default function Navbar() {
                 {t(link.key)}
               </NavLink>
             ))}
-            <div className="pt-3 pb-1 px-6 text-xs font-[family-name:var(--font-pixel)] text-teal-400 tracking-wider">
+            <div className="pt-3 pb-1 px-6 text-xs font-pixel text-teal-400 tracking-wider">
               {t("nav.yourSpace")}
             </div>
             {mobileExtras.map((link) => (
