@@ -1,22 +1,49 @@
-import usePrefersReducedData from './usePrefersReducedData';
-import { ROUNDING } from './rounding';
+import { memo } from "react";
 
-export default function Skeleton({
-  className = 'inline-block',
+const RADII = {
+  none: 0,
+  xs: 4,
+  sm: 6,
+  md: 8,
+  lg: 12,
+  xl: 16,
+  "2xl": 20,
+  "3xl": 24,
+  full: "50%",
+};
+
+function resolveRadius(radius) {
+  if (typeof radius === "number") return `${radius}px`;
+  const mapped = RADII[radius] ?? RADII.md;
+  return typeof mapped === "number" ? `${mapped}px` : mapped;
+}
+
+/**
+ * Base skeleton block. Decorative only — every instance is hidden from
+ * assistive tech via aria-hidden. Surfaces + sheen come from the --sk-* theme
+ * tokens in src/index.css.
+ */
+function Skeleton({
   width,
   height,
-  rounding = 'md',
-  shimmer = true,
-  dark = false,
+  radius = "md",
+  className = "",
+  style,
+  block = true,
 }) {
-  const reducedData = usePrefersReducedData();
-  const radius = ROUNDING[rounding] || ROUNDING.md;
-  const showShimmer = shimmer && !reducedData;
   return (
     <span
       aria-hidden="true"
-      className={`sk ${showShimmer ? 'sk-shimmer' : ''} ${dark ? 'sk-on-dark' : ''} ${radius} ${className}`}
-      style={width != null || height != null ? { width, height } : undefined}
+      className={`sk ${className}`}
+      style={{
+        width,
+        height,
+        borderRadius: resolveRadius(radius),
+        display: block ? "block" : undefined,
+        ...style,
+      }}
     />
   );
 }
+
+export default memo(Skeleton);

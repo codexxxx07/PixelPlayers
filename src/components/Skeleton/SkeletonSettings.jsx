@@ -1,72 +1,136 @@
 import Skeleton from './Skeleton';
-import SkeletonText from './SkeletonText';
 import SkeletonCard from './SkeletonCard';
-import SkeletonSectionTitle from './SkeletonSectionTitle';
+import SkeletonButton from './SkeletonButton';
 
-function LanguageRowSkeleton() {
+function ToggleRow() {
   return (
-    <div className="flex items-center gap-3 rounded-xl border-2 border-warm-200 bg-white p-3">
-      <Skeleton width={36} height={36} rounding="lg" />
-      <div className="flex-1 space-y-2">
-        <SkeletonText size="sm" lines={1} widths={[120]} />
-        <SkeletonText size="xs" lines={1} widths={[70]} />
+    <SkeletonCard className="p-5 flex items-center justify-between gap-4">
+      <div className="min-w-0 flex-1 space-y-2">
+        <Skeleton width="55%" height={16} radius="sm" className="sk-inner" />
+        <Skeleton width="80%" height={12} radius="sm" className="sk-inner" />
       </div>
-      <Skeleton width={24} height={24} rounding="full" />
+      <Skeleton width={80} height={48} radius="full" className="sk-inner" />
+    </SkeletonCard>
+  );
+}
+
+function SectionHeading() {
+  return (
+    <div className="mb-5">
+      <Skeleton width={150} height={14} radius="sm" className="sk-inner mb-1" />
+      <Skeleton width="45%" height={12} radius="sm" className="sk-inner" />
     </div>
   );
 }
 
-function ToggleRowSkeleton() {
+function LanguageTile() {
   return (
-    <div className="flex items-center justify-between gap-4 rounded-xl border-2 border-warm-200 bg-white p-4">
-      <div className="min-w-0 flex-1 space-y-2">
-        <SkeletonText size="md" lines={1} widths={[150]} />
-        <SkeletonText size="sm" lines={1} widths={[200]} />
+    <div className="flex items-center gap-4 rounded-2xl border-[3px] border-warm-200 bg-white px-5 py-6">
+      <Skeleton width={36} height={36} radius="md" className="sk-inner" />
+      <div className="min-w-0 space-y-2">
+        <Skeleton width={90} height={15} radius="sm" className="sk-inner" />
+        <Skeleton width={60} height={12} radius="sm" className="sk-inner" />
       </div>
-      <Skeleton width={56} height={32} rounding="full" />
     </div>
   );
 }
 
 export default function SkeletonSettings() {
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-4xl space-y-10 px-4 sm:px-6 py-8 md:py-12">
-        <header>
-          <SkeletonText size="sm" lines={1} widths={[110]} />
-          <SkeletonText size="xl" lines={1} widths={[200]} className="mt-2" />
-        </header>
-        <section>
-          <SkeletonSectionTitle />
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {Array.from({ length: 14 }).map((_, i) => (
-              <LanguageRowSkeleton key={i} />
+    <div className="min-h-screen bg-gradient-to-b from-teal-50/60 via-warm-50 to-white pb-20" aria-busy="true">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
+        {/* Page header */}
+        <div className="text-center mb-10">
+          <Skeleton width={240} height={28} radius="sm" className="sk-inner mx-auto mb-3" />
+          <Skeleton width={200} height={14} radius="sm" className="sk-inner mx-auto" />
+        </div>
+
+        {/* Language */}
+        <section className="mb-12">
+          <SectionHeading />
+          <div className="grid sm:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }, (_, i) => (
+              <LanguageTile key={i} />
             ))}
           </div>
         </section>
-        <section>
-          <SkeletonSectionTitle />
-          <div className="mt-6 grid gap-3 sm:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <SkeletonCard key={i} className="flex items-center justify-center">
-                <SkeletonText size="md" lines={1} widths={[90]} />
+
+        {/* Accessibility */}
+        <section className="mb-12">
+          <SectionHeading />
+          <SkeletonCard className="p-6 md:p-7 mb-5">
+            <Skeleton width={120} height={12} radius="sm" className="sk-inner mb-4" />
+            <div className="grid grid-cols-3 gap-3">
+              {Array.from({ length: 3 }, (_, i) => (
+                <Skeleton key={i} width="100%" height={52} radius="lg" className="sk-inner" />
+              ))}
+            </div>
+          </SkeletonCard>
+          <SkeletonCard className="p-6 md:p-7 mb-5">
+            <Skeleton width={100} height={12} radius="sm" className="sk-inner mb-4" />
+            <div className="space-y-4">
+              <ToggleRow />
+              <ToggleRow />
+              <ToggleRow />
+            </div>
+          </SkeletonCard>
+          <SkeletonCard className="p-6 md:p-7">
+            <Skeleton width={100} height={12} radius="sm" className="sk-inner mb-4" />
+            <div className="space-y-4">
+              <ToggleRow />
+              <ToggleRow />
+              <ToggleRow />
+            </div>
+          </SkeletonCard>
+        </section>
+
+        {/* Notifications */}
+        <section className="mb-12">
+          <SectionHeading />
+          <div className="space-y-4">
+            <ToggleRow />
+            <ToggleRow />
+            <ToggleRow />
+          </div>
+        </section>
+
+        {/* Privacy */}
+        <section className="mb-12">
+          <SectionHeading />
+          <div className="grid sm:grid-cols-2 gap-4 mb-6 items-stretch">
+            {Array.from({ length: 4 }, (_, i) => (
+              <SkeletonCard key={i} className="p-5 flex items-start gap-4">
+                <Skeleton width={32} height={32} radius="md" className="sk-inner" />
+                <div className="min-w-0 flex-1 space-y-2">
+                  <Skeleton width="70%" height={14} radius="sm" className="sk-inner" />
+                  <Skeleton width="90%" height={12} radius="sm" className="sk-inner" />
+                </div>
               </SkeletonCard>
             ))}
           </div>
+          <SkeletonButton width="100%" height={48} size="lg" radius="xl" className="mb-4" />
+          <div className="flex flex-col sm:flex-row gap-4">
+            <SkeletonButton width="100%" height={48} size="lg" radius="xl" className="flex-1" />
+            <SkeletonButton width="100%" height={48} size="lg" radius="xl" className="flex-1" />
+          </div>
         </section>
-        <section className="space-y-4">
-          <SkeletonText size="md" lines={1} widths={[150]} />
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={i} className="space-y-3">
-              <SkeletonText size="md" lines={1} widths={[140]} />
-              <ToggleRowSkeleton />
+
+        {/* Account */}
+        <section className="mb-12">
+          <SectionHeading />
+          <SkeletonCard className="p-6 flex items-center gap-4 mb-5">
+            <Skeleton width={80} height={80} radius="full" className="sk-inner" />
+            <div className="space-y-2">
+              <Skeleton width={160} height={14} radius="sm" className="sk-inner" />
+              <Skeleton width={100} height={13} radius="sm" className="sk-inner" />
             </div>
-          ))}
+          </SkeletonCard>
+          <div className="grid sm:grid-cols-3 gap-4">
+            <SkeletonButton width="100%" height={48} size="lg" radius="xl" />
+            <SkeletonButton width="100%" height={48} size="lg" radius="xl" />
+            <SkeletonButton width="100%" height={48} size="lg" radius="xl" />
+          </div>
         </section>
-        <div className="flex justify-end gap-3">
-          <Skeleton width={110} height={46} rounding="xl" />
-          <Skeleton width={110} height={46} rounding="xl" />
-        </div>
       </div>
     </div>
   );

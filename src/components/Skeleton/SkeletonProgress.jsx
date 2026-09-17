@@ -1,94 +1,155 @@
 import Skeleton from './Skeleton';
 import SkeletonText from './SkeletonText';
 import SkeletonCard from './SkeletonCard';
+import SkeletonButton from './SkeletonButton';
 import SkeletonSectionTitle from './SkeletonSectionTitle';
 
-const BAR_HEIGHTS = [38, 62, 45, 78, 54, 86, 30];
-const MIX_WIDTHS = [35, 25, 20, 15, 5];
-
-function MixRowSkeleton({ value }) {
+function StatCard() {
   return (
-    <div className="flex items-center gap-4">
-      <Skeleton width={96} height={14} rounding="md" />
-      <div className="relative h-5 flex-1 overflow-hidden rounded-full bg-teal-100/80">
-        <div className="absolute inset-y-0 left-0" style={{ width: `${value}%` }}>
-          <Skeleton className="h-full w-full" rounding="none" />
+    <SkeletonCard className="p-5">
+      <Skeleton width={40} height={40} radius="xl" className="sk-inner mb-3" />
+      <Skeleton width="80%" height={13} radius="sm" className="sk-inner mb-1" />
+      <Skeleton width="55%" height={18} radius="sm" className="sk-inner mb-3" />
+      <Skeleton width="100%" height={8} radius="full" className="sk-inner" />
+    </SkeletonCard>
+  );
+}
+
+function BarChart() {
+  return (
+    <SkeletonCard variant="elevated" className="p-6">
+      <Skeleton width={220} height={14} radius="sm" className="sk-inner mb-6" />
+      <div className="h-44 flex items-end gap-3 md:gap-4">
+        {Array.from({ length: 7 }, (_, i) => (
+          <div key={i} className="flex-1 h-full flex flex-col items-center justify-end gap-1.5 min-w-0">
+            <Skeleton width={22} height={12} radius="sm" className="sk-inner" />
+            <Skeleton
+              width="100%"
+              height={i % 2 === 0 ? 96 : 64}
+              radius="sm"
+              className="sk-inner max-w-[44px]"
+            />
+            <Skeleton width={30} height={11} radius="sm" className="sk-inner" />
+          </div>
+        ))}
+      </div>
+    </SkeletonCard>
+  );
+}
+
+function FavoriteRow() {
+  return (
+    <SkeletonCard hover className="p-5">
+      <div className="flex items-center gap-4">
+        <Skeleton width={48} height={48} radius="xl" className="sk-inner" />
+        <div className="flex-1 min-w-0">
+          <Skeleton width="50%" height={15} radius="sm" className="sk-inner mb-1" />
+          <Skeleton width="35%" height={13} radius="sm" className="sk-inner" />
+        </div>
+        <div className="flex-shrink-0 space-y-2">
+          <Skeleton width={44} height={14} radius="sm" className="sk-inner" />
+          <Skeleton width={48} height={11} radius="sm" className="sk-inner" />
         </div>
       </div>
-      <Skeleton width={40} height={14} rounding="md" />
-    </div>
+    </SkeletonCard>
   );
 }
 
 export default function SkeletonProgress() {
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 py-8 md:py-12">
-        <header>
-          <SkeletonText size="sm" lines={1} widths={[110]} />
-          <SkeletonText size="xl" lines={1} widths={[200]} className="mt-2" />
+    <div className="page-enter min-h-screen pb-16" aria-busy="true">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10 space-y-12">
+        {/* Page header */}
+        <header className="text-center">
+          <div className="flex justify-center mb-4">
+            <Skeleton width={64} height={64} radius="2xl" className="sk-inner" />
+          </div>
+          <Skeleton width={260} height={22} radius="sm" className="sk-inner mx-auto mb-3" />
+          <Skeleton width="55%" height={16} radius="sm" className="sk-inner mx-auto mb-4 max-w-xl" />
+          <div className="flex justify-center">
+            <Skeleton width={280} height={32} radius="full" className="sk sk-inner" />
+          </div>
         </header>
-        <section>
-          <SkeletonSectionTitle />
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <SkeletonCard key={i} className="flex flex-col">
-                <Skeleton width={40} height={40} rounding="xl" className="mb-3" />
-                <SkeletonText size="xl" lines={1} widths={[64]} />
-                <div className="mt-1 flex items-center gap-2">
-                  <Skeleton width={50} height={12} rounding="md" />
-                  <Skeleton width={30} height={12} rounding="md" />
-                </div>
-              </SkeletonCard>
-            ))}
+
+        {/* Overall stats */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={160} titleHeight={16} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+            <StatCard />
+            <StatCard />
+            <StatCard />
+            <StatCard />
           </div>
         </section>
-        <section>
-          <SkeletonSectionTitle />
-          <SkeletonCard className="mt-6">
-            <div className="flex h-44 items-end gap-3">
-              {BAR_HEIGHTS.map((h, i) => (
-                <Skeleton key={i} width="100%" height={`${h}%`} rounding="md" className="flex-1" />
+
+        {/* Weekly activity chart */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={180} titleHeight={16} />
+          <BarChart />
+        </section>
+
+        {/* Accuracy trend */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={180} titleHeight={16} />
+          <BarChart />
+        </section>
+
+        {/* Category breakdown */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={180} titleHeight={16} />
+          <SkeletonCard variant="elevated" className="p-6">
+            <Skeleton width={200} height={14} radius="sm" className="sk-inner mb-5" />
+            <Skeleton width="100%" height={28} radius="full" className="sk-inner mb-6" />
+            <div className="flex flex-wrap gap-x-5 gap-y-3">
+              {Array.from({ length: 5 }, (_, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <Skeleton width={12} height={12} radius="xs" className="sk-inner" />
+                  <Skeleton width={90} height={13} radius="sm" className="sk-inner" />
+                  <Skeleton width={30} height={13} radius="sm" className="sk-inner" />
+                </div>
               ))}
             </div>
           </SkeletonCard>
         </section>
-        <section>
-          <SkeletonSectionTitle />
-          <div className="mt-6 grid gap-5 lg:grid-cols-2">
-            <SkeletonCard className="space-y-5">
-              {MIX_WIDTHS.map((v, i) => (
-                <MixRowSkeleton key={i} value={v} />
-              ))}
-            </SkeletonCard>
-            <SkeletonCard className="space-y-4">
-              <SkeletonText size="md" lines={1} widths={[120]} />
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <Skeleton width={40} height={40} rounding="xl" />
-                  <div className="flex-1 space-y-2">
-                    <SkeletonText size="md" lines={1} widths={[140]} />
-                    <SkeletonText size="sm" lines={1} widths={[80]} />
-                  </div>
-                  <Skeleton width={56} height={20} rounding="full" />
-                </div>
-              ))}
-            </SkeletonCard>
+
+        {/* Favorites */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={160} titleHeight={16} />
+          <div className="space-y-3">
+            <FavoriteRow />
+            <FavoriteRow />
+            <FavoriteRow />
           </div>
         </section>
-        <section>
-          <SkeletonSectionTitle />
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <SkeletonCard key={i} className="flex items-center gap-4">
-                <Skeleton width={44} height={44} rounding="xl" />
-                <div className="flex-1 space-y-2">
-                  <SkeletonText size="md" lines={1} widths={[120]} />
-                  <SkeletonText size="sm" lines={1} widths={[90]} />
-                </div>
-                <Skeleton width={46} height={24} rounding="full" />
+
+        {/* Achievements */}
+        <section className="space-y-5">
+          <SkeletonSectionTitle iconSize={24} titleWidth={160} titleHeight={16} />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
+            {Array.from({ length: 5 }, (_, i) => (
+              <SkeletonCard key={i} className="p-5 flex flex-col items-center text-center">
+                <Skeleton width={40} height={40} radius="xl" className="sk-inner mb-3" />
+                <Skeleton width="75%" height={12} radius="sm" className="sk-inner mb-2" />
+                <SkeletonText lines={2} size="xs" widths={['100%', '70%']} className="flex-1" />
+                <Skeleton width={90} height={22} radius="full" className="sk-inner mt-3" />
               </SkeletonCard>
             ))}
+          </div>
+        </section>
+
+        {/* Disclaimer */}
+        <section>
+          <SkeletonCard className="p-6 rounded-2xl">
+            <div className="flex items-start gap-4">
+              <Skeleton width={28} height={28} radius="sm" className="sk-inner" />
+              <div className="flex-1">
+                <Skeleton width={120} height={12} radius="sm" className="sk-inner mb-2" />
+                <SkeletonText lines={2} size="sm" />
+              </div>
+            </div>
+          </SkeletonCard>
+          <div className="mt-8 text-center">
+            <SkeletonButton width={200} height={48} size="lg" radius="xl" />
           </div>
         </section>
       </div>

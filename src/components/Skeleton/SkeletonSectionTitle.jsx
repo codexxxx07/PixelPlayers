@@ -1,11 +1,36 @@
-import Skeleton from './Skeleton';
-import SkeletonText from './SkeletonText';
+import Skeleton from "./Skeleton";
 
-export default function SkeletonSectionTitle({ center = false, icon = true, className = '' }) {
+/**
+ * Mirrors the recurring section headings (icon + pixel title) used across
+ * pages, e.g. Progress.jsx's SectionTitle row.
+ */
+export default function SkeletonSectionTitle({
+  iconSize = 36,
+  titleWidth = 200,
+  titleHeight = 16,
+  className = "",
+  style,
+}) {
   return (
-    <div className={`flex items-center gap-3 ${center ? 'justify-center' : ''} ${className}`} aria-hidden="true">
-      {icon && <Skeleton width={28} height={28} rounding="md" />}
-      <SkeletonText size="md" lines={1} widths={[140]} />
-    </div>
+    <span
+      aria-hidden="true"
+      className={`flex items-center gap-2.5 ${className}`}
+      style={style}
+    >
+      <Skeleton
+        width={iconSize}
+        height={iconSize}
+        radius="md"
+        block={false}
+        className="sk-inner"
+      />
+      <Skeleton
+        width={titleWidth}
+        height={titleHeight}
+        radius="sm"
+        block={false}
+        className="sk-inner"
+      />
+    </span>
   );
 }

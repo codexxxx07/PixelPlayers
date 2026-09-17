@@ -1,29 +1,56 @@
 import Skeleton from './Skeleton';
+import SkeletonButton from './SkeletonButton';
 
-const NAV_LINKS = [64, 80, 72, 60];
+const navLinkWidths = [88, 104, 80, 96];
 
 export default function SkeletonNavbar() {
   return (
-    <div
+    <header
+      className="sticky top-0 z-50 w-full bg-(--pp-navbar) shadow-[0_8px_22px_-14px_rgba(63,40,25,0.25)] dark:shadow-[0_10px_24px_-14px_rgba(0,0,0,0.55)]"
       aria-hidden="true"
-      className="sticky top-0 z-40 bg-[var(--pp-navbar)] shadow-[0_8px_22px_-14px_rgba(63,40,25,0.25)] dark:shadow-[0_10px_24px_-14px_rgba(0,0,0,0.55)]"
     >
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <div className="flex items-center gap-2.5">
-          <Skeleton width={36} height={36} rounding="md" />
-          <Skeleton width={120} height={14} rounding="md" className="hidden sm:block" />
-        </div>
-        <div className="hidden items-center gap-2 lg:flex">
-          {NAV_LINKS.map((w) => (
-            <Skeleton key={w} width={w} height={32} rounding="lg" />
-          ))}
-        </div>
-        <div className="flex items-center gap-3">
-          <Skeleton width={76} height={40} rounding="xl" className="hidden sm:block" />
-          <Skeleton width={40} height={40} rounding="xl" />
-          <Skeleton width={28} height={28} rounding="md" className="lg:hidden" />
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-20 items-center justify-between gap-2">
+          {/* Logo */}
+          <div className="flex items-center gap-2.5 shrink-0">
+            <Skeleton width={40} height={40} radius="xl" className="sk-inner" />
+            <Skeleton
+              width={150}
+              height={20}
+              radius="sm"
+              className="sk-inner hidden sm:block"
+            />
+          </div>
+
+          {/* Desktop nav */}
+          <div className="hidden xl:flex items-center gap-2">
+            {navLinkWidths.map((w, i) => (
+              <SkeletonButton key={i} width={w} size="md" radius="lg" />
+            ))}
+          </div>
+
+          {/* Desktop auth */}
+          <div
+            className="hidden lg:flex items-center shrink-0"
+            style={{ gap: 'var(--nav-btn-gap)' }}
+          >
+            <SkeletonButton width={112} height={44} size="md" radius="xl" />
+            <SkeletonButton width={112} height={44} size="md" radius="xl" />
+            <Skeleton width={40} height={40} radius="full" className="sk-inner" />
+            <Skeleton width={44} height={44} radius="md" className="sk-inner" />
+          </div>
+
+          {/* Mobile pull-cord lamp */}
+          <div className="lg:hidden">
+            <Skeleton width={44} height={44} radius="md" className="sk-inner" />
+          </div>
+
+          {/* Mobile hamburger */}
+          <div className="xl:hidden">
+            <Skeleton width={48} height={48} radius="md" className="sk-inner" />
+          </div>
         </div>
       </nav>
-    </div>
+    </header>
   );
 }

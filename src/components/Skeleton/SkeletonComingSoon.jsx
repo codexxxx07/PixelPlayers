@@ -1,33 +1,45 @@
 import Skeleton from './Skeleton';
 import SkeletonText from './SkeletonText';
-import SkeletonButton from './SkeletonButton';
 import SkeletonCard from './SkeletonCard';
+import SkeletonButton from './SkeletonButton';
+import SkeletonBadge from './SkeletonBadge';
 
 export default function SkeletonComingSoon() {
   return (
-    <div className="min-h-screen">
+    <div className="page-enter min-h-screen pb-16" aria-busy="true">
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-8 md:py-12">
-        <header className="space-y-4 text-center">
-          <div className="flex justify-center">
-            <Skeleton width={64} height={64} rounding="xl" />
+        <header className="text-center">
+          <div className="flex justify-center mb-4">
+            <Skeleton width={64} height={64} radius="2xl" className="sk-inner" />
           </div>
-          <SkeletonText size="xl" lines={1} widths={[200]} className="mx-auto" />
-          <SkeletonText size="md" lines={2} widths={['78%', '56%']} className="mx-auto" />
+          <Skeleton width={240} height={22} radius="sm" className="sk-inner mx-auto" />
+          <SkeletonText
+            lines={2}
+            size="md"
+            widths={['90%', '70%']}
+            className="mx-auto mt-3 max-w-md"
+          />
         </header>
+
         <section className="mt-8">
-          <SkeletonCard className="mx-auto max-w-md space-y-4 text-center">
-            <div className="flex justify-center">
-              <Skeleton width={88} height={88} rounding="xl" />
-            </div>
-            <SkeletonText size="md" lines={2} widths={[160, 120]} className="mx-auto" />
-            <div className="flex justify-center gap-2">
-              <Skeleton width={110} height={22} rounding="full" />
-              <Skeleton width={96} height={22} rounding="full" />
+          <SkeletonCard className="p-6 md:p-8 flex flex-col items-center text-center">
+            <Skeleton width={48} height={48} radius="xl" className="sk-inner mb-4" />
+            <Skeleton width={180} height={16} radius="sm" className="sk-inner mb-3" />
+            <SkeletonText
+              lines={2}
+              size="sm"
+              widths={['85%', '65%']}
+              className="mx-auto max-w-sm"
+            />
+            <div className="flex flex-wrap justify-center gap-2 mt-6">
+              <SkeletonBadge width={140} height={26} />
+              <SkeletonBadge width={110} height={26} />
             </div>
           </SkeletonCard>
         </section>
-        <div className="mt-10 flex justify-center">
-          <SkeletonButton size="lg" width={180} />
+
+        <div className="text-center mt-8">
+          <SkeletonButton width={200} height={48} size="lg" radius="xl" />
         </div>
       </div>
     </div>

@@ -1,47 +1,78 @@
 import Skeleton from './Skeleton';
-
-const PIXEL_COLORS = [
-  'bg-teal-400',
-  'bg-teal-500',
-  'bg-teal-600',
-  'bg-teal-700',
-  'bg-amber-400',
-  'bg-amber-500',
-];
-
-const COLUMN_LINKS = [4, 4, 4, 4, 4];
+import SkeletonText from './SkeletonText';
 
 export default function SkeletonFooter() {
   return (
-    <footer aria-hidden="true" className="bg-teal-900 dark:bg-[#0a3530]">
-      <div className="flex h-3 w-full">
-        {Array.from({ length: 16 }).map((_, i) => (
-          <div key={i} className={`flex-1 ${PIXEL_COLORS[i % PIXEL_COLORS.length]}`} />
-        ))}
+    <footer className="relative bg-[var(--pp-footer-bg)] text-white" aria-hidden="true">
+      {/* Pixel art decorative border — same strip as the real footer */}
+      <div className="w-full h-3 flex">
+        <div className="flex-1 bg-teal-400" />
+        <div className="flex-1 bg-teal-500" />
+        <div className="flex-1 bg-teal-600" />
+        <div className="flex-1 bg-teal-700" />
+        <div className="flex-1 bg-amber-400" />
+        <div className="flex-1 bg-amber-500" />
+        <div className="flex-1 bg-teal-400" />
+        <div className="flex-1 bg-teal-300" />
+        <div className="flex-1 bg-teal-500" />
+        <div className="flex-1 bg-teal-600" />
+        <div className="flex-1 bg-teal-400" />
+        <div className="flex-1 bg-teal-700" />
+        <div className="flex-1 bg-amber-400" />
+        <div className="flex-1 bg-teal-500" />
+        <div className="flex-1 bg-teal-300" />
+        <div className="flex-1 bg-teal-600" />
       </div>
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
-          {COLUMN_LINKS.map((linkCount, col) => (
-            <div key={col} className="space-y-4">
-              <Skeleton width={col === 0 ? 120 : 88} height={12} rounding="md" dark />
-              <div className="space-y-3">
-                {Array.from({ length: linkCount }).map((_, row) => (
-                  <Skeleton
-                    key={row}
-                    width={72 - (row % 3) * 10}
-                    height={10}
-                    rounding="md"
-                    dark
-                  />
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+          {/* Branding column */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2 mb-4">
+              <Skeleton width={36} height={36} radius="lg" className="sk-inner" />
+              <Skeleton width={160} height={20} radius="sm" className="sk-inner" />
+            </div>
+            <SkeletonWidth width="60%" size="lg" className="mb-6" />
+            <div className="space-y-3">
+              <Skeleton width="100%" height={14} radius="sm" className="sk-inner max-w-sm" />
+              <Skeleton width="85%" height={14} radius="sm" className="sk-inner max-w-sm" />
+            </div>
+          </div>
+
+          {/* Link columns */}
+          {[0, 1, 2].map((col) => (
+            <div key={col}>
+              <Skeleton width={92} height={14} radius="sm" className="sk-inner mb-4" />
+              <ul className="space-y-3">
+                {[0, 1, 2, 3].map((i) => (
+                  <li key={i}>
+                    <Skeleton
+                      width={i === 3 ? '65%' : '80%'}
+                      height={16}
+                      radius="sm"
+                      className="sk-inner"
+                    />
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           ))}
         </div>
-        <div className="mt-12 border-t border-white/10 pt-6">
-          <Skeleton width={220} height={10} rounding="md" dark className="mx-auto" />
+
+        {/* Divider */}
+        <div className="mt-12 pt-8 border-t border-teal-700 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <Skeleton width={180} height={14} radius="sm" className="sk-inner" />
+          <div className="flex items-center gap-6">
+            {[0, 1, 2].map((i) => (
+              <Skeleton key={i} width={i === 2 ? 150 : 84} height={14} radius="sm" className="sk-inner" />
+            ))}
+          </div>
         </div>
       </div>
     </footer>
   );
+}
+
+function SkeletonWidth({ width, size, className }) {
+  return <SkeletonText lines={1} widths={[width]} size={size} className={className} />;
 }

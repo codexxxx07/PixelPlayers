@@ -1,46 +1,56 @@
-import Skeleton from './Skeleton';
+import Skeleton from "./Skeleton";
 
-const SIZES = {
+const LINE_HEIGHTS = {
   xs: 10,
-  sm: 14,
-  md: 18,
-  lg: 22,
-  xl: 28,
+  sm: 12,
+  md: 16,
+  lg: 20,
+  xl: 26,
 };
 
-const LINE_WIDTHS = ['100%', '88%', '96%', '72%', '84%', '55%'];
+const GAPS = {
+  xs: 6,
+  sm: 8,
+  md: 10,
+  lg: 12,
+  xl: 16,
+};
 
+/**
+ * Text-shaped placeholder lines. Mirrors real copy hierarchy: multiple
+ * lines, with the final line optionally shortened for a natural text look.
+ */
 export default function SkeletonText({
-  size = 'md',
-  lines = 1,
+  lines = 3,
   widths,
-  lastLineShort = false,
-  dark = false,
-  className = '',
+  size = "md",
+  gap,
+  className = "",
+  lastLineShort = true,
 }) {
-  const height = SIZES[size] || SIZES.md;
-  const rowWidths =
-    widths ||
-    Array.from({ length: lines }, (_, i) => {
-      if (i === lines - 1 && lastLineShort) return LINE_WIDTHS[5];
-      return LINE_WIDTHS[i % (LINE_WIDTHS.length - 1)];
-    });
+  const height = LINE_HEIGHTS[size] ?? LINE_HEIGHTS.md;
+  const resolved = Array.isArray(widths)
+    ? widths
+    : Array.from({ length: lines }, (_, i) =>
+        lastLineShort && i === lines - 1 ? "72%" : "100%"
+      );
+
   return (
-    <span aria-hidden="true" className={`block ${className}`}>
-      {rowWidths.map((rowWidth, i) => (
+    <span
+      aria-hidden="true"
+      className={`flex flex-col ${className}`}
+      style={{ gap: gap ?? GAPS[size] ?? GAPS.md }}
+    >
+      {Array.from({ length: lines }, (_, i) => (
         <Skeleton
           key={i}
+          className="sk-inner"
+          width={resolved[i] ?? "100%"}
           height={height}
-          width={rowWidth}
-          rounding="md"
-          dark={dark}
-          className={i < rowWidths.length - 1 ? 'mb-2' : ''}
+          radius="sm"
+          block={false}
         />
       ))}
     </span>
   );
-}
-
-export function SkeletonParagraph({ lines = 3, ...props }) {
-  return <SkeletonText lines={lines} {...props} />;
 }

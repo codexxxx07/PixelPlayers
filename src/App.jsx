@@ -1,27 +1,27 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClaraLauncher from "./components/ClaraLauncher";
 import ClickSpark from "./components/ClickSpark";
-import { lazyWithDelay, RouteSkeleton, SkeletonErrorBoundary } from "./components/Skeleton";
+import { RouteSkeleton, SkeletonErrorBoundary } from "./components/Skeleton";
 
-const Home = lazyWithDelay(() => import("./pages/Home"));
-const About = lazyWithDelay(() => import("./pages/About"));
-const Features = lazyWithDelay(() => import("./pages/Features"));
-const Games = lazyWithDelay(() => import("./pages/Games"));
-const ComingSoon = lazyWithDelay(() => import("./pages/ComingSoon"));
-const Memory = lazyWithDelay(() => import("./pages/Memory"));
-const Routine = lazyWithDelay(() => import("./pages/Routine"));
-const Reminders = lazyWithDelay(() => import("./pages/Reminders"));
-const Assistant = lazyWithDelay(() => import("./pages/Assistant"));
-const Dashboard = lazyWithDelay(() => import("./pages/Dashboard"));
-const Progress = lazyWithDelay(() => import("./pages/Progress"));
-const Support = lazyWithDelay(() => import("./pages/Support"));
-const Settings = lazyWithDelay(() => import("./pages/Settings"));
-const Login = lazyWithDelay(() => import("./pages/Login"));
-const Signup = lazyWithDelay(() => import("./pages/Signup"));
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Features = lazy(() => import("./pages/Features"));
+const Games = lazy(() => import("./pages/Games"));
+const ComingSoon = lazy(() => import("./pages/ComingSoon"));
+const Memory = lazy(() => import("./pages/Memory"));
+const Routine = lazy(() => import("./pages/Routine"));
+const Reminders = lazy(() => import("./pages/Reminders"));
+const Assistant = lazy(() => import("./pages/Assistant"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Progress = lazy(() => import("./pages/Progress"));
+const Support = lazy(() => import("./pages/Support"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Login = lazy(() => import("./pages/Login"));
+const Signup = lazy(() => import("./pages/Signup"));
 
 const GAME_SLUGS = [
   "picture-recall",

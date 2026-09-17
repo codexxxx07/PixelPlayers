@@ -1,23 +1,33 @@
-import Skeleton from './Skeleton';
+import Skeleton from "./Skeleton";
 
 const SIZES = {
-  xs: 24,
-  sm: 32,
-  md: 40,
-  lg: 56,
-  xl: 72,
-  xxl: 88,
+  xs: 32,
+  sm: 40,
+  md: 48,
+  lg: 64,
+  xl: 80,
+  "2xl": 112,
 };
 
-export default function SkeletonAvatar({ size = 'md', rounding = 'full', dark = false, className = '' }) {
-  const px = SIZES[size] || SIZES.md;
+/**
+ * Avatar-shaped placeholder. Matches real avatar boxes: UserButton, game
+ * icons, memory prompts and the Clara avatar frame.
+ */
+export default function SkeletonAvatar({
+  size = "md",
+  shape = "rounded",
+  className = "",
+  style,
+}) {
+  const px = SIZES[size] ?? SIZES.md;
   return (
     <Skeleton
       width={px}
       height={px}
-      rounding={rounding}
-      dark={dark}
-      className={`flex-shrink-0 ${className}`}
+      radius={shape === "circle" ? "full" : "xl"}
+      block={false}
+      className={`sk-inner ${className}`}
+      style={{ flexShrink: 0, ...style }}
     />
   );
 }

@@ -83,6 +83,18 @@
   --pp-shadow-soft: rgba(63, 40, 25, 0.1);
   --pp-lamp-shadow: rgba(63, 40, 25, 0.3);
   --pp-footer-bg: #134e4a;
+
+  /* Skeleton system: soft warm surfaces + gentle sheen in light mode. */
+  --sk-base: linear-gradient(180deg, var(--color-warm-100), var(--color-warm-200));
+  --sk-border: var(--color-warm-300);
+  --sk-sheen: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 80%
+  );
+  --sk-inset: rgba(255, 255, 255, 0.6);
+  --sk-ink: rgba(196, 102, 0, 0.16);
 }
 
 .dark {
@@ -100,6 +112,18 @@
   --pp-shadow-soft: rgba(0, 0, 0, 0.35);
   --pp-lamp-shadow: rgba(0, 0, 0, 0.5);
   --pp-footer-bg: #0a3530;
+
+  /* Skeleton system: soft dark-slate surfaces + dim highlight in dark mode. */
+  --sk-base: linear-gradient(180deg, #232932, #1b2026);
+  --sk-border: #2c333a;
+  --sk-sheen: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 80%
+  );
+  --sk-inset: rgba(255, 255, 255, 0.06);
+  --sk-ink: rgba(255, 255, 255, 0.09);
 }
 
 @keyframes pixel-fade-in {
@@ -273,6 +297,67 @@
     justify-content: center !important;
     max-width: 28rem !important;
     margin-inline: auto !important;
+  }
+
+  /* ─── Premium skeleton system ────────────────────────────────────────────
+     Page-accurate loading placeholders. Surfaces come from the --sk-* token
+     family (light: soft warm; dark: soft slate). A single, slow sheen sweeps
+     across each block; it is fully disabled for reduced-motion users. */
+  .sk {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: var(--sk-base);
+    border: 1px solid var(--sk-border);
+    box-shadow: inset 0 1px 0 var(--sk-inset);
+  }
+
+  .sk::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: var(--sk-sheen);
+    animation: sk-sweep 1.6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .sk-skew {
+    border-radius: 2px;
+  }
+
+  /* Card scaffold: like .sk but usable as a drop-in card surface that
+     hosts inner placeholder lines. */
+  .sk-card {
+    display: block;
+  }
+
+  /* Inner bars (text lines, icons inside a card) — calm, flat, sheen-free
+     so the sweep lives only on the outermost surfaces. */
+  .sk-inner {
+    background: var(--sk-ink);
+    border: none;
+    box-shadow: none;
+  }
+
+  .sk-inner::before {
+    content: none;
+  }
+
+  @keyframes sk-sweep {
+    0% {
+      transform: translateX(-100%);
+    }
+    55%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sk::before {
+      animation: none;
+    }
   }
 
   .skeuo-btn {
@@ -807,56 +892,6 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.85),
       0 2px 0 rgba(196, 132, 87, 0.18),
       0 10px 22px rgba(63, 40, 25, 0.07);
-  }
-}
-
-@layer components {
-  .sk {
-    position: relative;
-    display: block;
-    width: 100%;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--color-warm-100), var(--color-warm-200));
-    border: 1px solid var(--color-warm-300);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  }
-
-  .sk-shimmer::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      95deg,
-      transparent 15%,
-      rgba(255, 255, 255, 0.28) 50%,
-      transparent 85%
-    );
-    animation: sk-shimmer-sweep 2.8s ease infinite;
-  }
-
-  .sk-on-dark {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.06));
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  }
-}
-
-@keyframes sk-shimmer-sweep {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sk-shimmer::after {
-    animation: none;
-  }
-}
-
-@media (prefers-reduced-data: reduce) {
-  .sk-shimmer::after {
-    animation: none;
   }
 }
 

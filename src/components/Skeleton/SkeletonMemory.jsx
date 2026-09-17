@@ -1,22 +1,39 @@
 import Skeleton from './Skeleton';
 import SkeletonText from './SkeletonText';
-import SkeletonButton from './SkeletonButton';
-import SkeletonAvatar from './SkeletonAvatar';
 import SkeletonCard from './SkeletonCard';
+import SkeletonButton from './SkeletonButton';
 
-function MemoryCardSkeleton() {
+function MemoryRowCard() {
   return (
-    <div className="rounded-2xl border border-amber-200/60 bg-[var(--pp-surface-tint)] p-6 shadow-sm shadow-amber-900/5">
-      <div className="mb-3 flex items-center gap-3">
-        <Skeleton width={32} height={32} rounding="lg" />
-        <Skeleton width={120} height={12} rounding="md" />
-        <Skeleton width={72} height={12} rounding="md" className="ml-auto hidden sm:block" />
+    <SkeletonCard className="p-5">
+      <div className="flex items-start gap-3">
+        <Skeleton width={40} height={40} radius="xl" className="sk-inner" />
+        <div className="min-w-0 flex-1">
+          <Skeleton width="70%" height={16} radius="sm" className="sk-inner mb-1" />
+          <Skeleton width="40%" height={12} radius="sm" className="sk-inner mb-3" />
+          <SkeletonText lines={2} size="sm" widths={['100%', '82%']} />
+        </div>
       </div>
-      <SkeletonText size="lg" lines={1} widths={[140]} />
-      <SkeletonText size="md" lines={2} widths={['100%', '76%']} className="mt-3" />
-      <div className="mt-4 flex gap-2">
-        <SkeletonButton size="sm" width={110} />
-        <SkeletonButton size="sm" width={84} />
+    </SkeletonCard>
+  );
+}
+
+function ChatBubble({ align }) {
+  return (
+    <div className={`flex ${align === 'user' ? 'justify-end' : 'justify-start'}`}>
+      <div className={`max-w-[85%] ${align === 'user' ? 'bg-teal-500/90 rounded-br-sm' : 'bg-amber-200 rounded-bl-sm'}`}>
+        <div className="px-4 py-3">
+          <div className="flex items-center gap-2">
+            <Skeleton width={14} height={14} radius="sm" className="sk-inner" />
+            <Skeleton
+              width={align === 'user' ? 150 : 180}
+              height={12}
+              radius="sm"
+              className="sk-inner"
+            />
+          </div>
+          <Skeleton width={140} height={12} radius="sm" className="sk-inner mt-2" />
+        </div>
       </div>
     </div>
   );
@@ -24,54 +41,81 @@ function MemoryCardSkeleton() {
 
 export default function SkeletonMemory() {
   return (
-    <div className="min-h-screen">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-8 md:py-12">
-        <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <Skeleton width={96} height={12} rounding="full" className="mb-3" />
-            <SkeletonText size="xl" lines={1} widths={[220]} />
-          </div>
-          <SkeletonButton size="md" width={150} />
-        </header>
-        <div className="mb-8 flex flex-wrap gap-2">
-          {[80, 110, 96, 68, 120, 90].map((w) => (
-            <Skeleton key={w} width={w} height={34} rounding="full" />
-          ))}
+    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white pb-20" aria-busy="true">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
+        {/* Page header */}
+        <div className="text-center mb-8">
+          <Skeleton width={320} height={32} radius="sm" className="sk-inner mx-auto mb-3" />
+          <Skeleton width="55%" height={16} radius="sm" className="sk-inner mx-auto max-w-xl" />
+          <Skeleton width="40%" height={13} radius="sm" className="sk-inner mx-auto mt-2 max-w-lg" />
         </div>
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="space-y-4">
-            <MemoryCardSkeleton />
-            <MemoryCardSkeleton />
-            <MemoryCardSkeleton />
-            <MemoryCardSkeleton />
+
+        {/* Category tabs */}
+        <div className="mb-8 overflow-x-auto" style={{ marginLeft: '-1rem', marginRight: '-1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
+          <div className="flex gap-2 min-w-max pb-2">
+            {Array.from({ length: 9 }, (_, i) => (
+              <Skeleton
+                key={i}
+                width={i % 2 === 0 ? 128 : 112}
+                height={48}
+                radius="lg"
+                className="sk-inner flex-shrink-0"
+              />
+            ))}
           </div>
-          <div className="lg:order-last">
-            <SkeletonCard className="space-y-5">
-              <div className="flex items-center gap-3">
-                <SkeletonAvatar size="lg" />
-                <div className="flex-1 space-y-2">
-                  <SkeletonText size="md" lines={1} widths={[120]} />
-                  <SkeletonText size="sm" lines={1} widths={[90]} />
-                </div>
+        </div>
+
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
+          {/* Left column */}
+          <div className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
+            <div>
+              <Skeleton width={180} height={14} radius="sm" className="sk-inner mb-4" />
+              <div className="space-y-4">
+                <MemoryRowCard />
+                <MemoryRowCard />
+                <MemoryRowCard />
               </div>
-              <div className="space-y-3">
-                <div className="flex justify-start">
-                  <Skeleton width="72%" height={44} rounding="xl" />
-                </div>
-                <div className="flex justify-end">
-                  <Skeleton width="48%" height={44} rounding="xl" />
-                </div>
-                <div className="flex justify-start">
-                  <Skeleton width="62%" height={44} rounding="xl" />
-                </div>
-              </div>
-              <div className="flex items-center gap-3 border-t border-warm-200 pt-4">
-                <Skeleton width={44} height={44} rounding="full" />
-                <Skeleton height={44} className="flex-1" rounding="xl" />
-                <SkeletonButton size="md" width={72} />
+            </div>
+
+            {/* Add memory form */}
+            <SkeletonCard className="p-4 sm:p-6 md:p-8">
+              <Skeleton width={200} height={14} radius="sm" className="sk-inner mb-2" />
+              <Skeleton width="60%" height={13} radius="sm" className="sk-inner mb-4 max-w-sm" />
+              <Skeleton width="100%" height={48} radius="lg" className="sk-inner mb-3" />
+              <Skeleton width="100%" height={88} radius="lg" className="sk-inner" />
+              <div className="flex flex-wrap items-center gap-3 mt-4">
+                <Skeleton width={56} height={56} radius="full" className="sk-inner flex-shrink-0" />
+                <SkeletonButton width="100%" height={48} size="lg" radius="lg" className="flex-1 min-w-0" />
               </div>
             </SkeletonCard>
           </div>
+
+          {/* Right column — voice panel */}
+          <div className="lg:col-span-2 min-w-0">
+            <SkeletonCard className="p-4 sm:p-6 md:p-8">
+              <Skeleton width={200} height={14} radius="sm" className="sk-inner mb-4" />
+              <div className="space-y-4 mb-6">
+                <ChatBubble align="ai" />
+                <ChatBubble align="ai" />
+                <ChatBubble align="user" />
+              </div>
+              <div className="flex items-center gap-2 sm:gap-3">
+                <Skeleton width={40} height={40} radius="full" className="sk-inner flex-shrink-0" />
+                <Skeleton width="100%" height={48} radius="lg" className="sk-inner flex-1 min-w-0" />
+              </div>
+            </SkeletonCard>
+          </div>
+        </div>
+
+        {/* Privacy notice */}
+        <div className="mt-12 text-center">
+          <SkeletonCard className="px-4 sm:px-8 py-6 max-w-lg mx-auto">
+            <div className="flex items-center justify-center gap-2 mb-3">
+              <Skeleton width={20} height={20} radius="sm" className="sk-inner" />
+              <Skeleton width={160} height={12} radius="sm" className="sk-inner" />
+            </div>
+            <SkeletonText lines={2} size="sm" widths={['100%', '74%']} className="mx-auto max-w-sm" />
+          </SkeletonCard>
         </div>
       </div>
     </div>

@@ -43,14 +43,16 @@
         flex-direction: column;
         min-height: 100vh;
         background-color: #fffaf3;
-        color: #5f3d28;
         font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
       }
 
       .boot-bar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
         width: 100%;
-        border-bottom: 3px dashed #99f6e4;
         background-color: #fff8f0;
+        box-shadow: 0 8px 22px -14px rgba(63, 40, 25, 0.25);
       }
 
       .boot-bar-inner {
@@ -76,10 +78,28 @@
         border-radius: 0.25rem;
       }
 
+      .boot-nav-links {
+        display: none;
+        align-items: center;
+        gap: 2.25rem;
+      }
+
+      .boot-nav-link {
+        height: 0.75rem;
+        width: 4rem;
+        border-radius: 0.25rem;
+      }
+
       .boot-cta {
         height: 2.75rem;
         width: 7.5rem;
         border-radius: 0.75rem;
+      }
+
+      .boot-lamp {
+        height: 2.25rem;
+        width: 2.25rem;
+        border-radius: 9999px;
       }
 
       .boot-hero {
@@ -165,9 +185,9 @@
       }
 
       .sk-boot {
-        background: linear-gradient(180deg, #fef3e2, #faead3);
-        border: 1px solid #f0d6b2;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+        background: linear-gradient(180deg, #fdf3e3, #f6dfc1);
+        border: 1px solid #efcda3;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
         position: relative;
         overflow: hidden;
       }
@@ -177,11 +197,15 @@
         position: absolute;
         inset: 0;
         transform: translateX(-100%);
-        background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.55) 50%, transparent 80%);
-        animation: boot-sweep 1.9s ease-in-out infinite;
+        background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.45) 50%, transparent 80%);
+        animation: boot-sweep 1.6s ease-in-out infinite;
       }
 
       @keyframes boot-sweep {
+        0% {
+          transform: translateX(-100%);
+        }
+        55%,
         100% {
           transform: translateX(100%);
         }
@@ -196,16 +220,14 @@
       /* Dark theme boot shell — mirrors the app's remapped palette */
       .dark .boot-shell {
         background-color: #16181a;
-        color: #e7d7c5;
       }
 
       .dark .boot-bar {
         background-color: #191d1f;
-        border-bottom-color: rgba(45, 212, 191, 0.35);
       }
 
       .dark .sk-boot {
-        background: linear-gradient(180deg, #20252a, #1a1f23);
+        background: linear-gradient(180deg, #232932, #1b2026);
         border-color: #2c333a;
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
       }
@@ -223,10 +245,19 @@
         background-color: #0a3530;
       }
 
+      @media (min-width: 64rem) {
+        .boot-nav-links {
+          display: flex;
+        }
+      }
+
       @media (max-width: 40rem) {
         .boot-logo-text,
-        .boot-hero, .boot-cta {
+        .boot-cta {
           display: none;
+        }
+        .boot-hero {
+          padding-top: 3rem;
         }
         .boot-card-row {
           grid-template-columns: 1fr;
@@ -249,7 +280,14 @@
               </div>
               <div class="boot-logo-text sk-boot"></div>
             </div>
-            <div style="display:flex;gap:0.75rem">
+            <div class="boot-nav-links">
+              <div class="boot-nav-link sk-boot"></div>
+              <div class="boot-nav-link sk-boot"></div>
+              <div class="boot-nav-link sk-boot"></div>
+              <div class="boot-nav-link sk-boot"></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center">
+              <div class="boot-lamp sk-boot"></div>
               <div class="boot-cta sk-boot"></div>
               <div class="boot-cta sk-boot"></div>
             </div>

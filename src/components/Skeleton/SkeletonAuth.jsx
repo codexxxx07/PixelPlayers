@@ -1,37 +1,46 @@
 import Skeleton from './Skeleton';
-import SkeletonText from './SkeletonText';
-import SkeletonButton from './SkeletonButton';
 import SkeletonCard from './SkeletonCard';
 
 export default function SkeletonAuth() {
   return (
-    <div className="flex min-h-[80vh] items-center justify-center px-4 py-12">
-      <SkeletonCard className="w-full max-w-md space-y-6">
-        <div className="flex flex-col items-center gap-4">
-          <Skeleton width={56} height={56} rounding="xl" />
-          <Skeleton width={150} height={14} rounding="full" />
-          <SkeletonText size="lg" lines={2} widths={[190, 140]} className="mx-auto" />
+    <div
+      className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell"
+      aria-busy="true"
+    >
+      <div className="absolute inset-0 pixel-grid" aria-hidden="true" />
+
+      <div className="relative mx-auto max-w-xl px-4 sm:px-6">
+        <div className="animate-slide-up py-6 sm:py-10">
+          {/* Heading */}
+          <div className="text-center mb-8">
+            <div className="flex justify-center mb-4">
+              <Skeleton width={56} height={56} radius="2xl" className="sk-inner" />
+            </div>
+            <div className="flex justify-center mb-2">
+              <Skeleton width={120} height={12} radius="sm" className="sk-inner" />
+            </div>
+            <Skeleton width={200} height={22} radius="sm" className="sk-inner mx-auto" />
+            <Skeleton width={140} height={14} radius="sm" className="sk-inner mx-auto mt-2" />
+          </div>
+
+          {/* Card */}
+          <SkeletonCard className="mx-auto w-full max-w-md p-6 sm:p-8 space-y-4">
+            <Skeleton width="100%" height={52} radius="lg" className="sk-inner" />
+            <Skeleton width="100%" height={52} radius="lg" className="sk-inner" />
+            <Skeleton width="100%" height={48} radius="xl" className="sk-inner" />
+            <div className="flex items-center gap-3 py-2">
+              <Skeleton width="100%" height={2} radius="none" className="sk-inner flex-1" />
+              <Skeleton width={40} height={12} radius="sm" className="sk-inner" />
+              <Skeleton width="100%" height={2} radius="none" className="sk-inner flex-1" />
+            </div>
+            <Skeleton width="100%" height={44} radius="xl" className="sk-inner" />
+          </SkeletonCard>
         </div>
-        <div className="space-y-3">
-          <Skeleton height={48} rounding="lg" className="w-full" />
-          <Skeleton height={48} rounding="lg" className="w-full" />
-          <Skeleton height={48} rounding="lg" className="w-full" />
+
+        <div className="mt-8 flex justify-center">
+          <Skeleton width={180} height={14} radius="sm" className="sk-inner" />
         </div>
-        <SkeletonButton size="lg" block />
-        <div className="flex items-center gap-3">
-          <Skeleton width="25%" height={1} rounding="none" />
-          <Skeleton width={80} height={12} rounding="md" />
-          <Skeleton width="25%" height={1} rounding="none" />
-        </div>
-        <div className="flex items-center justify-center gap-4">
-          <SkeletonButton size="md" width={140} />
-          <SkeletonButton size="md" width={140} />
-        </div>
-        <div className="flex items-center justify-center gap-2">
-          <Skeleton width={110} height={12} rounding="md" />
-          <Skeleton width={90} height={12} rounding="md" />
-        </div>
-      </SkeletonCard>
+      </div>
     </div>
   );
 }

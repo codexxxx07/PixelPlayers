@@ -1,40 +1,43 @@
+import SkeletonHome from './SkeletonHome';
 import SkeletonAbout from './SkeletonAbout';
-import SkeletonAuth from './SkeletonAuth';
-import SkeletonAssistant from './SkeletonAssistant';
-import SkeletonComingSoon from './SkeletonComingSoon';
-import SkeletonDashboard from './SkeletonDashboard';
 import SkeletonFeatures from './SkeletonFeatures';
 import SkeletonGames from './SkeletonGames';
-import SkeletonHome from './SkeletonHome';
 import SkeletonMemory from './SkeletonMemory';
-import SkeletonProgress from './SkeletonProgress';
-import SkeletonReminders from './SkeletonReminders';
 import SkeletonRoutine from './SkeletonRoutine';
-import SkeletonSettings from './SkeletonSettings';
+import SkeletonAssistant from './SkeletonAssistant';
+import SkeletonDashboard from './SkeletonDashboard';
+import SkeletonProgress from './SkeletonProgress';
 import SkeletonSupport from './SkeletonSupport';
+import SkeletonSettings from './SkeletonSettings';
+import SkeletonComingSoon from './SkeletonComingSoon';
+import SkeletonReminders from './SkeletonReminders';
+import SkeletonAuth from './SkeletonAuth';
 import DefaultPageSkeleton from './DefaultPageSkeleton';
 
-const FIRST_SEGMENT = {
-  '': <SkeletonHome />,
-  home: <SkeletonHome />,
-  about: <SkeletonAbout />,
-  features: <SkeletonFeatures />,
-  games: <SkeletonGames />,
-  memory: <SkeletonMemory />,
-  routine: <SkeletonRoutine />,
-  reminders: <SkeletonReminders />,
-  assistant: <SkeletonAssistant />,
-  dashboard: <SkeletonDashboard />,
-  progress: <SkeletonProgress />,
-  support: <SkeletonSupport />,
-  settings: <SkeletonSettings />,
-  login: <SkeletonAuth />,
-  signup: <SkeletonAuth />,
+const registry = {
+  '/': SkeletonHome,
+  '/about': SkeletonAbout,
+  '/features': SkeletonFeatures,
+  '/games': SkeletonGames,
+  '/memory': SkeletonMemory,
+  '/routine': SkeletonRoutine,
+  '/reminders': SkeletonReminders,
+  '/assistant': SkeletonAssistant,
+  '/dashboard': SkeletonDashboard,
+  '/progress': SkeletonProgress,
+  '/support': SkeletonSupport,
+  '/settings': SkeletonSettings,
+  '/login': SkeletonAuth,
+  '/signup': SkeletonAuth,
 };
 
-export function getSkeletonForPath(pathname) {
-  const segments = (pathname || '/').split('/').filter(Boolean);
-  const first = segments[0] || '';
-  if (first === 'games' && segments.length > 1) return <SkeletonComingSoon />;
-  return FIRST_SEGMENT[first] || <DefaultPageSkeleton />;
+const prefixRoutes = ['/games'];
+
+export function resolveSkeletonForPath(pathname) {
+  const direct = registry[pathname];
+  if (direct) return direct;
+  if (prefixRoutes.some((prefix) => pathname.startsWith(`${prefix}/`))) {
+    return SkeletonComingSoon;
+  }
+  return DefaultPageSkeleton;
 }

@@ -1,27 +1,26 @@
 import Skeleton from './Skeleton';
 import SkeletonText from './SkeletonText';
 import SkeletonCard from './SkeletonCard';
-import SkeletonHero from './SkeletonHero';
-
-function DefaultCardSkeleton() {
-  return (
-    <SkeletonCard className="flex flex-col">
-      <Skeleton width={48} height={48} rounding="xl" className="mb-4" />
-      <SkeletonText size="lg" lines={1} widths={[120]} />
-      <SkeletonText size="md" lines={2} widths={['100%', '80%']} className="mt-2 flex-1" />
-    </SkeletonCard>
-  );
-}
+import SkeletonPageHeader from './SkeletonPageHeader';
 
 export default function DefaultPageSkeleton() {
   return (
-    <div className="min-h-screen">
-      <SkeletonHero variant="page" />
-      <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <DefaultCardSkeleton key={i} />
-          ))}
+    <div className="page-enter min-h-screen pb-16" aria-busy="true">
+      <SkeletonPageHeader />
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10 space-y-6">
+        <SkeletonCard className="p-6 md:p-8">
+          <Skeleton width={220} height={16} radius="sm" className="sk-inner mb-4" />
+          <SkeletonText lines={3} size="md" />
+        </SkeletonCard>
+        <div className="grid md:grid-cols-2 gap-6">
+          <SkeletonCard className="p-6">
+            <Skeleton width="70%" height={14} radius="sm" className="sk-inner mb-3" />
+            <SkeletonText lines={2} size="sm" />
+          </SkeletonCard>
+          <SkeletonCard className="p-6">
+            <Skeleton width="70%" height={14} radius="sm" className="sk-inner mb-3" />
+            <SkeletonText lines={2} size="sm" />
+          </SkeletonCard>
         </div>
       </div>
     </div>

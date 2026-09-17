@@ -1,39 +1,22 @@
-import usePageLoading from './usePageLoading';
-import SkeletonError from './SkeletonError';
+import ErrorState from './ErrorState';
 
 export default function SectionLoader({
+  status = 'loading',
   skeleton,
-  children,
-  loading = false,
-  error = null,
+  error,
   onRetry,
-  minDisplayMs = 150,
-  label = 'Loading content…',
+  children,
 }) {
-  const { status, retry } = usePageLoading({ loading, error, minDisplayMs });
-
   if (status === 'error') {
-    return (
-      <SkeletonError
-        compact
-        title="Could not load this section"
-        message="Something went wrong. You can try again below."
-        error={error}
-        onRetry={onRetry || retry}
-      />
-    );
+    return <ErrorState message={error?.message} onRetry={onRetry} />;
   }
 
-  if (status === 'loading') {
-    return (
-      <div role="status" aria-busy="true" aria-live="polite">
-        <span className="sr-only">{label}</span>
-        {skeleton}
-      </div>
-    );
-  }
+  if (children) return children;
 
-  if (status === 'idle') return null;
-
-  return children;
+  const Loader = skeleton;
+  return Loader ? (
+    <div aria-busy="true">
+      <Loader />
+    </div>
+  ) : null;
 }
