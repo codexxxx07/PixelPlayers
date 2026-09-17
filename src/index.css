@@ -828,3 +828,38 @@
     scroll-behavior: auto;
   }
 }
+
+/* ─── Memory Vault mobile responsiveness ─────────────────────────────────────
+   These utilities are needed because Tailwind v4's JIT may not generate
+   overflow-wrap/word-break utilities without explicit config. We add them
+   here so the classes used in Memory.jsx and MemoryCard.jsx always work.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+@layer utilities {
+  .overflow-wrap-anywhere {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Ensure every direct child of a flex row can shrink below its content size */
+  .min-w-0 {
+    min-width: 0;
+  }
+
+  /* Mobile-safe box-sizing reset (already browser default but explicit here) */
+  .box-border {
+    box-sizing: border-box;
+  }
+}
+
+/* ─── Memory Vault: category tab strip
+   The -mx bleed technique requires the PARENT to NOT have overflow:hidden.
+   We use inline style marginLeft/Right instead in JSX, but as a safety net
+   ensure the strip itself never bleeds past the viewport on very small screens.
+   ──────────────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .memory-tab-strip {
+    /* Safety: never let the strip's scroll area push beyond the page */
+    max-width: 100vw;
+  }
+}

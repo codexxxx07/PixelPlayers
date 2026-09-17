@@ -125,28 +125,28 @@ export default function Memory() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white pb-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide">
+          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide break-words">
             {t('memory.title')}
           </h1>
-          <p className="text-gray-600 text-lg max-w-xl mx-auto">
+          <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto overflow-wrap-anywhere">
             {t('memory.subtitle')}
           </p>
-          <p className="text-gray-400 text-sm mt-2 max-w-lg mx-auto italic">
+          <p className="text-gray-400 text-sm mt-2 max-w-lg mx-auto italic overflow-wrap-anywhere">
             {t('memory.profileHint')}
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="mb-8 -mx-4 px-4 overflow-x-auto scrollbar-hide">
+        {/* Category Tabs — scrollable strip, negative margin bleed contained */}
+        <div className="mb-8 overflow-x-auto scrollbar-hide" style={{ marginLeft: '-1rem', marginRight: '-1rem', paddingLeft: '1rem', paddingRight: '1rem' }}>
           <div className="flex gap-2 min-w-max pb-2">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex items-center gap-2 px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 border-2 min-h-[48px] ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 border-2 min-h-[48px] ${
                   activeCategory === cat.id
                     ? 'bg-amber-500 border-amber-500 text-white shadow-md shadow-amber-500/20'
                     : 'bg-white border-amber-200 text-amber-700 hover:border-amber-400 hover:bg-amber-50'
@@ -159,9 +159,10 @@ export default function Memory() {
           </div>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-8">
+        {/* Two-column grid: stacks to single column below lg */}
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Left Column: Memory List + Add Memory */}
-          <div className="lg:col-span-3 space-y-8">
+          <div className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
             {/* Memory List */}
             <div>
               <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-4 tracking-wide">
@@ -189,7 +190,7 @@ export default function Memory() {
             </div>
 
             {/* Add Memory Section */}
-            <PixelCard className="p-6 md:p-8">
+            <PixelCard className="p-4 sm:p-6 md:p-8">
               <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-2 tracking-wide">
                 {editingId ? t('memory.editMemory') : t('memory.tellMeAboutYou')}
               </h2>
@@ -210,13 +211,14 @@ export default function Memory() {
                 rows={4}
                 className="w-full border-2 border-amber-200 rounded-xl p-4 text-lg text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all resize-none placeholder:text-gray-300"
               />
-              <div className="flex items-center gap-4 mt-4">
-                <VoiceButton onClick={() => {}} size="md" />
+              {/* Button row — wraps on mobile when cancel button is present */}
+              <div className="flex flex-wrap items-center gap-3 mt-4">
+                <VoiceButton onClick={() => {}} size="md" className="flex-shrink-0" />
                 <PixelButton
                   onClick={handleSaveMemory}
                   variant="primary"
-                  size="lg"
-                  className="flex-1"
+                  size="md"
+                  className="flex-1 min-w-0"
                   icon={editingId ? "✏️" : "💾"}
                 >
                   {editingId ? t('memory.updateMemory') : t('memory.saveMemory')}
@@ -225,7 +227,8 @@ export default function Memory() {
                   <PixelButton
                     onClick={handleCancelEdit}
                     variant="secondary"
-                    size="lg"
+                    size="md"
+                    className="flex-shrink-0"
                     icon="✕"
                   >
                     {t('memory.cancel')}
@@ -236,8 +239,8 @@ export default function Memory() {
           </div>
 
           {/* Right Column: Voice Conversation Panel */}
-          <div className="lg:col-span-2">
-            <PixelCard className="p-6 md:p-8 lg:sticky lg:top-8">
+          <div className="lg:col-span-2 min-w-0">
+            <PixelCard className="p-4 sm:p-6 md:p-8 lg:sticky lg:top-8">
               <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-4 tracking-wide">
                 {t('memory.talkToCompanion')}
               </h2>
@@ -274,17 +277,17 @@ export default function Memory() {
               </div>
 
               {/* Chat Input */}
-              <div className="flex items-center gap-3">
-                <VoiceButton onClick={() => {}} size="sm" />
+              <div className="flex items-center gap-2 sm:gap-3">
+                <VoiceButton onClick={() => {}} size="sm" className="flex-shrink-0" />
                 <input
                   type="text"
                   value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleChatSend()}
                   placeholder={t('memory.typeOrSpeak')}
-                  className="flex-1 border-2 border-amber-200 rounded-xl px-4 py-3 text-sm text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[48px]"
+                  className="flex-1 min-w-0 border-2 border-amber-200 rounded-xl px-3 sm:px-4 py-3 text-sm text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[48px]"
                 />
-                <PixelButton onClick={handleChatSend} variant="primary" size="md" icon="➤">
+                <PixelButton onClick={handleChatSend} variant="primary" size="sm" icon="➤" className="flex-shrink-0">
                   {t('memory.send')}
                 </PixelButton>
               </div>
@@ -294,7 +297,7 @@ export default function Memory() {
 
         {/* Privacy Notice */}
         <div className="mt-12 text-center">
-          <PixelCard variant="inset" className="px-8 py-6 max-w-lg mx-auto">
+          <PixelCard variant="inset" className="px-4 sm:px-8 py-6 max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>
               <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs tracking-wide">

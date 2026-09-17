@@ -13,7 +13,7 @@ export default function PixelCard({
 }) {
   return (
     <div
-      className={`relative rounded-2xl overflow-hidden transition-all duration-300 flex flex-col skeuo-card-pad ${variants[variant]} ${
+      className={`relative rounded-2xl transition-all duration-300 flex flex-col skeuo-card-pad ${variants[variant]} ${
         hover
           ? "hover:shadow-md hover:shadow-teal-900/10 hover:-translate-y-0.5 hover:border-teal-200"
           : ""

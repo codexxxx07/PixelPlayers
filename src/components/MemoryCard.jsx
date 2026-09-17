@@ -45,7 +45,7 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
 
   return (
     <div
-      className="group relative bg-[#FFFDF7] border border-amber-200/60 rounded-2xl p-6 flex flex-col shadow-sm shadow-amber-900/5 transition-all duration-300 hover:shadow-md hover:shadow-amber-900/10 hover:rotate-0 hover:border-amber-300"
+      className="group relative bg-[#FFFDF7] border border-amber-200/60 rounded-2xl p-4 sm:p-6 flex flex-col shadow-sm shadow-amber-900/5 transition-all duration-300 hover:shadow-md hover:shadow-amber-900/10 hover:rotate-0 hover:border-amber-300 w-full min-w-0 box-border"
       style={{
         backgroundImage:
           "repeating-linear-gradient(0deg, transparent, transparent 31px, #f5f0e0 31px, #f5f0e0 32px)",
@@ -53,11 +53,11 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
       }}
     >
       {/* Top row: icon + category + date */}
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-center gap-3">
-          <span className="text-3xl leading-none flex-shrink-0">{displayIcon}</span>
-          <div>
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200">
+      <div className="flex items-start justify-between gap-2 mb-3 min-w-0">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
+          <span className="text-2xl sm:text-3xl leading-none flex-shrink-0">{displayIcon}</span>
+          <div className="min-w-0">
+            <span className="inline-flex items-center px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200 break-words">
               {categoryLabelKeys[category]
                 ? t(categoryLabelKeys[category])
                 : catLabel}
@@ -65,26 +65,26 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
           </div>
         </div>
         {displayDate && (
-          <span className="text-xs text-gray-400 mt-1 flex-shrink-0">{displayDate}</span>
+          <span className="text-xs text-gray-400 mt-1 flex-shrink-0 whitespace-nowrap">{displayDate}</span>
         )}
       </div>
 
       {/* Title */}
       {displayTitle && (
-        <p className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] leading-relaxed mb-2">
+        <p className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] leading-relaxed mb-2 break-words overflow-wrap-anywhere min-w-0">
           {t(`memory.data.${id}.title`, { defaultValue: displayTitle })}
         </p>
       )}
 
       {/* Content / Description — grows to keep actions aligned */}
       {bodyText && (
-        <p className="text-gray-600 text-base leading-relaxed mb-6 flex-1">
+        <p className="text-gray-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 flex-1 break-words overflow-wrap-anywhere min-w-0">
           {t(`memory.data.${id}.description`, { defaultValue: bodyText })}
         </p>
       )}
 
-      {/* Action buttons */}
-      <div className="flex items-center gap-3 pt-2">
+      {/* Action buttons — wrap on very small screens */}
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-2">
         <PixelButton
           onClick={() => onEdit?.(memory)}
           variant="secondary"
