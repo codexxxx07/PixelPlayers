@@ -1,8 +1,8 @@
-import { ClerkProvider } from '@clerk/react'
 import { StrictMode, lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
+import ClerkProviderWithRouter from './components/ClerkProviderWithRouter'
 import { BootShell } from './components/Skeleton'
 import './i18n'
 import './index.css'
@@ -12,19 +12,14 @@ const App = lazy(() => import('./App'))
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ClerkProvider
-      publishableKey={import.meta.env.VITE_CLERK_PUBLISHABLE_KEY}
-      afterSignInUrl="/dashboard"
-      afterSignUpUrl="/dashboard"
-      afterSignOutUrl="/"
-    >
-      <BrowserRouter>
+    <BrowserRouter>
+      <ClerkProviderWithRouter>
         <AppProvider>
           <Suspense fallback={<BootShell />}>
             <App />
           </Suspense>
         </AppProvider>
-      </BrowserRouter>
-    </ClerkProvider>
+      </ClerkProviderWithRouter>
+    </BrowserRouter>
   </StrictMode>
 )
