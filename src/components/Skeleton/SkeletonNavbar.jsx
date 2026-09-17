@@ -6,7 +6,7 @@ export default function SkeletonNavbar() {
   return (
     <div
       aria-hidden="true"
-      className="sticky top-0 z-40 border-b-[3px] border-dashed border-teal-200 bg-[#FFF8F0] shadow-md shadow-teal-900/5"
+      className="sticky top-0 z-40 border-b-[3px] border-dashed border-teal-200 bg-[var(--pp-navbar)] shadow-md shadow-teal-900/5"
     >
       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-2.5">

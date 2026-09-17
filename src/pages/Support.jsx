@@ -98,7 +98,7 @@ function Toggle({ checked, onChange, label }) {
         }`}
       >
         <span
-          className={`inline-block h-9 w-9 rounded-full bg-white shadow-md transition-transform duration-200 ${
+          className={`inline-block h-9 w-9 rounded-full bg-white dark:bg-[#ffffff] shadow-md transition-transform duration-200 ${
             checked ? 'translate-x-9' : 'translate-x-0'
           }`}
         />

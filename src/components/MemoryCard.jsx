@@ -45,10 +45,10 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
 
   return (
     <div
-      className="group relative bg-[#FFFDF7] border border-amber-200/60 rounded-2xl p-4 sm:p-6 flex flex-col shadow-sm shadow-amber-900/5 transition-all duration-300 hover:shadow-md hover:shadow-amber-900/10 hover:rotate-0 hover:border-amber-300 w-full min-w-0 box-border"
+      className="group relative bg-[var(--pp-surface-tint)] border border-amber-200/60 rounded-2xl p-4 sm:p-6 flex flex-col shadow-sm shadow-amber-900/5 transition-all duration-300 hover:shadow-md hover:shadow-amber-900/10 hover:rotate-0 hover:border-amber-300 w-full min-w-0 box-border"
       style={{
         backgroundImage:
-          "repeating-linear-gradient(0deg, transparent, transparent 31px, #f5f0e0 31px, #f5f0e0 32px)",
+          "repeating-linear-gradient(0deg, transparent, transparent 31px, var(--pp-ruled) 31px, var(--pp-ruled) 32px)",
         backgroundSize: "100% 32px",
       }}
     >

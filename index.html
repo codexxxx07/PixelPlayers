@@ -8,7 +8,32 @@
       name="description"
       content="Pixel Players — an AI-powered cognitive gaming and memory assistance platform for elderly users. Helping memories stay meaningful."
     />
-    <meta name="theme-color" content="#14b8a6" />
+    <meta name="theme-color" content="#fffaf3" />
+    <script>
+      // Pixel Players theme boot — runs before first paint so there is no flash
+      // of the wrong theme. Reads localStorage, falls back to OS preference.
+      (function () {
+        try {
+          var t = localStorage.getItem('pixelplayers-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t =
+              window.matchMedia &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+          }
+          var root = document.documentElement;
+          root.classList.toggle('dark', t === 'dark');
+          root.setAttribute('data-theme', t);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) {
+            meta.setAttribute('content', t === 'dark' ? '#161d1b' : '#fffaf3');
+          }
+        } catch (e) {
+          /* storage unavailable — keep light */
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Pixel Players — Helping Memories Stay Meaningful</title>
@@ -166,6 +191,36 @@
         .sk-boot::after {
           animation: none;
         }
+      }
+
+      /* Dark theme boot shell — mirrors the app's remapped palette */
+      .dark .boot-shell {
+        background-color: #16181a;
+        color: #e7d7c5;
+      }
+
+      .dark .boot-bar {
+        background-color: #191d1f;
+        border-bottom-color: rgba(45, 212, 191, 0.35);
+      }
+
+      .dark .sk-boot {
+        background: linear-gradient(180deg, #20252a, #1a1f23);
+        border-color: #2c333a;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      }
+
+      .dark .sk-boot::after {
+        background: linear-gradient(
+          100deg,
+          transparent 20%,
+          rgba(255, 255, 255, 0.07) 50%,
+          transparent 80%
+        );
+      }
+
+      .dark .boot-footer {
+        background-color: #0a3530;
       }
 
       @media (max-width: 40rem) {

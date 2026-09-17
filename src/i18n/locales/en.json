@@ -19,6 +19,12 @@
     "closeMenu": "Close menu",
     "yourSpace": "YOUR SPACE"
   },
+  "theme": {
+    "light": "Switch to light mode",
+    "dark": "Switch to dark mode",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
   "settings": {
     "title": "Settings",
     "subtitle": "Customize your experience",

@@ -13,7 +13,7 @@ const COLUMN_LINKS = [4, 4, 4, 4, 4];
 
 export default function SkeletonFooter() {
   return (
-    <footer aria-hidden="true" className="bg-teal-900">
+    <footer aria-hidden="true" className="bg-teal-900 dark:bg-[#0a3530]">
       <div className="flex h-3 w-full">
         {Array.from({ length: 16 }).map((_, i) => (
           <div key={i} className={`flex-1 ${PIXEL_COLORS[i % PIXEL_COLORS.length]}`} />

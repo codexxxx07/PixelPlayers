@@ -149,7 +149,7 @@ export default function ClaraLauncher() {
             ))}
           </div>
 
-          <form onSubmit={handleSubmit} className="p-3 border-t border-teal-100 bg-[#FFF8F0]">
+          <form onSubmit={handleSubmit} className="p-3 border-t border-teal-100 bg-[var(--pp-surface-2)]">
             <div className="flex items-end gap-2">
               <div className="flex-1">
                 <label htmlFor="clara-floater-input" className="sr-only">

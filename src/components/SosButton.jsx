@@ -139,7 +139,7 @@ export function SosModal({ open, onClose }) {
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-md rounded-3xl border-2 border-warm-200 bg-gradient-to-b from-white to-warm-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#f0d5b0,0_28px_48px_rgba(63,40,25,0.3)] animate-slide-up"
+        className="relative w-full max-w-md rounded-3xl border-2 border-warm-200 bg-gradient-to-b from-white to-warm-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#f0d5b0,0_28px_48px_rgba(63,40,25,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_8px_0_#173832,0_28px_48px_rgba(0,0,0,0.5)] animate-slide-up"
       >
         <div className="flex flex-col items-center text-center mb-6">
           <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-b from-red-400 to-red-600 border-[3px] border-red-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#7f1d1d] mb-4">

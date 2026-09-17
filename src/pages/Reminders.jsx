@@ -32,7 +32,7 @@ function Toggle({ enabled, onToggle }) {
       aria-label={enabled ? t('reminders.disable') : t('reminders.enable')}
     >
       <span
-        className={`pointer-events-none inline-block h-7 w-7 transform rounded-full bg-white shadow-lg ring-0 transition duration-300 ease-in-out ${
+        className={`pointer-events-none inline-block h-7 w-7 transform rounded-full bg-white dark:bg-[#ffffff] shadow-lg ring-0 transition duration-300 ease-in-out ${
           enabled ? 'translate-x-6' : 'translate-x-0'
         }`}
       />

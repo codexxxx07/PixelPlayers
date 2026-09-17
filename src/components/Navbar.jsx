@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth, UserButton } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
+import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
 const baseNavLinks = [
@@ -23,6 +25,7 @@ const mobileExtras = [
 export default function Navbar() {
   const { t } = useTranslation();
   const { isLoaded, isSignedIn } = useAuth();
+  const { isDark } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
@@ -89,12 +92,11 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-shadow duration-300 border-b-[3px] border-dashed border-teal-200 ${
+        className={`sticky top-0 z-50 w-full bg-(--pp-navbar) transition-shadow duration-300 border-b-[3px] border-dashed border-teal-200 ${
           scrolled
             ? "shadow-lg shadow-teal-900/5"
             : "shadow-md shadow-teal-900/5"
         }`}
-        style={{ backgroundColor: "#FFF8F0" }}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between gap-2">
@@ -120,6 +122,7 @@ export default function Navbar() {
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center shrink-0" style={{ gap: "var(--nav-btn-gap)" }}>
+              <ThemeToggle />
               {isLoaded && isSignedIn ? (
                 <UserButton
                   afterSignOutUrl="/"
@@ -140,6 +143,11 @@ export default function Navbar() {
                 </>
               ) : null}
               <SosButton variant="navbar" onClick={openSos} />
+            </div>
+
+            {/* Mobile theme toggle (desktop auth row already shows one ≥lg) */}
+            <div className="lg:hidden">
+              <ThemeToggle />
             </div>
 
             {/* Mobile Hamburger */}
@@ -183,10 +191,9 @@ export default function Navbar() {
 
       {/* Mobile Menu Panel */}
       <div
-        className={`fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-white shadow-2xl transition-transform duration-300 ease-out xl:hidden ${
+          className={`fixed top-0 right-0 z-50 h-full w-80 max-w-[85vw] bg-(--pp-navbar) shadow-2xl transition-transform duration-300 ease-out xl:hidden ${
           mobileOpen ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ backgroundColor: "#FFF8F0" }}
       >
         <div className="flex flex-col h-full">
           {/* Mobile Header */}
@@ -205,6 +212,12 @@ export default function Navbar() {
 
           {/* Mobile Nav Links */}
           <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1.5">
+            {/* Theme row — stays open while toggling so the change is visible live */}
+            <div className="mb-3">
+              <ThemeToggle style={{ width: "100%" }}>
+                {isDark ? t("theme.darkMode") : t("theme.lightMode")}
+              </ThemeToggle>
+            </div>
             <div className="mb-3">
               <SosButton
                 variant="menu"
@@ -327,7 +340,7 @@ function LoginRequiredModal({ open, onClose }) {
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-md rounded-3xl border-2 border-teal-200 bg-linear-to-b from-white to-teal-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#b8e0d8,0_28px_48px_rgba(15,60,90,0.3)] animate-slide-up"
+        className="relative w-full max-w-md rounded-3xl border-2 border-teal-200 bg-linear-to-b from-white to-teal-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#b8e0d8,0_28px_48px_rgba(15,60,90,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_8px_0_#173832,0_28px_48px_rgba(0,0,0,0.5)] animate-slide-up"
       >
         <div className="flex flex-col items-center text-center mb-6">
           <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-b from-teal-500 to-teal-600 border-[3px] border-teal-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#0f4c5c] mb-4">

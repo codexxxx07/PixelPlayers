@@ -342,7 +342,7 @@ export default function Assistant() {
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="p-4 border-t border-teal-100 bg-[#FFF8F0]">
+            <form onSubmit={handleSubmit} className="p-4 border-t border-teal-100 bg-[var(--pp-surface-2)]">
               <div className="flex items-end gap-3">
                 <div className="flex-1">
                   <label htmlFor="chat-input" className="sr-only">

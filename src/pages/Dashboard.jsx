@@ -131,7 +131,7 @@ export default function Dashboard() {
           className={`relative overflow-hidden rounded-3xl p-7 md:p-10 shadow-lg shadow-teal-900/10 animate-pixel-fade-in ${
             isDay
               ? "bg-gradient-to-br from-amber-100 via-orange-50 to-teal-50"
-              : "bg-gradient-to-br from-indigo-200 via-[#FFF8F0] to-teal-50"
+              : "bg-gradient-to-br from-indigo-200 via-[var(--pp-surface-2)] to-teal-50"
           }`}
         >
           <div className="absolute top-0 left-0 right-0 h-3 flex opacity-70">
@@ -162,7 +162,7 @@ export default function Dashboard() {
             </div>
 
             <div className="flex-shrink-0 self-center sm:self-end">
-              <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl bg-white/70 border-2 border-amber-200/70 shadow-inner shadow-amber-900/5">
+              <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl bg-white/70 dark:bg-white/10 border-2 border-amber-200/70 shadow-inner shadow-amber-900/5">
                 <div className="animate-gentle-bounce">
                   {isDay ? (
                     <PixelSprite art={SUN_ART} colors={SUN_COLORS} cell={6} />

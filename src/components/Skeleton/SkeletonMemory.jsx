@@ -6,7 +6,7 @@ import SkeletonCard from './SkeletonCard';
 
 function MemoryCardSkeleton() {
   return (
-    <div className="rounded-2xl border border-amber-200/60 bg-[#FFFDF7] p-6 shadow-sm shadow-amber-900/5">
+    <div className="rounded-2xl border border-amber-200/60 bg-[var(--pp-surface-tint)] p-6 shadow-sm shadow-amber-900/5">
       <div className="mb-3 flex items-center gap-3">
         <Skeleton width={32} height={32} rounding="lg" />
         <Skeleton width={120} height={12} rounding="md" />

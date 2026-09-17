@@ -49,7 +49,7 @@ export default function SkeletonHome() {
             </SkeletonCard>
           ))}
         </div>
-        <div className="rounded-2xl border-2 border-teal-200 bg-teal-900 p-10 text-center">
+        <div className="rounded-2xl border-2 border-teal-200 bg-teal-900 dark:bg-[#0a3530] dark:border-teal-800 p-10 text-center">
           <SkeletonText size="xl" lines={1} widths={[240]} className="mx-auto" dark={false} />
           <SkeletonText size="md" lines={2} widths={['55%', '42%']} className="mx-auto mt-4" />
           <div className="mt-8 flex flex-wrap justify-center gap-4">

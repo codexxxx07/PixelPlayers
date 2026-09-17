@@ -127,7 +127,7 @@ export default function Games() {
               {HOW_HELP_BENEFITS.map((benefit) => (
                 <div
                   key={benefit.titleKey}
-                  className="rounded-2xl bg-white/70 border border-teal-100 p-6 text-center flex flex-col items-center"
+                  className="rounded-2xl bg-white/70 dark:bg-white/5 border border-teal-100 p-6 text-center flex flex-col items-center"
                 >
                   <div className="w-14 h-14 flex items-center justify-center text-3xl rounded-2xl bg-teal-50 border border-teal-100 mb-4" aria-hidden="true">
                     {benefit.icon}
