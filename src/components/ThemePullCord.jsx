@@ -6,11 +6,27 @@ import LampIcon from "./LampIcon";
 const ROPE_REST = 84;
 const DRAG_INTENT = 8;
 const MAX_PULL = 80;
+const SOFT_POINT = 0.7;
+const SPRING_STIFFNESS = 240;
+const SPRING_DAMPING = 2 * Math.sqrt(SPRING_STIFFNESS);
 const SUPPRESS_CLICK_MS = 500;
+const SETTLE_EPSILON = 0.6;
+const SETTLE_VELOCITY = 6;
 
 function resolveThreshold() {
   if (typeof window === "undefined") return 56;
   return Math.min(60, Math.max(50, Math.round(window.innerWidth * 0.15)));
+}
+
+/* Map raw pointer pull to a lamp pull with gentle end-of-travel resistance:
+   1:1 movement early on, easing off softly as the maximum is approached. */
+function softenedPull(raw) {
+  const clamped = Math.max(0, Math.min(MAX_PULL, raw));
+  const t = clamped / MAX_PULL;
+  if (t <= SOFT_POINT) return clamped;
+  const tail = (t - SOFT_POINT) / (1 - SOFT_POINT);
+  const easedTail = 1 - Math.pow(1 - tail, 3);
+  return (SOFT_POINT + (1 - SOFT_POINT) * easedTail) * MAX_PULL;
 }
 
 /**
@@ -21,31 +37,62 @@ function resolveThreshold() {
  * theme exactly once for that gesture, then the lamp springs back to rest.
  * A plain click/tap (or Enter/Space) toggles the theme as well, so the
  * interaction stays usable for keyboard, touch and reduced-motion users.
+ *
+ * High-frequency movement is applied straight to the DOM custom property
+ * (`--pp-pull`) inside a single requestAnimationFrame loop, so the rope and
+ * lamp track the pointer smoothly without re-rendering React on every move.
+ * React state is kept for meaningful transitions only (dragging / near / fired).
  */
 export default function ThemePullCord({ className = "" }) {
   const { isDark, toggleTheme } = useTheme();
   const { t } = useTranslation();
 
   const label = isDark ? t("theme.light") : t("theme.dark");
-  const modeLabel = isDark ? t("theme.lightMode") : t("theme.darkMode");
 
   const boxRef = useRef(null);
   const [anchor, setAnchor] = useState(18);
   const [threshold, setThreshold] = useState(resolveThreshold);
-  const [pull, setPull] = useState(0);
   const [dragging, setDragging] = useState(false);
+  const [near, setNear] = useState(false);
   const [fired, setFired] = useState(false);
 
-  const pullRef = useRef(0);
+  const pullXRef = useRef(0);
+  const targetRef = useRef(0);
+  const velRef = useRef(0);
   const rafRef = useRef(0);
+  const lastTimeRef = useRef(0);
   const draggingRef = useRef(false);
   const dragIntentRef = useRef(false);
   const firedRef = useRef(false);
+  const nearRef = useRef(false);
   const suppressClickRef = useRef(false);
   const startYRef = useRef(0);
   const pointerIdRef = useRef(null);
   const fireTimerRef = useRef(0);
   const suppressTimerRef = useRef(0);
+  const reducedRef = useRef(false);
+  const thresholdRef = useRef(threshold);
+  const tickRef = useRef(null);
+
+  useEffect(() => {
+    thresholdRef.current = threshold;
+  }, [threshold]);
+
+  useEffect(() => {
+    let mq = null;
+    if (typeof window !== "undefined" && window.matchMedia) {
+      mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      reducedRef.current = mq.matches;
+      if (typeof mq.addEventListener === "function") {
+        const onChange = (e) => {
+          reducedRef.current = e.matches;
+        };
+        mq.addEventListener("change", onChange);
+        return () => mq.removeEventListener("change", onChange);
+      }
+    }
+    return undefined;
+  }, []);
 
   const cleanupTimers = useCallback(() => {
     if (fireTimerRef.current) {
@@ -93,13 +140,70 @@ export default function ThemePullCord({ className = "" }) {
     };
   }, [cleanupTimers]);
 
-  const renderPull = useCallback((v) => {
-    pullRef.current = v;
+  const applyPull = useCallback((v) => {
+    const el = boxRef.current;
+    if (el) el.style.setProperty("--pp-pull", `${v}px`);
+  }, []);
+
+  /* One rAF loop drives all movement: a critically-damped spring pulls the
+     lamp toward its target, giving jitter-free pointer tracking and a smooth
+     physical-feeling return without over-elastic bounce. */
+  const tick = useCallback(() => {
+    rafRef.current = 0;
+    const now = performance.now();
+    const dt = Math.min(0.05, Math.max(0.001, (now - lastTimeRef.current) / 1000));
+    lastTimeRef.current = now;
+
+    if (reducedRef.current) {
+      pullXRef.current = targetRef.current;
+      velRef.current = 0;
+    } else {
+      const acc =
+        SPRING_STIFFNESS * (targetRef.current - pullXRef.current) -
+        SPRING_DAMPING * velRef.current;
+      velRef.current += acc * dt;
+      pullXRef.current += velRef.current * dt;
+    }
+
+    if (pullXRef.current < 0) {
+      pullXRef.current = 0;
+      velRef.current = 0;
+    }
+
+    applyPull(pullXRef.current);
+
+    const settled =
+      !draggingRef.current &&
+      pullXRef.current <= SETTLE_EPSILON &&
+      Math.abs(velRef.current) < SETTLE_VELOCITY &&
+      targetRef.current <= SETTLE_EPSILON;
+
+    if (settled) {
+      targetRef.current = 0;
+      pullXRef.current = 0;
+      velRef.current = 0;
+      applyPull(0);
+      return;
+    }
+
+    const nextNear =
+      draggingRef.current && pullXRef.current >= thresholdRef.current * 0.72;
+    if (nextNear !== nearRef.current) {
+      nearRef.current = nextNear;
+      setNear(nextNear);
+    }
+
+    rafRef.current = requestAnimationFrame(() => tickRef.current && tickRef.current());
+  }, [applyPull]);
+
+  useEffect(() => {
+    tickRef.current = tick;
+  }, [tick]);
+
+  const startLoop = useCallback(() => {
     if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0;
-      setPull(pullRef.current);
-    });
+    lastTimeRef.current = performance.now();
+    rafRef.current = requestAnimationFrame(() => tickRef.current && tickRef.current());
   }, []);
 
   const fire = useCallback(() => {
@@ -140,10 +244,19 @@ export default function ThemePullCord({ className = "" }) {
         /* capture unavailable */
       }
 
-      renderPull(0);
+      if (nearRef.current) {
+        nearRef.current = false;
+        setNear(false);
+      }
+
+      pullXRef.current = 0;
+      velRef.current = 0;
+      targetRef.current = 0;
+      applyPull(0);
       setDragging(true);
+      startLoop();
     },
-    [clearSuppressTimer, renderPull]
+    [applyPull, clearSuppressTimer, startLoop]
   );
 
   const onPointerMove = useCallback(
@@ -151,23 +264,33 @@ export default function ThemePullCord({ className = "" }) {
       if (!draggingRef.current) return;
       if (pointerIdRef.current != null && e.pointerId !== pointerIdRef.current) return;
 
-      const dy = Math.max(0, e.clientY - startYRef.current);
-      if (dy >= DRAG_INTENT && !dragIntentRef.current) dragIntentRef.current = true;
+      const raw = Math.max(0, e.clientY - startYRef.current);
+      if (raw >= DRAG_INTENT && !dragIntentRef.current) dragIntentRef.current = true;
 
-      const next = Math.min(dy, MAX_PULL);
-      renderPull(next);
+      targetRef.current = softenedPull(raw);
+      startLoop();
 
-      if (dragIntentRef.current && next >= threshold && !firedRef.current) {
+      /* Fire only once the lamp has physically reached the threshold. */
+      if (
+        dragIntentRef.current &&
+        pullXRef.current >= thresholdRef.current &&
+        !firedRef.current
+      ) {
         fire();
       }
     },
-    [fire, renderPull, threshold]
+    [fire, startLoop]
   );
 
   const endDrag = useCallback(() => {
     if (!draggingRef.current) return;
     draggingRef.current = false;
     pointerIdRef.current = null;
+
+    if (nearRef.current) {
+      nearRef.current = false;
+      setNear(false);
+    }
 
     if (dragIntentRef.current || firedRef.current) {
       suppressClickRef.current = true;
@@ -178,9 +301,10 @@ export default function ThemePullCord({ className = "" }) {
       }, SUPPRESS_CLICK_MS);
     }
 
-    renderPull(0);
+    targetRef.current = 0;
     setDragging(false);
-  }, [clearSuppressTimer, renderPull]);
+    startLoop();
+  }, [clearSuppressTimer, startLoop]);
 
   const onPointerUp = useCallback(
     (e) => {
@@ -229,13 +353,11 @@ export default function ThemePullCord({ className = "" }) {
     [clearSuppressTimer, toggleTheme]
   );
 
-  const isNear = dragging && pull >= threshold * 0.72;
-
   const classes = [
     "pp-pullcord",
     isDark ? "lamp-off" : "lamp-on",
     dragging ? "is-dragging" : "",
-    isNear ? "is-near" : "",
+    near ? "is-near" : "",
     fired ? "is-fired" : "",
     className,
   ]
@@ -245,7 +367,6 @@ export default function ThemePullCord({ className = "" }) {
   const style = {
     "--pp-anchor": `${anchor}px`,
     "--pp-rope-rest": `${ROPE_REST}px`,
-    "--pp-pull": `${pull}px`,
   };
 
   return (
@@ -258,7 +379,6 @@ export default function ThemePullCord({ className = "" }) {
           className="pp-pullcord__lamp-btn"
           aria-label={label}
           aria-pressed={isDark}
-          title={label}
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
@@ -268,7 +388,6 @@ export default function ThemePullCord({ className = "" }) {
         >
           <span className="pp-pullcord__lamp-cap" aria-hidden="true" />
           <LampIcon />
-          <span className="pp-pullcord__lamp-label">{modeLabel}</span>
         </button>
       </div>
     </div>
