@@ -9,7 +9,6 @@ const MAX_PULL = 80;
 const SOFT_POINT = 0.7;
 const SPRING_STIFFNESS = 240;
 const SPRING_DAMPING = 2 * Math.sqrt(SPRING_STIFFNESS);
-const SUPPRESS_CLICK_MS = 500;
 const SETTLE_EPSILON = 0.6;
 const SETTLE_VELOCITY = 6;
 
@@ -35,8 +34,8 @@ function softenedPull(raw) {
  * The rope is anchored to the navbar's top border; the lamp dangles below the
  * navbar. Dragging the lamp downward past the activation threshold flips the
  * theme exactly once for that gesture, then the lamp springs back to rest.
- * A plain click/tap (or Enter/Space) toggles the theme as well, so the
- * interaction stays usable for keyboard, touch and reduced-motion users.
+ * Clicking/tapping the lamp (or pressing Enter/Space) does NOT change the
+ * theme — only a downward drag past the threshold does.
  *
  * High-frequency movement is applied straight to the DOM custom property
  * (`--pp-pull`) inside a single requestAnimationFrame loop, so the rope and
@@ -65,11 +64,9 @@ export default function ThemePullCord({ className = "" }) {
   const dragIntentRef = useRef(false);
   const firedRef = useRef(false);
   const nearRef = useRef(false);
-  const suppressClickRef = useRef(false);
   const startYRef = useRef(0);
   const pointerIdRef = useRef(null);
   const fireTimerRef = useRef(0);
-  const suppressTimerRef = useRef(0);
   const reducedRef = useRef(false);
   const thresholdRef = useRef(threshold);
   const tickRef = useRef(null);
@@ -98,10 +95,6 @@ export default function ThemePullCord({ className = "" }) {
     if (fireTimerRef.current) {
       clearTimeout(fireTimerRef.current);
       fireTimerRef.current = 0;
-    }
-    if (suppressTimerRef.current) {
-      clearTimeout(suppressTimerRef.current);
-      suppressTimerRef.current = 0;
     }
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
@@ -218,13 +211,6 @@ export default function ThemePullCord({ className = "" }) {
     toggleTheme();
   }, [toggleTheme]);
 
-  const clearSuppressTimer = useCallback(() => {
-    if (suppressTimerRef.current) {
-      clearTimeout(suppressTimerRef.current);
-      suppressTimerRef.current = 0;
-    }
-  }, []);
-
   const onPointerDown = useCallback(
     (e) => {
       if (e.button != null && e.button !== 0) return;
@@ -233,8 +219,6 @@ export default function ThemePullCord({ className = "" }) {
       draggingRef.current = true;
       dragIntentRef.current = false;
       firedRef.current = false;
-      suppressClickRef.current = false;
-      clearSuppressTimer();
       startYRef.current = e.clientY;
       pointerIdRef.current = e.pointerId;
 
@@ -256,7 +240,7 @@ export default function ThemePullCord({ className = "" }) {
       setDragging(true);
       startLoop();
     },
-    [applyPull, clearSuppressTimer, startLoop]
+    [applyPull, startLoop]
   );
 
   const onPointerMove = useCallback(
@@ -292,19 +276,10 @@ export default function ThemePullCord({ className = "" }) {
       setNear(false);
     }
 
-    if (dragIntentRef.current || firedRef.current) {
-      suppressClickRef.current = true;
-      clearSuppressTimer();
-      suppressTimerRef.current = setTimeout(() => {
-        suppressTimerRef.current = 0;
-        suppressClickRef.current = false;
-      }, SUPPRESS_CLICK_MS);
-    }
-
     targetRef.current = 0;
     setDragging(false);
     startLoop();
-  }, [clearSuppressTimer, startLoop]);
+  }, [startLoop]);
 
   const onPointerUp = useCallback(
     (e) => {
@@ -340,19 +315,6 @@ export default function ThemePullCord({ className = "" }) {
     [endDrag]
   );
 
-  const onClick = useCallback(
-    (e) => {
-      if (suppressClickRef.current) {
-        suppressClickRef.current = false;
-        clearSuppressTimer();
-        e.preventDefault();
-        return;
-      }
-      toggleTheme();
-    },
-    [clearSuppressTimer, toggleTheme]
-  );
-
   const classes = [
     "pp-pullcord",
     isDark ? "lamp-off" : "lamp-on",
@@ -384,7 +346,6 @@ export default function ThemePullCord({ className = "" }) {
           onPointerUp={onPointerUp}
           onPointerCancel={onPointerCancel}
           onLostPointerCapture={endDrag}
-          onClick={onClick}
         >
           <span className="pp-pullcord__lamp-cap" aria-hidden="true" />
           <LampIcon />
