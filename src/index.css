@@ -55,7 +55,7 @@
 
   --nav-btn-height: 2.75rem;
   --nav-btn-radius: 10px;
-  --nav-btn-gap: 0.5rem;
+  --nav-btn-gap: 0.625rem;
   --nav-btn-font-size: 0.875rem;
   --nav-btn-font-weight: 600;
   --nav-btn-px: 1rem;
@@ -725,7 +725,7 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.3),
       0 2px 0 #7f1d1d,
-      0 4px 10px rgba(153, 27, 27, 0.25);
+      0 4px 8px rgba(153, 27, 27, 0.18);
   }
 
   .nav-btn-sos:hover {
@@ -735,7 +735,7 @@
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.35),
       0 3px 0 #7f1d1d,
-      0 6px 14px rgba(153, 27, 27, 0.3);
+      0 5px 10px rgba(153, 27, 27, 0.22);
   }
 
   .nav-btn-sos:active {

@@ -77,37 +77,37 @@ export default function Navbar() {
     : baseNavLinks;
 
   const linkClass = ({ isActive }) =>
-    `relative inline-flex items-center justify-center px-4 py-2.5 text-base leading-6 font-medium rounded-lg transition-colors duration-200 ${
+    `relative inline-flex items-center justify-center px-4 py-2.5 text-base leading-6 font-semibold rounded-xl transition-colors duration-200 ${
       isActive
-        ? "bg-teal-100 text-teal-700 font-semibold after:content-[''] after:absolute after:inset-x-4 after:bottom-1.5 after:h-[3px] after:rounded-sm after:bg-teal-600"
-        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600"
+        ? "bg-teal-600/10 text-teal-800 font-bold ring-1 ring-inset ring-teal-600/25 dark:bg-teal-400/15 dark:text-teal-100 dark:ring-teal-300/30 after:content-[''] after:absolute after:inset-x-4 after:bottom-1 after:h-[2px] after:rounded-full after:bg-teal-600 dark:after:bg-teal-300"
+        : "text-warm-800 hover:bg-warm-100/80 hover:text-teal-700 dark:text-warm-200 dark:hover:bg-white/5 dark:hover:text-teal-200"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
     `flex w-full items-center min-h-14 px-6 py-4 text-lg font-medium rounded-xl transition-colors duration-200 ${
       isActive
-        ? "bg-teal-100 text-teal-700 font-semibold border-l-4 border-teal-600"
-        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600"
+        ? "bg-teal-600/10 text-teal-800 font-semibold border-l-4 border-teal-600 dark:bg-teal-400/15 dark:text-teal-100 dark:border-teal-300"
+        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600 dark:text-warm-200 dark:hover:bg-white/5 dark:hover:text-teal-200"
     }`;
 
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full bg-(--pp-navbar) transition-shadow duration-300 border-b-[3px] border-dashed border-teal-200 ${
+        className={`sticky top-0 z-50 w-full bg-(--pp-navbar) transition-shadow duration-300 ${
           scrolled
-            ? "shadow-lg shadow-teal-900/5"
-            : "shadow-md shadow-teal-900/5"
+            ? "shadow-[0_12px_28px_-14px_rgba(63,40,25,0.35)] dark:shadow-[0_14px_30px_-14px_rgba(0,0,0,0.65)]"
+            : "shadow-[0_8px_22px_-14px_rgba(63,40,25,0.25)] dark:shadow-[0_10px_24px_-14px_rgba(0,0,0,0.55)]"
         }`}
       >
         <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between gap-2">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2 group shrink-0">
-              <div className="relative flex items-center justify-center w-10 h-10 rounded-lg bg-teal-600 shadow-md">
+            <Link to="/" className="flex items-center gap-2.5 group shrink-0" aria-label="Pixel Players — Home">
+              <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-linear-to-b from-teal-500 to-teal-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_0_rgba(13,78,74,0.55),0_4px_10px_rgba(19,78,74,0.2)]">
                 <span className="text-white text-lg leading-none mt-0.5">♥</span>
-                <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-amber-400 rounded-sm" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-[3px] border-2 border-(--pp-navbar)" />
               </div>
-              <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
+              <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 dark:text-teal-200 group-hover:text-teal-600 transition-colors hidden sm:inline">
                 Pixel&nbsp;Players
               </span>
             </Link>
@@ -153,24 +153,24 @@ export default function Navbar() {
 
             {/* Mobile Hamburger */}
             <button
-              className="xl:hidden flex flex-col items-center justify-center w-12 h-12 rounded-xl hover:bg-teal-50 transition-colors shrink-0"
+              className="xl:hidden flex flex-col items-center justify-center w-12 h-12 rounded-xl hover:bg-teal-50 dark:hover:bg-white/5 transition-colors shrink-0"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t("nav.closeMenu") : t("nav.openMenu")}
               aria-expanded={mobileOpen}
             >
               <div className="flex flex-col gap-1.5 w-6">
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 origin-center ${
                     mobileOpen ? "translate-y-2 rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 ${
                     mobileOpen ? "opacity-0 scale-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 origin-center ${
                     mobileOpen ? "-translate-y-2 -rotate-45" : ""
                   }`}
                 />

@@ -7,10 +7,12 @@ const ROPE_REST = 84;
 const DRAG_INTENT = 8;
 const MAX_PULL = 80;
 const SOFT_POINT = 0.7;
-const SPRING_STIFFNESS = 240;
-const SPRING_DAMPING = 2 * Math.sqrt(SPRING_STIFFNESS);
-const SETTLE_EPSILON = 0.6;
-const SETTLE_VELOCITY = 6;
+/* First-order smoothing time constants (seconds). Short tau while following
+   the pointer keeps the lamp weightless and precise; a longer tau on release
+   lets it settle back gently with no bounce or swing. */
+const FOLLOW_TAU = 0.055;
+const RETURN_TAU = 0.12;
+const SETTLE_EPSILON = 0.5;
 
 function resolveThreshold() {
   if (typeof window === "undefined") return 56;
@@ -29,18 +31,18 @@ function softenedPull(raw) {
 }
 
 /**
- * Hanging pull-cord lamp — the Light/Dark switch for the navbar.
+*  Hanging pull-cord lamp — the Light/Dark switch for the navbar.
  *
- * The rope is anchored to the navbar's top border; the lamp dangles below the
- * navbar. Dragging the lamp downward past the activation threshold flips the
- * theme exactly once for that gesture, then the lamp springs back to rest.
- * Clicking/tapping the lamp (or pressing Enter/Space) does NOT change the
- * theme — only a downward drag past the threshold does.
+ *  The rope is anchored to the navbar's top border; the lamp dangles below the
+ *  navbar. Dragging the lamp downward past the activation threshold flips the
+ *  theme exactly once for that gesture, then the lamp returns gently to rest.
+ *  Clicking/tapping the lamp (or pressing Enter/Space) does NOT change the
+ *  theme — only a downward drag past the threshold does.
  *
- * High-frequency movement is applied straight to the DOM custom property
- * (`--pp-pull`) inside a single requestAnimationFrame loop, so the rope and
- * lamp track the pointer smoothly without re-rendering React on every move.
- * React state is kept for meaningful transitions only (dragging / near / fired).
+ *  High-frequency movement is applied straight to the DOM custom property
+ *  (`--pp-pull`) inside a single requestAnimationFrame loop, so the rope and
+ *  lamp track the pointer smoothly without re-rendering React on every move.
+ *  React state is kept for meaningful transitions only (dragging / near / fired).
  */
 export default function ThemePullCord({ className = "" }) {
   const { isDark, toggleTheme } = useTheme();
@@ -57,7 +59,6 @@ export default function ThemePullCord({ className = "" }) {
 
   const pullXRef = useRef(0);
   const targetRef = useRef(0);
-  const velRef = useRef(0);
   const rafRef = useRef(0);
   const lastTimeRef = useRef(0);
   const draggingRef = useRef(false);
@@ -138,9 +139,11 @@ export default function ThemePullCord({ className = "" }) {
     if (el) el.style.setProperty("--pp-pull", `${v}px`);
   }, []);
 
-  /* One rAF loop drives all movement: a critically-damped spring pulls the
-     lamp toward its target, giving jitter-free pointer tracking and a smooth
-     physical-feeling return without over-elastic bounce. */
+  /* One rAF loop drives all movement: frame-rate-independent exponential
+     smoothing eases the lamp toward its target. While dragging the time
+     constant is short, so the lamp feels weightless and follows the pointer
+     with only a whisper of lag; on release the time constant lengthens and the
+     lamp floats back to rest with zero overshoot, bounce, or swing. */
   const tick = useCallback(() => {
     rafRef.current = 0;
     const now = performance.now();
@@ -149,18 +152,14 @@ export default function ThemePullCord({ className = "" }) {
 
     if (reducedRef.current) {
       pullXRef.current = targetRef.current;
-      velRef.current = 0;
     } else {
-      const acc =
-        SPRING_STIFFNESS * (targetRef.current - pullXRef.current) -
-        SPRING_DAMPING * velRef.current;
-      velRef.current += acc * dt;
-      pullXRef.current += velRef.current * dt;
+      const tau = draggingRef.current ? FOLLOW_TAU : RETURN_TAU;
+      const k = 1 - Math.exp(-dt / tau);
+      pullXRef.current += (targetRef.current - pullXRef.current) * k;
     }
 
     if (pullXRef.current < 0) {
       pullXRef.current = 0;
-      velRef.current = 0;
     }
 
     applyPull(pullXRef.current);
@@ -168,13 +167,11 @@ export default function ThemePullCord({ className = "" }) {
     const settled =
       !draggingRef.current &&
       pullXRef.current <= SETTLE_EPSILON &&
-      Math.abs(velRef.current) < SETTLE_VELOCITY &&
       targetRef.current <= SETTLE_EPSILON;
 
     if (settled) {
       targetRef.current = 0;
       pullXRef.current = 0;
-      velRef.current = 0;
       applyPull(0);
       return;
     }
@@ -234,7 +231,6 @@ export default function ThemePullCord({ className = "" }) {
       }
 
       pullXRef.current = 0;
-      velRef.current = 0;
       targetRef.current = 0;
       applyPull(0);
       setDragging(true);
