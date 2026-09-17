@@ -1327,3 +1327,243 @@
 .lamp-off .lamp-notch {
   transform: translateY(1.5px);
 }
+
+/* ─── Hanging pull-cord theme lamp ────────────────────────────────────────────
+   A small pull-chain lamp that hangs from the navbar border. The rope is
+   anchored to the very top of the `<header>` and the lamp dangles below it.
+   Drag the lamp downward past the threshold to flip Light/Dark; a plain
+   click/tap or Enter/Space does the same. Positioning is driven by two custom
+   properties set from JS:
+     --pp-anchor → px from the container up to the header's top border
+     --pp-pull   → current downward pull distance in px */
+
+.pp-pullcord {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.pp-pullcord__rope {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: calc(-1 * var(--pp-anchor, 18px));
+  height: calc(var(--pp-rope-rest, 84px) + var(--pp-pull, 0px));
+  width: 4px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    180deg,
+    #d3a86f 0 6px,
+    #b98a50 6px 8px,
+    #e3bb82 8px 12px
+  );
+  box-shadow: 1px 2px 3px rgba(63, 40, 25, 0.3);
+  transition: height 480ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.pp-pullcord__knot {
+  position: absolute;
+  left: 50%;
+  top: calc(-1 * var(--pp-anchor, 18px));
+  transform: translateX(-50%);
+  width: 12px;
+  height: 9px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #eec887, #a5762f 90%);
+  box-shadow: 0 2px 3px rgba(63, 40, 25, 0.35);
+  pointer-events: none;
+}
+
+.pp-pullcord__lamp {
+  position: absolute;
+  left: 50%;
+  top: calc(-1 * var(--pp-anchor, 18px) + var(--pp-rope-rest, 84px) + var(--pp-pull, 0px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 48px;
+  pointer-events: none;
+  transition: top 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pp-pullcord__lamp-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 2px solid var(--color-warm-200);
+  border-radius: 13px;
+  background: linear-gradient(180deg, var(--color-warm-50), var(--color-warm-200));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 2px 0 var(--color-warm-300),
+    0 6px 12px var(--pp-lamp-shadow);
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 120ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.pp-pullcord__lamp-btn:hover {
+  border-color: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+.pp-pullcord.is-dragging .pp-pullcord__lamp-btn {
+  cursor: grabbing;
+}
+
+.pp-pullcord.is-dragging .pp-pullcord__lamp-btn:hover {
+  transform: translateY(0);
+}
+
+.pp-pullcord__lamp-btn:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow:
+    inset 0 2px 4px rgba(63, 40, 25, 0.18),
+    0 1px 0 var(--color-warm-300),
+    0 2px 5px var(--pp-lamp-shadow);
+}
+
+.pp-pullcord__lamp-btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.pp-pullcord__lamp-cap {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 9px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #f0cf94, #b17f34);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.pp-pullcord__lamp .lamp-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.pp-pullcord__lamp-label {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 8.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pp-text-muted);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Warm halo while theme is light — kept subtle */
+.pp-pullcord.lamp-on .pp-pullcord__lamp-btn {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 2px 0 var(--color-warm-300),
+    0 6px 12px var(--pp-lamp-shadow),
+    0 0 16px rgba(251, 191, 36, 0.26);
+}
+
+/* While dragging, drop transitions so the lamp tracks the pointer 1:1 */
+.pp-pullcord.is-dragging .pp-pullcord__rope,
+.pp-pullcord.is-dragging .pp-pullcord__lamp {
+  transition: none;
+}
+
+/* Near-threshold feedback */
+.pp-pullcord.is-near .pp-pullcord__lamp-btn {
+  border-color: var(--color-primary-light);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 2px 0 var(--color-warm-300),
+    0 6px 14px var(--pp-lamp-shadow),
+    0 0 0 4px rgba(20, 184, 166, 0.22);
+}
+
+.pp-pullcord.is-near .pp-pullcord__rope {
+  box-shadow:
+    0 0 0 1px rgba(20, 184, 166, 0.18),
+    1px 2px 3px rgba(63, 40, 25, 0.3);
+}
+
+/* Small "clicked" pop when the threshold fires */
+.pp-pullcord.is-fired .pp-pullcord__lamp-btn {
+  animation: pp-pullcord-pop 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes pp-pullcord-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Dark-mode material */
+.dark .pp-pullcord__lamp-btn {
+  border-color: var(--color-warm-300);
+  background: linear-gradient(180deg, #2a3430, #1c2522);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 0 rgba(0, 0, 0, 0.45),
+    0 6px 12px var(--pp-lamp-shadow);
+}
+
+.dark .pp-pullcord__rope {
+  background: repeating-linear-gradient(
+    180deg,
+    #7c6a4e 0 6px,
+    #5f523b 6px 8px,
+    #8a7657 8px 12px
+  );
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.dark .pp-pullcord__knot {
+  background: linear-gradient(180deg, #8a7657, #5f523b);
+}
+
+.dark .pp-pullcord__lamp-cap {
+  background: linear-gradient(180deg, #8a7657, #5f523b);
+}
+
+.dark .pp-pullcord__lamp-label {
+  color: #b8aa96;
+}
+
+/* Reduced motion: no spring return, no pop — switching still works */
+@media (prefers-reduced-motion: reduce) {
+  .pp-pullcord .pp-pullcord__rope,
+  .pp-pullcord .pp-pullcord__lamp {
+    transition-duration: 0.01s !important;
+  }
+
+  .pp-pullcord.is-fired .pp-pullcord__lamp-btn {
+    animation: none;
+  }
+}

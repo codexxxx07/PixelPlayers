@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useAuth, UserButton } from "@clerk/react";
 import SosButton, { SosModal } from "./SosButton";
 import ThemeToggle from "./ThemeToggle";
+import ThemePullCord from "./ThemePullCord";
 import { useTheme } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
 
@@ -122,7 +123,6 @@ export default function Navbar() {
 
             {/* Desktop Auth */}
             <div className="hidden lg:flex items-center shrink-0" style={{ gap: "var(--nav-btn-gap)" }}>
-              <ThemeToggle />
               {isLoaded && isSignedIn ? (
                 <UserButton
                   afterSignOutUrl="/"
@@ -143,11 +143,12 @@ export default function Navbar() {
                 </>
               ) : null}
               <SosButton variant="navbar" onClick={openSos} />
+              <ThemePullCord />
             </div>
 
-            {/* Mobile theme toggle (desktop auth row already shows one ≥lg) */}
+            {/* Mobile pull-cord theme lamp (desktop auth row already shows one ≥lg) */}
             <div className="lg:hidden">
-              <ThemeToggle />
+              <ThemePullCord />
             </div>
 
             {/* Mobile Hamburger */}
