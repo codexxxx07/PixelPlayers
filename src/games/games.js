@@ -76,7 +76,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Stone Paper Scissor is quick, playful and very familiar — many people already know the rules. It turns a simple choice into a light, cheerful moment that keeps the mind nimble.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-2/",
   },
   {
     id: "colour-the-same",
