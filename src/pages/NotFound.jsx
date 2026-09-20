@@ -11,10 +11,10 @@ export default function NotFound() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-teal-100 border-2 border-teal-200 text-3xl mb-4">
             <span aria-hidden="true">🗺️</span>
           </div>
-          <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-4 block">
+          <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-4 block">
             {t('notFound.eyebrow')}
           </span>
-          <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
+          <h1 className="font-pixel text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
             {t('notFound.title')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mt-3">
@@ -25,7 +25,7 @@ export default function NotFound() {
         <section className="animate-slide-up stagger-1">
           <PixelCard pixel className="p-8 md:p-10 text-center">
             <div
-              className="font-[family-name:var(--font-pixel)] text-6xl md:text-8xl text-teal-300 leading-none mb-3"
+              className="font-pixel text-6xl md:text-8xl text-teal-300 leading-none mb-3"
               aria-hidden="true"
             >
               4<span className="text-amber-400">0</span>4
