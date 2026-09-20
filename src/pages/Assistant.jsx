@@ -12,7 +12,7 @@ function ActionCard({ icon, titleKey, titleValues, linesKeys = [], to, ctaKey })
   return (
     <div className="skeuo-card p-5 flex flex-col h-full">
       <div className="flex items-center gap-3 mb-3">
-        <span className="w-11 h-11 flex-shrink-0 flex items-center justify-center rounded-xl bg-gradient-to-b from-teal-50 to-amber-50 border-2 border-teal-100 text-2xl" aria-hidden="true">
+        <span className="w-11 h-11 shrink-0 flex items-center justify-center rounded-xl bg-linear-to-b from-teal-50 to-amber-50 border-2 border-teal-100 text-2xl" aria-hidden="true">
           {icon}
         </span>
         <h2 className="font-pixel text-[9px] text-teal-800 leading-relaxed">{t(titleKey, titleValues)}</h2>
@@ -27,7 +27,7 @@ function ActionCard({ icon, titleKey, titleValues, linesKeys = [], to, ctaKey })
       {to && (
         <Link
           to={to}
-          className="inline-flex items-center gap-2 self-start rounded-xl bg-gradient-to-b from-teal-500 to-teal-600 text-white px-5 py-3 text-base font-extrabold shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-[2px] active:shadow-[0_1px_0_#134e4a]"
+          className="inline-flex items-center gap-2 self-start rounded-xl bg-linear-to-b from-teal-500 to-teal-600 text-white px-5 py-3 text-base font-extrabold shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-0.5 active:shadow-[0_1px_0_#134e4a]"
         >
           {t(ctaKey)}
           <span aria-hidden="true">→</span>
@@ -175,10 +175,10 @@ export default function Assistant() {
 
   return (
     <div className="page-enter min-h-screen pb-16">
-      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 py-8 md:py-10">
+      <div className="mx-auto max-w-360 px-4 sm:px-6 py-8 md:py-10">
         <div className="lg:hidden mb-6 animate-pixel-fade-in">
           <div className="skeuo-card flex items-center gap-4 p-5">
-            <ClaraBadge className="w-16 h-16 flex-shrink-0" />
+            <ClaraBadge className="w-16 h-16 shrink-0" />
             <div className="min-w-0">
               <p className="font-pixel text-[10px] text-teal-800 mb-1">{t('assistant.clara')}</p>
               <p className="text-sm text-gray-500 truncate">{t('assistant.claraSubtitle')}</p>
@@ -192,7 +192,7 @@ export default function Assistant() {
           <aside className="hidden lg:block lg:sticky lg:top-24 space-y-5">
             <div className="skeuo-card p-5 animate-pixel-fade-in">
               <div className="flex items-center gap-3 mb-4">
-                <ClaraBadge className="w-16 h-16 flex-shrink-0" />
+                <ClaraBadge className="w-16 h-16 shrink-0" />
                 <div className="min-w-0">
                   <p className="font-pixel text-[9px] text-teal-800 leading-relaxed">{t('assistant.clara')}</p>
                   <p className="text-sm text-gray-500 mt-1">{t('assistant.claraSubtitle')}</p>
@@ -249,9 +249,9 @@ export default function Assistant() {
             </div>
           </aside>
 
-          <div className="rounded-3xl bg-white border-2 border-teal-100 shadow-[0_8px_30px_rgba(19,78,74,0.08)] overflow-hidden flex flex-col">
-            <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
-              <ClaraBadge className="w-14 h-14 flex-shrink-0" />
+          <div className="rounded-3xl bg-white dark:bg-(--pp-surface) border-2 border-teal-100 dark:border-(--pp-border) shadow-[0_8px_30px_rgba(19,78,74,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] overflow-hidden flex flex-col">
+            <div className="flex items-center gap-3 px-5 py-4 bg-linear-to-r from-teal-50 to-amber-50 border-b border-teal-100">
+              <ClaraBadge className="w-14 h-14 shrink-0" />
               <div className="min-w-0 flex-1">
                 <p className="font-pixel text-[9px] text-teal-800 tracking-wider">{t('assistant.clara')}</p>
                 <p className="text-xs text-gray-500 truncate">{t('assistant.claraSubtitle')}</p>
@@ -268,7 +268,7 @@ export default function Assistant() {
             </div>
 
             <div
-              className="flex-1 h-[52vh] min-h-[420px] overflow-y-auto p-5 space-y-5 buddy-chat-bg"
+              className="flex-1 h-[52vh] min-h-105 overflow-y-auto p-5 space-y-5 buddy-chat-bg"
               aria-live="polite"
               aria-label={t('assistant.conversationLabel')}
             >
@@ -294,10 +294,10 @@ export default function Assistant() {
             </div>
 
             {voiceState !== "idle" && (
-              <div className="border-t border-teal-100 bg-gradient-to-r from-teal-50 via-amber-50 to-teal-50 px-5 py-4" aria-live="polite">
+              <div className="border-t border-teal-100 bg-linear-to-r from-teal-50 via-amber-50 to-teal-50 px-5 py-4" aria-live="polite">
                 {voiceState === "listening" ? (
                   <div className="flex items-center gap-4">
-                    <ClaraBadge className="w-14 h-14 flex-shrink-0" />
+                    <ClaraBadge className="w-14 h-14 shrink-0" />
                     <div className="flex-1 min-w-0">
                       <p className="font-pixel text-[9px] text-red-500 tracking-wider">{t('assistant.listening')}</p>
                       {voiceTranscript ? (
@@ -309,7 +309,7 @@ export default function Assistant() {
                     <button
                       type="button"
                       onClick={stopVoice}
-                      className="flex-shrink-0 inline-flex items-center gap-2 rounded-xl bg-white border-2 border-red-200 hover:bg-red-50 text-red-600 px-4 py-2.5 text-sm font-bold transition-colors"
+                      className="shrink-0 inline-flex items-center gap-2 rounded-xl bg-white border-2 border-red-200 hover:bg-red-50 text-red-600 px-4 py-2.5 text-sm font-bold transition-colors"
                     >
                       <span aria-hidden="true">⏹</span>
                       <span className="hidden sm:inline">{t('assistant.stop')}</span>
@@ -317,12 +317,12 @@ export default function Assistant() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-4">
-                    <ClaraBadge className="w-14 h-14 flex-shrink-0" />
+                    <ClaraBadge className="w-14 h-14 shrink-0" />
                     <div className="flex-1">
                       <p className="font-pixel text-[9px] text-teal-700 tracking-wider">{t('assistant.thinking')}</p>
                       <p className="text-gray-500 text-base mt-1">{t('assistant.justAMoment')}</p>
                     </div>
-                    <span className="inline-block w-8 h-8 rounded-full border-4 border-teal-200 border-t-teal-600 animate-spin flex-shrink-0" aria-hidden="true" />
+                    <span className="inline-block w-8 h-8 rounded-full border-4 border-teal-200 border-t-teal-600 animate-spin shrink-0" aria-hidden="true" />
                   </div>
                 )}
               </div>
@@ -334,7 +334,7 @@ export default function Assistant() {
                   key={suggestion.label}
                   type="button"
                   onClick={() => handleChip(suggestion)}
-                  className="flex-shrink-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 border-teal-200 bg-white hover:bg-teal-50 text-teal-800 px-4 py-2.5 text-sm font-bold transition-colors"
+                  className="shrink-0 inline-flex items-center gap-2 whitespace-nowrap rounded-full border-2 border-teal-200 bg-white hover:bg-teal-50 text-teal-800 px-4 py-2.5 text-sm font-bold transition-colors"
                 >
                   <span aria-hidden="true">{suggestion.icon}</span>
                   {t(suggestion.labelKey)}
@@ -342,7 +342,7 @@ export default function Assistant() {
               ))}
             </div>
 
-            <form onSubmit={handleSubmit} className="p-4 border-t border-teal-100 bg-[var(--pp-surface-2)]">
+            <form onSubmit={handleSubmit} className="p-4 border-t border-teal-100 bg-(--pp-surface-2)">
               <div className="flex items-end gap-3">
                 <div className="flex-1">
                   <label htmlFor="chat-input" className="sr-only">
@@ -368,14 +368,14 @@ export default function Assistant() {
                   isListening={voiceState === "listening"}
                   onToggle={toggleVoice}
                   size="xl"
-                  className="flex-shrink-0"
+                  className="shrink-0"
                 />
 
                 <button
                   type="submit"
                   disabled={!input.trim() || thinking || voiceState !== "idle"}
                   aria-label={t('assistant.sendMessage')}
-                  className="flex-shrink-0 inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 text-white font-pixel text-[10px] px-4 sm:px-6 h-20 sm:h-24 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] disabled:opacity-40 disabled:pointer-events-none transition-all"
+                  className="shrink-0 inline-flex items-center justify-center gap-2 rounded-2xl bg-linear-to-b from-teal-500 to-teal-600 text-white font-pixel text-[10px] px-4 sm:px-6 h-20 sm:h-24 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] disabled:opacity-40 disabled:pointer-events-none transition-all"
                 >
                   <span className="hidden sm:inline">{t('assistant.send')}</span><span aria-hidden="true">➤</span>
                 </button>
@@ -397,7 +397,7 @@ export default function Assistant() {
               <div className="space-y-3">
                 {supportNetwork.slice(0, 3).map((person) => (
                   <div key={person.id} className="flex items-center gap-3">
-                    <span className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full bg-amber-100 border-2 border-amber-200 text-xl" aria-hidden="true">
+                    <span className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full bg-amber-100 border-2 border-amber-200 text-xl" aria-hidden="true">
                       {person.icon}
                     </span>
                     <div className="min-w-0">
