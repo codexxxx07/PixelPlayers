@@ -6,7 +6,7 @@ export default function ProtectedRoute() {
   const { isLoaded, isSignedIn } = useAuth();
   const location = useLocation();
 
-  if (!isLoaded) return <PageLoader skeleton={<SkeletonDashboard />} />;
+  if (!isLoaded) return <PageLoader skeleton={SkeletonDashboard} />;
 
   if (!isSignedIn) {
     const from = location.pathname + location.search;
