@@ -22,6 +22,7 @@ const Support = lazy(() => import("./pages/Support"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function AppRoutes() {
   return (
@@ -32,23 +33,19 @@ function AppRoutes() {
         <Route path="/features" element={<Features />} />
         <Route path="/games" element={<Games />} />
         <Route path="/games/:gameId" element={<GameDetails />} />
-        <Route path="/memory" element={<Memory />} />
-        <Route path="/routine" element={<Routine />} />
-        <Route path="/reminders" element={<Reminders />} />
-        <Route path="/assistant" element={<Assistant />} />
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/progress" element={<Progress />} />
-        <Route path="/support" element={<Support />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/memory" element={<Memory />} />
+          <Route path="/routine" element={<Routine />} />
+          <Route path="/reminders" element={<Reminders />} />
+          <Route path="/assistant" element={<Assistant />} />
+          <Route path="/progress" element={<Progress />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/settings" element={<Settings />} />
+        </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );

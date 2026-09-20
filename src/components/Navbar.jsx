@@ -125,7 +125,6 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center shrink-0" style={{ gap: "var(--nav-btn-gap)" }}>
               {isLoaded && isSignedIn ? (
                 <UserButton
-                  afterSignOutUrl="/"
                   appearance={{
                     elements: {
                       avatarBox: "w-10 h-10 rounded-full",
@@ -239,22 +238,26 @@ export default function Navbar() {
                 {t(link.key)}
               </NavLink>
             ))}
-            <div className="pt-3 pb-1 px-6 text-xs font-pixel text-teal-400 tracking-wider">
-              {t("nav.yourSpace")}
-            </div>
-            {mobileExtras.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={mobileLinkClass}
-                onClick={() => setMobileOpen(false)}
-              >
-                <span className="inline-flex items-center gap-3">
-                  <span className="text-xl">{link.icon}</span>
-                  {t(link.key)}
-                </span>
-              </NavLink>
-            ))}
+            {isLoaded && isSignedIn && (
+              <>
+                <div className="pt-3 pb-1 px-6 text-xs font-pixel text-teal-400 tracking-wider">
+                  {t("nav.yourSpace")}
+                </div>
+                {mobileExtras.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={mobileLinkClass}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <span className="text-xl">{link.icon}</span>
+                      {t(link.key)}
+                    </span>
+                  </NavLink>
+                ))}
+              </>
+            )}
           </div>
 
             {/* Mobile Auth */}
@@ -262,7 +265,6 @@ export default function Navbar() {
               {isLoaded && isSignedIn ? (
                 <div className="flex justify-center py-2">
                   <UserButton
-                    afterSignOutUrl="/"
                     appearance={{
                       elements: {
                         avatarBox: "w-12 h-12 rounded-full",

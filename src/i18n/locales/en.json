@@ -849,5 +849,13 @@
     "preparing": "We're busy preparing {{name}} for you. It will be available here soon — check back in a little while!",
     "notGame": "This activity is still being prepared. It will be available here soon!",
     "backToGames": "← Back to Games"
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "Page Not Found",
+    "desc": "The page you're looking for doesn't exist or has moved.",
+    "hint": "Looks like you've wandered off the map. Let's get you back to the fun!",
+    "backHome": "Back to Home",
+    "browseGames": "Browse Games"
   }
 }

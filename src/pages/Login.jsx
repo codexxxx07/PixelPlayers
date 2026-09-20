@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { SignIn, useAuth } from "@clerk/react";
 import { useTranslation } from "react-i18next";
 import AuthShell from "../components/AuthShell";
@@ -7,9 +7,14 @@ import { SkeletonAuth } from "../components/Skeleton";
 export default function Login() {
   const { isLoaded, isSignedIn } = useAuth();
   const { t } = useTranslation();
+  const location = useLocation();
+  const from =
+    typeof location.state?.from === "string" && location.state.from.startsWith("/")
+      ? location.state.from
+      : "/dashboard";
 
   if (!isLoaded) return <SkeletonAuth />;
-  if (isSignedIn) return <Navigate to="/dashboard" replace />;
+  if (isSignedIn) return <Navigate to={from} replace />;
 
   return (
     <AuthShell
@@ -20,7 +25,7 @@ export default function Login() {
     >
       <SignIn
         signUpUrl="/signup"
-        fallbackRedirectUrl="/dashboard"
+        fallbackRedirectUrl={from}
         appearance={{
           elements: {
             rootBox: "w-full",
