@@ -30,7 +30,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Tetris is a gentle classic that asks you to look, think and act one step at a time. There is no rushing — every move is your own decision, which can feel calm and satisfying at any age.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-9/",
   },
   {
     id: "tic-tac-toe",
@@ -99,7 +99,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Colour matching is a quiet, visual activity that asks you to pause, look closely and compare. It is simple to follow and gives a steady sense of progress, which can be very encouraging.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-8/",
   },
   {
     id: "spot-the-difference",
@@ -122,7 +122,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Spot the Difference turns a gentle search into a rewarding little hunt. It invites you to look slowly and notice details, with the satisfaction of finding every hidden change.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-6/",
   },
   {
     id: "2048",
@@ -145,7 +145,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "2048 is a thoughtful puzzle that rewards calm planning over speed. Each move is deliberate, which gives the mind space to work through a problem step by step.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-3/",
   },
   {
     id: "chess",
@@ -168,7 +168,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Chess invites deep, quiet thinking in a familiar and respected game. Playing against the computer lets you take your time with every move, making it a calm yet engaging mental workout.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-4/",
   },
   {
     id: "rapid-fire-calculation",
@@ -191,7 +191,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Rapid Fire Calculation gives numbers a playful rhythm. A short, friendly timer adds a gentle spark of energy while the questions stay simple enough to feel achievable.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-7/",
   },
   {
     id: "memory-card-game",
@@ -214,7 +214,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "The memory card game is a beloved classic for good reason. It is gentle, visual and quiet, letting you practice recall one small step at a time while a loved one plays beside you.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-5/",
   },
   {
     id: "running-goat",
