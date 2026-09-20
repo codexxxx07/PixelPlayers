@@ -402,7 +402,7 @@
   },
   "games": {
     "title": "Cognitive Games Hub",
-    "subtitle": "A growing collection of gentle brain activities — coming soon",
+    "subtitle": "Play gentle games designed for a happy, busy mind — at your own pace.",
     "categoryAll": "All",
     "categoryMemory": "Memory",
     "categoryAttention": "Attention",
@@ -413,6 +413,14 @@
     "noGamesTitle": "No games in this category",
     "noGamesDesc": "There are no activities here right now. Try another category!",
     "showAll": "Show all games",
+    "viewGame": "View Game",
+    "backToGames": "Back to Games",
+    "playGame": "Play Game",
+    "howThisHelps": "How This Helps",
+    "howToPlay": "How to Play",
+    "whyThisActivity": "Why This Activity?",
+    "gameNotFound": "We could not find that game.",
+    "gameNotFoundDesc": "The game may have moved. Let's head back to the game library.",
     "howGamesHelp": "How Games Help",
     "howGamesHelpDesc": "A little play each day keeps the mind happy and busy.",
     "howHelpMemory": {

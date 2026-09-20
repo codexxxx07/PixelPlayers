@@ -8,9 +8,7 @@ const CATEGORIES = [
   { key: 'Memory', labelKey: 'games.categoryMemory', icon: '🧠' },
   { key: 'Attention', labelKey: 'games.categoryAttention', icon: '👁️' },
   { key: 'Reasoning', labelKey: 'games.categoryReasoning', icon: '🧩' },
-  { key: 'Language', labelKey: 'games.categoryLanguage', icon: '💬' },
   { key: 'Recognition', labelKey: 'games.categoryRecognition', icon: '🏷️' },
-  { key: 'Daily-life', labelKey: 'games.categoryDaily', icon: '📅' },
 ];
 
 const HOW_HELP_BENEFITS = [

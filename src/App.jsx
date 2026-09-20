@@ -11,7 +11,7 @@ const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Features = lazy(() => import("./pages/Features"));
 const Games = lazy(() => import("./pages/Games"));
-const ComingSoon = lazy(() => import("./pages/ComingSoon"));
+const GameDetails = lazy(() => import("./pages/GameDetails"));
 const Memory = lazy(() => import("./pages/Memory"));
 const Routine = lazy(() => import("./pages/Routine"));
 const Reminders = lazy(() => import("./pages/Reminders"));
@@ -23,19 +23,6 @@ const Settings = lazy(() => import("./pages/Settings"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
 
-const GAME_SLUGS = [
-  "picture-recall",
-  "sequence-recall",
-  "pattern-match",
-  "find-the-object",
-  "memory-cards",
-  "word-association",
-  "daily-life-recall",
-  "place-recognition",
-  "memory-story",
-  "name-face-match",
-];
-
 function AppRoutes() {
   return (
     <Suspense fallback={<RouteSkeleton />}>
@@ -44,9 +31,7 @@ function AppRoutes() {
         <Route path="/about" element={<About />} />
         <Route path="/features" element={<Features />} />
         <Route path="/games" element={<Games />} />
-        {GAME_SLUGS.map((slug) => (
-          <Route key={slug} path={`/games/${slug}`} element={<ComingSoon />} />
-        ))}
+        <Route path="/games/:gameId" element={<GameDetails />} />
         <Route path="/memory" element={<Memory />} />
         <Route path="/routine" element={<Routine />} />
         <Route path="/reminders" element={<Reminders />} />

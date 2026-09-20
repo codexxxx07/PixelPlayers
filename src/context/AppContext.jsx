@@ -2,6 +2,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react';
 import { useUser } from '@clerk/react';
 import { getUserDisplayName } from '../utils/displayName';
+import { GAMES } from '../games/games';
 
 const AppContext = createContext(null);
 
@@ -323,128 +324,15 @@ export function AppProvider({ children }) {
     },
   ]);
 
-  const [games] = useState([
-    {
-      id: "picture-recall",
-      name: "Picture Recall",
-      category: "Memory",
-      description: "Look at a picture, then find it again from a set. Gentle on the eyes, gentle on the mind.",
-      difficulty: "Easy",
-      duration: "3 min",
-      icon: "🖼️",
-      skillTarget: "Short-term visual memory",
-      href: "/games/picture-recall",
-      status: "coming-soon",
-    },
-    {
-      id: "sequence-recall",
-      name: "Sequence Recall",
-      category: "Memory",
-      description: "Watch the order of lights and repeat the sequence back. Builds focus and recollection step by step.",
-      difficulty: "Medium",
-      duration: "4 min",
-      icon: "🔢",
-      skillTarget: "Working memory & sequencing",
-      href: "/games/sequence-recall",
-      status: "coming-soon",
-    },
-    {
-      id: "pattern-match",
-      name: "Pattern Match",
-      category: "Reasoning",
-      description: "Spot the pattern and find the piece that completes it. A calm puzzle for a sunny afternoon.",
-      difficulty: "Easy",
-      duration: "3 min",
-      icon: "🧩",
-      skillTarget: "Pattern recognition",
-      href: "/games/pattern-match",
-      status: "coming-soon",
-    },
-    {
-      id: "find-the-object",
-      name: "Find the Object",
-      category: "Attention",
-      description: "Search the scene for a hidden object. Train your eye to scan carefully and calmly.",
-      difficulty: "Easy",
-      duration: "2 min",
-      icon: "🔍",
-      skillTarget: "Focused attention & scanning",
-      href: "/games/find-the-object",
-      status: "coming-soon",
-    },
-    {
-      id: "memory-cards",
-      name: "Memory Cards",
-      category: "Memory",
-      description: "Classic pairs game with familiar photos and faces. Flip, remember, and match.",
-      difficulty: "Medium",
-      duration: "5 min",
-      icon: "🃏",
-      skillTarget: "Working memory & recall",
-      href: "/games/memory-cards",
-      status: "coming-soon",
-    },
-    {
-      id: "word-association",
-      name: "Word Association",
-      category: "Language",
-      description: "Pick the word that fits best together. A gentle nudge for vocabulary and expression.",
-      difficulty: "Easy",
-      duration: "3 min",
-      icon: "💬",
-      skillTarget: "Vocabulary & verbal fluency",
-      href: "/games/word-association",
-      status: "coming-soon",
-    },
-    {
-      id: "daily-life-recall",
-      name: "Daily-Life Recall",
-      category: "Daily-life",
-      description: "Reorder everyday tasks like brewing chai or watering plants in the right sequence.",
-      difficulty: "Medium",
-      duration: "4 min",
-      icon: "📅",
-      skillTarget: "Procedural memory",
-      href: "/games/daily-life-recall",
-      status: "coming-soon",
-    },
-    {
-      id: "place-recognition",
-      name: "Place Recognition",
-      category: "Recognition",
-      description: "Match familiar places — the temple, the market, the old school — to their names.",
-      difficulty: "Medium",
-      duration: "3 min",
-      icon: "🏠",
-      skillTarget: "Visuospatial recognition",
-      href: "/games/place-recognition",
-      status: "coming-soon",
-    },
-    {
-      id: "memory-story",
-      name: "Memory Story",
-      category: "Language",
-      description: "Listen to a short story, then answer gentle questions about it. Slow and soothing.",
-      difficulty: "Hard",
-      duration: "5 min",
-      icon: "📖",
-      skillTarget: "Listening comprehension & retention",
-      href: "/games/memory-story",
-      status: "coming-soon",
-    },
-    {
-      id: "name-face-match",
-      name: "Name-Face Match",
-      category: "Memory",
-      description: "Match friendly faces to their names. Great for remembering people you care about.",
-      difficulty: "Medium",
-      duration: "4 min",
-      icon: "👋",
-      skillTarget: "Face-name association",
-      href: "/games/name-face-match",
-      status: "coming-soon",
-    },
-  ]);
+  const [games] = useState(() =>
+    GAMES.map((game) => ({
+      ...game,
+      name: game.title,
+      href: `/games/${game.id}`,
+      duration: "A few minutes",
+      skillTarget: game.category,
+    }))
+  );
 
   const [progressData] = useState({
     gamesCompleted: 128,
