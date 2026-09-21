@@ -857,5 +857,45 @@
     "hint": "Looks like you've wandered off the map. Let's get you back to the fun!",
     "backHome": "Back to Home",
     "browseGames": "Browse Games"
+  },
+  "featurePreview": {
+    "eyebrow": "Personal Feature",
+    "loginCta": "Login to Access",
+    "whyUseTitle": "Why you'll use it",
+    "whyLogin": {
+      "title": "Why do I need to log in?",
+      "desc": "Your memories, reminders, and everyday details are private to you. Logging in keeps this personal information safe and just for you."
+    },
+    "howContinue": {
+      "title": "How do I continue?",
+      "desc": "Tap the button below to log in. After you sign in, you will be brought right back here and can start using {{feature}}."
+    },
+    "privacyNote": "Your personal details stay private. Nothing is shown here until you log in.",
+    "mobileLockLabel": "Log in to unlock",
+    "memory": {
+      "title": "Memory Vault",
+      "desc": "Save and organize meaningful memories in your personal memory space, so Clara can use them to make your experience more personal.",
+      "benefit1": "Keep meaningful memories organized.",
+      "benefit2": "Build a personal memory profile.",
+      "benefit3": "Help Clara provide more personalized conversations and activities.",
+      "benefit4": "Access and manage your memories from one place."
+    },
+    "reminders": {
+      "title": "Reminders",
+      "desc": "Keep track of important daily routines, activities, and reminders so you don't have to remember everything on your own.",
+      "benefit1": "Remember important daily activities.",
+      "benefit2": "Keep routines organized.",
+      "benefit3": "Support consistent everyday habits.",
+      "benefit4": "Make important reminders easier to manage."
+    },
+    "assistant": {
+      "title": "Clara — Your Memory Assistant",
+      "desc": "Talk with Clara using simple voice or text to get help with memories, routines, activities, and everyday guidance.",
+      "benefit1": "Talk naturally using voice or text.",
+      "benefit2": "Get help with memories and routines.",
+      "benefit3": "Ask about your activities.",
+      "benefit4": "Get simple everyday guidance.",
+      "benefit5": "Use a friendly conversational interface."
+    }
   }
 }

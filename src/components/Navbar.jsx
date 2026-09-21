@@ -23,6 +23,12 @@ const mobileExtras = [
   { to: "/settings", key: "nav.settings", icon: "⚙️" },
 ];
 
+const lockedExtras = [
+  { to: "/memory", key: "nav.memory", icon: "💾" },
+  { to: "/reminders", key: "nav.reminders", icon: "⏰" },
+  { to: "/assistant", key: "nav.assistant", icon: "🤖" },
+];
+
 export default function Navbar() {
   const { t } = useTranslation();
   const { isLoaded, isSignedIn } = useAuth();
@@ -75,6 +81,10 @@ export default function Navbar() {
   const navLinks = isSignedIn
     ? [...baseNavLinks, { to: "/dashboard", key: "nav.dashboard" }]
     : baseNavLinks;
+
+  const mobileNavLinks = isSignedIn
+    ? [...baseNavLinks, { to: "/dashboard", key: "nav.dashboard" }]
+    : baseNavLinks.filter((link) => link.to !== "/memory");
 
   const linkClass = ({ isActive }) =>
     `relative inline-flex items-center justify-center px-4 py-2.5 text-base leading-6 font-semibold rounded-xl transition-colors duration-200 ${
@@ -227,7 +237,7 @@ export default function Navbar() {
                 }}
               />
             </div>
-            {navLinks.map((link) => (
+            {mobileNavLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
@@ -254,6 +264,27 @@ export default function Navbar() {
                       <span className="text-xl">{link.icon}</span>
                       {t(link.key)}
                     </span>
+                  </NavLink>
+                ))}
+              </>
+            )}
+            {isLoaded && !isSignedIn && (
+              <>
+                <div className="pt-3 pb-1 px-6 text-xs font-pixel text-teal-400 tracking-wider">
+                  {t("featurePreview.mobileLockLabel")}
+                </div>
+                {lockedExtras.map((link) => (
+                  <NavLink
+                    key={link.to}
+                    to={link.to}
+                    className={mobileLinkClass}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span className="inline-flex items-center gap-3">
+                      <span className="text-xl">{link.icon}</span>
+                      {t(link.key)}
+                    </span>
+                    <span className="ml-auto text-sm opacity-60" aria-hidden="true">🔒</span>
                   </NavLink>
                 ))}
               </>

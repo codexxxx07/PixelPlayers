@@ -35,13 +35,19 @@ function AppRoutes() {
         <Route path="/games/:gameId" element={<GameDetails />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/memory" element={<Memory />} />
           <Route path="/routine" element={<Routine />} />
-          <Route path="/reminders" element={<Reminders />} />
-          <Route path="/assistant" element={<Assistant />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/support" element={<Support />} />
           <Route path="/settings" element={<Settings />} />
+        </Route>
+        <Route element={<ProtectedRoute feature="memory" />}>
+          <Route path="/memory" element={<Memory />} />
+        </Route>
+        <Route element={<ProtectedRoute feature="reminders" />}>
+          <Route path="/reminders" element={<Reminders />} />
+        </Route>
+        <Route element={<ProtectedRoute feature="assistant" />}>
+          <Route path="/assistant" element={<Assistant />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
