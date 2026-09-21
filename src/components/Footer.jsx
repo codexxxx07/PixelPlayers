@@ -160,7 +160,7 @@ export default function Footer() {
 
         {/* SIH Credit */}
         <div className="mt-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-teal-800 border border-teal-700 px-4 py-1.5 text-xs text-[#5eead4]">
+          <span className="inline-flex items-center gap-2 rounded-full bg-teal-800 border border-teal-700 px-4 py-1.5 text-xs text-[#5eead4] dark:bg-teal-100 dark:border-teal-300">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             {t("footer.sihCredit")}
           </span>

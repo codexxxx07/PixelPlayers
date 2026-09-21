@@ -79,15 +79,15 @@ export default function Navbar() {
   const linkClass = ({ isActive }) =>
     `relative inline-flex items-center justify-center px-4 py-2.5 text-base leading-6 font-semibold rounded-xl transition-colors duration-200 ${
       isActive
-        ? "bg-teal-600/10 text-teal-800 font-bold ring-1 ring-inset ring-teal-600/25 dark:bg-teal-400/15 dark:text-teal-100 dark:ring-teal-300/30 after:content-[''] after:absolute after:inset-x-4 after:bottom-1 after:h-[2px] after:rounded-full after:bg-teal-600 dark:after:bg-teal-300"
-        : "text-warm-800 hover:bg-warm-100/80 hover:text-teal-700 dark:text-warm-200 dark:hover:bg-white/5 dark:hover:text-teal-200"
+        ? "bg-teal-600/10 text-teal-800 font-bold ring-1 ring-inset ring-teal-600/25 dark:bg-teal-400/15 after:content-[''] after:absolute after:inset-x-4 after:bottom-1 after:h-[2px] after:rounded-full after:bg-teal-600"
+        : "text-warm-800 hover:bg-warm-100/80 hover:text-teal-700 dark:hover:bg-white/5"
     }`;
 
   const mobileLinkClass = ({ isActive }) =>
     `flex w-full items-center min-h-14 px-6 py-4 text-lg font-medium rounded-xl transition-colors duration-200 ${
       isActive
-        ? "bg-teal-600/10 text-teal-800 font-semibold border-l-4 border-teal-600 dark:bg-teal-400/15 dark:text-teal-100 dark:border-teal-300"
-        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600 dark:text-warm-200 dark:hover:bg-white/5 dark:hover:text-teal-200"
+        ? "bg-teal-600/10 text-teal-800 font-semibold border-l-4 border-teal-600 dark:bg-teal-400/15"
+        : "text-warm-800 hover:bg-teal-50 hover:text-teal-600 dark:hover:bg-white/5"
     }`;
 
   return (
@@ -107,7 +107,7 @@ export default function Navbar() {
                 <span className="text-white text-lg leading-none mt-0.5">♥</span>
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-[3px] border-2 border-(--pp-navbar)" />
               </div>
-              <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 dark:text-teal-200 group-hover:text-teal-600 transition-colors hidden sm:inline">
+              <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">
                 Pixel&nbsp;Players
               </span>
             </Link>
@@ -159,17 +159,17 @@ export default function Navbar() {
             >
               <div className="flex flex-col gap-1.5 w-6">
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 origin-center ${
                     mobileOpen ? "translate-y-2 rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 ${
                     mobileOpen ? "opacity-0 scale-0" : ""
                   }`}
                 />
                 <span
-                  className={`block h-0.5 w-full rounded-full bg-teal-700 dark:bg-teal-200 transition-all duration-300 origin-center ${
+                  className={`block h-0.5 w-full rounded-full bg-teal-700 transition-all duration-300 origin-center ${
                     mobileOpen ? "-translate-y-2 -rotate-45" : ""
                   }`}
                 />
