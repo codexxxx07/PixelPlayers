@@ -3,6 +3,7 @@ import { useApp } from '../context/AppContext';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { PixelCard, PixelButton } from '../components/';
+import { useRole } from '../auth/useRole';
 
 const LANG_STORAGE_KEY = 'pixelplayers-language';
 
@@ -96,6 +97,7 @@ function SectionHeading({ title, subtitle }) {
 export default function Settings() {
   const { user, settings, updateSettings } = useApp();
   const { t, i18n: activeI18n } = useTranslation();
+  const { role } = useRole();
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
   const changeLanguage = (code) => {
@@ -364,6 +366,28 @@ export default function Settings() {
               {t('settings.signOut')}
             </PixelButton>
           </div>
+        </section>
+
+        <section className="mb-12">
+          <SectionHeading title={t('settings.experience')} subtitle={t('settings.experienceDesc')} />
+          <PixelCard className="p-6 flex-row flex-wrap items-center justify-between gap-4">
+            <span className="min-w-0">
+              <span className="block text-warm-800 text-base font-bold">{t('settings.currentExperience')}</span>
+              <span className="block text-gray-500 text-sm mt-1">
+                {role === 'caregiver' ? t('settings.experienceCaregiverValue') : t('settings.experienceValue')}
+              </span>
+            </span>
+            <PixelButton
+              variant="secondary"
+              size="lg"
+              to="/welcome"
+              block
+              className="sm:w-auto"
+              aria-label={t('settings.switchExperience')}
+            >
+              {t('settings.switchExperience')}
+            </PixelButton>
+          </PixelCard>
         </section>
 
         <section className="mb-8">
