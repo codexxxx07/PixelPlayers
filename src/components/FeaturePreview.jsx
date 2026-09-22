@@ -76,7 +76,7 @@ export default function FeaturePreview({ feature }) {
               state={{ from }}
               className="skeuo-btn skeuo-btn-primary skeuo-btn-pixel skeuo-btn-block mt-6 py-4"
             >
-              {t("featurePreview.loginCta")}
+              {config.loginCtaKey ? t(config.loginCtaKey) : t("featurePreview.loginCta")}
             </Link>
           </div>
 

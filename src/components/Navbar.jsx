@@ -25,6 +25,7 @@ const mobileExtras = [
 
 const lockedExtras = [
   { to: "/memory", key: "nav.memory", icon: "💾" },
+  { to: "/routine", key: "nav.routine", icon: "📅" },
   { to: "/reminders", key: "nav.reminders", icon: "⏰" },
   { to: "/assistant", key: "nav.assistant", icon: "🤖" },
 ];

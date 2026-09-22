@@ -896,6 +896,16 @@
       "benefit3": "Ask about your activities.",
       "benefit4": "Get simple everyday guidance.",
       "benefit5": "Use a friendly conversational interface."
+    },
+    "routine": {
+      "title": "Your Daily Routine",
+      "desc": "Keep track of your daily activities and build a simple, familiar routine with gentle guidance.",
+      "loginCta": "Login to Access Routine",
+      "benefit1": "Organize your daily activities in one simple place.",
+      "benefit2": "Remember the important parts of your day.",
+      "benefit3": "Follow familiar routines with gentle guidance.",
+      "benefit4": "Reduce confusion about \"what should I do next?\".",
+      "benefit5": "Maintain consistency with simple visual guidance."
     }
   }
 }

@@ -36,6 +36,20 @@ export const featureGates = {
       "featurePreview.assistant.benefit5",
     ],
   },
+  routine: {
+    to: "/routine",
+    icon: "📅",
+    titleKey: "featurePreview.routine.title",
+    descKey: "featurePreview.routine.desc",
+    loginCtaKey: "featurePreview.routine.loginCta",
+    benefitKeys: [
+      "featurePreview.routine.benefit1",
+      "featurePreview.routine.benefit2",
+      "featurePreview.routine.benefit3",
+      "featurePreview.routine.benefit4",
+      "featurePreview.routine.benefit5",
+    ],
+  },
 };
 
 export function getFeatureGate(feature) {

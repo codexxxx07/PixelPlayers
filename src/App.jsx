@@ -35,10 +35,12 @@ function AppRoutes() {
         <Route path="/games/:gameId" element={<GameDetails />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/routine" element={<Routine />} />
           <Route path="/progress" element={<Progress />} />
           <Route path="/support" element={<Support />} />
           <Route path="/settings" element={<Settings />} />
+        </Route>
+        <Route element={<ProtectedRoute feature="routine" />}>
+          <Route path="/routine" element={<Routine />} />
         </Route>
         <Route element={<ProtectedRoute feature="memory" />}>
           <Route path="/memory" element={<Memory />} />
