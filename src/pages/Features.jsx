@@ -136,16 +136,16 @@ export default function Features() {
   return (
     <div className="min-h-screen">
       {/* ===== PAGE HEADER ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-warm-50 to-teal-50/30 py-20 md:py-28 px-6">
+      <section className="relative overflow-hidden bg-linear-to-b from-warm-50 to-teal-50/30 py-20 md:py-28 px-6">
         <div className="absolute inset-0 pixel-grid pointer-events-none opacity-30" />
         <div className="relative max-w-4xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white border-2 border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-[family-name:var(--font-pixel)] mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white border-2 border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-pixel mb-6">
             🌐 {t(languageLabels[language] || 'features.langEnglish')}
           </span>
-          <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-4 block">
+          <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-4 block">
             {t('features.eyebrow')}
           </span>
-          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-3xl text-teal-700 leading-relaxed mb-6 tracking-wide">
+          <h1 className="font-pixel text-xl sm:text-2xl md:text-3xl text-teal-700 leading-relaxed mb-6 tracking-wide">
             {t('features.title')}
           </h1>
           <p className="text-warm-700 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
@@ -164,7 +164,7 @@ export default function Features() {
                   <div className="text-5xl mb-5 group-hover:scale-110 transition-transform duration-200">
                     {feature.icon}
                   </div>
-                  <h3 className="font-[family-name:var(--font-pixel)] text-[11px] text-teal-800 mb-3 leading-relaxed">
+                  <h3 className="font-pixel text-[11px] text-teal-800 mb-3 leading-relaxed">
                     {t(feature.titleKey)}
                   </h3>
                   <p className="text-warm-700 text-base leading-relaxed flex-1">
@@ -174,7 +174,7 @@ export default function Features() {
                     <div className="mt-5 pt-4 border-t border-warm-100">
                       <Link
                         to={feature.to}
-                        className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-500 hover:text-teal-700 transition-colors inline-flex items-center gap-1"
+                        className="font-pixel text-[10px] text-teal-500 hover:text-teal-700 transition-colors inline-flex items-center gap-1"
                       >
                         {t('features.explore')}
                         <span className="text-[8px]">→</span>
@@ -200,10 +200,10 @@ export default function Features() {
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
-            <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
+            <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('features.whyUsBadge')}
             </span>
-            <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide">
+            <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide">
               {t('features.whyUsTitle')}
             </h2>
           </div>
@@ -214,17 +214,17 @@ export default function Features() {
               {/* Header row */}
               <div className="grid grid-cols-3 border-b-2 border-warm-200">
                 <div className="p-5 bg-warm-100">
-                  <span className="font-[family-name:var(--font-pixel)] text-[10px] text-warm-600 tracking-wider">
+                  <span className="font-pixel text-[10px] text-warm-600 tracking-wider">
                     {t('features.cmpAspect')}
                   </span>
                 </div>
                 <div className="p-5 bg-warm-50 border-l border-warm-200">
-                  <span className="font-[family-name:var(--font-pixel)] text-[10px] text-warm-500 tracking-wider">
+                  <span className="font-pixel text-[10px] text-warm-500 tracking-wider">
                     {t('features.cmpTraditional')}
                   </span>
                 </div>
                 <div className="p-5 bg-teal-50 border-l border-warm-200">
-                  <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-700 tracking-wider">
+                  <span className="font-pixel text-[10px] text-teal-700 tracking-wider">
                     {t('features.cmpPixel')}
                   </span>
                 </div>
@@ -239,7 +239,7 @@ export default function Features() {
                   }`}
                 >
                   <div className="p-5">
-                    <span className="font-[family-name:var(--font-pixel)] text-[9px] text-warm-800 leading-relaxed">
+                    <span className="font-pixel text-[9px] text-warm-800 leading-relaxed">
                       {t(row.aspectKey).toUpperCase()}
                     </span>
                   </div>
@@ -262,7 +262,7 @@ export default function Features() {
           <div className="md:hidden space-y-4">
             {comparisonData.map((row) => (
               <PixelCard key={row.aspectKey} className="p-5">
-                <div className="font-[family-name:var(--font-pixel)] text-[9px] text-teal-600 mb-3 tracking-wider">
+                <div className="font-pixel text-[9px] text-teal-600 mb-3 tracking-wider">
                   {t(row.aspectKey).toUpperCase()}
                 </div>
                 <div className="space-y-2">
