@@ -104,7 +104,7 @@ export default function Progress() {
                 >
                   <span className="text-xs font-bold text-teal-800">{day.games}</span>
                   <div
-                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-linear-to-t from-teal-600 via-teal-400 to-teal-300 shadow-inner transition-all duration-500"
+                    className="w-full max-w-11 min-h-1.5 rounded-t-md bg-linear-to-t from-teal-600 via-teal-400 to-teal-300 shadow-inner transition-all duration-500"
                     style={{ height: `${(day.games / maxGames) * 100}%` }}
                     title={t('progress.chartGamesTitle', { day: day.day, games: day.games })}
                   />
@@ -130,7 +130,7 @@ export default function Progress() {
                 >
                   <span className="text-[11px] font-bold text-emerald-600">{day.accuracy}%</span>
                   <div
-                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-linear-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-inner transition-all duration-500"
+                    className="w-full max-w-11 min-h-1.5 rounded-t-md bg-linear-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-inner transition-all duration-500"
                     style={{ height: `${day.accuracy}%` }}
                     title={t('progress.chartAccuracyTitle', { day: day.day, accuracy: day.accuracy })}
                   />
@@ -256,7 +256,7 @@ export default function Progress() {
 
         {/* ========== MEDICAL DISCLAIMER ========== */}
         <section className="animate-slide-up">
-          <div className="rounded-2xl border-l-4 border-amber-400 bg-amber-50/60 border border-amber-200 p-6">
+          <div className="rounded-2xl border-l-4 border-l-amber-400 bg-amber-50/60 border border-amber-200 p-6">
             <div className="flex items-start gap-4">
               <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
               <div>

@@ -128,7 +128,7 @@ export default function Memory() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="font-pixel text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide break-words">
+          <h1 className="font-pixel text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide wrap-break-word">
             {t('memory.title')}
           </h1>
           <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto overflow-wrap-anywhere">
@@ -146,7 +146,7 @@ export default function Memory() {
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 border-2 min-h-[48px] ${
+                className={`flex items-center gap-2 px-3 sm:px-4 py-3 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-200 border-2 min-h-12 ${
                   activeCategory === cat.id
                     ? 'bg-amber-500 border-amber-500 text-white shadow-md shadow-amber-500/20'
                     : 'bg-white border-amber-200 text-amber-700 hover:border-amber-400 hover:bg-amber-50'
@@ -246,7 +246,7 @@ export default function Memory() {
               </h2>
 
               {/* Chat Messages */}
-              <div className="space-y-4 mb-6 max-h-[400px] overflow-y-auto pr-1">
+              <div className="space-y-4 mb-6 max-h-100 overflow-y-auto pr-1">
                 {chatMessages.map((msg) => (
                   <div
                     key={msg.id}
@@ -285,7 +285,7 @@ export default function Memory() {
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleChatSend()}
                   placeholder={t('memory.typeOrSpeak')}
-                  className="flex-1 min-w-0 border-2 border-amber-200 rounded-xl px-3 sm:px-4 py-3 text-sm text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[48px]"
+                  className="flex-1 min-w-0 border-2 border-amber-200 rounded-xl px-3 sm:px-4 py-3 text-sm text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-12"
                 />
                 <PixelButton onClick={handleChatSend} variant="primary" size="sm" icon="➤" className="shrink-0">
                   {t('memory.send')}
