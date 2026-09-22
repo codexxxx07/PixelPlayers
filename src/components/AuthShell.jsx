@@ -11,11 +11,11 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
         <span className="text-white text-2xl leading-none mt-0.5">♥</span>
       </div>
       {eyebrow && (
-        <p className="mb-2 font-[family-name:var(--font-pixel)] text-[10px] tracking-[0.2em] text-teal-500 uppercase">
+        <p className="mb-2 font-pixel text-[10px] tracking-[0.2em] text-teal-500 uppercase">
           {eyebrow}
         </p>
       )}
-      <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl text-teal-700 leading-relaxed">
+      <h1 className="font-pixel text-xl sm:text-2xl text-teal-700 leading-relaxed">
         {title}
       </h1>
       {subtitle && (
@@ -25,7 +25,7 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
   );
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell">
+    <div className="relative min-h-screen bg-linear-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell">
       <div className="absolute inset-0 pixel-grid" aria-hidden="true" />
       <div
         className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-teal-200/40 blur-3xl"

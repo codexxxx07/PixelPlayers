@@ -54,7 +54,7 @@ function ChipButton({ icon, label, onClick }) {
 function ActionButton({ action, onClick }) {
   const { t } = useTranslation();
   const primary =
-    "inline-flex items-center gap-2 rounded-xl bg-gradient-to-b from-teal-500 to-teal-600 text-white px-5 py-3 text-base font-extrabold shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-[2px] active:shadow-[0_1px_0_#134e4a]";
+    "inline-flex items-center gap-2 rounded-xl bg-linear-to-b from-teal-500 to-teal-600 text-white px-5 py-3 text-base font-extrabold shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_3px_0_#134e4a] hover:brightness-105 active:translate-y-[2px] active:shadow-[0_1px_0_#134e4a]";
   const ghost =
     "inline-flex items-center gap-2 rounded-xl bg-white text-teal-800 border-2 border-teal-200 hover:bg-teal-50 px-5 py-3 text-base font-extrabold shadow-[0_2px_0_rgba(19,78,74,0.15)] active:translate-y-[2px] active:shadow-none";
 
@@ -90,7 +90,7 @@ export function AiBubble({ message, isStreaming, onDone, onAction, onChip }) {
 
   return (
     <div className="flex items-start gap-3 animate-slide-up">
-      <ClaraBadge className="w-12 h-12 flex-shrink-0 mt-1" />
+      <ClaraBadge className="w-12 h-12 shrink-0 mt-1" />
 
       <div className="max-w-[85%] sm:max-w-[78%] min-w-0">
         <div className="buddy-bubble px-4 py-3.5 sm:px-5 sm:py-4">
@@ -143,7 +143,7 @@ export function UserBubble({ message }) {
   return (
     <div className="flex justify-end animate-slide-up">
       <div className="max-w-[85%] sm:max-w-[70%]">
-        <div className="rounded-2xl rounded-br-md bg-gradient-to-b from-teal-500 to-teal-600 text-white px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_3px_0_rgba(19,78,74,0.55)]">
+        <div className="rounded-2xl rounded-br-md bg-linear-to-b from-teal-500 to-teal-600 text-white px-4 py-3 shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_3px_0_rgba(19,78,74,0.55)]">
           <p className="text-base md:text-lg leading-relaxed whitespace-pre-wrap">{message.text}</p>
         </div>
         <p className="text-[11px] text-gray-400 mt-1 text-right">{message.time}</p>
@@ -156,7 +156,7 @@ export function ThinkingBubble() {
   const { t } = useTranslation();
   return (
     <div className="flex items-start gap-3">
-      <ClaraBadge className="w-12 h-12 flex-shrink-0 mt-1" />
+      <ClaraBadge className="w-12 h-12 shrink-0 mt-1" />
       <div className="buddy-bubble px-5 py-4">
         <div className="flex items-center gap-3">
           <span className="font-pixel text-[9px] text-teal-700 tracking-wider">{t("assistant.thinking")}</span>

@@ -52,7 +52,7 @@ export default function ProgressCard({
       </p>
 
       <div className="flex items-baseline gap-1.5 mt-auto">
-        <span className="font-[family-name:var(--font-pixel)] text-4xl leading-none">
+        <span className="font-pixel text-4xl leading-none">
           {value}
         </span>
         {unit && <span className="text-sm opacity-60">{unit}</span>}

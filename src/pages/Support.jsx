@@ -93,7 +93,7 @@ function Toggle({ checked, onChange, label }) {
     >
       <span className="text-lg text-warm-800 font-semibold leading-snug">{label}</span>
       <span
-        className={`relative inline-flex h-12 w-20 flex-shrink-0 items-center rounded-full p-1 transition-colors duration-200 ${
+        className={`relative inline-flex h-12 w-20 shrink-0 items-center rounded-full p-1 transition-colors duration-200 ${
           checked ? 'bg-teal-500' : 'bg-gray-300'
         }`}
       >
@@ -178,10 +178,10 @@ export default function Support() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50/60 via-warm-50 to-white pb-20">
+    <div className="min-h-screen bg-linear-to-b from-teal-50/60 via-warm-50 to-white pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         <div className="text-center mb-10">
-          <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
+          <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
             {t('support.pageTitle')}
           </h1>
           <p className="text-gray-600 text-lg max-w-xl mx-auto">
@@ -194,7 +194,7 @@ export default function Support() {
 
         <section className="mb-12">
           <div className="flex items-center justify-between gap-4 mb-5">
-            <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm tracking-wide">
+            <h2 className="font-pixel text-teal-700 text-sm tracking-wide">
               {t('support.currentNetwork')}
             </h2>
             <PixelButton
@@ -223,12 +223,12 @@ export default function Support() {
                   <PixelCard key={person.id} pixel hover className="p-6 flex flex-col">
                     <div className="flex items-start gap-4 mb-5">
                       <div
-                        className={`flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-full border-4 border-white shadow-inner text-3xl font-extrabold text-white ${option.color}`}
+                        className={`shrink-0 flex items-center justify-center w-20 h-20 rounded-full border-4 border-white shadow-inner text-3xl font-extrabold text-white ${option.color}`}
                       >
                         {person.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <h3 className="font-[family-name:var(--font-pixel)] text-[11px] text-teal-800 leading-relaxed">
+                        <h3 className="font-pixel text-[11px] text-teal-800 leading-relaxed">
                           {person.name}
                         </h3>
                         <p className="text-warm-600 text-sm mt-1.5">
@@ -271,7 +271,7 @@ export default function Support() {
                       <button
                         type="button"
                         onClick={() => deleteSupportPerson(person.id)}
-                        className="font-[family-name:var(--font-pixel)] uppercase rounded-xl bg-red-500 text-white text-[0.72rem] tracking-wide px-3 py-3 border-2 border-red-700 shadow-[0_4px_0_#991b1b] transition-transform duration-100 hover:bg-red-600 active:translate-y-1 active:shadow-none"
+                        className="font-pixel uppercase rounded-xl bg-red-500 text-white text-[0.72rem] tracking-wide px-3 py-3 border-2 border-red-700 shadow-[0_4px_0_#991b1b] transition-transform duration-100 hover:bg-red-600 active:translate-y-1 active:shadow-none"
                       >
                         {t('support.remove')}
                       </button>
@@ -285,7 +285,7 @@ export default function Support() {
 
         {showForm && (
           <PixelCard className="p-6 md:p-8 mb-12 animate-slide-up">
-            <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
+            <h2 className="font-pixel text-teal-700 text-sm mb-2 tracking-wide">
               {t('support.addTrustedPerson')}
             </h2>
             <p className="text-gray-500 text-sm mb-6">
@@ -357,7 +357,7 @@ export default function Support() {
                   }`}
                 >
                   <span
-                    className={`mt-1 flex-shrink-0 flex items-center justify-center w-7 h-7 rounded-full border-2 ${
+                    className={`mt-1 shrink-0 flex items-center justify-center w-7 h-7 rounded-full border-2 ${
                       permission === option.id
                         ? 'border-teal-600 text-teal-700'
                         : 'border-warm-300'
@@ -399,7 +399,7 @@ export default function Support() {
         )}
 
         <section className="mb-12">
-          <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
+          <h2 className="font-pixel text-teal-700 text-sm mb-2 tracking-wide">
             {t('support.privacySettings')}
           </h2>
           <p className="text-gray-500 text-sm mb-5">
@@ -437,7 +437,7 @@ export default function Support() {
         </section>
 
         <section className="mb-12">
-          <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
+          <h2 className="font-pixel text-teal-700 text-sm mb-2 tracking-wide">
             {t('support.emergencySOS')}
           </h2>
           <p className="text-gray-500 text-sm mb-5">
@@ -461,7 +461,7 @@ export default function Support() {
                   <button
                     type="button"
                     onClick={() => setSosAlert(false)}
-                    className="mt-4 font-[family-name:var(--font-pixel)] uppercase text-[0.62rem] rounded-lg border-2 border-red-300 bg-white text-red-600 px-4 py-2 hover:bg-red-100"
+                    className="mt-4 font-pixel uppercase text-[0.62rem] rounded-lg border-2 border-red-300 bg-white text-red-600 px-4 py-2 hover:bg-red-100"
                   >
                     {t('support.done')}
                   </button>
@@ -474,7 +474,7 @@ export default function Support() {
                   onPointerLeave={cancelHold}
                   onPointerCancel={cancelHold}
                   onContextMenu={(event) => event.preventDefault()}
-                  className={`relative select-none touch-none flex items-center justify-center w-56 h-56 rounded-full border-[6px] border-red-700 text-white font-[family-name:var(--font-pixel)] shadow-[0_8px_0_#7f1d1d] transition-transform duration-100 ${
+                  className={`relative select-none touch-none flex items-center justify-center w-56 h-56 rounded-full border-[6px] border-red-700 text-white font-pixel shadow-[0_8px_0_#7f1d1d] transition-transform duration-100 ${
                     sosHolding ? 'scale-95' : 'hover:scale-105'
                   }`}
                   style={{
@@ -493,7 +493,7 @@ export default function Support() {
               )}
             </div>
 
-            <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 tracking-wide">
+            <h3 className="font-pixel text-gray-600 text-xs mb-4 tracking-wide">
               {t('support.yourEmergencyContacts')}
             </h3>
             {!settings.allowEmergencySOS && (
@@ -511,7 +511,7 @@ export default function Support() {
                       className="flex items-center gap-4 rounded-2xl border-2 border-warm-200 bg-white px-5 py-4"
                     >
                       <div
-                        className={`flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full text-xl font-extrabold text-white ${option.color}`}
+                        className={`shrink-0 flex items-center justify-center w-14 h-14 rounded-full text-xl font-extrabold text-white ${option.color}`}
                       >
                         {person.name.charAt(0).toUpperCase()}
                       </div>
@@ -537,7 +537,7 @@ export default function Support() {
         </section>
 
         <section className="mb-12">
-          <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-5 tracking-wide">
+          <h2 className="font-pixel text-teal-700 text-sm mb-5 tracking-wide">
             {t('support.howItWorks')}
           </h2>
           <div className="grid md:grid-cols-3 gap-5 items-stretch">

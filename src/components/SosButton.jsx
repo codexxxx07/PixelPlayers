@@ -57,7 +57,7 @@ export default function SosButton({ variant = "navbar", onClick }) {
           style={{ background: "linear-gradient(180deg, #f87171, #dc2626)" }}
         >
           <SosIcon className="w-9 h-9" />
-          <span className="font-[family-name:var(--font-pixel)] text-[0.68rem] tracking-widest leading-none">
+          <span className="font-pixel text-[0.68rem] tracking-widest leading-none">
             SOS
           </span>
         </button>
@@ -139,15 +139,15 @@ export function SosModal({ open, onClose }) {
         onClick={onClose}
       />
       <div
-        className="relative w-full max-w-md rounded-3xl border-2 border-warm-200 bg-gradient-to-b from-white to-warm-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#f0d5b0,0_28px_48px_rgba(63,40,25,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_8px_0_#173832,0_28px_48px_rgba(0,0,0,0.5)] animate-slide-up"
+        className="relative w-full max-w-md rounded-3xl border-2 border-warm-200 bg-linear-to-b from-white to-warm-50 p-6 sm:p-8 shadow-[inset_0_1px_0_rgba(255,255,255,0.8),0_8px_0_#f0d5b0,0_28px_48px_rgba(63,40,25,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_8px_0_#173832,0_28px_48px_rgba(0,0,0,0.5)] animate-slide-up"
       >
         <div className="flex flex-col items-center text-center mb-6">
-          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-b from-red-400 to-red-600 border-[3px] border-red-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#7f1d1d] mb-4">
+          <div className="flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-b from-red-400 to-red-600 border-[3px] border-red-800/70 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#7f1d1d] mb-4">
             <SosIcon className="w-9 h-9 text-white" />
           </div>
           <h2
             id="sos-modal-title"
-            className="font-[family-name:var(--font-pixel)] text-teal-800 text-sm sm:text-base leading-relaxed"
+            className="font-pixel text-teal-800 text-sm sm:text-base leading-relaxed"
           >
             DO YOU NEED HELP?
           </h2>
@@ -236,7 +236,7 @@ export function SosModal({ open, onClose }) {
                   className="flex w-full items-center gap-4 rounded-2xl border-2 border-warm-200 bg-white px-5 py-4 text-left transition-all duration-200 hover:border-red-300 hover:bg-red-50/40 active:translate-y-0.5"
                 >
                   <span
-                    className={`flex-shrink-0 flex items-center justify-center w-14 h-14 rounded-full border-4 border-white shadow-inner text-xl font-extrabold text-white ${relationshipColor(
+                    className={`shrink-0 flex items-center justify-center w-14 h-14 rounded-full border-4 border-white shadow-inner text-xl font-extrabold text-white ${relationshipColor(
                       person.relationship
                     )}`}
                   >
@@ -268,7 +268,7 @@ export function SosModal({ open, onClose }) {
         {step === "call-placed" && selected && (
           <div className="space-y-4 text-center">
             <span className="text-5xl block" aria-hidden="true">📞</span>
-            <h3 className="font-[family-name:var(--font-pixel)] text-teal-800 text-xs leading-relaxed">
+            <h3 className="font-pixel text-teal-800 text-xs leading-relaxed">
               CALLING {selected.name.toUpperCase()}…
             </h3>
             <p className="text-gray-500 text-sm">
@@ -291,7 +291,7 @@ export function SosModal({ open, onClose }) {
         {step === "alert-sent" && (
           <div className="space-y-4 text-center">
             <span className="text-5xl block" aria-hidden="true">📳</span>
-            <h3 className="font-[family-name:var(--font-pixel)] text-red-700 text-xs leading-relaxed">
+            <h3 className="font-pixel text-red-700 text-xs leading-relaxed">
               HELP ALERT SENT
             </h3>
             {sosContacts.length > 0 ? (
@@ -302,7 +302,7 @@ export function SosModal({ open, onClose }) {
                     className="flex items-center gap-3 rounded-xl border-2 border-warm-200 bg-white px-4 py-3"
                   >
                     <span
-                      className={`flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-full border-2 border-white text-base font-extrabold text-white ${relationshipColor(
+                      className={`shrink-0 flex items-center justify-center w-11 h-11 rounded-full border-2 border-white text-base font-extrabold text-white ${relationshipColor(
                         person.relationship
                       )}`}
                     >

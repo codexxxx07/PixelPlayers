@@ -63,10 +63,10 @@ export default function Welcome() {
 
       <div className="relative mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
         <div className="text-center mb-10">
-          <p className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-4">
+          <p className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-4">
             {t("welcome.kicker")}
           </p>
-          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-3xl text-teal-700 dark:text-teal-300 leading-relaxed mb-4 tracking-wide">
+          <h1 className="font-pixel text-xl sm:text-2xl md:text-3xl text-teal-700 dark:text-teal-300 leading-relaxed mb-4 tracking-wide">
             {t("welcome.title")}
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-base sm:text-lg leading-relaxed max-w-[52ch] mx-auto">
@@ -99,8 +99,8 @@ export default function Welcome() {
                 <span
                   className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl text-2xl border-2 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_3px_0_rgba(0,0,0,0.15)] ${
                     card.accent === "caregiver"
-                      ? "bg-gradient-to-b from-amber-300 to-amber-400 border-amber-500"
-                      : "bg-gradient-to-b from-teal-400 to-teal-500 border-teal-600"
+                      ? "bg-linear-to-b from-amber-300 to-amber-400 border-amber-500"
+                      : "bg-linear-to-b from-teal-400 to-teal-500 border-teal-600"
                   }`}
                   aria-hidden="true"
                 >
@@ -109,7 +109,7 @@ export default function Welcome() {
 
                 <span className="min-w-0">
                   <span className="flex items-center gap-2 flex-wrap">
-                    <span className="font-[family-name:var(--font-pixel)] text-sm text-gray-800 dark:text-gray-100 leading-relaxed">
+                    <span className="font-pixel text-sm text-gray-800 dark:text-gray-100 leading-relaxed">
                       {t(card.title)}
                     </span>
                     {isActive && (

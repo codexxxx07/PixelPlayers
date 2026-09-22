@@ -41,7 +41,7 @@ function ToggleRow() {
 
 export default function SkeletonSupport() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50/60 via-warm-50 to-white pb-20" aria-busy="true">
+    <div className="min-h-screen bg-linear-to-b from-teal-50/60 via-warm-50 to-white pb-20" aria-busy="true">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page header */}
         <div className="text-center mb-10">

@@ -25,7 +25,7 @@ export default function SkeletonGames() {
                 width={i === 0 ? 72 : 104}
                 height={48}
                 radius="full"
-                className="sk-inner flex-shrink-0"
+                className="sk-inner shrink-0"
               />
             ))}
           </div>

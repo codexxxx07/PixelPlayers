@@ -70,9 +70,9 @@ export default function SkeletonAssistant() {
 
           {/* Chat panel */}
           <div className="rounded-3xl bg-white border-2 border-teal-100 overflow-hidden flex flex-col">
-            <div className="flex items-center gap-3 px-5 py-4 bg-gradient-to-r from-teal-50 to-amber-50 border-b border-teal-100">
+            <div className="flex items-center gap-3 px-5 py-4 bg-linear-to-r from-teal-50 to-amber-50 border-b border-teal-100">
               <ClaraBlock />
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <Skeleton width={100} height={40} radius="xl" className="sk-inner" />
               </div>
             </div>
@@ -91,8 +91,8 @@ export default function SkeletonAssistant() {
             <form className="p-4 border-t border-teal-100 bg-[var(--pp-surface-2)]">
               <div className="flex items-end gap-3">
                 <Skeleton width="100%" height={72} radius="2xl" className="sk-inner flex-1 min-w-0" />
-                <Skeleton width={56} height={56} radius="full" className="sk-inner flex-shrink-0" />
-                <Skeleton width={96} height={80} radius="2xl" className="sk-inner flex-shrink-0" />
+                <Skeleton width={56} height={56} radius="full" className="sk-inner shrink-0" />
+                <Skeleton width={96} height={80} radius="2xl" className="sk-inner shrink-0" />
               </div>
             </form>
           </div>

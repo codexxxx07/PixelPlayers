@@ -32,12 +32,12 @@ export default function RoutineCard({ activity, onClick }) {
         {statusDot}
 
         {/* Icon */}
-        <span className="text-3xl flex-shrink-0">{icon}</span>
+        <span className="text-3xl shrink-0">{icon}</span>
 
         {/* Text content */}
         <div className="flex-1 min-w-0">
           <span
-            className={`font-[family-name:var(--font-pixel)] text-xl block ${
+            className={`font-pixel text-xl block ${
               current
                 ? "text-teal-700"
                 : completed
@@ -59,7 +59,7 @@ export default function RoutineCard({ activity, onClick }) {
         {/* Arrow for non-completed */}
         {!completed && (
           <div
-            className={`flex-shrink-0 transition-transform duration-200 ${
+            className={`shrink-0 transition-transform duration-200 ${
               current ? "text-teal-400" : "text-gray-300 group-hover:text-gray-400"
             } group-hover:translate-x-1`}
           >

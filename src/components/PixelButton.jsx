@@ -8,7 +8,7 @@ const variants = {
   ghost:
     'skeuo-btn skeuo-btn-ghost font-body font-bold text-sm',
   danger:
-    'skeuo-btn skeuo-btn-primary skeuo-btn-pixel bg-gradient-to-b from-red-400 to-red-500 border-red-600 shadow-red-700/30',
+    'skeuo-btn skeuo-btn-primary skeuo-btn-pixel bg-linear-to-b from-red-400 to-red-500 border-red-600 shadow-red-700/30',
   default:
     'skeuo-btn skeuo-btn-pixel',
 };

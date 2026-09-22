@@ -39,7 +39,7 @@ function VoiceButton({ onClick, size = 'md', className = '' }) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center justify-center rounded-full bg-gradient-to-br from-red-400 to-red-600 text-white shadow-lg shadow-red-500/30 hover:shadow-xl hover:shadow-red-500/40 active:scale-95 transition-all duration-200 ${sizes[size]} ${className}`}
+      className={`flex items-center justify-center rounded-full bg-linear-to-br from-red-400 to-red-600 text-white shadow-lg shadow-red-500/30 hover:shadow-xl hover:shadow-red-500/40 active:scale-95 transition-all duration-200 ${sizes[size]} ${className}`}
       aria-label={t('memory.voiceInput')}
     >
       🎤
@@ -124,11 +124,11 @@ export default function Memory() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white pb-20">
+    <div className="min-h-screen bg-linear-to-b from-amber-50/50 to-white pb-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
         {/* Page Header */}
         <div className="text-center mb-8">
-          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide break-words">
+          <h1 className="font-pixel text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide break-words">
             {t('memory.title')}
           </h1>
           <p className="text-gray-600 text-base sm:text-lg max-w-xl mx-auto overflow-wrap-anywhere">
@@ -153,7 +153,7 @@ export default function Memory() {
                 }`}
               >
                 <span className="text-xl">{cat.icon}</span>
-                <span className="font-[family-name:var(--font-pixel)] text-[11px]">{t(cat.labelKey)}</span>
+                <span className="font-pixel text-[11px]">{t(cat.labelKey)}</span>
               </button>
             ))}
           </div>
@@ -165,7 +165,7 @@ export default function Memory() {
           <div className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
             {/* Memory List */}
             <div>
-              <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-4 tracking-wide">
+              <h2 className="font-pixel text-amber-700 text-sm mb-4 tracking-wide">
                 {activeCat.icon} {t(categories.find((c) => c.id === activeCategory).labelKey)}
               </h2>
               {filteredMemories.length === 0 ? (
@@ -191,7 +191,7 @@ export default function Memory() {
 
             {/* Add Memory Section */}
             <PixelCard className="p-4 sm:p-6 md:p-8">
-              <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-2 tracking-wide">
+              <h2 className="font-pixel text-amber-700 text-sm mb-2 tracking-wide">
                 {editingId ? t('memory.editMemory') : t('memory.tellMeAboutYou')}
               </h2>
               <p className="text-gray-500 text-sm mb-4 italic">
@@ -213,7 +213,7 @@ export default function Memory() {
               />
               {/* Button row — wraps on mobile when cancel button is present */}
               <div className="flex flex-wrap items-center gap-3 mt-4">
-                <VoiceButton onClick={() => {}} size="md" className="flex-shrink-0" />
+                <VoiceButton onClick={() => {}} size="md" className="shrink-0" />
                 <PixelButton
                   onClick={handleSaveMemory}
                   variant="primary"
@@ -228,7 +228,7 @@ export default function Memory() {
                     onClick={handleCancelEdit}
                     variant="secondary"
                     size="md"
-                    className="flex-shrink-0"
+                    className="shrink-0"
                     icon="✕"
                   >
                     {t('memory.cancel')}
@@ -241,7 +241,7 @@ export default function Memory() {
           {/* Right Column: Voice Conversation Panel */}
           <div className="lg:col-span-2 min-w-0">
             <PixelCard className="p-4 sm:p-6 md:p-8 lg:sticky lg:top-8">
-              <h2 className="font-[family-name:var(--font-pixel)] text-amber-700 text-sm mb-4 tracking-wide">
+              <h2 className="font-pixel text-amber-700 text-sm mb-4 tracking-wide">
                 {t('memory.talkToCompanion')}
               </h2>
 
@@ -278,7 +278,7 @@ export default function Memory() {
 
               {/* Chat Input */}
               <div className="flex items-center gap-2 sm:gap-3">
-                <VoiceButton onClick={() => {}} size="sm" className="flex-shrink-0" />
+                <VoiceButton onClick={() => {}} size="sm" className="shrink-0" />
                 <input
                   type="text"
                   value={chatInput}
@@ -287,7 +287,7 @@ export default function Memory() {
                   placeholder={t('memory.typeOrSpeak')}
                   className="flex-1 min-w-0 border-2 border-amber-200 rounded-xl px-3 sm:px-4 py-3 text-sm text-gray-700 bg-amber-50/30 focus:border-amber-400 focus:ring-2 focus:ring-amber-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[48px]"
                 />
-                <PixelButton onClick={handleChatSend} variant="primary" size="sm" icon="➤" className="flex-shrink-0">
+                <PixelButton onClick={handleChatSend} variant="primary" size="sm" icon="➤" className="shrink-0">
                   {t('memory.send')}
                 </PixelButton>
               </div>
@@ -300,7 +300,7 @@ export default function Memory() {
           <PixelCard variant="inset" className="px-4 sm:px-8 py-6 max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>
-              <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs tracking-wide">
+              <h3 className="font-pixel text-gray-600 text-xs tracking-wide">
                 {t('memory.privacyNotice')}
               </h3>
             </div>

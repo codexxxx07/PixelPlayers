@@ -7,12 +7,12 @@ function ReminderRow() {
   return (
     <SkeletonCard className="p-5">
       <div className="flex items-center gap-4">
-        <Skeleton width={48} height={48} radius="xl" className="sk-inner flex-shrink-0" />
+        <Skeleton width={48} height={48} radius="xl" className="sk-inner shrink-0" />
         <div className="flex-1 min-w-0">
           <Skeleton width="65%" height={15} radius="sm" className="sk-inner mb-1" />
           <Skeleton width="35%" height={13} radius="sm" className="sk-inner" />
         </div>
-        <Skeleton width={56} height={32} radius="full" className="sk-inner flex-shrink-0" />
+        <Skeleton width={56} height={32} radius="full" className="sk-inner shrink-0" />
       </div>
     </SkeletonCard>
   );
@@ -20,7 +20,7 @@ function ReminderRow() {
 
 export default function SkeletonReminders() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white pb-20" aria-busy="true">
+    <div className="min-h-screen bg-linear-to-b from-blue-50/30 to-white pb-20" aria-busy="true">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page header */}
         <div className="text-center mb-10">
@@ -55,7 +55,7 @@ export default function SkeletonReminders() {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-stretch">
             {Array.from({ length: 6 }, (_, i) => (
               <SkeletonCard key={i} className="p-5 flex items-center gap-3">
-                <Skeleton width={44} height={44} radius="xl" className="sk-inner flex-shrink-0" />
+                <Skeleton width={44} height={44} radius="xl" className="sk-inner shrink-0" />
                 <div className="min-w-0 space-y-2">
                   <Skeleton width="80%" height={13} radius="sm" className="sk-inner" />
                   <Skeleton width="50%" height={11} radius="sm" className="sk-inner" />

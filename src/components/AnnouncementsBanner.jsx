@@ -24,16 +24,16 @@ export default function AnnouncementsBanner() {
       </div>
       <div className="relative flex items-start gap-4">
         <span
-          className="flex items-center justify-center w-11 h-11 shrink-0 rounded-2xl bg-gradient-to-b from-teal-400 to-teal-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_3px_0_rgba(13,78,74,0.4)] text-xl"
+          className="flex items-center justify-center w-11 h-11 shrink-0 rounded-2xl bg-linear-to-b from-teal-400 to-teal-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_3px_0_rgba(13,78,74,0.4)] text-xl"
           aria-hidden="true"
         >
           💌
         </span>
         <div className="min-w-0 flex-1">
-          <p className="font-[family-name:var(--font-pixel)] text-[9px] text-teal-500 tracking-widest uppercase mb-1.5">
+          <p className="font-pixel text-[9px] text-teal-500 tracking-widest uppercase mb-1.5">
             {t("announcements.newMessage", { from: latest.from || "" })}
           </p>
-          <h2 className="font-[family-name:var(--font-pixel)] text-teal-800 dark:text-teal-200 text-xs md:text-sm leading-relaxed mb-1.5 break-words">
+          <h2 className="font-pixel text-teal-800 dark:text-teal-200 text-xs md:text-sm leading-relaxed mb-1.5 break-words">
             {latest.title}
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed break-words">

@@ -97,7 +97,7 @@ export default function SkeletonDashboard() {
                 <Skeleton width={140} height={16} radius="sm" className="sk-inner" />
               </div>
             </div>
-            <div className="flex-shrink-0 self-center sm:self-end">
+            <div className="shrink-0 self-center sm:self-end">
               <Skeleton width={80} height={80} radius="2xl" className="sk sk-inner" />
             </div>
           </div>
@@ -172,10 +172,10 @@ export default function SkeletonDashboard() {
         <section className="space-y-5">
           <SkeletonSectionTitle iconSize={24} titleWidth={180} titleHeight={16} />
           <div className="flex gap-4 overflow-x-auto pb-4 px-1 -mx-1">
-            <div className="min-w-[260px] max-w-[300px] w-full flex-shrink-0">
+            <div className="min-w-[260px] max-w-[300px] w-full shrink-0">
               <RoutineSlider />
             </div>
-            <div className="min-w-[260px] max-w-[300px] w-full flex-shrink-0">
+            <div className="min-w-[260px] max-w-[300px] w-full shrink-0">
               <RoutineSlider />
             </div>
           </div>

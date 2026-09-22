@@ -46,7 +46,7 @@ function FavoriteRow() {
           <Skeleton width="50%" height={15} radius="sm" className="sk-inner mb-1" />
           <Skeleton width="35%" height={13} radius="sm" className="sk-inner" />
         </div>
-        <div className="flex-shrink-0 space-y-2">
+        <div className="shrink-0 space-y-2">
           <Skeleton width={44} height={14} radius="sm" className="sk-inner" />
           <Skeleton width={48} height={11} radius="sm" className="sk-inner" />
         </div>

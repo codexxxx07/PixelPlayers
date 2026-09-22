@@ -55,7 +55,7 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
       {/* Top row: icon + category + date */}
       <div className="flex items-start justify-between gap-2 mb-3 min-w-0">
         <div className="flex items-center gap-2 min-w-0 flex-1">
-          <span className="text-2xl sm:text-3xl leading-none flex-shrink-0">{displayIcon}</span>
+          <span className="text-2xl sm:text-3xl leading-none shrink-0">{displayIcon}</span>
           <div className="min-w-0">
             <span className="inline-flex items-center px-2 sm:px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-700 border border-amber-200 break-words">
               {categoryLabelKeys[category]
@@ -65,13 +65,13 @@ export default function MemoryCard({ memory, onEdit, onDelete }) {
           </div>
         </div>
         {displayDate && (
-          <span className="text-xs text-gray-400 mt-1 flex-shrink-0 whitespace-nowrap">{displayDate}</span>
+          <span className="text-xs text-gray-400 mt-1 shrink-0 whitespace-nowrap">{displayDate}</span>
         )}
       </div>
 
       {/* Title */}
       {displayTitle && (
-        <p className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] leading-relaxed mb-2 break-words overflow-wrap-anywhere min-w-0">
+        <p className="font-pixel text-teal-800 text-[11px] leading-relaxed mb-2 break-words overflow-wrap-anywhere min-w-0">
           {t(`memory.data.${id}.title`, { defaultValue: displayTitle })}
         </p>
       )}

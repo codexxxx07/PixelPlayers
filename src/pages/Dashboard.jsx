@@ -59,7 +59,7 @@ function SectionTitle({ icon, children }) {
   return (
     <div className="flex items-center gap-2.5 mb-5">
       <span className="text-xl leading-none" aria-hidden="true">{icon}</span>
-      <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm tracking-wider">
+      <h2 className="font-pixel text-teal-700 text-xs md:text-sm tracking-wider">
         {children}
       </h2>
     </div>
@@ -134,8 +134,8 @@ export default function Dashboard() {
         <section
           className={`relative overflow-hidden rounded-3xl p-7 md:p-10 shadow-lg shadow-teal-900/10 animate-pixel-fade-in ${
             isDay
-              ? "bg-gradient-to-br from-amber-100 via-orange-50 to-teal-50"
-              : "bg-gradient-to-br from-indigo-200 via-[var(--pp-surface-2)] to-teal-50"
+              ? "bg-linear-to-br from-amber-100 via-orange-50 to-teal-50"
+              : "bg-linear-to-br from-indigo-200 via-[var(--pp-surface-2)] to-teal-50"
           }`}
         >
           <div className="absolute top-0 left-0 right-0 h-3 flex opacity-70">
@@ -147,10 +147,10 @@ export default function Dashboard() {
 
           <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
             <div className="flex-1">
-              <p className="font-[family-name:var(--font-pixel)] text-[9px] md:text-[10px] text-teal-500 tracking-widest mb-3">
+              <p className="font-pixel text-[9px] md:text-[10px] text-teal-500 tracking-widest mb-3">
                 {isDay ? t('dashboard.dayTag') : t('dashboard.eveningTag')}
               </p>
-              <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl leading-relaxed mb-4">
+              <h1 className="font-pixel text-teal-800 text-lg md:text-2xl leading-relaxed mb-4">
                 {t("auth.welcomeBack")}, {user.name}
               </h1>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-gray-600 text-base md:text-lg">
@@ -165,7 +165,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex-shrink-0 self-center sm:self-end">
+            <div className="shrink-0 self-center sm:self-end">
               <div className="relative flex items-center justify-center w-20 h-20 rounded-2xl bg-white/70 dark:bg-white/10 border-2 border-amber-200/70 shadow-inner shadow-amber-900/5">
                 <div className="animate-gentle-bounce">
                   {isDay ? (
@@ -185,7 +185,7 @@ export default function Dashboard() {
           <PixelCard variant="elevated" className="p-6 md:p-7">
             <div className="grid sm:grid-cols-2 gap-5">
               <div className="flex items-center gap-4 rounded-2xl bg-emerald-50 border border-emerald-200 p-5">
-                <span className="relative flex flex-shrink-0 w-4 h-4">
+                <span className="relative flex shrink-0 w-4 h-4">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-40 animate-ping" />
                   <span className="relative inline-flex w-4 h-4 rounded-full bg-emerald-500 border-2 border-emerald-600" />
                 </span>
@@ -203,7 +203,7 @@ export default function Dashboard() {
               </div>
 
               <div className="flex items-center gap-4 rounded-2xl bg-gray-50 border border-gray-200 p-5">
-                <span className="flex flex-shrink-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-gray-400" />
+                <span className="flex shrink-0 w-4 h-4 rounded-full bg-gray-300 border-2 border-gray-400" />
                 <div className="min-w-0">
                   <p className="text-xs font-bold uppercase tracking-wide text-gray-500 mb-1">
                     {t('dashboard.nextUp')}
@@ -227,7 +227,7 @@ export default function Dashboard() {
             {recommendedGames.map((game) => (
               <PixelCard key={game.id} hover pixel className="p-6 flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
-                  <span className="text-4xl flex-shrink-0 animate-gentle-bounce" aria-hidden="true">
+                  <span className="text-4xl shrink-0 animate-gentle-bounce" aria-hidden="true">
                     {game.icon}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -282,7 +282,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-3">
               <span className="text-2xl" aria-hidden="true">🆕</span>
               <p className="text-gray-700 text-base md:text-lg font-semibold">
-                <span className="font-[family-name:var(--font-pixel)] text-[10px] text-amber-600 mr-2">
+                <span className="font-pixel text-[10px] text-amber-600 mr-2">
                   {t('dashboard.newMemoriesLabel')}
                 </span>
                 {t('dashboard.newMemoriesBanner')}
@@ -294,7 +294,7 @@ export default function Dashboard() {
             {highlightMemories.map((memory) => (
               <PixelCard key={memory.id} hover className="p-6 flex flex-col">
                 <div className="flex items-start gap-3 mb-3">
-                  <span className="text-3xl flex-shrink-0" aria-hidden="true">{memory.icon}</span>
+                  <span className="text-3xl shrink-0" aria-hidden="true">{memory.icon}</span>
                   <div className="min-w-0 flex-1">
                     <h3 className="font-semibold text-gray-800 text-lg leading-snug mb-0.5">
                       {memory.title}
@@ -321,7 +321,7 @@ export default function Dashboard() {
           <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
             <div className="flex items-center gap-2.5">
               <span className="text-xl leading-none" aria-hidden="true">⏰</span>
-              <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm tracking-wider">
+              <h2 className="font-pixel text-teal-700 text-xs md:text-sm tracking-wider">
                 {t('dashboard.todaysRoutine')}
               </h2>
             </div>
@@ -332,7 +332,7 @@ export default function Dashboard() {
 
           <div className="flex gap-4 overflow-x-auto pb-4 px-1 snap-x snap-mandatory -mx-1">
             {routineWithCurrent.map((item) => (
-              <div key={item.id} className="min-w-[260px] max-w-[300px] w-full snap-start flex-shrink-0">
+              <div key={item.id} className="min-w-[260px] max-w-[300px] w-full snap-start shrink-0">
                 <RoutineCard activity={item} onClick={(routineItem) => toggleRoutine(routineItem.id)} />
               </div>
             ))}
@@ -366,7 +366,7 @@ export default function Dashboard() {
                 >
                   {action.icon}
                 </span>
-                <span className="font-[family-name:var(--font-pixel)] text-teal-800 text-[11px] md:text-xs leading-relaxed block">
+                <span className="font-pixel text-teal-800 text-[11px] md:text-xs leading-relaxed block">
                   {t(action.labelKey)}
                 </span>
                 <span className="text-xs md:text-sm text-gray-500 mt-2 block">{t(action.hintKey)}</span>
@@ -382,7 +382,7 @@ export default function Dashboard() {
             {activityLog.slice(0, 5).map((activity) => (
               <PixelCard key={activity.id} variant="default" className="p-4 md:p-5">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-2xl">
+                  <div className="shrink-0 w-11 h-11 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center text-2xl">
                     <span aria-hidden="true">{activity.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
@@ -393,7 +393,7 @@ export default function Dashboard() {
                       {activity.detail}
                     </p>
                   </div>
-                  <span className="flex-shrink-0 text-xs text-gray-400 whitespace-nowrap">
+                  <span className="shrink-0 text-xs text-gray-400 whitespace-nowrap">
                     {activity.timestamp}
                   </span>
                 </div>

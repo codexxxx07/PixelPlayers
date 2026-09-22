@@ -26,7 +26,7 @@ function Toggle({ enabled, onToggle }) {
   return (
     <button
       onClick={onToggle}
-      className={`relative inline-flex h-8 w-14 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${
+      className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2 ${
         enabled ? 'bg-teal-500' : 'bg-gray-300'
       }`}
       aria-label={enabled ? t('reminders.disable') : t('reminders.enable')}
@@ -114,7 +114,7 @@ export default function Reminders() {
     if (items.length === 0) return null;
     return (
       <div className="mb-8">
-        <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 flex items-center gap-2 tracking-wide">
+        <h3 className="font-pixel text-gray-600 text-xs mb-4 flex items-center gap-2 tracking-wide">
           <span className="text-lg">{icon}</span> {title}
         </h3>
         <div className="space-y-3">
@@ -129,7 +129,7 @@ export default function Reminders() {
               >
                 <div className="flex items-center gap-4">
                   {/* Category icon */}
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-xl border text-2xl flex-shrink-0 ${cat.color}`}>
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-xl border text-2xl shrink-0 ${cat.color}`}>
                     {cat.icon}
                   </div>
 
@@ -140,7 +140,7 @@ export default function Reminders() {
                   </div>
 
                   {/* Toggle + Delete */}
-                  <div className="flex items-center gap-3 flex-shrink-0">
+                  <div className="flex items-center gap-3 shrink-0">
                     <Toggle
                       enabled={!reminder.completed}
                       onToggle={() => toggleReminder(reminder.id)}
@@ -163,11 +163,11 @@ export default function Reminders() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white pb-20">
+    <div className="min-h-screen bg-linear-to-b from-blue-50/30 to-white pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page Header */}
         <div className="text-center mb-10">
-          <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
+          <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
             {t('reminders.pageTitle')}
           </h1>
           <p className="text-gray-500 text-lg italic">
@@ -190,7 +190,7 @@ export default function Reminders() {
           </div>
         ) : (
           <PixelCard className="p-6 md:p-8 mb-8 border-2 border-teal-300 shadow-lg shadow-teal-500/10">
-            <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-6 tracking-wide">
+            <h3 className="font-pixel text-teal-700 text-sm mb-6 tracking-wide">
               {t('reminders.addNew')}
             </h3>
 
@@ -313,14 +313,14 @@ export default function Reminders() {
 
         {/* Reminder Categories Overview */}
         <div className="mt-8">
-          <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-4 tracking-wide">
+          <h2 className="font-pixel text-teal-700 text-sm mb-4 tracking-wide">
             {t('reminders.reminderCategories')}
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-stretch">
             {Object.entries(categoryConfig).map(([key, cat]) => (
               <PixelCard key={key} hover className="p-5 flex flex-col justify-center">
                 <div className="flex items-center gap-3">
-                  <span className={`flex-shrink-0 flex items-center justify-center w-11 h-11 rounded-xl border text-xl ${cat.color}`}>
+                  <span className={`shrink-0 flex items-center justify-center w-11 h-11 rounded-xl border text-xl ${cat.color}`}>
                     {cat.icon}
                   </span>
                   <div className="min-w-0">
@@ -340,7 +340,7 @@ export default function Reminders() {
           <PixelCard variant="inset" className="px-8 py-6 max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>
-              <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs tracking-wide">
+              <h3 className="font-pixel text-gray-600 text-xs tracking-wide">
                 {t('reminders.privacyNote')}
               </h3>
             </div>

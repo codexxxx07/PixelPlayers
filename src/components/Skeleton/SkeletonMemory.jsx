@@ -41,7 +41,7 @@ function ChatBubble({ align }) {
 
 export default function SkeletonMemory() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50/50 to-white pb-20" aria-busy="true">
+    <div className="min-h-screen bg-linear-to-b from-amber-50/50 to-white pb-20" aria-busy="true">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
         {/* Page header */}
         <div className="text-center mb-8">
@@ -59,7 +59,7 @@ export default function SkeletonMemory() {
                 width={i % 2 === 0 ? 128 : 112}
                 height={48}
                 radius="lg"
-                className="sk-inner flex-shrink-0"
+                className="sk-inner shrink-0"
               />
             ))}
           </div>
@@ -84,7 +84,7 @@ export default function SkeletonMemory() {
               <Skeleton width="100%" height={48} radius="lg" className="sk-inner mb-3" />
               <Skeleton width="100%" height={88} radius="lg" className="sk-inner" />
               <div className="flex flex-wrap items-center gap-3 mt-4">
-                <Skeleton width={56} height={56} radius="full" className="sk-inner flex-shrink-0" />
+                <Skeleton width={56} height={56} radius="full" className="sk-inner shrink-0" />
                 <SkeletonButton width="100%" height={48} size="lg" radius="lg" className="flex-1 min-w-0" />
               </div>
             </SkeletonCard>
@@ -100,7 +100,7 @@ export default function SkeletonMemory() {
                 <ChatBubble align="user" />
               </div>
               <div className="flex items-center gap-2 sm:gap-3">
-                <Skeleton width={40} height={40} radius="full" className="sk-inner flex-shrink-0" />
+                <Skeleton width={40} height={40} radius="full" className="sk-inner shrink-0" />
                 <Skeleton width="100%" height={48} radius="lg" className="sk-inner flex-1 min-w-0" />
               </div>
             </SkeletonCard>

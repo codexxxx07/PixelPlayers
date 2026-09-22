@@ -6,7 +6,7 @@ import SkeletonBadge from './SkeletonBadge';
 export default function SkeletonHero() {
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-b from-warm-50 via-white to-teal-50/40 py-20 md:py-32 px-6"
+      className="relative overflow-hidden bg-linear-to-b from-warm-50 via-white to-teal-50/40 py-20 md:py-32 px-6"
       aria-hidden="true"
     >
       <div className="absolute inset-0 pixel-grid pointer-events-none opacity-40" />

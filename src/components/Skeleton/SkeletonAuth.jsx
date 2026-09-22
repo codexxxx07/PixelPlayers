@@ -4,7 +4,7 @@ import SkeletonCard from './SkeletonCard';
 export default function SkeletonAuth() {
   return (
     <div
-      className="relative min-h-screen bg-gradient-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell"
+      className="relative min-h-screen bg-linear-to-b from-teal-50/70 via-warm-50 to-white py-10 md:py-16 overflow-hidden auth-shell"
       aria-busy="true"
     >
       <div className="absolute inset-0 pixel-grid" aria-hidden="true" />

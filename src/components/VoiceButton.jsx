@@ -39,10 +39,10 @@ export default function VoiceButton({ isListening = false, onToggle, size = "md"
     "relative z-10 flex items-center justify-center rounded-full transition-all duration-300 select-none touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-teal-500";
 
   const idle =
-    "bg-gradient-to-b from-teal-400 to-teal-600 text-white border-2 border-teal-700/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#134e4a,0_10px_16px_rgba(19,78,74,0.28)] hover:brightness-105 active:translate-y-1 active:shadow-[inset_0_2px_0_rgba(255,255,255,0.25),0_1px_0_#134e4a]";
+    "bg-linear-to-b from-teal-400 to-teal-600 text-white border-2 border-teal-700/40 shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#134e4a,0_10px_16px_rgba(19,78,74,0.28)] hover:brightness-105 active:translate-y-1 active:shadow-[inset_0_2px_0_rgba(255,255,255,0.25),0_1px_0_#134e4a]";
 
   const active =
-    "bg-gradient-to-b from-red-400 to-red-600 text-white border-2 border-red-700/50 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#7f1d1d,0_10px_18px_rgba(190,18,60,0.35)] active:translate-y-1 active:shadow-[inset_0_2px_0_rgba(255,255,255,0.2),0_1px_0_#7f1d1d]";
+    "bg-linear-to-b from-red-400 to-red-600 text-white border-2 border-red-700/50 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#7f1d1d,0_10px_18px_rgba(190,18,60,0.35)] active:translate-y-1 active:shadow-[inset_0_2px_0_rgba(255,255,255,0.2),0_1px_0_#7f1d1d]";
 
   return (
     <div className={`relative inline-flex items-center justify-center ${SIZES[size]} ${className}`}>

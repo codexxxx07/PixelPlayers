@@ -61,7 +61,7 @@ export default function Activities() {
               <div key={day.day} className="flex-1 flex flex-col items-center gap-1 min-w-0">
                 <span className="text-[11px] font-bold text-(--cg-text-soft) cg-mono">{day.games || 0}</span>
                 <div
-                  className="w-full rounded-t-lg bg-gradient-to-b from-teal-400 to-teal-600"
+                  className="w-full rounded-t-lg bg-linear-to-b from-teal-400 to-teal-600"
                   style={{ height: `${Math.max(4, Math.round(((day.games || 0) / maxGames) * 100))}%` }}
                   aria-hidden="true"
                 />

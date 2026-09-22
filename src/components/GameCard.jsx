@@ -16,7 +16,7 @@ export default function GameCard({ game }) {
         {/* Visual + title area */}
         <div className="flex items-start gap-4 mb-4 min-w-0">
           <span
-            className="flex-shrink-0 w-16 h-16 rounded-2xl bg-teal-50 border-2 border-teal-200 flex items-center justify-center text-3xl mt-0.5 group-hover:scale-110 group-hover:border-teal-300 transition-transform duration-200"
+            className="shrink-0 w-16 h-16 rounded-2xl bg-teal-50 border-2 border-teal-200 flex items-center justify-center text-3xl mt-0.5 group-hover:scale-110 group-hover:border-teal-300 transition-transform duration-200"
             aria-hidden="true"
           >
             {game.image}

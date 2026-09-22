@@ -50,14 +50,14 @@ export default function Routine() {
   const currentActivity = currentIndex >= 0 ? routine[currentIndex] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50/50 to-white pb-20">
+    <div className="min-h-screen bg-linear-to-b from-teal-50/50 to-white pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page Header */}
         <div className="text-center mb-10">
-          <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-2 tracking-wide">
+          <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-2 tracking-wide">
             {t(getGreetingKey())}{user.name ? `, ${user.name}` : ""}
           </h1>
-          <p className="text-gray-500 text-lg font-[family-name:var(--font-pixel)] text-[11px] tracking-wider mb-1">
+          <p className="text-gray-500 text-lg font-pixel text-[11px] tracking-wider mb-1">
             {getTodayDate()}
           </p>
           <p className="text-gray-400 text-sm italic">
@@ -70,16 +70,16 @@ export default function Routine() {
           <div className="lg:col-span-2 space-y-8">
             {/* Current Activity Highlight */}
             {currentActivity && (
-              <PixelCard className="p-6 md:p-8 border-2 border-teal-400 bg-gradient-to-br from-teal-50 to-white shadow-lg shadow-teal-500/10">
+              <PixelCard className="p-6 md:p-8 border-2 border-teal-400 bg-linear-to-br from-teal-50 to-white shadow-lg shadow-teal-500/10">
                 <div className="text-center">
                   <span className="text-6xl block mb-4">{currentActivity.icon}</span>
-                  <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-base md:text-lg mb-1">
+                  <h2 className="font-pixel text-teal-700 text-base md:text-lg mb-1">
                     {currentActivity.title}
                   </h2>
                   <p className="text-teal-600 text-sm mb-3">{currentActivity.time}</p>
                   <div className="flex items-center justify-center gap-2">
                     <span className="inline-flex h-3 w-3 rounded-full bg-teal-500 animate-pulse" />
-                    <span className="font-[family-name:var(--font-pixel)] text-teal-600 text-[10px] tracking-wide">
+                    <span className="font-pixel text-teal-600 text-[10px] tracking-wide">
                       {t('routine.happeningNow')}
                     </span>
                   </div>
@@ -92,7 +92,7 @@ export default function Routine() {
 
             {/* Today's Timeline */}
             <div>
-              <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-6 tracking-wide">
+              <h2 className="font-pixel text-teal-700 text-sm mb-6 tracking-wide">
                 {t('routine.todaysTimeline')}
               </h2>
               <div className="relative">
@@ -103,7 +103,7 @@ export default function Routine() {
                   {routine.map((activity, index) => (
                     <div key={activity.id} className="relative flex items-start gap-4">
                       {/* Timeline dot */}
-                      <div className="relative z-10 mt-5 flex-shrink-0">
+                      <div className="relative z-10 mt-5 shrink-0">
                         {activity.completed ? (
                           <div className="flex items-center justify-center w-[18px] h-[18px] rounded-full bg-emerald-500 border-2 border-emerald-400">
                             <span className="text-white text-[10px] font-bold">✓</span>
@@ -138,14 +138,14 @@ export default function Routine() {
           <div className="space-y-6">
             {/* Progress Summary */}
             <PixelCard className="p-6">
-              <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
+              <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.todaysProgress')}
               </h3>
 
               {/* Progress bar */}
               <div className="w-full bg-gray-100 rounded-full h-5 mb-4 overflow-hidden border border-gray-200">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-teal-400 to-emerald-500 transition-all duration-700 ease-out"
+                  className="h-full rounded-full bg-linear-to-r from-teal-400 to-emerald-500 transition-all duration-700 ease-out"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
@@ -154,7 +154,7 @@ export default function Routine() {
                 <span className="text-gray-600 text-sm font-medium">
                   {t('routine.activitiesCompleted', { done: completedCount, total: totalCount })}
                 </span>
-                <span className="font-[family-name:var(--font-pixel)] text-teal-600 text-sm">
+                <span className="font-pixel text-teal-600 text-sm">
                   {progressPercent}%
                 </span>
               </div>
@@ -172,7 +172,7 @@ export default function Routine() {
 
             {/* Quick Actions */}
             <PixelCard className="p-6">
-              <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
+              <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.adjustRoutine')}
               </h3>
               <div className="space-y-3">
@@ -190,7 +190,7 @@ export default function Routine() {
 
             {/* Tomorrow Preview */}
             <PixelCard className="p-6">
-              <h3 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-4 tracking-wide">
+              <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.tomorrowsHighlights')}
               </h3>
               <div className="space-y-3">

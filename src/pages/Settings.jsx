@@ -69,7 +69,7 @@ function Toggle({ checked, onChange, label, description }) {
         )}
       </span>
       <span
-        className={`relative inline-flex h-12 w-20 flex-shrink-0 items-center rounded-full p-1 transition-colors duration-200 ${
+        className={`relative inline-flex h-12 w-20 shrink-0 items-center rounded-full p-1 transition-colors duration-200 ${
           checked ? 'bg-teal-500' : 'bg-gray-300'
         }`}
       >
@@ -86,7 +86,7 @@ function Toggle({ checked, onChange, label, description }) {
 function SectionHeading({ title, subtitle }) {
   return (
     <div className="mb-5">
-      <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-1 tracking-wide">
+      <h2 className="font-pixel text-teal-700 text-sm mb-1 tracking-wide">
         {title}
       </h2>
       {subtitle && <p className="text-gray-500 text-sm">{subtitle}</p>}
@@ -111,10 +111,10 @@ export default function Settings() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-50/60 via-warm-50 to-white pb-20">
+    <div className="min-h-screen bg-linear-to-b from-teal-50/60 via-warm-50 to-white pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         <div className="text-center mb-10">
-          <h1 className="font-[family-name:var(--font-pixel)] text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
+          <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
             {t('settings.title')}
           </h1>
           <p className="text-gray-600 text-lg">{t('settings.subtitle')}</p>
@@ -161,7 +161,7 @@ export default function Settings() {
           <SectionHeading title={t('settings.accessibility')} subtitle={t('settings.accessibilityDesc')} />
 
           <PixelCard className="p-6 md:p-7 mb-5">
-            <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 tracking-wide">
+            <h3 className="font-pixel text-gray-600 text-xs mb-4 tracking-wide">
               {t('settings.textSize')}
             </h3>
             <div className="grid grid-cols-3 gap-3">
@@ -187,7 +187,7 @@ export default function Settings() {
           </PixelCard>
 
           <PixelCard className="p-6 md:p-7 mb-5">
-            <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 tracking-wide">
+            <h3 className="font-pixel text-gray-600 text-xs mb-4 tracking-wide">
               {t('settings.voice')}
             </h3>
             <div className="space-y-4">
@@ -213,7 +213,7 @@ export default function Settings() {
           </PixelCard>
 
           <PixelCard className="p-6 md:p-7">
-            <h3 className="font-[family-name:var(--font-pixel)] text-gray-600 text-xs mb-4 tracking-wide">
+            <h3 className="font-pixel text-gray-600 text-xs mb-4 tracking-wide">
               {t('settings.display')}
             </h3>
             <div className="space-y-4">
@@ -280,7 +280,7 @@ export default function Settings() {
           <div className="grid sm:grid-cols-2 gap-4 mb-6 items-stretch">
             {privacyCards.map((card) => (
               <PixelCard key={card.titleKey} className="p-5 flex-row items-start gap-4">
-                <span className="text-3xl flex-shrink-0">{card.icon}</span>
+                <span className="text-3xl shrink-0">{card.icon}</span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-warm-800 text-base font-bold">{t(card.titleKey)}</span>
                   <span className="block text-gray-500 text-sm mt-1 leading-relaxed">
@@ -320,7 +320,7 @@ export default function Settings() {
                   onClick={() => {
                     setDeleteConfirm(false);
                   }}
-                  className="font-[family-name:var(--font-pixel)] uppercase rounded-xl bg-red-600 text-white text-xs tracking-wide px-6 py-3 border-2 border-red-800 shadow-[0_4px_0_#7f1d1d] transition-transform duration-100 hover:bg-red-700 active:translate-y-1 active:shadow-none"
+                  className="font-pixel uppercase rounded-xl bg-red-600 text-white text-xs tracking-wide px-6 py-3 border-2 border-red-800 shadow-[0_4px_0_#7f1d1d] transition-transform duration-100 hover:bg-red-700 active:translate-y-1 active:shadow-none"
                 >
                   {t('settings.deleteEverything')}
                 </button>
@@ -329,7 +329,7 @@ export default function Settings() {
               <button
                 type="button"
                 onClick={() => setDeleteConfirm(true)}
-                className="font-[family-name:var(--font-pixel)] uppercase rounded-xl bg-red-500 text-white text-xs tracking-wide px-6 py-3 border-2 border-red-700 shadow-[0_4px_0_#991b1b] transition-transform duration-100 hover:bg-red-600 active:translate-y-1 active:shadow-none"
+                className="font-pixel uppercase rounded-xl bg-red-500 text-white text-xs tracking-wide px-6 py-3 border-2 border-red-700 shadow-[0_4px_0_#991b1b] transition-transform duration-100 hover:bg-red-600 active:translate-y-1 active:shadow-none"
               >
                 {t('settings.deleteAllMyData')}
               </button>
@@ -345,11 +345,11 @@ export default function Settings() {
         <section className="mb-12">
           <SectionHeading title={t('settings.account')} subtitle={t('settings.signedInAs', { name: user.name })} />
           <PixelCard className="p-6 flex-row items-center gap-4 mb-5">
-            <div className="flex-shrink-0 flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 text-3xl font-extrabold text-white">
+            <div className="shrink-0 flex items-center justify-center w-20 h-20 rounded-full bg-linear-to-br from-teal-400 to-teal-600 text-3xl font-extrabold text-white">
               {user.name.charAt(0).toUpperCase()}
             </div>
             <div>
-              <p className="font-[family-name:var(--font-pixel)] text-[11px] text-teal-800 leading-relaxed">
+              <p className="font-pixel text-[11px] text-teal-800 leading-relaxed">
                 {user.name}
               </p>
               <p className="text-gray-500 text-base mt-1">{t('settings.ageYears', { age: user.age })}</p>
@@ -393,7 +393,7 @@ export default function Settings() {
         <section className="mb-8">
           <SectionHeading title={t('settings.about')} />
           <PixelCard className="p-6 text-center">
-            <p className="font-[family-name:var(--font-pixel)] text-teal-700 text-sm mb-2 tracking-wide">
+            <p className="font-pixel text-teal-700 text-sm mb-2 tracking-wide">
               Pixel Players
             </p>
             <p className="text-gray-500 text-sm mb-1">{t('settings.version')}</p>

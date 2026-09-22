@@ -29,7 +29,7 @@ function SectionTitle({ icon, children }) {
   return (
     <div className="flex items-center gap-2.5 mb-5">
       <span className="text-xl leading-none" aria-hidden="true">{icon}</span>
-      <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm tracking-wider">
+      <h2 className="font-pixel text-teal-700 text-xs md:text-sm tracking-wider">
         {children}
       </h2>
     </div>
@@ -67,7 +67,7 @@ export default function Progress() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-teal-600 shadow-lg shadow-teal-600/25 mb-4 animate-gentle-bounce">
             <span className="text-3xl" aria-hidden="true">📈</span>
           </div>
-          <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl mb-3">
+          <h1 className="font-pixel text-teal-800 text-lg md:text-2xl mb-3">
             {t('progress.pageTitle')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mb-4">
@@ -104,7 +104,7 @@ export default function Progress() {
                 >
                   <span className="text-xs font-bold text-teal-800">{day.games}</span>
                   <div
-                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-gradient-to-t from-teal-600 via-teal-400 to-teal-300 shadow-inner transition-all duration-500"
+                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-linear-to-t from-teal-600 via-teal-400 to-teal-300 shadow-inner transition-all duration-500"
                     style={{ height: `${(day.games / maxGames) * 100}%` }}
                     title={t('progress.chartGamesTitle', { day: day.day, games: day.games })}
                   />
@@ -130,7 +130,7 @@ export default function Progress() {
                 >
                   <span className="text-[11px] font-bold text-emerald-600">{day.accuracy}%</span>
                   <div
-                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-gradient-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-inner transition-all duration-500"
+                    className="w-full max-w-[44px] min-h-[6px] rounded-t-md bg-linear-to-t from-emerald-600 via-emerald-400 to-emerald-300 shadow-inner transition-all duration-500"
                     style={{ height: `${day.accuracy}%` }}
                     title={t('progress.chartAccuracyTitle', { day: day.day, accuracy: day.accuracy })}
                   />
@@ -179,12 +179,12 @@ export default function Progress() {
             {favoriteGames.map((favorite, index) => (
               <PixelCard key={favorite.id} hover className="p-5">
                 <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-2xl">
+                  <div className="shrink-0 w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-2xl">
                     <span aria-hidden="true">{favorite.icon}</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-[family-name:var(--font-pixel)] text-[9px] text-amber-600">
+                      <span className="font-pixel text-[9px] text-amber-600">
                         #{index + 1}
                       </span>
                       <h3 className="font-semibold text-gray-800 text-lg leading-snug">
@@ -198,8 +198,8 @@ export default function Progress() {
                       {t('progress.playedTimes', { count: favorite.plays })}
                     </p>
                   </div>
-                  <div className="flex-shrink-0 text-right">
-                    <p className="font-[family-name:var(--font-pixel)] text-emerald-600 text-sm">
+                  <div className="shrink-0 text-right">
+                    <p className="font-pixel text-emerald-600 text-sm">
                       {favorite.accuracy}%
                     </p>
                     <p className="text-[11px] text-gray-400">{t('progress.avgAccuracyLabel')}</p>
@@ -219,7 +219,7 @@ export default function Progress() {
                 key={achievement.titleKey}
                 className={`relative rounded-2xl p-5 text-center border-2 flex flex-col items-center transition-all duration-200 ${
                   achievement.completed
-                    ? "bg-gradient-to-b from-amber-50 to-amber-100 border-amber-300 shadow-md shadow-amber-900/5"
+                    ? "bg-linear-to-b from-amber-50 to-amber-100 border-amber-300 shadow-md shadow-amber-900/5"
                     : "bg-gray-50 border-gray-200 opacity-80"
                 }`}
               >
@@ -230,7 +230,7 @@ export default function Progress() {
                   {achievement.icon}
                 </span>
                 <p
-                  className={`font-[family-name:var(--font-pixel)] text-[9px] mb-2 ${
+                  className={`font-pixel text-[9px] mb-2 ${
                     achievement.completed ? "text-amber-700" : "text-gray-400"
                   }`}
                 >
@@ -258,9 +258,9 @@ export default function Progress() {
         <section className="animate-slide-up">
           <div className="rounded-2xl border-l-4 border-amber-400 bg-amber-50/60 border border-amber-200 p-6">
             <div className="flex items-start gap-4">
-              <span className="text-2xl flex-shrink-0" aria-hidden="true">⚠️</span>
+              <span className="text-2xl shrink-0" aria-hidden="true">⚠️</span>
               <div>
-                <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-amber-700 mb-2">
+                <h3 className="font-pixel text-[10px] text-amber-700 mb-2">
                   {t('progress.important')}
                 </h3>
                 <p className="text-amber-800 text-base leading-relaxed">

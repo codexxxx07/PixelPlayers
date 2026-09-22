@@ -19,7 +19,7 @@ export default function GameDetails() {
             >
               🎮
             </div>
-            <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
+            <h1 className="font-pixel text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
               {t('games.gameNotFound')}
             </h1>
             <p className="text-gray-600 text-lg mt-3 leading-relaxed">
@@ -29,7 +29,7 @@ export default function GameDetails() {
           <div className="text-center mt-8">
             <Link
               to="/games"
-              className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 text-white text-lg font-bold px-8 py-4 border-2 border-teal-700 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/70 focus-visible:ring-offset-2 transition-all"
+              className="inline-flex items-center gap-2 rounded-2xl bg-linear-to-b from-teal-500 to-teal-600 text-white text-lg font-bold px-8 py-4 border-2 border-teal-700 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/70 focus-visible:ring-offset-2 transition-all"
             >
               {t('games.backToGames')}
             </Link>
@@ -59,13 +59,13 @@ export default function GameDetails() {
           <header className="animate-pixel-fade-in">
             <div className="flex flex-col sm:flex-row sm:items-center gap-5">
               <span
-                className="flex-shrink-0 w-20 h-20 rounded-2xl bg-teal-50 border-2 border-teal-200 flex items-center justify-center text-5xl"
+                className="shrink-0 w-20 h-20 rounded-2xl bg-teal-50 border-2 border-teal-200 flex items-center justify-center text-5xl"
                 aria-hidden="true"
               >
                 {game.image}
               </span>
               <div className="min-w-0">
-                <h1 className="font-[family-name:var(--font-pixel)] text-teal-800 text-lg md:text-2xl leading-relaxed tracking-wide mb-3">
+                <h1 className="font-pixel text-teal-800 text-lg md:text-2xl leading-relaxed tracking-wide mb-3">
                   {game.title}
                 </h1>
                 {game.category && (
@@ -85,7 +85,7 @@ export default function GameDetails() {
             <PixelCard className="p-6 md:p-8">
               <h2
                 id="how-this-helps-heading"
-                className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
+                className="font-pixel text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
               >
                 {t('games.howThisHelps')}
               </h2>
@@ -93,7 +93,7 @@ export default function GameDetails() {
                 {game.dementiaBenefit.map((benefit) => (
                   <li key={benefit} className="flex items-start gap-3 min-w-0">
                     <span
-                      className="flex-shrink-0 mt-0.5 inline-flex items-center justify-center w-7 h-7 rounded-full bg-teal-100 border border-teal-200 text-teal-700 text-sm"
+                      className="shrink-0 mt-0.5 inline-flex items-center justify-center w-7 h-7 rounded-full bg-teal-100 border border-teal-200 text-teal-700 text-sm"
                       aria-hidden="true"
                     >
                       ✓
@@ -112,7 +112,7 @@ export default function GameDetails() {
             <PixelCard className="p-6 md:p-8">
               <h2
                 id="how-to-play-heading"
-                className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
+                className="font-pixel text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
               >
                 {t('games.howToPlay')}
               </h2>
@@ -120,7 +120,7 @@ export default function GameDetails() {
                 {game.howToPlay.map((step, index) => (
                   <li key={step} className="flex items-start gap-3 min-w-0">
                     <span
-                      className="flex-shrink-0 mt-0.5 inline-flex items-center justify-center w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 text-amber-700 font-black"
+                      className="shrink-0 mt-0.5 inline-flex items-center justify-center w-9 h-9 rounded-xl bg-amber-100 border border-amber-200 text-amber-700 font-black"
                       aria-hidden="true"
                     >
                       {index + 1}
@@ -139,7 +139,7 @@ export default function GameDetails() {
             <PixelCard className="p-6 md:p-8">
               <h2
                 id="why-this-activity-heading"
-                className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
+                className="font-pixel text-teal-700 text-xs md:text-sm mb-4 tracking-wide"
               >
                 {t('games.whyThisActivity')}
               </h2>
@@ -153,7 +153,7 @@ export default function GameDetails() {
           <div className="text-center animate-slide-up stagger-4">
             <a
               href={game.gameUrl}
-              className="inline-flex items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-teal-500 to-teal-600 text-white text-xl font-bold px-10 py-5 min-h-16 border-2 border-teal-700 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/70 focus-visible:ring-offset-2 transition-all w-full sm:w-auto"
+              className="inline-flex items-center justify-center gap-3 rounded-2xl bg-linear-to-b from-teal-500 to-teal-600 text-white text-xl font-bold px-10 py-5 min-h-16 border-2 border-teal-700 shadow-[inset_0_2px_0_rgba(255,255,255,0.3),0_4px_0_#134e4a] hover:brightness-105 active:translate-y-1 active:shadow-[0_1px_0_#134e4a] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/70 focus-visible:ring-offset-2 transition-all w-full sm:w-auto"
             >
               <span aria-hidden="true">🎮</span>
               {t('games.playGame')}

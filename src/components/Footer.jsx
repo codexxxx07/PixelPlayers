@@ -54,7 +54,7 @@ export default function Footer() {
                 <span className="text-white text-base leading-none mt-0.5">♥</span>
                 <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-amber-400 rounded-sm" />
               </div>
-              <span className="font-[family-name:var(--font-pixel)] text-xl text-white">
+              <span className="font-pixel text-xl text-white">
                 Pixel Players
               </span>
             </div>
@@ -68,7 +68,7 @@ export default function Footer() {
 
           {/* Platform Column */}
           <div>
-            <h3 className="font-[family-name:var(--font-pixel)] text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.platform")}
             </h3>
             <ul className="space-y-3">
@@ -87,7 +87,7 @@ export default function Footer() {
 
           {/* Support Column */}
           <div>
-            <h3 className="font-[family-name:var(--font-pixel)] text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.support")}
             </h3>
             <ul className="space-y-3">
@@ -106,7 +106,7 @@ export default function Footer() {
 
           {/* About Column */}
           <div>
-            <h3 className="font-[family-name:var(--font-pixel)] text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.explore")}
             </h3>
             <ul className="space-y-3">

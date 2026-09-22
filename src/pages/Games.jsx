@@ -47,7 +47,7 @@ export default function Games() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-teal-100 border-2 border-teal-200 text-3xl mb-4 shadow-sm">
             <span aria-hidden="true">🎮</span>
           </div>
-          <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
+          <h1 className="font-pixel text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
             {t('games.title')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mt-3 max-w-xl mx-auto">
@@ -66,7 +66,7 @@ export default function Games() {
                   type="button"
                   onClick={() => setActiveCategory(cat.key)}
                   aria-pressed={active}
-                  className={`snap-start flex-shrink-0 inline-flex items-center gap-2 min-h-12 px-4 md:px-5 rounded-full border-2 font-[family-name:var(--font-pixel)] text-[10px] md:text-[11px] uppercase tracking-wider transition-all duration-200 ${
+                  className={`snap-start shrink-0 inline-flex items-center gap-2 min-h-12 px-4 md:px-5 rounded-full border-2 font-pixel text-[10px] md:text-[11px] uppercase tracking-wider transition-all duration-200 ${
                     active
                       ? 'bg-teal-600 border-teal-600 text-white shadow-md shadow-teal-900/20 scale-[1.02]'
                       : 'bg-white border-teal-200 text-teal-700 hover:border-teal-400 hover:bg-teal-50'
@@ -95,7 +95,7 @@ export default function Games() {
               <div className="text-6xl mb-4" aria-hidden="true">
                 🍃
               </div>
-              <p className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-3">
+              <p className="font-pixel text-teal-700 text-xs mb-3">
                 {t('games.noGamesTitle')}
               </p>
               <p className="text-gray-500 text-base mb-6">
@@ -114,8 +114,8 @@ export default function Games() {
 
         {/* ========== HOW GAMES HELP ========== */}
         <section className="animate-slide-up stagger-3">
-          <div className="skeuo-card bg-gradient-to-br from-teal-50 to-white">
-            <h2 className="font-[family-name:var(--font-pixel)] text-teal-700 text-xs mb-2 tracking-wide">
+          <div className="skeuo-card bg-linear-to-br from-teal-50 to-white">
+            <h2 className="font-pixel text-teal-700 text-xs mb-2 tracking-wide">
               {t('games.howGamesHelp')}
             </h2>
             <p className="text-gray-500 text-base mb-6">

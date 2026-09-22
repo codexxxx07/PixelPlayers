@@ -9,7 +9,7 @@ export default function SkeletonPageHeader({
 }) {
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-b from-warm-50 to-teal-50/30 py-20 md:py-28 px-6"
+      className="relative overflow-hidden bg-linear-to-b from-warm-50 to-teal-50/30 py-20 md:py-28 px-6"
       aria-hidden="true"
     >
       <div className="absolute inset-0 pixel-grid pointer-events-none opacity-30" />

@@ -17,7 +17,7 @@ export default function ErrorState({
         >
           ⚠️
         </div>
-        <h2 className="font-[family-name:var(--font-pixel)] text-sm text-warm-800 mb-3 leading-relaxed">
+        <h2 className="font-pixel text-sm text-warm-800 mb-3 leading-relaxed">
           {title}
         </h2>
         <p className="text-warm-600 text-base leading-relaxed mb-8">{message}</p>

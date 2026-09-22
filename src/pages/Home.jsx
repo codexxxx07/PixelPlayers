@@ -144,10 +144,10 @@ export default function Home() {
       <div className="w-16 h-16 shrink-0 flex items-center justify-center mb-4">
         <span className="text-4xl leading-none">{step.icon}</span>
       </div>
-      <div className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-300 mb-2">
+      <div className="font-pixel text-[10px] text-teal-300 mb-2">
         {t('common.step')} {String(i + 1).padStart(2, '0')}
       </div>
-      <h3 className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-800 mb-2 leading-relaxed">
+      <h3 className="font-pixel text-[10px] text-teal-800 mb-2 leading-relaxed">
         {t(step.titleKey)}
       </h3>
       <p className="text-warm-700 text-sm leading-relaxed">
@@ -159,32 +159,32 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* ===== HERO SECTION ===== */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-warm-50 via-white to-teal-50/40 py-20 md:py-32 px-6">
+      <section className="relative overflow-hidden bg-linear-to-b from-warm-50 via-white to-teal-50/40 py-20 md:py-32 px-6">
         {/* Decorative pixel elements */}
         <div className="absolute top-8 left-8 opacity-20 pointer-events-none hidden lg:block">
-          <span className="font-[family-name:var(--font-pixel)] text-teal-400 text-[10px]">♥ ♥ ♥</span>
+          <span className="font-pixel text-teal-400 text-[10px]">♥ ♥ ♥</span>
         </div>
         <div className="absolute top-16 right-12 opacity-20 pointer-events-none hidden lg:block">
-          <span className="font-[family-name:var(--font-pixel)] text-amber-400 text-[10px]">★ ★ ★</span>
+          <span className="font-pixel text-amber-400 text-[10px]">★ ★ ★</span>
         </div>
         <div className="absolute bottom-24 left-16 opacity-15 pointer-events-none hidden lg:block">
-          <span className="font-[family-name:var(--font-pixel)] text-teal-300 text-[8px]">■ ■ ■</span>
+          <span className="font-pixel text-teal-300 text-[8px]">■ ■ ■</span>
         </div>
         <div className="absolute bottom-32 right-20 opacity-15 pointer-events-none hidden lg:block">
-          <span className="font-[family-name:var(--font-pixel)] text-amber-300 text-[8px]">♥ ★ ♥</span>
+          <span className="font-pixel text-amber-300 text-[8px]">♥ ★ ♥</span>
         </div>
 
         {/* Pixel grid background */}
         <div className="absolute inset-0 pixel-grid pointer-events-none opacity-40" />
 
         <div className="relative max-w-5xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-white border-2 border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-[family-name:var(--font-pixel)] mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full bg-white border-2 border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-pixel mb-6">
             🌐 {t(languageLabels[language] || 'home.langEnglish')}
           </span>
 
           <PixelDecor className="justify-center mb-8 opacity-60" />
 
-          <h1 className="font-[family-name:var(--font-pixel)] text-xl sm:text-2xl md:text-4xl lg:text-[2.5rem] text-teal-700 leading-relaxed md:leading-relaxed mb-8 tracking-wide">
+          <h1 className="font-pixel text-xl sm:text-2xl md:text-4xl lg:text-[2.5rem] text-teal-700 leading-relaxed md:leading-relaxed mb-8 tracking-wide">
             {t('home.tagline')}{' '}
             <RotatingText
               texts={['Meaningful', 'Cherished', 'Priceless', 'Forever']}
@@ -218,14 +218,14 @@ export default function Home() {
             {['home.flow.voice', 'home.flow.memory', 'home.flow.personalizedActivity', 'home.flow.progress'].map((flowKey, i) => (
               <div key={flowKey} className="flex items-center gap-3 md:gap-4">
                 <div className="skeuo-card-inset px-4 py-2.5 md:px-5 md:py-3 text-center">
-                  <span className="font-[family-name:var(--font-pixel)] text-[9px] md:text-[10px] text-teal-700">
+                  <span className="font-pixel text-[9px] md:text-[10px] text-teal-700">
                     {t(flowKey).toUpperCase()}
                   </span>
                 </div>
                 {i < 3 && (
                   <div className="hidden sm:flex items-center gap-0.5">
                     <div className="w-4 h-0.5 bg-teal-300" />
-                    <div className="border-y-[4px] border-y-transparent border-l-[5px] border-l-teal-400" />
+                    <div className="border-y-4 border-y-transparent border-l-[5px] border-l-teal-400" />
                   </div>
                 )}
               </div>
@@ -260,10 +260,10 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
+            <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.featuresBadge')}
             </span>
-            <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide">
+            <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide">
               {t('home.featuresTitle')}
             </h2>
           </div>
@@ -282,7 +282,7 @@ export default function Home() {
                 </p>
                 <Link
                   to={feature.to}
-                  className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-500 hover:text-teal-700 transition-colors inline-flex items-center justify-center gap-1 mt-auto"
+                  className="font-pixel text-[10px] text-teal-500 hover:text-teal-700 transition-colors inline-flex items-center justify-center gap-1 mt-auto"
                 >
                   {t('common.learnMore')}
                   <span className="text-[8px]">→</span>
@@ -297,10 +297,10 @@ export default function Home() {
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
+            <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.process')}
             </span>
-            <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide mb-4">
+            <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide mb-4">
               {t('home.howItWorks')}
             </h2>
             <p className="text-warm-600 text-base max-w-2xl mx-auto">
@@ -363,10 +363,10 @@ export default function Home() {
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
+            <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.intelligence')}
             </span>
-            <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide">
+            <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide">
               {t('home.poweredByPersonalization')}
             </h2>
             <p className="text-warm-600 text-base mt-3 max-w-2xl mx-auto">
@@ -379,16 +379,16 @@ export default function Home() {
             {personalizationSteps.map((step, i) => (
               <div key={step.labelKey} className="flex items-center gap-3">
                 <div
-                  className={`px-4 py-3 rounded-xl text-center min-w-[140px] transition-transform hover:scale-105 ${step.color}`}
+                  className={`px-4 py-3 rounded-xl text-center min-w-35 transition-transform hover:scale-105 ${step.color}`}
                 >
-                  <span className="font-[family-name:var(--font-pixel)] text-[9px] leading-relaxed">
+                  <span className="font-pixel text-[9px] leading-relaxed">
                     {t(step.labelKey)}
                   </span>
                 </div>
                 {i < personalizationSteps.length - 1 && (
-                  <div className="flex items-center gap-0.5 flex-shrink-0">
+                  <div className="flex items-center gap-0.5 shrink-0">
                     <div className="w-4 h-0.5 bg-teal-300" />
-                    <div className="border-y-[4px] border-y-transparent border-l-[5px] border-l-teal-400" />
+                    <div className="border-y-4 border-y-transparent border-l-[5px] border-l-teal-400" />
                   </div>
                 )}
               </div>
@@ -396,7 +396,7 @@ export default function Home() {
             {/* Loop-back arrow */}
             <div className="w-full flex justify-center mt-2">
               <div className="flex items-center gap-2 px-5 py-2 bg-teal-50 border border-teal-200 rounded-full">
-                <span className="font-[family-name:var(--font-pixel)] text-[8px] text-teal-500">↻ {t('home.continuousLoop')}</span>
+                <span className="font-pixel text-[8px] text-teal-500">↻ {t('home.continuousLoop')}</span>
               </div>
             </div>
           </div>
@@ -408,7 +408,7 @@ export default function Home() {
                 <div
                   className={`px-4 py-3 rounded-xl text-center w-full max-w-xs ${step.color}`}
                 >
-                  <span className="font-[family-name:var(--font-pixel)] text-[8px] leading-relaxed">
+                  <span className="font-pixel text-[8px] leading-relaxed">
                     {t(step.labelKey)}
                   </span>
                 </div>
@@ -421,7 +421,7 @@ export default function Home() {
               </div>
             ))}
             <div className="mt-2 px-5 py-2 bg-teal-50 border border-teal-200 rounded-full">
-              <span className="font-[family-name:var(--font-pixel)] text-[8px] text-teal-500">↻ {t('home.continuousLoop')}</span>
+              <span className="font-pixel text-[8px] text-teal-500">↻ {t('home.continuousLoop')}</span>
             </div>
           </div>
         </div>
@@ -431,10 +431,10 @@ export default function Home() {
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-14">
-            <span className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
+            <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.trust')}
             </span>
-            <h2 className="font-[family-name:var(--font-pixel)] text-base md:text-lg text-teal-700 tracking-wide">
+            <h2 className="font-pixel text-base md:text-lg text-teal-700 tracking-wide">
               {t('home.trustedByFamilies')}
             </h2>
           </div>
@@ -442,12 +442,12 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((item, i) => (
               <PixelCard key={i} hover className="p-8 flex flex-col">
-                <div className="font-[family-name:var(--font-pixel)] text-teal-200 text-3xl mb-4">"</div>
+                <div className="font-pixel text-teal-200 text-3xl mb-4">"</div>
                 <p className="text-warm-800 text-base leading-relaxed italic flex-1 mb-6">
                   {t(item.quoteKey)}
                 </p>
                 <div className="border-t border-warm-200 pt-4">
-                  <p className="font-[family-name:var(--font-pixel)] text-[10px] text-teal-700">
+                  <p className="font-pixel text-[10px] text-teal-700">
                     {item.name}
                   </p>
                   <p className="text-warm-500 text-sm mt-0.5">{t(item.relationshipKey)}</p>
@@ -473,7 +473,7 @@ export default function Home() {
         </div>
 
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-[family-name:var(--font-pixel)] text-lg md:text-xl text-teal-700 tracking-wide mb-6">
+          <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide mb-6">
             {t('home.ctaTitle')}
           </h2>
           <p className="text-warm-600 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
