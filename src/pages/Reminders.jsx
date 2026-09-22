@@ -202,7 +202,7 @@ export default function Reminders() {
                 value={formTitle}
                 onChange={(e) => setFormTitle(e.target.value)}
                 placeholder={t('reminders.titlePlaceholder')}
-                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base text-gray-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-[52px]"
+                className="w-full border-2 border-gray-200 rounded-xl px-4 py-3 text-base text-gray-700 focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all placeholder:text-gray-300 min-h-13"
               />
             </div>
 
@@ -214,7 +214,7 @@ export default function Reminders() {
                   <button
                     key={key}
                     onClick={() => setFormCategory(key)}
-                    className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 text-center transition-all duration-200 min-h-[72px] ${
+                    className={`flex flex-col items-center gap-1 p-3 rounded-xl border-2 text-center transition-all duration-200 min-h-18 ${
                       formCategory === key
                         ? 'border-teal-500 bg-teal-50 shadow-md'
                         : 'border-gray-200 bg-white hover:border-gray-300'
@@ -234,7 +234,7 @@ export default function Reminders() {
                 <select
                   value={formHour}
                   onChange={(e) => setFormHour(e.target.value)}
-                  className="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 text-base text-gray-700 bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all min-h-[52px]"
+                  className="flex-1 border-2 border-gray-200 rounded-xl px-4 py-3 text-base text-gray-700 bg-white focus:border-teal-400 focus:ring-2 focus:ring-teal-200 focus:outline-none transition-all min-h-13"
                 >
                   {hours.map((h) => (
                     <option key={h} value={h}>{h}</option>
@@ -245,7 +245,7 @@ export default function Reminders() {
                     <button
                       key={p}
                       onClick={() => setFormPeriod(p)}
-                      className={`px-5 py-3 rounded-xl border-2 text-sm font-bold transition-all duration-200 min-h-[52px] ${
+                      className={`px-5 py-3 rounded-xl border-2 text-sm font-bold transition-all duration-200 min-h-13 ${
                         formPeriod === p
                           ? 'border-teal-500 bg-teal-500 text-white'
                           : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'
@@ -266,7 +266,7 @@ export default function Reminders() {
                   <button
                     key={r}
                     onClick={() => setFormRepeat(r)}
-                    className={`flex-1 px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all duration-200 min-h-[52px] ${
+                    className={`flex-1 px-4 py-3 rounded-xl border-2 text-sm font-medium transition-all duration-200 min-h-13 ${
                       formRepeat === r
                         ? 'border-teal-500 bg-teal-500 text-white'
                         : 'border-gray-200 bg-white text-gray-600 hover:border-gray-300'

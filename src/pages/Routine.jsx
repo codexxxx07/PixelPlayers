@@ -97,7 +97,7 @@ export default function Routine() {
               </h2>
               <div className="relative">
                 {/* Vertical line */}
-                <div className="absolute left-[23px] top-0 bottom-0 w-0.5 bg-teal-200" />
+                <div className="absolute left-5.75 top-0 bottom-0 w-0.5 bg-teal-200" />
 
                 <div className="space-y-3">
                   {routine.map((activity, index) => (
@@ -105,16 +105,16 @@ export default function Routine() {
                       {/* Timeline dot */}
                       <div className="relative z-10 mt-5 shrink-0">
                         {activity.completed ? (
-                          <div className="flex items-center justify-center w-[18px] h-[18px] rounded-full bg-emerald-500 border-2 border-emerald-400">
+                          <div className="flex items-center justify-center w-4.5 h-4.5 rounded-full bg-emerald-500 border-2 border-emerald-400">
                             <span className="text-white text-[10px] font-bold">✓</span>
                           </div>
                         ) : index === currentIndex ? (
-                          <div className="relative flex items-center justify-center w-[18px] h-[18px]">
+                          <div className="relative flex items-center justify-center w-4.5 h-4.5">
                             <span className="absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-40 animate-ping" />
-                            <span className="relative inline-flex w-[10px] h-[10px] rounded-full bg-teal-500 border-2 border-teal-600" />
+                            <span className="relative inline-flex w-2.5 h-2.5 rounded-full bg-teal-500 border-2 border-teal-600" />
                           </div>
                         ) : (
-                          <div className="w-[18px] h-[18px] rounded-full bg-gray-200 border-2 border-gray-300" />
+                          <div className="w-4.5 h-4.5 rounded-full bg-gray-200 border-2 border-gray-300" />
                         )}
                       </div>
 
