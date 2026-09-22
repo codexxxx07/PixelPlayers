@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import { useTranslation } from "react-i18next";
 import { PixelButton, PixelCard, ProgressCard, RoutineCard } from "../components/";
+import AnnouncementsBanner from "../components/AnnouncementsBanner";
 
 function formatTime12h(time) {
   if (!time) return "";
@@ -125,6 +126,9 @@ export default function Dashboard() {
   return (
     <div className="page-enter min-h-screen pb-16">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10 space-y-12">
+
+        {/* ========== NEW MESSAGES FROM CAREGIVERS ========== */}
+        <AnnouncementsBanner />
 
         {/* ========== GREETING ========== */}
         <section

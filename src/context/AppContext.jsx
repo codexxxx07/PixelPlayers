@@ -424,6 +424,8 @@ export function AppProvider({ children }) {
     },
   ]);
 
+  const [announcements, setAnnouncements] = useState([]);
+
   const [settings, setSettings] = useState({
     language: "en",
     textSize: "large",
@@ -541,6 +543,31 @@ export function AppProvider({ children }) {
     ]);
   }, []);
 
+  const addAnnouncement = useCallback((announcement) => {
+    setAnnouncements((prev) => [
+      {
+        id: generateId("ann"),
+        read: false,
+        sentAt: new Date().toLocaleString([], {
+          day: "numeric",
+          month: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        ...announcement,
+      },
+      ...prev,
+    ]);
+  }, []);
+
+  const dismissAnnouncement = useCallback((id) => {
+    setAnnouncements((prev) =>
+      prev.map((announcement) =>
+        announcement.id === id ? { ...announcement, read: true } : announcement
+      )
+    );
+  }, []);
+
   const value = useMemo(
     () => ({
       user,
@@ -552,6 +579,7 @@ export function AppProvider({ children }) {
       progressData,
       supportNetwork,
       activityLog,
+      announcements,
       settings,
       language: settings.language,
       addMemory,
@@ -566,6 +594,8 @@ export function AppProvider({ children }) {
       updateRoutine,
       toggleRoutine,
       logActivity,
+      addAnnouncement,
+      dismissAnnouncement,
     }),
     [
       user,
@@ -577,6 +607,7 @@ export function AppProvider({ children }) {
       progressData,
       supportNetwork,
       activityLog,
+      announcements,
       settings,
       addMemory,
       deleteMemory,
@@ -590,6 +621,8 @@ export function AppProvider({ children }) {
       updateRoutine,
       toggleRoutine,
       logActivity,
+      addAnnouncement,
+      dismissAnnouncement,
     ]
   );
 

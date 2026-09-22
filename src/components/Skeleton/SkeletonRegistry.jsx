@@ -29,6 +29,7 @@ const registry = {
   '/settings': SkeletonSettings,
   '/login': SkeletonAuth,
   '/signup': SkeletonAuth,
+  '/welcome': SkeletonAuth,
 };
 
 const prefixRoutes = ['/games'];
