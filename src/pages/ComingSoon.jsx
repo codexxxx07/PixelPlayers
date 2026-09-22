@@ -17,7 +17,7 @@ export default function ComingSoon() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gray-100 border-2 border-gray-200 text-3xl mb-4">
             <span aria-hidden="true">{game ? game.icon : '🎮'}</span>
           </div>
-          <h1 className="font-[family-name:var(--font-pixel)] text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
+          <h1 className="font-pixel text-teal-700 text-lg md:text-2xl leading-relaxed tracking-wide">
             {game ? game.name : t('comingSoon.titleFallback')}
           </h1>
           <p className="text-gray-500 text-base md:text-lg mt-3">
@@ -30,7 +30,7 @@ export default function ComingSoon() {
             <div className="text-5xl mb-4 animate-gentle-bounce" aria-hidden="true">
               🛠️
             </div>
-            <h2 className="font-[family-name:var(--font-pixel)] text-amber-600 text-sm mb-3 tracking-wide">
+            <h2 className="font-pixel text-amber-600 text-sm mb-3 tracking-wide">
               {t('comingSoon.comingSoon')}
             </h2>
             <p className="text-gray-600 text-base leading-relaxed max-w-md mx-auto">
