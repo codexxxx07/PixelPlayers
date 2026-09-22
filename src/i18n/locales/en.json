@@ -951,8 +951,8 @@
   "caregiver": {
     "roleLabel": "Caregiver",
     "sidebarLabel": "Caregiver navigation",
-    "sidebarExpand": "Expand sidebar",
-    "sidebarCollapse": "Collapse sidebar",
+    "sidebarExpand": "Expand caregiver navigation",
+    "sidebarCollapse": "Collapse caregiver navigation",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "topbarSub": "Care tools",

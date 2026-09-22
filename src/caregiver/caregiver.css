@@ -286,13 +286,20 @@
     font-weight: 700;
   }
 
-  .cg-shell--collapsed .cg-sidebar__brand span,
-  .cg-shell--collapsed .cg-sidebar__collapse {
+  .cg-shell--collapsed .cg-sidebar__brand {
     display: none;
   }
 
   .cg-shell--collapsed .cg-sidebar__head {
     justify-content: center;
+    padding-inline: 12px;
+  }
+
+  .cg-shell--collapsed .cg-sidebar__collapse {
+    margin-left: 0;
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
   }
 
   .cg-shell--collapsed .cg-sidebar__navwrap {
