@@ -46,9 +46,9 @@ export default function Footer() {
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-12 sm:gap-12 lg:gap-8">
           {/* Branding Column */}
-          <div className="lg:col-span-2">
+          <div className="col-span-2 md:col-span-1 lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-teal-600 border border-teal-500">
                 <span className="text-white text-base leading-none mt-0.5">♥</span>
@@ -105,7 +105,7 @@ export default function Footer() {
           </div>
 
           {/* About Column */}
-          <div>
+          <div className="col-span-2 md:col-span-1 text-center md:text-left">
             <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.explore")}
             </h3>
