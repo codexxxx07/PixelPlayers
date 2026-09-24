@@ -1,13 +1,3 @@
-// Central game library configuration for Pixel Players.
-//
-// Every field below is used by the Games page, the GameCard component and the
-// Game Details page. Edit this ONE file to update any game.
-//
-// TIP: `image` currently uses an emoji as a visual placeholder. Replace it
-// with a real image URL later if you wish.
-//
-// TIP: `gameUrl` is a placeholder ("#") because the actual games live as
-// separate apps. Replace each "#" with the deployed URL of the real game.
 export const GAMES = [
   {
     id: "tetris",
