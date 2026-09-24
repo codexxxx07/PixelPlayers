@@ -67,7 +67,7 @@ export default function Footer() {
           </div>
 
           {/* Platform Column */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.platform")}
             </h3>
@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
 
           {/* Support Column */}
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
               {t("footer.support")}
             </h3>
