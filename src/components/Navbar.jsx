@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth, UserButton } from "@clerk/react";
+import logoImg from "../assets/Logo.png";
 import SosButton, { SosModal } from "./SosButton";
 import ThemeToggle from "./ThemeToggle";
 import ThemePullCord from "./ThemePullCord";
@@ -115,7 +116,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5 group shrink-0" aria-label="Pixel Players — Home">
               <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-linear-to-b from-teal-500 to-teal-600 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_0_rgba(13,78,74,0.55),0_4px_10px_rgba(19,78,74,0.2)]">
-                <span className="text-white text-lg leading-none mt-0.5">♥</span>
+                <img src={logoImg} alt="" className="w-full h-full object-contain rounded-xl" draggable={false} />
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-[3px] border-2 border-(--pp-navbar)" />
               </div>
               <span className="font-pixel text-lg sm:text-xl leading-none text-teal-800 group-hover:text-teal-600 transition-colors hidden sm:inline">

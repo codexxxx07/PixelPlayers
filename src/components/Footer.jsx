@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import logoImg from "../assets/Logo.png";
 
 const platformLinks = [
   { to: "/features", key: "nav.features" },
@@ -51,7 +52,7 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1 lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <div className="relative flex items-center justify-center w-9 h-9 rounded-lg bg-teal-600 border border-teal-500">
-                <span className="text-white text-base leading-none mt-0.5">♥</span>
+                <img src={logoImg} alt="" className="w-full h-full object-contain rounded-lg" draggable={false} />
                 <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-amber-400 rounded-sm" />
               </div>
               <span className="font-pixel text-xl text-white">

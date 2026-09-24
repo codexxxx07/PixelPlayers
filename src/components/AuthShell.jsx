@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import logoImg from "../assets/Logo.png";
 
 function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
   const { t } = useTranslation();
@@ -8,7 +9,7 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
         className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-600 shadow-[4px_4px_0_rgba(19,78,74,0.4)]"
         aria-hidden="true"
       >
-        <span className="text-white text-2xl leading-none mt-0.5">♥</span>
+        <img src={logoImg} alt="" className="w-full h-full object-contain rounded-2xl" draggable={false} />
       </div>
       {eyebrow && (
         <p className="mb-2 font-pixel text-[10px] tracking-[0.2em] text-teal-500 uppercase">
