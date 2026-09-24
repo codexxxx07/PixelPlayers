@@ -53,7 +53,7 @@ export const GAMES = [
     ],
     whyThisActivity:
       "Tic Tac Toe is short, familiar and easy to grasp. It offers a friendly way to play together, taking turns and planning just a little bit ahead — like a gentle conversation in game form.",
-    gameUrl: "#",
+    gameUrl: "https://prithvirajguha03-ai.github.io/game-11/",
   },
   {
     id: "stone-paper-scissor",
