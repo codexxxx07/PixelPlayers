@@ -6,7 +6,7 @@ function AuthShell({ eyebrow, title, subtitle, children, chromeless = false }) {
   const heading = (
     <div className="text-center mb-8">
       <div
-        className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-600 shadow-[4px_4px_0_rgba(19,78,74,0.4)]"
+        className="mx-auto mb-4 flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-600 shadow-pixel"
         aria-hidden="true"
       >
         <img src={logoImg} alt="" className="w-full h-full object-contain rounded-2xl" draggable={false} />

@@ -25,7 +25,7 @@ const aboutLinks = [
 export default function Footer() {
   const { t } = useTranslation();
   return (
-    <footer className="relative bg-[var(--pp-footer-bg)] text-white">
+    <footer className="relative bg-(--pp-footer-bg) text-white">
       {/* Pixel art decorative border */}
       <div className="w-full h-3 flex">
         <div className="flex-1 bg-teal-400" />
@@ -62,14 +62,14 @@ export default function Footer() {
             <p className="text-[#99f6e4] text-lg mb-6 max-w-sm">
               {t("footer.tagline")}
             </p>
-            <p className="text-[#5eead4] text-sm leading-relaxed max-w-sm">
+            <p className="text-primary-lighter text-sm leading-relaxed max-w-sm">
               {t("footer.description")}
             </p>
           </div>
 
           {/* Platform Column */}
           <div className="text-center md:text-left">
-            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-primary-lighter uppercase tracking-wider mb-4">
               {t("footer.platform")}
             </h3>
             <ul className="space-y-3">
@@ -88,7 +88,7 @@ export default function Footer() {
 
           {/* Support Column */}
           <div className="text-center md:text-left">
-            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-primary-lighter uppercase tracking-wider mb-4">
               {t("footer.support")}
             </h3>
             <ul className="space-y-3">
@@ -107,7 +107,7 @@ export default function Footer() {
 
           {/* About Column */}
           <div className="col-span-2 md:col-span-1 text-center md:text-left">
-            <h3 className="font-pixel text-sm text-[#5eead4] uppercase tracking-wider mb-4">
+            <h3 className="font-pixel text-sm text-primary-lighter uppercase tracking-wider mb-4">
               {t("footer.explore")}
             </h3>
             <ul className="space-y-3">
@@ -127,7 +127,7 @@ export default function Footer() {
 
         {/* Divider */}
         <div className="mt-12 pt-8 border-t border-teal-700 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[#5eead4] text-sm">
+            <p className="text-primary-lighter text-sm">
             {t("footer.copyright")}
           </p>
           <div className="flex items-center gap-6">
@@ -135,7 +135,7 @@ export default function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#5eead4] hover:text-white text-sm transition-colors"
+              className="text-primary-lighter hover:text-white text-sm transition-colors"
               aria-label={t("footer.twitter")}
             >
               {t("footer.twitter")}
@@ -144,14 +144,14 @@ export default function Footer() {
               href="https://github.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#5eead4] hover:text-white text-sm transition-colors"
+              className="text-primary-lighter hover:text-white text-sm transition-colors"
               aria-label={t("footer.github")}
             >
               {t("footer.github")}
             </a>
             <a
               href="mailto:hello@pixelplayers.com"
-              className="text-[#5eead4] hover:text-white text-sm transition-colors"
+              className="text-primary-lighter hover:text-white text-sm transition-colors"
               aria-label={t("footer.emailLabel")}
             >
               {t("footer.contact")}
@@ -161,7 +161,7 @@ export default function Footer() {
 
         {/* SIH Credit */}
         <div className="mt-6 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full bg-teal-800 border border-teal-700 px-4 py-1.5 text-xs text-[#5eead4] dark:bg-teal-100 dark:border-teal-300">
+          <span className="inline-flex items-center gap-2 rounded-full bg-teal-800 border border-teal-700 px-4 py-1.5 text-xs text-primary-lighter dark:bg-teal-100 dark:border-teal-300">
             <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
             {t("footer.sihCredit")}
           </span>
