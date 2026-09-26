@@ -53,7 +53,7 @@ export default function Routine() {
     <div className="min-h-screen bg-linear-to-b from-teal-50/50 to-white pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page Header */}
-        <div className="text-center mb-10">
+        <div data-pp-reveal="pixel" className="text-center mb-10">
           <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-2 tracking-wide">
             {t(getGreetingKey())}{user.name ? `, ${user.name}` : ""}
           </h1>
@@ -70,7 +70,7 @@ export default function Routine() {
           <div className="lg:col-span-2 space-y-8">
             {/* Current Activity Highlight */}
             {currentActivity && (
-              <PixelCard className="p-6 md:p-8 border-2 border-teal-400 bg-linear-to-br from-teal-50 to-white shadow-lg shadow-teal-500/10">
+              <PixelCard data-pp-reveal="rise" className="p-6 md:p-8 border-2 border-teal-400 bg-linear-to-br from-teal-50 to-white shadow-lg shadow-teal-500/10">
                 <div className="text-center">
                   <span className="text-6xl block mb-4">{currentActivity.icon}</span>
                   <h2 className="font-pixel text-teal-700 text-base md:text-lg mb-1">
@@ -99,9 +99,9 @@ export default function Routine() {
                 {/* Vertical line */}
                 <div className="absolute left-5.75 top-0 bottom-0 w-0.5 bg-teal-200" />
 
-                <div className="space-y-3">
+                <div data-pp-reveal-group className="space-y-3">
                   {routine.map((activity, index) => (
-                    <div key={activity.id} className="relative flex items-start gap-4">
+                    <div key={activity.id} data-pp-reveal="rise" className="relative flex items-start gap-4">
                       {/* Timeline dot */}
                       <div className="relative z-10 mt-5 shrink-0">
                         {activity.completed ? (
@@ -137,7 +137,7 @@ export default function Routine() {
           {/* Right: Progress + Quick Actions + Tomorrow */}
           <div className="space-y-6">
             {/* Progress Summary */}
-            <PixelCard className="p-6">
+            <PixelCard data-pp-reveal="rise" className="p-6">
               <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.todaysProgress')}
               </h3>
@@ -171,7 +171,7 @@ export default function Routine() {
             </PixelCard>
 
             {/* Quick Actions */}
-            <PixelCard className="p-6">
+            <PixelCard data-pp-reveal="rise" className="p-6">
               <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.adjustRoutine')}
               </h3>
@@ -189,7 +189,7 @@ export default function Routine() {
             </PixelCard>
 
             {/* Tomorrow Preview */}
-            <PixelCard className="p-6">
+            <PixelCard data-pp-reveal="rise" className="p-6">
               <h3 className="font-pixel text-teal-700 text-xs mb-4 tracking-wide">
                 {t('routine.tomorrowsHighlights')}
               </h3>

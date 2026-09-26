@@ -127,7 +127,7 @@ export default function Memory() {
     <div className="min-h-screen bg-linear-to-b from-amber-50/50 to-white pb-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 pt-8 md:pt-12 box-border">
         {/* Page Header */}
-        <div className="text-center mb-8">
+        <div data-pp-reveal="pixel" className="text-center mb-8">
           <h1 className="font-pixel text-xl sm:text-2xl md:text-4xl text-amber-700 mb-3 tracking-wide wrap-break-word">
             {t('memory.title')}
           </h1>
@@ -162,7 +162,7 @@ export default function Memory() {
         {/* Two-column grid: stacks to single column below lg */}
         <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Left Column: Memory List + Add Memory */}
-          <div className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
+          <div data-pp-reveal="rise" className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
             {/* Memory List */}
             <div>
               <h2 className="font-pixel text-amber-700 text-sm mb-4 tracking-wide">
@@ -296,7 +296,7 @@ export default function Memory() {
         </div>
 
         {/* Privacy Notice */}
-        <div className="mt-12 text-center">
+        <div data-pp-reveal="rise" className="mt-12 text-center">
           <PixelCard variant="inset" className="px-4 sm:px-8 py-6 max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>

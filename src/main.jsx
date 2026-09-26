@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { AppProvider } from './context/AppContext'
 import { ThemeProvider } from './context/ThemeContext'
+import { SmoothScrollProvider } from './context/ScrollContext'
 import ClerkProviderWithRouter from './components/ClerkProviderWithRouter'
 import { BootShell } from './components/Skeleton'
 import './i18n'
@@ -17,9 +18,13 @@ createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <ClerkProviderWithRouter>
           <AppProvider>
-            <Suspense fallback={<BootShell />}>
-              <App />
-            </Suspense>
+            {/* Owns the single Lenis instance for the whole app — mounted above
+                the lazy <App /> so scrolling is already live on first paint. */}
+            <SmoothScrollProvider>
+              <Suspense fallback={<BootShell />}>
+                <App />
+              </Suspense>
+            </SmoothScrollProvider>
           </AppProvider>
         </ClerkProviderWithRouter>
       </ThemeProvider>

@@ -11,3 +11,4 @@ export { default as ClaraLauncher } from './ClaraLauncher';
 export { default as ProtectedRoute } from './ProtectedRoute';
 export { default as SosButton, SosModal } from './SosButton';
 export { default as ClickSpark } from './ClickSpark';
+export { default as ScrollProgress } from './ScrollProgress';

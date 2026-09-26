@@ -157,10 +157,17 @@ export default function Features() {
       {/* ===== FEATURES GRID ===== */}
       <section className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          <div
+            data-pp-reveal-group
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
             {features.map((feature) => {
               const CardContent = (
-                <PixelCard hover pixel className="p-8 h-full group flex flex-col">
+                <PixelCard
+                  hover
+                  pixel
+                  className="p-8 h-full group flex flex-col"
+                >
                   <div className="text-5xl mb-5 group-hover:scale-110 transition-transform duration-200">
                     {feature.icon}
                   </div>
@@ -185,11 +192,18 @@ export default function Features() {
               );
 
               return feature.to ? (
-                <Link key={feature.titleKey} to={feature.to} className="block h-full">
+                <Link
+                  key={feature.titleKey}
+                  to={feature.to}
+                  data-pp-reveal="rise"
+                  className="block h-full"
+                >
                   {CardContent}
                 </Link>
               ) : (
-                <div key={feature.titleKey} className="h-full">{CardContent}</div>
+                <div key={feature.titleKey} data-pp-reveal="rise" className="h-full">
+                  {CardContent}
+                </div>
               );
             })}
           </div>

@@ -5,7 +5,9 @@ import logoImg from "../assets/Logo.png";
 import SosButton, { SosModal } from "./SosButton";
 import ThemeToggle from "./ThemeToggle";
 import ThemePullCord from "./ThemePullCord";
+import ScrollProgress from "./ScrollProgress";
 import { useTheme } from "../context/ThemeContext";
+import { useSmoothScroll } from "../context/ScrollContext";
 import { useTranslation } from "react-i18next";
 
 const baseNavLinks = [
@@ -35,6 +37,7 @@ export default function Navbar() {
   const { t } = useTranslation();
   const { isLoaded, isSignedIn } = useAuth();
   const { isDark } = useTheme();
+  const { lenis, stop, start } = useSmoothScroll();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [sosOpen, setSosOpen] = useState(false);
@@ -65,20 +68,42 @@ export default function Navbar() {
     sosTriggerRef.current = null;
   }, []);
 
+  // Shadow swap stays exactly as it was — it just reads the smoothed scroll
+  // position when Lenis is driving, and falls back to the native event
+  // otherwise (reduced motion, or a Lenis instance that failed to start).
+  // The equality guard means the Navbar never re-renders mid-scroll.
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const applyScrollState = (y) => {
+      const next = y > 10;
+      setScrolled((prev) => (prev === next ? prev : next));
+    };
+
+    if (lenis) {
+      applyScrollState(lenis.animatedScroll);
+      lenis.on("scroll", applyScrollState);
+      return () => lenis.off("scroll", applyScrollState);
+    }
+
+    const onNativeScroll = () => applyScrollState(window.scrollY);
+    window.addEventListener("scroll", onNativeScroll, { passive: true });
+    applyScrollState(window.scrollY);
+    return () => window.removeEventListener("scroll", onNativeScroll);
+  }, [lenis]);
 
   useEffect(() => {
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
+      // Lenis would otherwise keep animating the page behind the open menu.
+      stop();
     } else {
       document.body.style.overflow = "";
+      start();
     }
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+    return () => {
+      document.body.style.overflow = "";
+      start();
+    };
+  }, [mobileOpen, stop, start]);
 
   const navLinks = isSignedIn
     ? [...baseNavLinks, { to: "/dashboard", key: "nav.dashboard" }]
@@ -189,6 +214,8 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
+
+        <ScrollProgress />
       </header>
 
       <SosButton variant="floating" onClick={openSos} />
@@ -223,7 +250,10 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Nav Links */}
-          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-1.5">
+          <div
+            data-lenis-prevent
+            className="flex-1 overflow-y-auto px-4 py-4 space-y-1.5"
+          >
             {/* Theme row — stays open while toggling so the change is visible live */}
             <div className="mb-3">
               <ThemeToggle style={{ width: "100%" }}>

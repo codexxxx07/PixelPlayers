@@ -909,6 +909,246 @@
   }
 }
 
+/* ─── Scroll experience (Lenis + retro/Y2K reveals) ────────────────────────
+   Driven by src/context/ScrollContext.jsx. Pages only declare intent with
+   data attributes; the single Lenis instance, the single rAF-synced scroll
+   bus and the single IntersectionObserver all live in that provider.
+
+   Contract:
+     data-pp-reveal            entrance variant, see the variant rules below
+     data-pp-reveal-group      staggers its direct [data-pp-reveal] children
+     data-pp-drift="0.6"       clamped decorative scroll drift (set from JS)
+
+   Two guarantees, in order of importance:
+     1. Content is visible by default. The hidden state is scoped to
+        `html.pp-reveal-armed`, a class the provider adds only once the
+        observer is live — so blocked/failed JS can never hide a page.
+     2. Entrances are keyframe animations, never transitions, so the element's
+        own `transition-*` utilities (card hover lift, theme colour crossfades)
+        keep their exact existing timing.
+   ──────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --pp-reveal-dur: 620ms;
+  --pp-reveal-pixel-dur: 480ms;
+  --pp-reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pp-reveal-shift: 14px;
+}
+
+/* Lenis base styles (mirrors lenis' own stylesheet) + one addition: the app
+   sets `html { scroll-behavior: smooth }` for native anchor jumps, which
+   makes the browser animate every programmatic scroll Lenis issues. Neutralise
+   it for as long as Lenis owns the scroll position. */
+html.lenis,
+html.lenis body {
+  height: auto;
+  scroll-behavior: auto !important;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+/* ─── Reveal: hidden resting state (only while armed) ─────────────────────── */
+
+html.pp-reveal-armed [data-pp-reveal]:not(.pp-reveal-in) {
+  opacity: 0;
+  transform: translateY(var(--pp-reveal-shift));
+}
+
+html.pp-reveal-armed [data-pp-reveal="drop"]:not(.pp-reveal-in) {
+  transform: translateY(calc(var(--pp-reveal-shift) * -0.55));
+}
+
+html.pp-reveal-armed [data-pp-reveal="left"]:not(.pp-reveal-in) {
+  transform: translateX(calc(var(--pp-reveal-shift) * -1.35));
+}
+
+html.pp-reveal-armed [data-pp-reveal="right"]:not(.pp-reveal-in) {
+  transform: translateX(calc(var(--pp-reveal-shift) * 1.35));
+}
+
+html.pp-reveal-armed [data-pp-reveal="zoom"]:not(.pp-reveal-in) {
+  transform: scale(0.972);
+}
+
+html.pp-reveal-armed [data-pp-reveal="pixel"]:not(.pp-reveal-in) {
+  transform: translateY(5px) scale(0.986);
+}
+
+/* ─── Reveal: entrance (keyframes, `backwards` fill only) ─────────────────
+   `backwards` means the fill is dropped the moment the animation ends, so the
+   element returns to its own cascade — hover transforms and Tailwind
+   `transition-*` utilities work normally from that point on. */
+
+html.pp-reveal-armed [data-pp-reveal].pp-reveal-in {
+  animation: pp-reveal-rise var(--pp-reveal-dur) var(--pp-reveal-ease)
+    var(--pp-reveal-delay, 0ms) backwards;
+}
+
+html.pp-reveal-armed [data-pp-reveal="drop"].pp-reveal-in {
+  animation-name: pp-reveal-drop;
+}
+
+html.pp-reveal-armed [data-pp-reveal="left"].pp-reveal-in {
+  animation-name: pp-reveal-left;
+}
+
+html.pp-reveal-armed [data-pp-reveal="right"].pp-reveal-in {
+  animation-name: pp-reveal-right;
+}
+
+html.pp-reveal-armed [data-pp-reveal="zoom"].pp-reveal-in {
+  animation-name: pp-reveal-zoom;
+}
+
+/* The pixel variant snaps in discrete frames — the same stepped timing the
+   caret blink already uses — for a sprite-like "powering up" entrance. */
+html.pp-reveal-armed [data-pp-reveal="pixel"].pp-reveal-in {
+  animation-name: pp-reveal-pixel;
+  animation-duration: var(--pp-reveal-pixel-dur);
+  animation-timing-function: steps(5, end);
+}
+
+@keyframes pp-reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--pp-reveal-shift));
+  }
+}
+
+@keyframes pp-reveal-drop {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--pp-reveal-shift) * -0.55));
+  }
+}
+
+@keyframes pp-reveal-left {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--pp-reveal-shift) * -1.35));
+  }
+}
+
+@keyframes pp-reveal-right {
+  from {
+    opacity: 0;
+    transform: translateX(calc(var(--pp-reveal-shift) * 1.35));
+  }
+}
+
+@keyframes pp-reveal-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.972);
+  }
+}
+
+@keyframes pp-reveal-pixel {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.986);
+  }
+}
+
+/* ─── Reveal: stagger groups (pure CSS, capped so long lists stay snappy) ── */
+
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(1) { --pp-reveal-delay: 0ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(2) { --pp-reveal-delay: 60ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(3) { --pp-reveal-delay: 120ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(4) { --pp-reveal-delay: 180ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(5) { --pp-reveal-delay: 240ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(6) { --pp-reveal-delay: 300ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(7) { --pp-reveal-delay: 360ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(8) { --pp-reveal-delay: 420ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(9) { --pp-reveal-delay: 480ms; }
+[data-pp-reveal-group] > [data-pp-reveal]:nth-child(n + 10) { --pp-reveal-delay: 520ms; }
+
+/* ─── Decorative drift (parallax) ─────────────────────────────────────────
+   The transform is written straight from the Lenis scroll bus, so these nodes
+   need no transition of their own — adding one would fight the rAF loop. */
+
+[data-pp-drift] {
+  will-change: transform;
+}
+
+/* ─── Navbar scroll-progress rail ────────────────────────────────────────
+   A 3px segmented HUD strip that fills with page progress. Absolutely
+   positioned against the sticky header, so it adds zero layout height. */
+
+.pp-scroll-progress {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--pp-ruled) 0 20px,
+    transparent 20px 24px
+  );
+}
+
+.pp-scroll-progress__fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background-image: linear-gradient(
+    90deg,
+    var(--color-primary-light),
+    var(--color-primary),
+    var(--color-accent-attention)
+  );
+  box-shadow: 0 0 8px var(--pp-shadow-soft);
+}
+
+/* ─── Mobile: soften the movement rather than removing it ─────────────────── */
+
+@media (max-width: 640px) {
+  :root {
+    --pp-reveal-dur: 520ms;
+    --pp-reveal-pixel-dur: 420ms;
+    --pp-reveal-shift: 10px;
+  }
+
+  [data-pp-reveal-group] > [data-pp-reveal]:nth-child(n + 7) {
+    --pp-reveal-delay: 360ms;
+  }
+}
+
+/* ─── Reduced motion: the hard guarantee ──────────────────────────────────
+   The provider already skips Lenis and never arms the reveals when the user
+   prefers reduced motion. This block is the second line of defence: even if
+   the armed class were ever applied, nothing can be left invisible. */
+
+@media (prefers-reduced-motion: reduce) {
+  html.pp-reveal-armed [data-pp-reveal],
+  html.pp-reveal-armed [data-pp-reveal]:not(.pp-reveal-in) {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  [data-pp-reveal-group] > [data-pp-reveal] {
+    --pp-reveal-delay: 0ms !important;
+  }
+
+  [data-pp-drift] {
+    will-change: auto;
+  }
+}
+
 /* ─── Memory Vault mobile responsiveness ─────────────────────────────────────
    These utilities are needed because Tailwind v4's JIT may not generate
    overflow-wrap/word-break utilities without explicit config. We add them

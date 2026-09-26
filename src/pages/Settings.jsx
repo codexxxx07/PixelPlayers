@@ -113,14 +113,14 @@ export default function Settings() {
   return (
     <div className="min-h-screen bg-linear-to-b from-teal-50/60 via-warm-50 to-white pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
-        <div className="text-center mb-10">
+        <div data-pp-reveal="pixel" className="text-center mb-10">
           <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
             {t('settings.title')}
           </h1>
           <p className="text-gray-600 text-lg">{t('settings.subtitle')}</p>
         </div>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.language')} subtitle={t('settings.languageDesc')} />
           <div className="grid sm:grid-cols-3 gap-4">
             {languages.map((language) => {
@@ -157,7 +157,7 @@ export default function Settings() {
           </div>
         </section>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.accessibility')} subtitle={t('settings.accessibilityDesc')} />
 
           <PixelCard className="p-6 md:p-7 mb-5">
@@ -239,7 +239,7 @@ export default function Settings() {
           </PixelCard>
         </section>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.notifications')} subtitle={t('settings.notificationsDesc')} />
           <div className="space-y-4">
             <Toggle
@@ -275,7 +275,7 @@ export default function Settings() {
           </div>
         </section>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.privacy')} subtitle={t('settings.privacyDesc')} />
           <div className="grid sm:grid-cols-2 gap-4 mb-6 items-stretch">
             {privacyCards.map((card) => (
@@ -342,7 +342,7 @@ export default function Settings() {
           )}
         </section>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.account')} subtitle={t('settings.signedInAs', { name: user.name })} />
           <PixelCard className="p-6 flex-row items-center gap-4 mb-5">
             <div className="shrink-0 flex items-center justify-center w-20 h-20 rounded-full bg-linear-to-br from-teal-400 to-teal-600 text-3xl font-extrabold text-white">
@@ -368,7 +368,7 @@ export default function Settings() {
           </div>
         </section>
 
-        <section className="mb-12">
+        <section data-pp-reveal="rise" className="mb-12">
           <SectionHeading title={t('settings.experience')} subtitle={t('settings.experienceDesc')} />
           <PixelCard className="p-6 flex-row flex-wrap items-center justify-between gap-4">
             <span className="min-w-0">
@@ -390,7 +390,7 @@ export default function Settings() {
           </PixelCard>
         </section>
 
-        <section className="mb-8">
+        <section data-pp-reveal="rise" className="mb-8">
           <SectionHeading title={t('settings.about')} />
           <PixelCard className="p-6 text-center">
             <p className="font-pixel text-teal-700 text-sm mb-2 tracking-wide">

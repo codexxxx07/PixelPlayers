@@ -160,17 +160,29 @@ export default function Home() {
     <div className="min-h-screen">
       {/* ===== HERO SECTION ===== */}
       <section className="relative overflow-hidden bg-linear-to-b from-warm-50 via-white to-teal-50/40 py-20 md:py-32 px-6">
-        {/* Decorative pixel elements */}
-        <div className="absolute top-8 left-8 opacity-20 pointer-events-none hidden lg:block">
+        {/* Decorative pixel elements — drift slightly faster than the page */}
+        <div
+          data-pp-drift="0.03"
+          className="absolute top-8 left-8 opacity-20 pointer-events-none hidden lg:block"
+        >
           <span className="font-pixel text-teal-400 text-[10px]">♥ ♥ ♥</span>
         </div>
-        <div className="absolute top-16 right-12 opacity-20 pointer-events-none hidden lg:block">
+        <div
+          data-pp-drift="-0.045"
+          className="absolute top-16 right-12 opacity-20 pointer-events-none hidden lg:block"
+        >
           <span className="font-pixel text-amber-400 text-[10px]">★ ★ ★</span>
         </div>
-        <div className="absolute bottom-24 left-16 opacity-15 pointer-events-none hidden lg:block">
+        <div
+          data-pp-drift="0.05"
+          className="absolute bottom-24 left-16 opacity-15 pointer-events-none hidden lg:block"
+        >
           <span className="font-pixel text-teal-300 text-[8px]">■ ■ ■</span>
         </div>
-        <div className="absolute bottom-32 right-20 opacity-15 pointer-events-none hidden lg:block">
+        <div
+          data-pp-drift="-0.06"
+          className="absolute bottom-32 right-20 opacity-15 pointer-events-none hidden lg:block"
+        >
           <span className="font-pixel text-amber-300 text-[8px]">♥ ★ ♥</span>
         </div>
 
@@ -259,7 +271,7 @@ export default function Home() {
       {/* ===== QUICK FEATURES SECTION ===== */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.featuresBadge')}
             </span>
@@ -268,9 +280,15 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
+          <div data-pp-reveal-group className="grid md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {features.map((feature) => (
-              <PixelCard key={feature.titleKey} hover pixel className="p-8 text-center group flex flex-col">
+              <PixelCard
+                key={feature.titleKey}
+                data-pp-reveal="rise"
+                hover
+                pixel
+                className="p-8 text-center group flex flex-col"
+              >
                 <div className="text-5xl mb-5 group-hover:scale-110 transition-transform duration-200">
                   {feature.icon}
                 </div>
@@ -296,7 +314,7 @@ export default function Home() {
       {/* ===== HOW IT WORKS SECTION ===== */}
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div data-pp-reveal="pixel" className="text-center mb-16">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.process')}
             </span>
@@ -362,7 +380,7 @@ export default function Home() {
       {/* ===== PERSONALIZATION FLOW SECTION ===== */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.intelligence')}
             </span>
@@ -430,7 +448,7 @@ export default function Home() {
       {/* ===== TESTIMONIAL / TRUST SECTION ===== */}
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('home.trust')}
             </span>
@@ -439,9 +457,9 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div data-pp-reveal-group className="grid md:grid-cols-3 gap-6">
             {testimonials.map((item, i) => (
-              <PixelCard key={i} hover className="p-8 flex flex-col">
+              <PixelCard key={i} data-pp-reveal="rise" hover className="p-8 flex flex-col">
                 <div className="font-pixel text-teal-200 text-3xl mb-4">"</div>
                 <p className="text-warm-800 text-base leading-relaxed italic flex-1 mb-6">
                   {t(item.quoteKey)}
@@ -472,7 +490,7 @@ export default function Home() {
           <div className="flex-1 bg-teal-400" />
         </div>
 
-        <div className="max-w-3xl mx-auto text-center">
+        <div data-pp-reveal="rise" className="max-w-3xl mx-auto text-center">
           <h2 className="font-pixel text-lg md:text-xl text-teal-700 tracking-wide mb-6">
             {t('home.ctaTitle')}
           </h2>

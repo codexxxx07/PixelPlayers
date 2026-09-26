@@ -166,7 +166,7 @@ export default function Reminders() {
     <div className="min-h-screen bg-linear-to-b from-blue-50/30 to-white pb-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-8 md:pt-12">
         {/* Page Header */}
-        <div className="text-center mb-10">
+        <div data-pp-reveal="pixel" className="text-center mb-10">
           <h1 className="font-pixel text-2xl md:text-4xl text-teal-700 mb-3 tracking-wide">
             {t('reminders.pageTitle')}
           </h1>
@@ -177,7 +177,7 @@ export default function Reminders() {
 
         {/* Add Reminder Button / Form */}
         {!showForm ? (
-          <div className="mb-8">
+          <div data-pp-reveal="rise" className="mb-8">
             <PixelButton
               onClick={() => setShowForm(true)}
               variant="primary"
@@ -189,7 +189,7 @@ export default function Reminders() {
             </PixelButton>
           </div>
         ) : (
-          <PixelCard className="p-6 md:p-8 mb-8 border-2 border-teal-300 shadow-lg shadow-teal-500/10">
+          <PixelCard data-pp-reveal="rise" className="p-6 md:p-8 mb-8 border-2 border-teal-300 shadow-lg shadow-teal-500/10">
             <h3 className="font-pixel text-teal-700 text-sm mb-6 tracking-wide">
               {t('reminders.addNew')}
             </h3>
@@ -312,13 +312,13 @@ export default function Reminders() {
         </div>
 
         {/* Reminder Categories Overview */}
-        <div className="mt-8">
+        <div data-pp-reveal="rise" className="mt-8">
           <h2 className="font-pixel text-teal-700 text-sm mb-4 tracking-wide">
             {t('reminders.reminderCategories')}
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-stretch">
+          <div data-pp-reveal-group className="grid grid-cols-2 sm:grid-cols-3 gap-4 items-stretch">
             {Object.entries(categoryConfig).map(([key, cat]) => (
-              <PixelCard key={key} hover className="p-5 flex flex-col justify-center">
+              <PixelCard key={key} hover data-pp-reveal="rise" className="p-5 flex flex-col justify-center">
                 <div className="flex items-center gap-3">
                   <span className={`shrink-0 flex items-center justify-center w-11 h-11 rounded-xl border text-xl ${cat.color}`}>
                     {cat.icon}
@@ -336,7 +336,7 @@ export default function Reminders() {
         </div>
 
         {/* Privacy Note */}
-        <div className="mt-12 text-center">
+        <div data-pp-reveal="rise" className="mt-12 text-center">
           <PixelCard variant="inset" className="px-8 py-6 max-w-lg mx-auto">
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-xl">🔒</span>

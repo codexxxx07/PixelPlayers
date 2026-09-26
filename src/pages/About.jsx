@@ -148,7 +148,7 @@ export default function About() {
       {/* ===== PROBLEM STATEMENT SECTION ===== */}
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="inline-flex items-center gap-2 rounded-full bg-teal-100 border border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-pixel mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-500" />
               SIH26003
@@ -161,9 +161,9 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 items-stretch">
+          <div data-pp-reveal-group className="grid md:grid-cols-3 gap-6 items-stretch">
             {stats.map((stat) => (
-              <PixelCard key={stat.labelKey} hover className="p-8 text-center flex flex-col items-center justify-center">
+              <PixelCard key={stat.labelKey} hover data-pp-reveal="rise" className="p-8 text-center flex flex-col items-center justify-center">
                 <div className="font-pixel text-3xl md:text-4xl text-teal-500 mb-4">
                   {stat.value}
                 </div>
@@ -179,7 +179,7 @@ export default function About() {
       {/* ===== OUR APPROACH SECTION ===== */}
       <section className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('about.approachBadge')}
             </span>
@@ -188,9 +188,9 @@ export default function About() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div data-pp-reveal-group className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {approaches.map((item) => (
-              <PixelCard key={item.titleKey} hover pixel className="p-8 group">
+              <PixelCard key={item.titleKey} hover pixel data-pp-reveal="rise" className="p-8 group">
                 <div className="text-5xl mb-5 group-hover:scale-110 transition-transform duration-200">
                   {item.icon}
                 </div>
@@ -209,7 +209,7 @@ export default function About() {
       {/* ===== TECHNOLOGY SECTION ===== */}
       <section className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('about.techBadge')}
             </span>
@@ -257,7 +257,7 @@ export default function About() {
       {/* ===== TEAM / NER FOCUS SECTION ===== */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-14">
+          <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
               {t('about.focusBadge')}
             </span>
@@ -301,7 +301,7 @@ export default function About() {
             </div>
           </PixelCard>
 
-          <div className="text-center mt-12">
+          <div data-pp-reveal="rise" className="text-center mt-12">
             <PixelButton to="/features" variant="primary" size="lg">
               {t('about.exploreAllFeatures')}
             </PixelButton>
