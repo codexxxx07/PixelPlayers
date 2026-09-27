@@ -60,12 +60,6 @@
   --nav-btn-py: 0.5rem;
 }
 
-/* ─── Semantic theme tokens ─────────────────────────────────────────────────
-   The Pixel Players surface language uses a warm cream / brown palette in
-   light mode and a soft dark-slate in dark mode. These semantic variables are
-   consumed directly (or via the Tailwind palette remap below) so surfaces,
-   text, borders and shadows all transition together. */
-
 :root {
   color-scheme: light;
 
