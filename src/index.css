@@ -1236,9 +1236,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
 
   --color-candy: #1c241f;
 
-  /* Teal brand scale — light tints become dark surfaces, dark tints lift into
-     readable text on dark backgrounds. Saturated core stays put so buttons,
-     gradients and highlights keep their identity. */
   --color-teal-50: #0d211d;
   --color-teal-100: #112a25;
   --color-teal-200: #173832;
