@@ -1195,12 +1195,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
   }
 }
 
-/* ─── Memory Vault mobile responsiveness ─────────────────────────────────────
-   These utilities are needed because Tailwind v4's JIT may not generate
-   overflow-wrap/word-break utilities without explicit config. We add them
-   here so the classes used in Memory.jsx and MemoryCard.jsx always work.
-   ──────────────────────────────────────────────────────────────────────────── */
-
 @layer utilities {
   .overflow-wrap-anywhere {
     overflow-wrap: anywhere;
