@@ -1351,12 +1351,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
   color-scheme: dark;
 }
 
-/* ─── Dark-mode polarity fixes ───────────────────────────────────────────────
-   A few utilities are used on BOTH solid colours and surfaces; the palette
-   remap above can only pick one direction, so these re-pin the few places
-   where text/decoration must stay light regardless of theme. Written
-   unlayered so they win over generated utilities. */
-
 .dark .text-white,
 .dark .border-white {
   color: #ffffff;
