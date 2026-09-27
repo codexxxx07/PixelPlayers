@@ -1212,11 +1212,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
   }
 }
 
-/* ─── Memory Vault: category tab strip
-   The -mx bleed technique requires the PARENT to NOT have overflow:hidden.
-   We use inline style marginLeft/Right instead in JSX, but as a safety net
-   ensure the strip itself never bleeds past the viewport on very small screens.
-   ──────────────────────────────────────────────────────────────────────────── */
 @media (max-width: 640px) {
   .memory-tab-strip {
     /* Safety: never let the strip's scroll area push beyond the page */
