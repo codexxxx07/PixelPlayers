@@ -1219,14 +1219,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
   }
 }
 
-/* ─── Light / Dark theme ─────────────────────────────────────────────────────
-   Tailwind v4 emits utilities as `var(--color-*)` references, so re-declaring
-   the palette below under `.dark` retints the entire app (cards, borders,
-   text, gradients, rings, chips) without touching any component classes. The
-   values are deliberately NOT an inversion: dark surfaces stay warm-toned to
-   match Pixel Players, saturated accents keep their identity, and text shades
-   lift so contrast stays comfortable for elderly readers. */
-
 .dark {
   /* Warm brown / cream scale — used for page bg, cards, surfaces & text */
   --color-warm-50: #161d1b;
