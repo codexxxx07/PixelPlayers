@@ -114,7 +114,7 @@ export default function Games() {
 
         {/* ========== HOW GAMES HELP ========== */}
         <section className="animate-slide-up stagger-3">
-          <div className="skeuo-card bg-linear-to-br from-teal-50 to-white">
+          <div data-pp-fade className="skeuo-card bg-linear-to-br from-teal-50 to-white">
             <h2 className="font-pixel text-teal-700 text-xs mb-2 tracking-wide">
               {t('games.howGamesHelp')}
             </h2>

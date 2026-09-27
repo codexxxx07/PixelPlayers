@@ -160,7 +160,7 @@ export default function Memory() {
         </div>
 
         {/* Two-column grid: stacks to single column below lg */}
-        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
+        <div data-pp-fade className="grid lg:grid-cols-5 gap-6 lg:gap-8">
           {/* Left Column: Memory List + Add Memory */}
           <div data-pp-reveal="rise" className="lg:col-span-3 space-y-6 lg:space-y-8 min-w-0">
             {/* Memory List */}

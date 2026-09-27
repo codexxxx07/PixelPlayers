@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&display=swap');
 @import "tailwindcss";
 
-/* Class-based dark mode: the `.dark` class lives on <html> and is applied by
-   ThemeContext (src/context/ThemeContext.jsx). */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -1081,6 +1079,41 @@ html.pp-reveal-armed [data-pp-reveal="pixel"].pp-reveal-in {
   will-change: transform;
 }
 
+/* ─── Scroll-linked fade (continuous, reversible) ──────────────────────────
+   Driven by src/context/ScrollContext.jsx from the same Lenis 'scroll' bus as
+   the drift above. The element's opacity is a pure function of how much of the
+   block has crossed the bottom edge (in) and how much is hanging off the top
+   edge (out), so it reverses on its own and never gets stuck.
+
+   Contract:
+     data-pp-fade           opt a major block into the continuous fade
+     --pp-fade-span         fade travel, in viewport-heights. The block's own
+                            height is used when that is smaller, which is what
+                            keeps a card crisp and a full-height panel gentle.
+
+   Only opacity is touched: no transform, no filter, no blur, no layout. Because
+   opacity is a compositing-only property this cannot cause reflow, cannot shift
+   layout and cannot produce horizontal overflow.
+
+   Deliberately NOT applied to the navbar, the footer nav, the SOS button, auth
+   controls, or anything else whose visibility a reader depends on. */
+
+:root {
+  /* Read by the engine, and the single knob for how cinematic the fade is.
+     A card still fades across its own height; this only governs tall blocks. */
+  --pp-fade-span: 0.45;
+}
+
+/* Pre-measurement safety net, exactly like the reveal layer: a block is only
+   hidden until the engine has written a real opacity to it (`pp-fade-on`). The
+   armed class lands after the first measure+write pass, and if JS never runs
+   the class is never added — so a blocked script shows the page, not a blank
+   one. It is deliberately NOT !important, so the engine's inline write always
+   wins for a settled block. */
+html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
+  opacity: 0;
+}
+
 /* ─── Navbar scroll-progress rail ────────────────────────────────────────
    A 3px segmented HUD strip that fills with page progress. Absolutely
    positioned against the sticky header, so it adds zero layout height. */
@@ -1127,10 +1160,21 @@ html.pp-reveal-armed [data-pp-reveal="pixel"].pp-reveal-in {
   }
 }
 
+/* Phones get a shorter fade travel. On a narrow viewport almost every block is
+   "tall" relative to the screen, so this is the value that actually applies —
+   and shortening it keeps blocks from lingering in a half-faded state through a
+   thumb-fling. Touch itself is untouched: Lenis still runs with `syncTouch:
+   false`, so momentum, rubber-banding and nested panes stay native. */
+@media (max-width: 768px) {
+  :root {
+    --pp-fade-span: 0.34;
+  }
+}
+
 /* ─── Reduced motion: the hard guarantee ──────────────────────────────────
-   The provider already skips Lenis and never arms the reveals when the user
-   prefers reduced motion. This block is the second line of defence: even if
-   the armed class were ever applied, nothing can be left invisible. */
+   The provider already skips Lenis and never arms the reveals or the fade when
+   the user prefers reduced motion. This block is the second line of defence:
+   even if the armed class were ever applied, nothing can be left invisible. */
 
 @media (prefers-reduced-motion: reduce) {
   html.pp-reveal-armed [data-pp-reveal],
@@ -1146,6 +1190,14 @@ html.pp-reveal-armed [data-pp-reveal="pixel"].pp-reveal-in {
 
   [data-pp-drift] {
     will-change: auto;
+  }
+
+  /* The fade writes an inline opacity, so the guarantee has to clear the
+     inline style too — and drop the marker that would otherwise let the
+     safety-net rule above keep the block hidden. */
+  html.pp-fade-armed [data-pp-fade],
+  html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
+    opacity: 1 !important;
   }
 }
 

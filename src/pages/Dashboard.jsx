@@ -223,7 +223,7 @@ export default function Dashboard() {
         {/* ========== RECOMMENDED FOR YOU ========== */}
         <section className="animate-slide-up stagger-2">
           <SectionTitle icon="✨">{t('dashboard.recommended')}</SectionTitle>
-          <div className="grid sm:grid-cols-2 gap-5 items-stretch">
+          <div data-pp-fade className="grid sm:grid-cols-2 gap-5 items-stretch">
             {recommendedGames.map((game) => (
               <PixelCard key={game.id} hover pixel className="p-6 flex flex-col">
                 <div className="flex items-start gap-4 mb-4">
@@ -254,7 +254,7 @@ export default function Dashboard() {
         <section className="animate-slide-up stagger-3">
           <SectionTitle icon="📊">{t('dashboard.todaysProgress')}</SectionTitle>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-5">
+          <div data-pp-fade className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-5">
             <ProgressCard label={t('dashboard.gamesCompleted')} value={progressData.gamesCompleted} icon="🎮" trend="up" color="teal" />
             <ProgressCard label={t('dashboard.accuracy')} value={progressData.accuracy} unit="%" icon="🎯" trend="up" color="emerald" />
             <ProgressCard label={t('dashboard.avgResponse')} value={12.4} unit="s" icon="⏱️" color="blue" />
@@ -290,7 +290,7 @@ export default function Dashboard() {
             </div>
           </PixelCard>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
+          <div data-pp-fade className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
             {highlightMemories.map((memory) => (
               <PixelCard key={memory.id} hover className="p-6 flex flex-col">
                 <div className="flex items-start gap-3 mb-3">
@@ -348,7 +348,7 @@ export default function Dashboard() {
         {/* ========== QUICK ACTIONS ========== */}
         <section className="animate-slide-up stagger-6">
           <SectionTitle icon="⚡">{t('dashboard.quickActions')}</SectionTitle>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 items-stretch">
+          <div data-pp-fade className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 items-stretch">
             {quickActions.map((action) => (
               <Link
                 key={action.to}
@@ -378,7 +378,7 @@ export default function Dashboard() {
         {/* ========== RECENT ACTIVITY ========== */}
         <section className="animate-slide-up">
           <SectionTitle icon="🕰️">{t('dashboard.recentActivity')}</SectionTitle>
-          <div className="space-y-3">
+          <div data-pp-fade className="space-y-3">
             {activityLog.slice(0, 5).map((activity) => (
               <PixelCard key={activity.id} variant="default" className="p-4 md:p-5">
                 <div className="flex items-start gap-4">

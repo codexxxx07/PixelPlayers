@@ -269,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* ===== QUICK FEATURES SECTION ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -312,7 +312,7 @@ export default function Home() {
       </section>
 
       {/* ===== HOW IT WORKS SECTION ===== */}
-      <section className="py-20 px-6 bg-warm-50">
+      <section data-pp-fade className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-16">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -378,7 +378,7 @@ export default function Home() {
       </section>
 
       {/* ===== PERSONALIZATION FLOW SECTION ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -446,7 +446,7 @@ export default function Home() {
       </section>
 
       {/* ===== TESTIMONIAL / TRUST SECTION ===== */}
-      <section className="py-20 px-6 bg-warm-50">
+      <section data-pp-fade className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -477,7 +477,7 @@ export default function Home() {
       </section>
 
       {/* ===== CTA SECTION ===== */}
-      <section className="py-20 px-6 relative overflow-hidden">
+      <section data-pp-fade className="py-20 px-6 relative overflow-hidden">
         {/* Pixel border top */}
         <div className="absolute top-0 left-0 right-0 h-2 flex pointer-events-none">
           <div className="flex-1 bg-teal-200" />

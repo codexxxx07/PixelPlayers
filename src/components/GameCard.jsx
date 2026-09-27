@@ -9,6 +9,7 @@ export default function GameCard({ game }) {
   return (
     <Link
       to={detailsUrl}
+      data-pp-fade
       aria-label={`${game.title} — ${game.shortDescription}`}
       className="group block h-full rounded-2xl min-w-0 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-teal-400/60 focus-visible:ring-offset-2"
     >

@@ -119,7 +119,7 @@ export default function About() {
       </section>
 
       {/* ===== MISSION SECTION ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -146,7 +146,7 @@ export default function About() {
       </section>
 
       {/* ===== PROBLEM STATEMENT SECTION ===== */}
-      <section className="py-20 px-6 bg-warm-50">
+      <section data-pp-fade className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="inline-flex items-center gap-2 rounded-full bg-teal-100 border border-teal-200 px-4 py-1.5 text-xs text-teal-700 font-pixel mb-4">
@@ -177,7 +177,7 @@ export default function About() {
       </section>
 
       {/* ===== OUR APPROACH SECTION ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -207,7 +207,7 @@ export default function About() {
       </section>
 
       {/* ===== TECHNOLOGY SECTION ===== */}
-      <section className="py-20 px-6 bg-warm-50">
+      <section data-pp-fade className="py-20 px-6 bg-warm-50">
         <div className="max-w-6xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
@@ -255,7 +255,7 @@ export default function About() {
       </section>
 
       {/* ===== TEAM / NER FOCUS SECTION ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-4xl mx-auto">
           <div data-pp-reveal="pixel" className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">

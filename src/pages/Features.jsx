@@ -155,7 +155,7 @@ export default function Features() {
       </section>
 
       {/* ===== FEATURES GRID ===== */}
-      <section className="py-20 px-6">
+      <section data-pp-fade className="py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div
             data-pp-reveal-group
@@ -211,7 +211,7 @@ export default function Features() {
       </section>
 
       {/* ===== COMPARISON SECTION ===== */}
-      <section className="py-20 px-6 bg-warm-50">
+      <section data-pp-fade className="py-20 px-6 bg-warm-50">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-14">
             <span className="font-pixel text-[10px] text-teal-400 tracking-widest uppercase mb-3 block">
