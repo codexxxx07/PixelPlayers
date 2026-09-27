@@ -1410,12 +1410,6 @@ html.pp-fade-armed [data-pp-fade]:not(.pp-fade-on) {
   }
 }
 
-/* ─── Physical lamp theme toggle ─────────────────────────────────────────────
-   A compact, skeuomorphic bedside-lamp switch. Day state shows a warm glow +
-   sun inside the glass; night state shows a cool lamp + moon and stars. The
-   SVG layers crossfade through CSS transitions so the swap feels like a lamp
-   being switched, not a colour blink. */
-
 .lamp-toggle {
   position: relative;
   display: inline-flex;
