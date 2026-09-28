@@ -1,6 +1,3 @@
-// Daily update builder. Consumes shared elder stores (routine, meals,
-// medicines, activity) and produces a ✓/⚠ list for the caregiver.
-
 import { getMealStatus } from "./meals";
 import { getMedicineStatus } from "./medicines";
 
