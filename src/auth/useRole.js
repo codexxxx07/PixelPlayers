@@ -1,12 +1,6 @@
 import { useUser } from "@clerk/react";
 import { getRole } from "./roles";
 
-/**
- * React hook exposing the signed-in user plus their current role.
- * `claimRole` writes the claimed role onto the real Clerk user record via
- * user.updateMetadata({ unsafeMetadata: { role } }) — a real authenticated
- * client update, never localStorage.
- */
 export function useRole() {
   const { isLoaded, user } = useUser();
   return {
