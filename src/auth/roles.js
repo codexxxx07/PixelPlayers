@@ -1,15 +1,3 @@
-// Canonical role representation for Pixel Players.
-//
-// The role lives on the real Clerk user object as metadata:
-//   role: 'elder' | 'caregiver'
-//
-// Read precedence:
-//   1. user.publicMetadata.role  — authoritative (Server-set via Clerk Dashboard / Backend API)
-//   2. user.unsafeMetadata.role  — client-claimed staging value (persisted server-side on the user)
-//
-// There is no localStorage auth, no fake role state, no frontend-only security.
-// Missing role => claim on /welcome. The value 'role' is stored as { role: 'elder' | 'caregiver' }.
-
 export const ROLES = Object.freeze({
   ELDER: "elder",
   CAREGIVER: "caregiver",
